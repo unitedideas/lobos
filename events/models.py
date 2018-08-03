@@ -9,17 +9,29 @@ from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.text import slugify
 from django.db.models.signals import post_save
+from events.util import load_choices
+
 
 
 #   V--->--hooks extends-->---V
 # User (not seen) 1----1-> Profile -1----M-> UserEvent -1----M-> Event -1----M-> SpecialTests -M----1-> UserSpecialTests -M----1->|
 #  ^----------------<-----------------------<------------------------<---------------------------<----------------------------------<-V
 
+
+
+HERE = os.path.abspath(os.path.dirname(__file__))
+STATES_PATH = os.path.join(HERE, 'states.txt')
+STATES = load_choices(STATES_PATH, True)
+MAKES_PATH = os.path.join(HERE, 'makes.txt')
+MAKES = load_choices(MAKES_PATH, True)
+
+
+
 class Event(models.Model):
-    event_name = models.CharField(max_length=300, null=True, blank=True)
-    event_date = models.DateField(max_length=300, null=True, blank=True)
-    pro_time_est = models.TimeField(max_length=300, null=True, blank=True)
-    am_time_est = models.TimeField(max_length=300, null=True, blank=True)
+    event_name = models.CharField(max_length=100, null=True, blank=True)
+    event_date = models.DateField(max_length=30, null=True, blank=True)
+    pro_time_est = models.TimeField(max_length=30, null=True, blank=True)
+    am_time_est = models.TimeField(max_length=30, null=True, blank=True)
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
@@ -34,33 +46,33 @@ class RiderProfile(models.Model):
         (MALE, 'Male'),
     )
     # user name displayed at login
+    event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    email = models.EmailField(user.email()
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
     birth_date = models.DateField(null=True, blank=True)
-    phone_number = models.CharField(max_length=300, null=True, blank=True)
-    country = models.CharField(max_length=300, null=True, blank=True)
-    address = models.CharField(max_length=300, null=True, blank=True)
-    address_line_two = models.CharField(max_length=300, null=True, blank=True)
-    city = models.CharField(max_length=300, null=True, blank=True)
+    phone_number = models.CharField(max_length=10, null=True, blank=True)
+    email = models.EmailField(max_length=100, null=True, blank=True)
+    country = models.CharField(max_length=50, null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
+    address_line_two = models.CharField(max_length=100, null=True, blank=True)
+    city = models.CharField(max_length=50, null=True, blank=True)
     # make a dropdown like from the diaper bank app
-    state = models.CharField(max_length=300, null=True, blank=True)
-    zip_code = models.CharField(max_length=300, null=True, blank=True)
-    emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
-    emergency_contact_contact = models.CharField(max_length=300, null=True, blank=True)
-    event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
-    bike_make = models.CharField(max_length=300, null=True, blank=True)
+    state = models.CharField(max_length=2, null=True, blank=True, choices=STATES)
+    zip_code = models.CharField(max_length=5, null=True, blank=True)
+    emergency_contact_name = models.CharField(max_length=50, null=True, blank=True)
+    emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
+    bike_make = models.CharField(max_length=2, null=True, blank=True, choices=MAKES)
     bike_displacement = models.IntegerField(null=True, blank=True)
-    omra_number = models.CharField(max_length=300, null=True, blank=True)
-    ama_number = models.CharField(max_length=300, null=True, blank=True)
+    omra_number = models.CharField(max_length=30, null=True, blank=True)
+    ama_number = models.CharField(max_length=30, null=True, blank=True)
 
     # These items will not be in the form and must not be visible
     # confirmation will be generated, age on event day will be calculated
     # rider number and start time will be assigned
     age_on_event_day = models.IntegerField(null=True, blank=True)
-    confirmation = models.CharField(max_length=300, null=True, blank=True)
+    confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     rider_number = models.IntegerField(null=True, blank=True)
-    start_time = models.TimeField(max_length=300, null=True, blank=True)
+    start_time = models.TimeField(max_length=30, null=True, blank=True)
 
     def __str__(self):
         return str(self.user) + ' Contact Info'

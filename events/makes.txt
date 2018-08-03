@@ -1,0 +1,18 @@
+Alta,ALT
+ATK,ATK
+Beta,Bet
+Can-Am,Can
+CZ,CZ
+Gas Gas,Gas
+Husaberg,Hbg
+Honda,Hon
+Husqvarna,Hus
+Kawasaki,Kaw
+KTM,KTM
+Maico,Mai
+Montesa,Mon
+Scorpa,Sco
+Suzuki,Suz
+TM,TM
+Yamaha,Yam
+Not Listed,N/A
