@@ -126,3 +126,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join('static'),)
 
 LOGIN_REDIRECT_URL = '/'
+
+EMAIL_HOST = 'localhost'
+
+EMAIL_PORT = 1025
