@@ -35,6 +35,7 @@ class RiderProfile(models.Model):
     )
     # user name displayed at login
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    email = models.EmailField(user.email()
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
     birth_date = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=300, null=True, blank=True)
