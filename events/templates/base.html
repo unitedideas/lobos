@@ -31,7 +31,7 @@
                 {% if user.is_authenticated %}
                     <ul class="nav navbar-nav">
                         <li><a href="/">Home</a></li>
-                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="{% url 'profile' %}">Profile</a></li>
                         <li><a href="/profile/edit">Edit Profile</a></li>
                         <li><a href="/change-password">Change Password</a></li>
                         <li><a href="/password-reset">Reset Password</a></li>

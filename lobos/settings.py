@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 from lobos.secrets import *
-
+import re
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -127,6 +127,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join('static'),)
 
 LOGIN_REDIRECT_URL = '/'
+
+LOGIN_URL = '/login/'
+
+LOGIN_EXEMPT_URLS = (
+    'logout/',
+    'register/',
+)
 
 EMAIL_HOST = 'localhost'
 
