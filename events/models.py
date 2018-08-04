@@ -57,7 +57,7 @@ class RiderProfile(models.Model):
     zip_code = models.CharField(max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField(max_length=50, null=True, blank=True)
     emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
-    bike_make = models.CharField(max_length=2, null=True, blank=True, choices=MAKES)
+    bike_make = models.CharField(max_length=20, null=True, blank=True, choices=MAKES)
     bike_displacement = models.IntegerField(null=True, blank=True)
     omra_number = models.CharField(max_length=30, null=True, blank=True)
     ama_number = models.CharField(max_length=30, null=True, blank=True)
@@ -69,6 +69,12 @@ class RiderProfile(models.Model):
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     rider_number = models.IntegerField(null=True, blank=True)
     start_time = models.TimeField(max_length=30, null=True, blank=True)
+
+
+    # if we want to allow user profile images
+    # https://www.youtube.com/watch?v=tT2JOpfelSg&list=PLw02n0FEB3E3VSHjyYMcFadtQORvl1Ssj&index=36
+
+
 
     def __str__(self):
         return str(self.user.first_name) + ' ' + str(self.user.last_name)
