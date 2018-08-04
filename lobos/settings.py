@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
@@ -133,8 +133,14 @@ LOGIN_URL = '/login/'
 LOGIN_EXEMPT_URLS = (
     'logout/',
     'register/',
+    'password-reset/',
+    'password-reset/done/',
+    r'^password-reset/confirm/(?P<uib64>[0-9A-Za-z]+)-(?P<token>.+)/$',
+    'password-reset/complete/',
 )
 
 EMAIL_HOST = 'localhost'
 
 EMAIL_PORT = 1025
+
+# python -m smtpd -n -c DebuggingServer localhost:1025

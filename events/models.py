@@ -11,12 +11,9 @@ from django.utils.text import slugify
 from django.db.models.signals import post_save
 from events.util import load_choices
 
-
-
 #   V--->--hooks extends-->---V
 # User (not seen) 1----1-> Profile -1----M-> UserEvent -1----M-> Event -1----M-> SpecialTests -M----1-> UserSpecialTests -M----1->|
 #  ^----------------<-----------------------<------------------------<---------------------------<----------------------------------<-V
-
 
 
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -24,7 +21,6 @@ STATES_PATH = os.path.join(HERE, 'states.txt')
 STATES = load_choices(STATES_PATH, True)
 MAKES_PATH = os.path.join(HERE, 'makes.txt')
 MAKES = load_choices(MAKES_PATH, True)
-
 
 
 class Event(models.Model):
@@ -75,7 +71,7 @@ class RiderProfile(models.Model):
     start_time = models.TimeField(max_length=30, null=True, blank=True)
 
     def __str__(self):
-        return str(self.user) + ' Contact Info'
+        return str(self.user) + ' Contact Info and ' + str(self.event) + ' Registration'
 
 
 #
