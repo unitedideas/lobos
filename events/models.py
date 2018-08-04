@@ -43,7 +43,7 @@ class RiderProfile(models.Model):
     )
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
     birth_date = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=10, null=True, blank=True)
@@ -71,7 +71,7 @@ class RiderProfile(models.Model):
     start_time = models.TimeField(max_length=30, null=True, blank=True)
 
     def __str__(self):
-        return str(self.user) + ' Contact Info and ' + str(self.event) + ' Registration'
+        return str(self.user.first_name) + ' ' + str(self.user.last_name)
 
 
 #
