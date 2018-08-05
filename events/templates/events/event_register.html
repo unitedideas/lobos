@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Event Registration</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Register Here</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ event_form.as_p }}
+
+            {#            {% for item in form %}#}
+            {#                <div class="form-group row ">#}
+            {#                    <label class="col-sm-4 ">{{ item.label }}</label>#}
+            {#                    <div class="">{{ item }}</div>#}
+            {#                </div>#}
+            {##}
+            {#            {% endfor %}#}
+            <button class="btn" type="submit">Submit</button>
+        </form>
+
+    </div>
+
+{% endblock %}

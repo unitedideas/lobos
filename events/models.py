@@ -4,7 +4,6 @@ from django import forms
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.contrib.auth.models import User
 from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.text import slugify
@@ -43,7 +42,7 @@ class RiderProfile(models.Model):
     )
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
-    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
     birth_date = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=10, null=True, blank=True)
@@ -65,6 +64,7 @@ class RiderProfile(models.Model):
     # These items will not be in the form and must not be visible
     # confirmation will be generated, age on event day will be calculated
     # rider number and start time will be assigned
+    Registration_date_time = models.DateTimeField(null=True, blank=True)
     age_on_event_day = models.IntegerField(null=True, blank=True)
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     rider_number = models.IntegerField(null=True, blank=True)
@@ -77,7 +77,7 @@ class RiderProfile(models.Model):
 
 
     def __str__(self):
-        return str(self.user.first_name) + ' ' + str(self.user.last_name)
+        return str(self.user.first_name) + ' ' + str(self.user.last_name) + ' - ' + str(self.event)
 
 
 #

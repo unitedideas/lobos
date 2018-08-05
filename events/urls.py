@@ -14,5 +14,7 @@ urlpatterns = [
     path('password-reset/confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='events/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset/complete/', auth_views.PasswordResetCompleteView.as_view(template_name='events/password_reset_complete.html'), name='password_reset_complete'),
     path('profile/password/', auth_views.PasswordChangeView.as_view(template_name='events/password_change.html'), name='password_change'),
+    path('event-confirmation/', views.event_confirmation, name='event_confirmation'),
+    path('event-registration/', views.event_register, name='event_register'),
 
 ]

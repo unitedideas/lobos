@@ -1,7 +1,14 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import RiderProfile
+from django.forms import ModelForm
+from django.utils.translation import gettext_lazy as _
 
+
+# widgets = {
+#             'name': Textarea(attrs={'cols': 80, 'rows': 20}),
+#         }
 
 
 class RegistrationForm(UserCreationForm):
@@ -10,29 +17,37 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = (
-            'username',
+            # 'username',
+            'email',
             'first_name',
             'last_name',
-            'email',
             'password1',
             'password2',
-
         )
+        labels = {
+            'email': _('Labels !! << this is the one'),
+        }
+        help_texts = {
+            'name': _('help text'),
+        }
+        error_messages = {
+            'name': {
+                'max_length': _("error 1"),
+            },
+        }
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
-
+        user.username = self.cleaned_data['email']
         if commit:
             user.save()
-
         return user
 
 
 class EditProfileForm(UserChangeForm):
-
     class Meta:
         model = User
         fields = (
@@ -42,3 +57,18 @@ class EditProfileForm(UserChangeForm):
             'password'
         )
 
+
+class RiderEventForm(ModelForm):
+    email = forms.EmailField(required=True)
+    birth_date = forms.DateField(required=True)
+
+    class Meta:
+        model = RiderProfile
+        exclude = [
+            'Registration_date',
+            'user',
+            'age_on_event_day',
+            'confirmation_number',
+            'rider_number',
+            'start_time'
+        ]

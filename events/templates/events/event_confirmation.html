@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Event Registration Confirmation</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Congrats!</h1>
+        <p>
+            You have successfully registered for the {{ user.event }}
+        </p>
+        <h1>Confirmation Number: {{ confirmation_number }}</h1>
+        <p>Username: {{ user }}</p>
+        <p>Username: {{ request.user }}</p>
+        <p>Email: {{ post_email }}</p>
+        <p>Event: {{ event }}</p>
+    </div>
+
+{% endblock %}
