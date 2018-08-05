@@ -43,10 +43,12 @@ class RiderProfile(models.Model):
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=50, null=True, blank=True)
+    last_name = models.CharField(max_length=50, null=True, blank=True)
+    email = models.EmailField(max_length=100, null=True, blank=True)
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
     birth_date = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=10, null=True, blank=True)
-    email = models.EmailField(max_length=100, null=True, blank=True)
     country = models.CharField(max_length=50, null=True, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
     address_line_two = models.CharField(max_length=100, null=True, blank=True)
@@ -77,7 +79,7 @@ class RiderProfile(models.Model):
 
 
     def __str__(self):
-        return str(self.user.first_name) + ' ' + str(self.user.last_name) + ' - ' + str(self.event)
+        return str(self.event)
 
 
 #

@@ -74,45 +74,42 @@ def change_password(request):
 
 def event_register(request):
     if request.method == 'POST':
-        user_form = RegistrationForm(request.POST)
-        print('user POST')
 
         event_form = RiderEventForm(request.POST)
-        print('event POST')
 
-        if event_form.is_valid() and user_form.is_valid():
+        if event_form.is_valid():
 
-            print('Made it to the 1st post.save')
             event_post = event_form.save(commit=False)
 
+            print(event_post)
+            print(event_post.email)
+            print(event_post.first_name)
 
-            print('Made it to the 2nd event.save')
-            event_post.user = request.user
+            all_users = User.objects.all()
 
-
-            print('event_post.user = request.user')
-            user_post = user_form.save(commit=False)
-
-
-            print('user_post.user = request.user')
+            if event_post.email not in all_users:
+                print('not in db')
+                user = User.objects.create_user(event_post.email, event_post.email, id_generator())
+                user.first_name = event_post.first_name
+                user.last_name = event_post.last_name
+                user.save()
+                print('saved new user')
+            else:
+                pass
             confirmation_number = id_generator()
             event_post.confirmation_number = confirmation_number
 
-            user_post.save()
-            print('user save')
-
-
             event_post.save()
-            print('event save')
 
-            args = {'event': event_post.event, 'post_email': event_post.email, 'confirmation_number': confirmation_number}
-            print('args')
+            args = {'event': event_post.event, 'post_email': event_post.email,
+                    'confirmation_number': confirmation_number}
             # email confirmation function here
             # return redirect('/event-confirmation')
             return render(request, 'events/event_confirmation.html', args)
+
         else:
-            # user_form = RegistrationForm()
-            # event_form = RiderEventForm()
+            user_form = RegistrationForm()
+            event_form = RiderEventForm()
             args = {'event_form': event_form, 'user_form': user_form}
             return render(request, 'events/event_register.html', args)
     else:

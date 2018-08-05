@@ -13,7 +13,6 @@ from django.utils.translation import gettext_lazy as _
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-
     class Meta:
         model = User
         fields = (
@@ -28,10 +27,10 @@ class RegistrationForm(UserCreationForm):
             'email': _('Labels !! << this is the one'),
         }
         help_texts = {
-            'name': _('help text'),
+            'email': _('help text'),
         }
         error_messages = {
-            'name': {
+            'email': {
                 'max_length': _("error 1"),
             },
         }
@@ -60,12 +59,12 @@ class EditProfileForm(UserChangeForm):
 
 class RiderEventForm(ModelForm):
     email = forms.EmailField(required=True)
-    birth_date = forms.DateField(required=True)
-
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
     class Meta:
         model = RiderProfile
         exclude = [
-            'Registration_date',
+            'Registration_date_time',
             'user',
             'age_on_event_day',
             'confirmation_number',

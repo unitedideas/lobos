@@ -9,8 +9,10 @@
         <h1>Register Here</h1>
         <form method="post">
             {% csrf_token %}
-            {{ user_form.as_p }}
             {{ event_form.as_p }}
+
+
+{# adding additional forms   https://docs.djangoproject.com/en/2.1/topics/forms/formsets/#understanding-the-managementform#}
 
             {#            {% for item in form %}#}
             {#                <div class="form-group row ">#}
