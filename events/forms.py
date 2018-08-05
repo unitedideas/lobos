@@ -23,17 +23,7 @@ class RegistrationForm(UserCreationForm):
             'password1',
             'password2',
         )
-        labels = {
-            'email': _('Labels !! << this is the one'),
-        }
-        help_texts = {
-            'email': _('help text'),
-        }
-        error_messages = {
-            'email': {
-                'max_length': _("error 1"),
-            },
-        }
+
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
@@ -58,7 +48,6 @@ class EditProfileForm(UserChangeForm):
 
 
 class RiderEventForm(ModelForm):
-    email = forms.EmailField(required=True)
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
     class Meta:

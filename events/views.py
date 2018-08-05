@@ -4,7 +4,8 @@ from events.forms import (
     EditProfileForm,
     RiderEventForm,
 )
-import random, string
+import random , string
+from . models import RiderProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -74,32 +75,25 @@ def change_password(request):
 
 def event_register(request):
     if request.method == 'POST':
-
         event_form = RiderEventForm(request.POST)
 
         if event_form.is_valid():
-
             event_post = event_form.save(commit=False)
-
-            print(event_post)
-            print(event_post.email)
-            print(event_post.first_name)
-
-            all_users = User.objects.all()
-
-            if event_post.email not in all_users:
-                print('not in db')
-                user = User.objects.create_user(event_post.email, event_post.email, id_generator())
-                user.first_name = event_post.first_name
-                user.last_name = event_post.last_name
-                user.save()
-                print('saved new user')
-            else:
-                pass
             confirmation_number = id_generator()
             event_post.confirmation_number = confirmation_number
+            event_post = event_form.save()
+            # print(event_post.user)
+            user = User.objects.get_or_create(username=event_post.email,
+                                              email=event_post.email,
+                                              first_name=event_post.first_name,
+                                              last_name=event_post.last_name)[0]
+            user.save()
+            user.first_name = event_post.first_name
+            user.last_name = event_post.last_name
 
-            event_post.save()
+            RiderProfile.objects.all().last().delete()
+            event_post.user = user
+            event_post = event_form.save()
 
             args = {'event': event_post.event, 'post_email': event_post.email,
                     'confirmation_number': confirmation_number}
