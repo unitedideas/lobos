@@ -64,20 +64,17 @@ class RiderEventForm(ModelForm):
         ]
 
 
-# RiderProfileFormSet = modelformset_factory(RiderProfile, exclude=('Registration_date_time',
-#                                                             'user',
-#                                                             'age_on_event_day',
-#                                                             'confirmation_number',
-#                                                             'rider_number',
-#                                                             'start_time'))
+RiderProfileFormSet = modelformset_factory(RiderProfile, exclude=('Registration_date_time',
+                                                            'user',
+                                                            'age_on_event_day',
+                                                            'confirmation_number',
+                                                            'rider_number',
+                                                            'start_time'))
 
-RiderProfileModelFormset = modelformset_factory(
-    RiderProfile,
-    fields=('email',),
-    extra=1,
-    widgets={'email': forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Enter the Rider email'
-    })
-    }
-)
+RiderProfileModelFormset = modelformset_factory(RiderProfile, exclude=('Registration_date_time',
+                                                            'user',
+                                                            'age_on_event_day',
+                                                            'confirmation_number',
+                                                            'rider_number',
+                                                            'start_time'))
+

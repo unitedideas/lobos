@@ -125,31 +125,32 @@ def event_register(request):
         formset_post = RiderProfileFormSet(request.POST, request.FILES)
         if formset_post.is_valid():
             formset = formset_post.save(commit=False)
-            formset.email = 'sdfasdf@gmail.com'
+            confirmation_number = id_generator()
+            for form in formset:
+                print(form.email)
 
-            # confirmation_number = id_generator()
-            # formset.confirmation_number = confirmation_number
-            # formset.save()
-            # print(formset.user)
-            #
-            # user = User.objects.get_or_create(username=formset.email,
-            #                                   email=formset.email,
-            #                                   first_name=formset.first_name,
-            #                                   last_name=formset.last_name)[0]
-            # user.save()
-            # user.first_name = formset.first_name
-            # user.last_name = formset.last_name
-            #
-            # RiderProfile.objects.all().last().delete()
-            # formset.user = user
-            # formset.save()
+                form.confirmation_number = confirmation_number
+                # formset.save()
+                # print(formset.user)
+                #
+                user = User.objects.get_or_create(username=form.email,
+                                                  email=form.email,
+                                                  first_name=form.first_name,
+                                                  last_name=form.last_name)[0]
+                user.save()
+                user.first_name = form.first_name
+                user.last_name = form.last_name
 
-            # args = {'event': formset.event, 'post_email': formset.email,
-            #         'confirmation_number': confirmation_number}
+                RiderProfile.objects.all().last().delete()
+                form.user = user
+                form.save()
+
+            args = {'event': formset.event, 'post_email': formset.email,
+                    'confirmation_number': confirmation_number}
             # email confirmation function here
-            return redirect('/event-confirmation')
+            # return redirect('/event-confirmation')
             # return render(request, 'events/event_confirmation.html')
-            # return render(request, 'events/event_confirmation.html', args)
+            return render(request, 'events/event_confirmation.html', args)
         else:
             formset = RiderProfileFormSet()
             args = {'formset': formset}
@@ -160,26 +161,6 @@ def event_register(request):
         formset = RiderProfileFormSet(queryset=RiderProfile.objects.none())
         args = {'formset': formset}
         return render(request, 'events/event_register.html', args)
-
-
-def create_normal(request):
-    template_name = 'events/create_normal.html'
-    heading_message = 'Model Formset Demo'
-    if request.method == 'GET':
-        # we don't want to display the already saved model instances
-        formset = RiderProfileModelFormset(queryset=RiderProfile.objects.all())
-    elif request.method == 'POST':
-        formset = RiderProfileModelFormset(request.POST)
-        if formset.is_valid():
-            for form in formset:
-                # only save if email is present
-                if form.cleaned_data.get('email'):
-                    form.save()
-            return render(request, 'events/event_confirmation.html')
-    return render(request, template_name, {
-        'formset': formset,
-        'heading': heading_message,
-    })
 
 
 def event_confirmation(request):

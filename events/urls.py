@@ -16,6 +16,5 @@ urlpatterns = [
     path('profile/password/', auth_views.PasswordChangeView.as_view(template_name='events/password_change.html'), name='password_change'),
     path('event-confirmation/', views.event_confirmation, name='event_confirmation'),
     path('event-registration/', views.event_register, name='event_register'),
-    path('create-normal/', views.create_normal, name='create_normal'),
 
 ]
