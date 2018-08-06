@@ -49,7 +49,10 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
             return redirect('/profile')
-
+        else:
+            form = EditProfileForm(instance=request.user)
+            args = {'form': form, 'errors': 'A user with that username already exists. Please choose a different one.'}
+            return render(request, 'events/edit_profile.html', args)
     else:
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
@@ -115,7 +118,7 @@ def change_password(request):
 
 def event_register(request):
     if request.method == 'POST':
-        formset_post = RiderProfileFormSet(request.POST, request.FILES)
+        formset_post = RiderProfileFormSet(request.POST)
         if formset_post.is_valid():
             formset = formset_post.save(commit=False)
             confirmation_number = id_generator()
@@ -126,16 +129,18 @@ def event_register(request):
                 # formset.save()
                 # print(formset.user)
                 #
-                user = User.objects.get_or_create(username=form.email,
-                                                  email=form.email,
-                                                  first_name=form.first_name,
-                                                  last_name=form.last_name)[0]
-                user.save()
-                user.first_name = form.first_name
-                user.last_name = form.last_name
+                if not User.objects.filter(username=form.email).exists():
+                    user = User.objects.create(username=form.email,
+                                               email=form.email,
+                                               first_name=form.first_name,
+                                               last_name=form.last_name)[0]
+                    user.save()
+                    user.first_name = form.first_name
+                    user.last_name = form.last_name
 
-                RiderProfile.objects.all().last().delete()
-                form.user = user
+                    RiderProfile.objects.all().last().delete()
+                    form.user = user
+
                 form.save()
 
             # args = {'event': formset.event, 'post_email': formset.email,
@@ -145,13 +150,13 @@ def event_register(request):
             return render(request, 'events/event_confirmation.html')
             # return render(request, 'events/event_confirmation.html', args)
         else:
-            formset = RiderProfileFormSet()
+            formset = RiderProfileFormSet(queryset=RiderProfile.objects.filter(user=request.user))
             args = {'formset': formset}
             return render(request, 'events/event_register.html', args)
     else:
         # can start with the current users filter queryset
         # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
-        formset = RiderProfileFormSet(queryset=RiderProfile.objects.none())
+        formset = RiderProfileFormSet(queryset=RiderProfile.objects.filter(user=request.user))
         args = {'formset': formset}
         return render(request, 'events/event_register.html', args)
 

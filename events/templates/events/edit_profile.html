@@ -7,6 +7,8 @@
 {% block body %}
     <div class="container">
         <h1>Edit Profile</h1>
+        <h4 class="alert alert-warning">{{ errors }}</h4>
+
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
