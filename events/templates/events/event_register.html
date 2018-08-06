@@ -2,35 +2,43 @@
 
 {% block body %}
     <div class=container>
-    {% if heading %}
-        <h1>{{ heading }}</h1>
-    {% endif %}
-        <form class="form-horizontal" method="POST" action="">
-            {% csrf_token %}
-            {{ formset.management_form }}
+    <div class="jumbotron">
+        <h1>Event Name passed here</h1>
+        <p>A little history about the event here</p>
+        <p>Maybe a notice</p>
+        <p>Date</p>
+        <p>Location</p>
 
-            {% for form in formset %}
-                <div class="row form-row spacer">
-                    <div class="col-2">
-                        <label></label>
-                    </div>
-                    <div class="col-4">
-                        <div class="input-group">
-                            {{ form.as_p }}
-                            <div class="input-group-append">
-                                <button class="btn btn-success add-form-row">+</button>
-                            </div>
+    </div>
+    <div class="container">
+    <form style="" class="form-horizontal" method="POST" action="">
+        {% csrf_token %}
+        {{ formset.management_form }}
+
+        {% for form in formset %}
+            <div style="background-color: #ffe673; padding: 0px 60px 0px 60px;" class="row form-row spacer">
+                <div class="col-2">
+                    <label></label>
+                </div>
+                <div class="col-4">
+                    <div class="input-group">
+                        {{ form.as_p }}
+                        <div class="input-group-append">
+                            <button class="btn btn-success add-form-row btn-lg">Add a Rider</button>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-            <div class="row spacer">
-                <div class="col-4 offset-2">
-                    <button type="submit" class="btn btn-block btn-primary">Create</button>
-                </div>
             </div>
-        </form>
-
+            <br>
+        {% endfor %}
+        <footer class="row spacer"> Make this into sidebar cart or footer
+            <div style="padding: 0px 60px 0px 60px; background-color: black" class="col-4 offset-2">
+                <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
+            </div>
+        </footer>
+    <br>
+    </form>
+    </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -61,7 +69,7 @@
             conditionRow.find('.btn.add-form-row')
                 .removeClass('btn-success').addClass('btn-danger')
                 .removeClass('add-form-row').addClass('remove-form-row')
-                .html('-');
+                .html('Remove Rider');
             return false;
         }
 
