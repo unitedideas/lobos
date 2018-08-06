@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import RiderProfile
 from django.forms import ModelForm
-from django.utils.translation import gettext_lazy as _
+from django.forms import modelformset_factory
 
 
 # widgets = {
@@ -13,6 +13,7 @@ from django.utils.translation import gettext_lazy as _
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
+
     class Meta:
         model = User
         fields = (
@@ -23,7 +24,6 @@ class RegistrationForm(UserCreationForm):
             'password1',
             'password2',
         )
-
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
@@ -47,9 +47,11 @@ class EditProfileForm(UserChangeForm):
         )
 
 
+# OG
 class RiderEventForm(ModelForm):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
+
     class Meta:
         model = RiderProfile
         exclude = [
@@ -60,3 +62,22 @@ class RiderEventForm(ModelForm):
             'rider_number',
             'start_time'
         ]
+
+
+# RiderProfileFormSet = modelformset_factory(RiderProfile, exclude=('Registration_date_time',
+#                                                             'user',
+#                                                             'age_on_event_day',
+#                                                             'confirmation_number',
+#                                                             'rider_number',
+#                                                             'start_time'))
+
+RiderProfileModelFormset = modelformset_factory(
+    RiderProfile,
+    fields=('email',),
+    extra=1,
+    widgets={'email': forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Enter the Rider email'
+    })
+    }
+)

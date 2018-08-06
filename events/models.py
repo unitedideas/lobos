@@ -78,8 +78,8 @@ class RiderProfile(models.Model):
 
 
 
-    def __str__(self):
-        return str(self.event)
+    # def __str__(self):
+    #     return str(self.event)
 
 
 #
