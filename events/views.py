@@ -2,16 +2,14 @@ from django.shortcuts import render, redirect
 from events.forms import (
     RegistrationForm,
     EditProfileForm,
-    RiderEventForm,
-    RiderProfileModelFormset,
+    RiderProfileFormSet,
 )
 import random
 import string
 from .models import RiderProfile
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from django.forms import modelformset_factory
 
 
 def home(request):
@@ -75,6 +73,7 @@ def change_password(request):
         return render(request, 'events/password_change.html', args)
 
 
+# old registration saving for deletion before deployment
 # def event_register(request):
 #     if request.method == 'POST':
 #         event_form = RiderEventForm(request.POST)
@@ -115,12 +114,6 @@ def change_password(request):
 #
 
 def event_register(request):
-    RiderProfileFormSet = modelformset_factory(RiderProfile, exclude=('Registration_date_time',
-                                                                      'user',
-                                                                      'age_on_event_day',
-                                                                      'confirmation_number',
-                                                                      'rider_number',
-                                                                      'start_time'))
     if request.method == 'POST':
         formset_post = RiderProfileFormSet(request.POST, request.FILES)
         if formset_post.is_valid():
@@ -145,12 +138,12 @@ def event_register(request):
                 form.user = user
                 form.save()
 
-            args = {'event': formset.event, 'post_email': formset.email,
-                    'confirmation_number': confirmation_number}
+            # args = {'event': formset.event, 'post_email': formset.email,
+            #         'confirmation_number': confirmation_number}
             # email confirmation function here
             # return redirect('/event-confirmation')
-            # return render(request, 'events/event_confirmation.html')
-            return render(request, 'events/event_confirmation.html', args)
+            return render(request, 'events/event_confirmation.html')
+            # return render(request, 'events/event_confirmation.html', args)
         else:
             formset = RiderProfileFormSet()
             args = {'formset': formset}

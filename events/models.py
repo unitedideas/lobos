@@ -1,19 +1,8 @@
 import os
 from django.db import models
-from django import forms
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.conf import settings
-from phonenumber_field.modelfields import PhoneNumberField
-from django.utils.text import slugify
-from django.db.models.signals import post_save
 from events.util import load_choices
-
-#   V--->--hooks extends-->---V
-# User (not seen) 1----1-> Profile -1----M-> UserEvent -1----M-> Event -1----M-> SpecialTests -M----1-> UserSpecialTests -M----1->|
-#  ^----------------<-----------------------<------------------------<---------------------------<----------------------------------<-V
-
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
@@ -72,11 +61,8 @@ class RiderProfile(models.Model):
     rider_number = models.IntegerField(null=True, blank=True)
     start_time = models.TimeField(max_length=30, null=True, blank=True)
 
-
     # if we want to allow user profile images
     # https://www.youtube.com/watch?v=tT2JOpfelSg&list=PLw02n0FEB3E3VSHjyYMcFadtQORvl1Ssj&index=36
-
-
 
     def __str__(self):
         return str(self.event)
