@@ -65,7 +65,7 @@ class RiderProfile(models.Model):
     # https://www.youtube.com/watch?v=tT2JOpfelSg&list=PLw02n0FEB3E3VSHjyYMcFadtQORvl1Ssj&index=36
 
     def __str__(self):
-        return str(self.event)
+        return str(self.event) + ' ' + str(self.user)
 
 
 #

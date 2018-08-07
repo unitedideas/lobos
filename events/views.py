@@ -141,7 +141,6 @@ def event_register(request):
                 # formset.save()
                 # print(formset.user)
                 #
-
                 # create username first by combining first, last and email used in the form
                 #  and check if in User.obj.username.exists
                 if not User.objects.filter(username=form.email).exists():
@@ -155,7 +154,8 @@ def event_register(request):
 
                     RiderProfile.objects.all().last().delete()
                     form.user = user
-
+                else:
+                    form.user = User.objects.get(username=form.email)
                 form.save()
 
             # args = {'event': formset.event, 'post_email': formset.email,
