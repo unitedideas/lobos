@@ -17,13 +17,19 @@
         <h1>Upcoming Events</h1>
         <h3>Make clickable upcoming events that take you to the registration page</h3>
 
-        {% for event in events %}
+        {% for name in name_date %}
         <p>
-            <a class="btn btn-lg btn-primary" href="/event-registration" role="button">{{event}}</a>
+            <a class="btn btn-lg btn-primary" href="/event-registration/?event={{name.0}}" role="button" methods="GET">{{name.0}} {{ name.1 }}</a>
         </p>
        {% endfor %}
     </div>
 
 
 {% endblock %}
+<script>
+    function get_event({{event}}) {
+
+
+    }
+</script>
 </body>

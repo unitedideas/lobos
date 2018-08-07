@@ -6,6 +6,7 @@ from events.forms import (
 )
 import random
 import string
+import urllib.parse
 from .models import RiderProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
@@ -15,10 +16,17 @@ from . models import Event
 
 def home(request):
     events = Event.objects.all().order_by('-event_date')[0:3]
-    for event in events:
-        print(event)
+    event_name = events.values_list('event_name', flat=True)
+    event_date = events.values_list('event_date', flat=True)
+    date_list = []
+    for name in event_date:
+        name = str(name)[:4]
+        date_list.append(name)
 
-    context = {'events': events}
+    name_date = zip(event_name, date_list)
+
+    print(name_date)
+    context = {'name_date': name_date}
 
     return render(request, 'events/home.html', context)
 
@@ -129,6 +137,7 @@ def event_register(request):
                 print(form.email)
 
                 form.confirmation_number = confirmation_number
+                form.event = Event.objects.get(event_name=request.GET.get('event'))
                 # formset.save()
                 # print(formset.user)
                 #
@@ -139,7 +148,7 @@ def event_register(request):
                     user = User.objects.create(username=form.email,
                                                email=form.email,
                                                first_name=form.first_name,
-                                               last_name=form.last_name)[0]
+                                               last_name=form.last_name)
                     user.save()
                     user.first_name = form.first_name
                     user.last_name = form.last_name
@@ -156,14 +165,20 @@ def event_register(request):
             return render(request, 'events/event_confirmation.html')
             # return render(request, 'events/event_confirmation.html', args)
         else:
+            # can start with the current users filter queryset
+            # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
+
+            event = Event.objects.get(event_name=request.GET.get('event'))
             formset = RiderProfileFormSet(queryset=RiderProfile.objects.filter(user=request.user))
-            args = {'formset': formset}
+            args = {'formset': formset, 'event': event}
             return render(request, 'events/event_register.html', args)
     else:
         # can start with the current users filter queryset
         # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
+
+        event = Event.objects.get(event_name=request.GET.get('event'))
         formset = RiderProfileFormSet(queryset=RiderProfile.objects.filter(user=request.user))
-        args = {'formset': formset}
+        args = {'formset': formset, 'event': event}
         return render(request, 'events/event_register.html', args)
 
 
