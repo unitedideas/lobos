@@ -10,12 +10,15 @@ from .models import RiderProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from . models import Event
 
 
 def home(request):
-    name = "Name Here"
-    numbers = {1, 2, 3, 4, 5}
-    context = {'name': name, 'numbers': numbers}
+    events = Event.objects.all().order_by('-event_date')[0:3]
+    for event in events:
+        print(event)
+
+    context = {'events': events}
 
     return render(request, 'events/home.html', context)
 
