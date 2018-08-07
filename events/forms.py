@@ -70,4 +70,6 @@ RiderProfileFormSet = modelformset_factory(RiderProfile, exclude=('Registration_
                                                                   'age_on_event_day',
                                                                   'confirmation_number',
                                                                   'rider_number',
-                                                                  'start_time'))
+                                                                  'start_time',
+                                                                  'event',),
+                                           extra=0)

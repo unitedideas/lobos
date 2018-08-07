@@ -138,8 +138,6 @@ def event_register(request):
 
                 form.confirmation_number = confirmation_number
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
-                # formset.save()
-                # print(formset.user)
                 #
                 # create username first by combining first, last and email used in the form
                 #  and check if in User.obj.username.exists
@@ -169,15 +167,17 @@ def event_register(request):
             # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
 
             event = Event.objects.get(event_name=request.GET.get('event'))
+            print(event)
             formset = RiderProfileFormSet(queryset=RiderProfile.objects.filter(user=request.user))
             args = {'formset': formset, 'event': event}
             return render(request, 'events/event_register.html', args)
     else:
         # can start with the current users filter queryset
         # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
+        print(request.user)
 
         event = Event.objects.get(event_name=request.GET.get('event'))
-        formset = RiderProfileFormSet(queryset=RiderProfile.objects.filter(user=request.user))
+        formset = RiderProfileFormSet(queryset=User.objects.filter(username=request.user))
         args = {'formset': formset, 'event': event}
         return render(request, 'events/event_register.html', args)
 
