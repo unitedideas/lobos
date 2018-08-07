@@ -51,6 +51,7 @@
             var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
             newElement.find(':input').each(function () {
                 var name = $(this).attr('name')
+                console.log(name)
                 if (name) {
                     name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
                     var id = 'id_' + name;
@@ -65,6 +66,7 @@
                 .removeClass('btn-success').addClass('btn-danger')
                 .removeClass('add-form-row').addClass('remove-form-row')
                 .html('Remove Rider Above');
+            console.log(total)
             return false;
         }
 
@@ -95,5 +97,3 @@
         });
     </script>
 {% endblock %}
-
-</div>
