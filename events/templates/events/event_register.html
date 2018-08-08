@@ -1,23 +1,27 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block body %}
     <div class=container>
-        <div class="jumbotron">
-            <h1>{{ event }}</h1>
-            <p>A little history about the event here</p>
-            <p>Maybe a notice</p>
-            <p>Date</p>
-            <p>Location</p>
+    <div class="jumbotron">
+        <h1>{{ event }}</h1>
+        <p>A little history about the event here</p>
+        <p>Maybe a notice</p>
+        <p>Date</p>
+        <p>Location</p>
 
-        </div>
-        <div class="container">
-            <form class="form-horizontal" method="POST" action="">
-                {% csrf_token %}
-                {{ formset.management_form }}
-                {% for form in formset %}
-                    <div style="background-color: #ffe673; padding: 20px 60px 20px 60px; margin-right: 15px;"
-                         class="row form-row">
-                        <div class="col-4">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+
+                <form class="form-horizontal" method="POST" action="">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+
+                        <div style="background-color: #ffe673; padding: 20px 60px 20px 60px; margin-right: 15px;"
+                             class="row form-row">
+                            {% for form in formset %}
                             <div class="input-group">
                                 {{ form.as_p }}
                                 <div class="input-group-append">
@@ -25,75 +29,19 @@
                                 </div>
                             </div>
                         </div>
+                    {% endfor %}
+                    <div style="padding-left: 60px; background-color: black">
+                        <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
                     </div>
-                {% endfor %}
-                <div style="padding-left: 60px; background-color: black" class="">
-                    <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
         <br>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        function updateElementIndex(el, prefix, ndx) {
-            var id_regex = new RegExp('(' + prefix + '-\\d+)');
-            var replacement = prefix + '-' + ndx;
-            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
-            if (el.id) el.id = el.id.replace(id_regex, replacement);
-            if (el.name) el.name = el.name.replace(id_regex, replacement);
-        }
+            crossorigin="anonymous">
 
-        function cloneMore(selector, prefix) {
-            var newElement = $(selector).clone(true);
-            var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
-            newElement.find(':input').each(function () {
-                var name = $(this).attr('name')
-                console.log(name)
-                if (name) {
-                    name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
-                    var id = 'id_' + name;
-                    $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
-                }
-            });
-            total++;
-            $('#id_' + prefix + '-TOTAL_FORMS').val(total);
-            $(selector).after(newElement);
-            var conditionRow = $('.form-row:not(:last)');
-            conditionRow.find('.btn.add-form-row')
-                .removeClass('btn-success').addClass('btn-danger')
-                .removeClass('add-form-row').addClass('remove-form-row')
-                .html('Remove Rider Above');
-            console.log(total)
-            return false;
-        }
-
-        function deleteForm(prefix, btn) {
-            var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
-            if (total > 1) {
-                btn.closest('.form-row').remove();
-                var forms = $('.form-row');
-                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
-                for (var i = 0, formCount = forms.length; i < formCount; i++) {
-                    $(forms.get(i)).find(':input').each(function () {
-                        updateElementIndex(this, prefix, i);
-                    });
-                }
-            }
-            return false;
-        }
-
-        $(document).on('click', '.add-form-row', function (e) {
-            e.preventDefault();
-            cloneMore('.form-row:last', 'form');
-            return false;
-        });
-        $(document).on('click', '.remove-form-row', function (e) {
-            e.preventDefault();
-            deleteForm('form', $(this));
-            return false;
-        });
     </script>
+    <script type="text/javascript" src="{% static "events/add_form_script.js" %}"></script>
 {% endblock %}
