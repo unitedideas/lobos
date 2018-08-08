@@ -130,6 +130,7 @@ def change_password(request):
 def event_register(request):
     if request.method == 'POST':
         formset_post = RiderProfileFormSet(request.POST)
+
         if formset_post.is_valid():
             print('formset valid')
             formset = formset_post.save(commit=False)
@@ -171,7 +172,7 @@ def event_register(request):
             # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
 
             event = Event.objects.get(event_name=request.GET.get('event'))
-            formset = RiderProfileFormSet(queryset=User.objects.filter(username=request.user))
+            formset = RiderProfileFormSet()
             args = {'formset': formset, 'event': event}
             return render(request, 'events/event_register.html', args)
     else:
@@ -180,7 +181,7 @@ def event_register(request):
         print(request.user)
 
         event = Event.objects.get(event_name=request.GET.get('event'))
-        formset = RiderProfileFormSet(queryset=User.objects.filter(username=request.user))
+        formset = RiderProfileFormSet(queryset=RiderProfile.objects.none())
         args = {'formset': formset, 'event': event}
         return render(request, 'events/event_register.html', args)
 

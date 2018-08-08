@@ -65,10 +65,10 @@ class EditProfileForm(UserChangeForm):
 #         ]
 
 
-RiderProfileFormSet = modelformset_factory(RiderProfile, exclude=('Registration_date_time',
+RiderProfileFormSet = modelformset_factory(RiderProfile, exclude=('registration_date_time',
                                                                   'user',
                                                                   'age_on_event_day',
                                                                   'confirmation_number',
                                                                   'rider_number',
                                                                   'start_time',
-                                                                  'event',), extra=0)
+                                                                  ))
