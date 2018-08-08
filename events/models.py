@@ -12,8 +12,15 @@ MAKES = load_choices(MAKES_PATH, True)
 
 
 class Event(models.Model):
-    event_name = models.CharField(max_length=100, null=True, blank=True)
+    event_name = models.CharField(max_length=300, null=True, blank=True)
+    slogan = models.CharField(max_length=800, null=True, blank=True)
+    pre_entry_cost = models.CharField(max_length=800, null=True, blank=True)
+    post_entry_cost = models.CharField(max_length=800, null=True, blank=True)
+    entry_closes = models.CharField(max_length=800, null=True, blank=True)
     event_date = models.DateField(max_length=30, null=True, blank=True)
+    event_location = models.CharField(max_length=300, null=True, blank=True)
+    event_details = models.CharField(max_length=1000, null=True, blank=True)
+    map_location = models.CharField(max_length=800, null=True, blank=True)
     pro_time_est = models.TimeField(max_length=30, null=True, blank=True)
     am_time_est = models.TimeField(max_length=30, null=True, blank=True)
 

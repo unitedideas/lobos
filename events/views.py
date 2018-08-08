@@ -11,22 +11,50 @@ from .models import RiderProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from . models import Event
+from .models import Event
 
 
 def home(request):
     events = Event.objects.all().order_by('-event_date')[0:3]
     event_name = events.values_list('event_name', flat=True)
-    event_date = events.values_list('event_date', flat=True)
-    date_list = []
-    for name in event_date:
-        name = str(name)[:4]
-        date_list.append(name)
+    event_dates = events.values_list('event_date', flat=True)
+    year_list = []
+    event_date = []
+    event_details = []
+    event_location = []
+    map_location = []
+    slogan = []
+    pre_entry_cost = []
+    post_entry_cost = []
+    entry_closes = []
 
-    name_date = zip(event_name, date_list)
+    for date in event_dates:
+        year = str(date)[:4]
+        year_list.append(year)
 
-    print(name_date)
-    context = {'name_date': name_date}
+    for event in events:
+        event_date.append(event.event_date)
+        event_details.append(event.event_details)
+        event_location.append(event.event_location)
+        map_location.append(event.map_location)
+        slogan.append(event.slogan)
+        pre_entry_cost.append(event.pre_entry_cost)
+        post_entry_cost.append(event.post_entry_cost)
+        entry_closes.append(event.entry_closes)
+
+
+    events_details = zip(event_name,
+                         year_list,
+                         event_date,
+                         event_details,
+                         event_location,
+                         map_location,
+                         slogan,
+                         pre_entry_cost,
+                         post_entry_cost,
+                         entry_closes)
+
+    context = {'events_details': events_details}
 
     return render(request, 'events/home.html', context)
 
