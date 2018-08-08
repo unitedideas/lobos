@@ -48,7 +48,7 @@ class RiderProfile(models.Model):
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, default=None, null=True, blank=True, on_delete=models.CASCADE)
-    rider_class = models.CharField(null=True, blank=True, max_length=10, choices=RIDER_CLASS)
+    rider_class = models.CharField(null=True, blank=True, max_length=100, choices=RIDER_CLASS)
     first_name = models.CharField(max_length=50, null=True, blank=True)
     last_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=100, null=True, blank=True)

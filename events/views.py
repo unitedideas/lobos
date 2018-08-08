@@ -131,9 +131,11 @@ def event_register(request):
     if request.method == 'POST':
         formset_post = RiderProfileFormSet(request.POST)
         if formset_post.is_valid():
+            print('formset valid')
             formset = formset_post.save(commit=False)
             confirmation_number = id_generator()
             for form in formset:
+                print('in the form loop')
                 print(form.email)
 
                 form.confirmation_number = confirmation_number
@@ -163,12 +165,13 @@ def event_register(request):
             return render(request, 'events/event_confirmation.html')
             # return render(request, 'events/event_confirmation.html', args)
         else:
+            print('formset not valid')
+            print(formset_post.errors)
             # can start with the current users filter queryset
             # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
 
             event = Event.objects.get(event_name=request.GET.get('event'))
-            print(event)
-            formset = RiderProfileFormSet(queryset=RiderProfile.objects.filter(user=request.user))
+            formset = RiderProfileFormSet(queryset=User.objects.filter(username=request.user))
             args = {'formset': formset, 'event': event}
             return render(request, 'events/event_register.html', args)
     else:

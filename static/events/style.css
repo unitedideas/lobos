@@ -20,3 +20,13 @@ body {
 .navbar-brand li a {
     color: #333;
 }
+
+label {
+    font-size: 20px;
+}
+
+input, select {
+    font-size: 20px;
+    width: 100%;
+
+}

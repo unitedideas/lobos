@@ -49,20 +49,20 @@ class EditProfileForm(UserChangeForm):
 
 
 # OG
-class RiderEventForm(ModelForm):
-    first_name = forms.CharField(required=True)
-    last_name = forms.CharField(required=True)
-
-    class Meta:
-        model = RiderProfile
-        exclude = [
-            'Registration_date_time',
-            'user',
-            'age_on_event_day',
-            'confirmation_number',
-            'rider_number',
-            'start_time'
-        ]
+# class RiderEventForm(ModelForm):
+#     first_name = forms.CharField(required=True)
+#     last_name = forms.CharField(required=True)
+#
+#     class Meta:
+#         model = RiderProfile
+#         exclude = [
+#             'Registration_date_time',
+#             'user',
+#             'age_on_event_day',
+#             'confirmation_number',
+#             'rider_number',
+#             'start_time'
+#         ]
 
 
 RiderProfileFormSet = modelformset_factory(RiderProfile, exclude=('Registration_date_time',
@@ -71,5 +71,4 @@ RiderProfileFormSet = modelformset_factory(RiderProfile, exclude=('Registration_
                                                                   'confirmation_number',
                                                                   'rider_number',
                                                                   'start_time',
-                                                                  'event',),
-                                           extra=0)
+                                                                  'event',), extra=0)
