@@ -1,49 +1,73 @@
 {% extends "base.html" %}
 {% load static %}
+<head>
+    {# Vue.js CDN #}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-{% block body %}
-    <div class=container>
-    <div class="jumbotron">
-        <h1>{{ event }}</h1>
-        <p>A little history about the event here</p>
-        <p>Maybe a notice</p>
-        <p>Date</p>
-        <p>Location</p>
-
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <form class="form-horizontal" method="POST" action="">
-                    {% csrf_token %}
-                    {{ formset.management_form }}
-                    <div style="background-color: #ffe673; padding: 20px 60px 20px 60px; margin-right: 15px;" class="row form-row">
-                        <div class="input-group">
-                            {% for form in formset %}
-                                {{ form.as_p }}
-                                <div class="input-group-append">
-                                    <button class="btn btn-success add-form-row btn-lg">Add a Rider</button>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div style="padding-left: 60px; background-color: black">
-                        <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
-                    </div>
-                </form>
-            </div>
-        <div class="col-sm-offset-7 " style="">
-        <div style="position: fixed; bottom: 10%; " class="col-sm-5">
-            sfasfasfasdfasfasfasfdasfasdfasdfas dfasdkfjhas kjdfhals kjfhaskjdfhalskdfjhals kdfjhals dfkjhals dkfjhals kdfhjakls fhj alskdhf
-        </div>
-        </div>
-        <br>
-    </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous">
-
-    </script>
+    {# jQuery #}
     <script type="text/javascript" src="{% static "events/add_form_script.js" %}"></script>
+
+</head>
+{% block body %}
+    <div id="app" class=container>
+        <div class="jumbotron">
+            <h1>{{ event }}</h1>
+            <p>A little history about the event here</p>
+            <p>Maybe a notice</p>
+            <p>Date</p>
+            <p>Location</p>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <form class="form-horizontal" method="POST" action="">
+                        {% csrf_token %}
+                        {{ formset.management_form }}
+                        <div style="background-color: #ffe673; padding: 20px 60px 20px 60px; margin-right: 15px;"
+                             class="row form-row">
+                            <div class="input-group">
+                                {% for form in formset %}
+                                    {{ form.as_p }}
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success add-form-row btn-lg">Add a Rider</button>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div style="padding-left: 60px; background-color: black">
+                            <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-offset-7 " style="">
+                    <div style="position: fixed; bottom: 10%; " class="col-sm-5">
+                        <div>[[message]]</div>
+                        <input v-model="message">
+                        <button v-on:click="reverseMessage">Reverse it</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous">
+
+        </script>
+    </div>
 {% endblock %}
+<script>
+    new Vue({
+        delimiters: ['[[', ']]'],
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    })
+</script>
