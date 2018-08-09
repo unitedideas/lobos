@@ -8,37 +8,37 @@
 
 {% block body %}
     <div class="container">
-        <div class="jumbotron">
-            <h1>Navbar example</h1>
-            <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar
-                work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+    <div class="jumbotron">
+        <h1>Navbar example</h1>
+        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar
+            work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
 
-        </div>
-        <h1>Upcoming Events</h1>
-        <h3>Make clickable upcoming events that take you to the registration page</h3>
+    </div>
+    <h1>Upcoming Events</h1>
+    <h3>Make clickable upcoming events that take you to the registration page</h3>
 
-        {% for detail in events_details %}
-            <div class="jumbotron row" style="margin: 0px 0px 50px 0px">
-                <div class="col-md-6">
-                    <a class="btn btn-lg btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
-                       methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
-                    <h3>{{ detail.6 }}</h3>
-                    <p>Date: {{ detail.2 }}</p>
-                    <p>Pre-entry: {{ detail.7 }}</p>
-                    <p>Post-entry: {{ detail.8 }}</p>
-                    <p>Entry closes {{ detail.9 }}</p>
-                    <p>Details: {{ detail.3 }}</p>
+    {% for detail in events_details %}
+        <div class="jumbotron row" style="margin: 0px 0px 50px 0px">
+            <div class="col-md-6">
+                <a class="btn btn-lg btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
+                   methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
+                <h3>{{ detail.6 }}</h3>
+                <p>Date: {{ detail.2 }}</p>
+                <p>Pre-entry: {{ detail.7 }}</p>
+                <p>Post-entry: {{ detail.8 }}</p>
+                <p>Entry closes {{ detail.9 }}</p>
+                <p>Details: {{ detail.3 }}</p>
 
-                </div>
-                <div style="float: right; margin-top: 80px;" class="col-md-5">
-                    <p>{{ detail.4 }}</p>
-                    <p>{{ detail.5 | safe }}</p>
-                </div>
             </div>
-        {% endfor %}
+            <div style="float: right; margin-top: 80px;" class="col-md-5">
+                <p>{{ detail.4 }}</p>
+                <p>{{ detail.5 | safe }}</p>
+            </div>
+        </div>
+    {% endfor %}
 
 
 {% endblock %}
-    </div>
+</div>
 
 </body>
