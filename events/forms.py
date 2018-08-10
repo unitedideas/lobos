@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import RiderProfile
 from django.forms import ModelForm
 from django.forms import modelformset_factory
+import datetime
 
 
 # widgets = {
@@ -49,27 +50,31 @@ class EditProfileForm(UserChangeForm):
 
 
 # OG
-# class RiderEventForm(ModelForm):
-#     first_name = forms.CharField(required=True)
-#     last_name = forms.CharField(required=True)
+# class RiderProfileFormSet(ModelForm):
+#     registration_date_time = forms.DateTimeField(initial=datetime.datetime.now())
 #
 #     class Meta:
 #         model = RiderProfile
-#         exclude = [
-#             'Registration_date_time',
+#         exclude = (
+#             'registration_date_time',
 #             'user',
 #             'age_on_event_day',
 #             'confirmation_number',
 #             'rider_number',
-#             'start_time'
-#         ]
+#             'start_time',
+#             'event',
+#             'conf_timestamp'
+#         )
 
-
-RiderProfileFormSet = modelformset_factory(RiderProfile, exclude=('registration_date_time',
-                                                                  'user',
-                                                                  'age_on_event_day',
-                                                                  'confirmation_number',
-                                                                  'rider_number',
-                                                                  'start_time',
-                                                                  'event'
-                                                                  ))
+# https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
+RiderProfileFormSet = modelformset_factory(RiderProfile,
+                                           exclude=('registration_date_time',
+                                                    'user',
+                                                    'age_on_event_day',
+                                                    'confirmation_number',
+                                                    'rider_number',
+                                                    'start_time',
+                                                    'event',
+                                                    ), initial=[
+        {'title': 'Django is now open source',
+         'pub_date': datetime.date.today(),}])
