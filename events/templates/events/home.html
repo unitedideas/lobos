@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 <head>
+{% load static %}
+
     {% block head %}
         <title>Upcoming Events</title>
     {% endblock %}
@@ -9,13 +11,18 @@
 {% block body %}
     <div class="container">
     <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar
-            work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+    <div class="row">
+        <div class="col-sm-7">
 
+            <h1>Events Page</h1>
+            <p>The could be a notification, countdown, welcome, race results, links, Points leaders, whatever.</p>
+        </div>
+    <div class="col-md-5">
+        <img src="{% static "events/lobos logo.png" %}">
     </div>
-    <h1>Upcoming Events</h1>
-    <h3>Make clickable upcoming events that take you to the registration page</h3>
+    </div>
+    </div>
+    <h1 style="text-align: center;">Upcoming Events</h1>
 
     {% for detail in events_details %}
         <div class="jumbotron row" style="margin: 0px 0px 50px 0px">
