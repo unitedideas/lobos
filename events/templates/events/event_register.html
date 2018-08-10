@@ -30,8 +30,9 @@
                                 {% for form in formset %}
                                     {{ form.as_p }}
                                     <div class="input-group-append">
-                                        <button class="btn btn-success add-form-row btn-lg">Add a Rider</button>
-                                    </div>
+{% if formset.can_delete %}
+                <li>{{ form.DELETE }}</li>
+            {% endif %}                                    </div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -41,7 +42,7 @@
                     </form>
                 </div>
                 <div class="col-sm-offset-7 " style="position: fixed; top: 500px; left: 150px; width: auto;">
-                    <div style="position: relative; top: 0px; " class="col-sm-8">
+                    <div style="position: relative; top: 0px; " class="col-md-8">
                         <div>[[message]]</div>
                         <br>
                         <div v-html = 'paypal_button'></div>
