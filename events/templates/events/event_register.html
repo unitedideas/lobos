@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 <head>
-    {# Vue.js CDN #}
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     {# jQuery #}
     <script type="text/javascript" src="{% static "events/add_form_script.js" %}"></script>
-
+   {# Vue.js CDN #}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 {% block body %}
+<div id="app">
     <div class=container>
         <div class="jumbotron">
             <h1>{{ event }}</h1>
@@ -40,9 +40,12 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-sm-offset-7 " style="">
-                    <div style="position: fixed; bottom: 10%; " class="col-sm-5">
+                <div class="col-sm-offset-7 " style="position: fixed; top: 500px; left: 150px; width: auto;">
+                    <div style="position: relative; top: 0px; " class="col-sm-8">
                         <div>[[message]]</div>
+                        <br>
+                        <div v-html = 'paypal_button'></div>
+                        <br>
                         <input v-model="message">
                         <button v-on:click="reverseMessage">Reverse it</button>
                     </div>
@@ -50,18 +53,21 @@
                 <br>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                crossorigin="anonymous">
-
-        </script>
     </div>
-    <script>
+</div>
+
+<script>
     new Vue({
         delimiters: ['[[', ']]'],
         el: '#app',
         data: {
-            message: 'Hello Vue.js!'
+            message: 'Total Price: $160.00',
+            paypal_button :'<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">\n' +
+                '<input type="hidden" name="cmd" value="_s-xclick">\n' +
+                '<input type="hidden" name="hosted_button_id" value="4X3VTSLSHYJP8">\n' +
+                '<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">\n' +
+                '<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="0" height="0">\n' +
+                '</form>\n'
         },
         methods: {
             reverseMessage: function () {
@@ -71,3 +77,4 @@
     })
 </script>
 {% endblock %}
+
