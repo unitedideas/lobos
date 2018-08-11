@@ -27,7 +27,7 @@ class RegistrationForm(UserCreationForm):
         (MALE, 'Male'),
     )
 
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(required=True,)
     gender = forms.ChoiceField(choices=GENDER)
     birth_date = forms.DateField(required=False)
     phone_number = forms.CharField()
@@ -35,7 +35,7 @@ class RegistrationForm(UserCreationForm):
     address = forms.CharField()
     address_line_two = forms.CharField(max_length=300)
     city = forms.CharField(max_length=300)
-    state = forms.ChoiceField(choices=STATES)
+    state = forms.ChoiceField(choices=STATES, initial='OR')
     zip_code = forms.CharField(max_length=5)
     emergency_contact_name = forms.CharField(max_length=300)
     emergency_contact_phone = forms.CharField(max_length=10)
