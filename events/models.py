@@ -28,6 +28,37 @@ class Event(models.Model):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
 
 
+class Profile(models.Model):
+    FEMALE = 'Female'
+    MALE = 'Male'
+
+    GENDER = (
+        (FEMALE, 'Female'),
+        (MALE, 'Male'),
+    )
+
+    user = models.OneToOneField(User, default=None, null=True, blank=True, on_delete=models.CASCADE)
+    gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
+    birth_date = models.DateField(null=True, blank=True)
+    phone_number = models.CharField(max_length=10, null=True, blank=True)
+    country = models.CharField(max_length=300, null=True, blank=True)
+    address = models.CharField(max_length=300, null=True, blank=True)
+    address_line_two = models.CharField(max_length=300, null=True, blank=True)
+    city = models.CharField(max_length=300, null=True, blank=True)
+    state = models.CharField(max_length=2, null=True, blank=True, choices=STATES)
+    zip_code = models.CharField(max_length=5, null=True, blank=True)
+    emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
+    emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
+    bike_make = models.CharField(max_length=20, null=True, blank=True, choices=MAKES)
+    bike_displacement = models.IntegerField(null=True, blank=True)
+    omra_number = models.CharField(max_length=300, null=True, blank=True)
+    ama_number = models.CharField(max_length=300, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.user.first_name) + " " + str(self.user.last_name) + " - " + str(self.user)
+
+
+
 class RiderProfile(models.Model):
     EXOVER16 = 'Expert Schedule Classes - Over age 16'
     EXUNDER16 = 'Expert Schedule Classes - 16 and under'
@@ -35,9 +66,6 @@ class RiderProfile(models.Model):
     AMUNDER16 = 'Expert Schedule Classes - 16 and under'
     CLASS60_70 = 'Class 60 and 70 Rider'
     ESCORT = 'Escort Rider'
-
-    FEMALE = 'Female'
-    MALE = 'Male'
 
     RIDER_CLASS = (
         (EXOVER16, 'Expert Schedule Classes - Over age 16'),
@@ -47,6 +75,9 @@ class RiderProfile(models.Model):
         (CLASS60_70, 'Class 60 and 70 Rider'),
         (ESCORT, 'Escort Rider'),
     )
+
+    FEMALE = 'Female'
+    MALE = 'Male'
 
     GENDER = (
         (FEMALE, 'Female'),
@@ -143,7 +174,8 @@ class Person(models.Model):
 
 def create_profile(sender, **kwargs):
     if kwargs['created']:
-        user_profile = RiderProfile.objects.create(user=kwargs['instance'])
+        user_profile = Profile.objects.create(user=kwargs['instance'])
 
 
 post_save.connect(create_profile, sender=User)
+

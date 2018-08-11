@@ -8,7 +8,7 @@ import random
 import string
 import datetime
 import urllib.parse
-from .models import RiderProfile
+from .models import RiderProfile, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -136,13 +136,19 @@ def event_register(request):
                     user = User.objects.create(username=form.email,
                                                email=form.email,
                                                first_name=form.first_name,
-                                               last_name=form.last_name)
+                                               last_name=form.last_name,
+                                               )
+
+
                     user.save()
                     user.first_name = form.first_name
                     user.last_name = form.last_name
+                    Profile.user.address = form.address
 
-                    RiderProfile.objects.all().last().delete()
+                    # RiderProfile.objects.all().last().delete()
+                    # Profile.objects.update(address=form.address)
                     form.user = user
+
                 else:
                     form.user = User.objects.get(username=form.email)
                 form.save()
@@ -170,16 +176,17 @@ def event_register(request):
     else:
         # can start with the current users filter queryset
         # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
-        current_user = request.user
         # current_user_profile = RiderProfile.objects.get(user=request.user)
-        print('user ok = ' + str(current_user))
+        # current_user_profile = RiderProfile.objects.all()
+        # ride =request.user
+        # print(RiderProfile.objects.user)
         # print(current_user_profile)
         event = Event.objects.get(event_name=request.GET.get('event'))
-        formset = RiderProfileFormSet(initial=[
+        formset = RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[
             {
-                'first_name': current_user.first_name, 'last_name': current_user.last_name,
-                'email': current_user.email,
-                'registration_date_time': datetime.datetime.now().strftime('%d-%m-%y %H:%M:%S')}, ])
+                'first_name': request.user.first_name, 'last_name': request.user.last_name,
+                'email': request.user.email,
+            }])
 
         args = {'formset': formset, 'event': event}
 

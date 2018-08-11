@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import RiderProfile
+from .models import RiderProfile, Profile
 from django.forms import ModelForm
 from django.forms import modelformset_factory
 import datetime
@@ -14,6 +14,7 @@ import datetime
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    address = forms.CharField()
 
     class Meta:
         model = User
@@ -22,6 +23,7 @@ class RegistrationForm(UserCreationForm):
             'email',
             'first_name',
             'last_name',
+            'address',
             'password1',
             'password2',
         )
@@ -32,6 +34,8 @@ class RegistrationForm(UserCreationForm):
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
         user.username = self.cleaned_data['email']
+        user.save()
+        Profile.objects.update(address=self.cleaned_data['address'])
         if commit:
             user.save()
         return user
@@ -49,16 +53,13 @@ class EditProfileForm(UserChangeForm):
         )
 
 
-
 # https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
 RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            exclude=(
-                                                    'user',
-                                                    'age_on_event_day',
-                                                    'confirmation_number',
-                                                    'rider_number',
-                                                    'start_time',
-                                                    'event',
-                                                    ), extra=2)
-
-
+                                               'user',
+                                               'age_on_event_day',
+                                               'confirmation_number',
+                                               'rider_number',
+                                               'start_time',
+                                               'event',
+                                           ))
