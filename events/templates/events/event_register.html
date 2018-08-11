@@ -24,18 +24,25 @@
                         <form class="form-horizontal" method="POST" action="">
                             {% csrf_token %}
                             {{ formset.management_form }}
-                            <div style="background-color: #ffe673; padding: 20px 60px 20px 60px; margin-right: 15px;"
+                            <div style="padding: 20px 60px 20px 60px; margin-right: 15px;"
                                  class="row form-row">
-                                <div class="input-group">
+                                <div id="form" class="input-group">
                                     {% for form in formset %}
-                                        {{ form.as_p }}
-                                        <div class="input-group-append">
+
+                                        <div style="background-color: #ffe673">
+                                            {{ form }}
                                         </div>
                                     {% endfor %}
+{#                                    <div style="padding-left: 60px; background-color: black">#}
+{#                                        <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>#}
+{#                                        <p v-on:click="delForm" class="btn btn-primary btn-lg">Delete Form</p>#}
+{#                                    </div>#}
+                                    <br>
+
                                 </div>
-                            </div>
-                            <div style="padding-left: 60px; background-color: black">
-                                <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
+                                <div style="padding-left: 60px; background-color: black">
+                                    <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -55,25 +62,5 @@
         </div>
     </div>
 
-    <script>
-        new Vue({
-            delimiters: ['[[', ']]'],
-            el: '#app',
-            data: {
-                message: 'Total Price: $160.00',
-                paypal_button: '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">\n' +
-                    '<input type="hidden" name="cmd" value="_s-xclick">\n' +
-                    '<input type="hidden" name="hosted_button_id" value="4X3VTSLSHYJP8">\n' +
-                    '<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">\n' +
-                    '<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="0" height="0">\n' +
-                    '</form>\n'
-            },
-            methods: {
-                reverseMessage: function () {
-                    this.message = this.message.split('').reverse().join('')
-                }
-            }
-        })
-    </script>
 {% endblock %}
 
