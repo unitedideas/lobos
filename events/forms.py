@@ -49,32 +49,16 @@ class EditProfileForm(UserChangeForm):
         )
 
 
-# OG
-# class RiderProfileFormSet(ModelForm):
-#     registration_date_time = forms.DateTimeField(initial=datetime.datetime.now())
-#
-#     class Meta:
-#         model = RiderProfile
-#         exclude = (
-#             'registration_date_time',
-#             'user',
-#             'age_on_event_day',
-#             'confirmation_number',
-#             'rider_number',
-#             'start_time',
-#             'event',
-#             'conf_timestamp'
-#         )
 
 # https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
 RiderProfileFormSet = modelformset_factory(RiderProfile,
-                                           exclude=('registration_date_time',
+                                           exclude=(
                                                     'user',
                                                     'age_on_event_day',
                                                     'confirmation_number',
                                                     'rider_number',
                                                     'start_time',
                                                     'event',
-                                                    ), initial=[
-        {'title': 'Django is now open source',
-         'pub_date': datetime.date.today(),}])
+                                                    ), extra=2)
+
+

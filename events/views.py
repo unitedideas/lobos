@@ -6,6 +6,7 @@ from events.forms import (
 )
 import random
 import string
+import datetime
 import urllib.parse
 from .models import RiderProfile
 from django.contrib.auth.models import User
@@ -41,7 +42,6 @@ def home(request):
         pre_entry_cost.append(event.pre_entry_cost)
         post_entry_cost.append(event.post_entry_cost)
         entry_closes.append(event.entry_closes)
-
 
     events_details = zip(event_name,
                          year_list,
@@ -115,46 +115,6 @@ def change_password(request):
         return render(request, 'events/password_change.html', args)
 
 
-# old registration saving for deletion before deployment
-# def event_register(request):
-#     if request.method == 'POST':
-#         event_form = RiderEventForm(request.POST)
-#
-#         if event_form.is_valid():
-#             event_post = event_form.save(commit=False)
-#             confirmation_number = id_generator()
-#             event_post.confirmation_number = confirmation_number
-#             event_post = event_form.save()
-#             # print(event_post.user)
-#             user = User.objects.get_or_create(username=event_post.email,
-#                                               email=event_post.email,
-#                                               first_name=event_post.first_name,
-#                                               last_name=event_post.last_name)[0]
-#             user.save()
-#             user.first_name = event_post.first_name
-#             user.last_name = event_post.last_name
-#
-#             RiderProfile.objects.all().last().delete()
-#             event_post.user = user
-#             event_post = event_form.save()
-#
-#             args = {'event': event_post.event, 'post_email': event_post.email,
-#                     'confirmation_number': confirmation_number}
-#             # email confirmation function here
-#             # return redirect('/event-confirmation')
-#             return render(request, 'events/event_confirmation.html', args)
-#
-#         else:
-#             event_form = RiderEventForm()
-#             args = {'event_form': event_form}
-#             return render(request, 'events/event_register.html', args)
-#     else:
-#         event_form = RiderEventForm()
-#         args = {'event_form': event_form}
-#         return render(request, 'events/event_register.html', args)
-#
-#
-
 def event_register(request):
     if request.method == 'POST':
         formset_post = RiderProfileFormSet(request.POST)
@@ -203,14 +163,26 @@ def event_register(request):
             formset = RiderProfileFormSet()
             args = {'formset': formset, 'event': event}
             return render(request, 'events/event_register.html', args)
+
+
+
+
     else:
         # can start with the current users filter queryset
         # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
-        print(request.user)
-
+        current_user = request.user
+        # current_user_profile = RiderProfile.objects.get(user=request.user)
+        print('user ok = ' + str(current_user))
+        # print(current_user_profile)
         event = Event.objects.get(event_name=request.GET.get('event'))
-        formset = RiderProfileFormSet(queryset=RiderProfile.objects.none())
+        formset = RiderProfileFormSet(initial=[
+            {
+                'first_name': current_user.first_name, 'last_name': current_user.last_name,
+                'email': current_user.email,
+                'registration_date_time': datetime.datetime.now().strftime('%d-%m-%y %H:%M:%S')}, ])
+
         args = {'formset': formset, 'event': event}
+
         return render(request, 'events/event_register.html', args)
 
 
