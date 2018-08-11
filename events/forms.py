@@ -42,21 +42,34 @@ class RegistrationForm(UserCreationForm):
 
 
 class EditProfileForm(UserChangeForm):
-    address = forms.CharField()
+    email = forms.EmailField()
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    password = forms.PasswordInput
     class Meta:
         model = Profile
-        fields = (
-            'email',
-            'first_name',
-            'last_name',
-            'address',
-            'password'
-        )
-    #
-    # def save(self, commit=True):
-    #     user = super(RegistrationForm, self).save(commit=False)
-    #     Profile.objects.update(address=user.address)
+        exclude = ['user']
 
+
+    def save(self, commit=True):
+        user = super(EditProfileForm, self).save(commit=False)
+        Profile.objects.update(gender=self.cleaned_data['gender'])
+        Profile.objects.update(birth_date=self.cleaned_data['birth_date'])
+        Profile.objects.update(phone_number=self.cleaned_data['phone_number'])
+        Profile.objects.update(country=self.cleaned_data['country'])
+        Profile.objects.update(address=self.cleaned_data['address'])
+        Profile.objects.update(address_line_two=self.cleaned_data['address_line_two'])
+        Profile.objects.update(city=self.cleaned_data['city'])
+        Profile.objects.update(state=self.cleaned_data['state'])
+        Profile.objects.update(zip_code=self.cleaned_data['zip_code'])
+        Profile.objects.update(emergency_contact_name=self.cleaned_data['emergency_contact_name'])
+        Profile.objects.update(emergency_contact_phone=self.cleaned_data['emergency_contact_phone'])
+        Profile.objects.update(omra_number=self.cleaned_data['omra_number'])
+        Profile.objects.update(ama_number=self.cleaned_data['ama_number'])
+
+        if commit:
+            user.save()
+        return user
 
 # https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
 RiderProfileFormSet = modelformset_factory(RiderProfile,
