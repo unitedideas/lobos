@@ -93,7 +93,7 @@ def edit_profile(request):
             args = {'form': form, 'errors': 'A user with that username already exists. Please choose a different one.'}
             return render(request, 'events/edit_profile.html', args)
     else:
-        form = EditProfileForm(instance=request.user)
+        form = EditProfileForm(instance=request.user.profile)
         args = {'form': form}
         return render(request, 'events/edit_profile.html', args)
 

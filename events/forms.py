@@ -66,7 +66,6 @@ class RegistrationForm(UserCreationForm):
             'password2',
         )
 
-
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name']
@@ -93,11 +92,20 @@ class RegistrationForm(UserCreationForm):
 
 
 class EditProfileForm(UserChangeForm):
-    user = request.user.username
-    email = forms.EmailField(initial=str(user.email))
+
+    FEMALE = 'Female'
+    MALE = 'Male'
+
+    GENDER = (
+        (FEMALE, 'Female'),
+        (MALE, 'Male'),
+    )
+
+    email = forms.EmailField()
     first_name = forms.CharField()
     last_name = forms.CharField()
     password = forms.PasswordInput
+    gender = forms.ChoiceField(choices=GENDER)
 
     class Meta:
         model = Profile
