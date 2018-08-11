@@ -93,7 +93,8 @@ class RegistrationForm(UserCreationForm):
 
 
 class EditProfileForm(UserChangeForm):
-    email = forms.EmailField()
+    user = request.user.username
+    email = forms.EmailField(initial=str(user.email))
     first_name = forms.CharField()
     last_name = forms.CharField()
     password = forms.PasswordInput
