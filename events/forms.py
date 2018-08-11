@@ -27,7 +27,7 @@ class RegistrationForm(UserCreationForm):
         (MALE, 'Male'),
     )
 
-    email = forms.EmailField(required=True,)
+    email = forms.EmailField(required=True)
     gender = forms.ChoiceField(choices=GENDER)
     birth_date = forms.DateField(required=False)
     phone_number = forms.CharField()
