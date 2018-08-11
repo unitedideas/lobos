@@ -31,9 +31,6 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'first_name', 'last_name')
     list_select_related = ('profile', )
 
-    def get_location(self, instance):
-        return instance.profile.location
-    get_location.short_description = 'Location'
 
     def get_inline_instances(self, request, obj=None):
         if not obj:

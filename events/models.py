@@ -49,8 +49,6 @@ class Profile(models.Model):
     zip_code = models.CharField(max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
     emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
-    bike_make = models.CharField(max_length=20, null=True, blank=True, choices=MAKES)
-    bike_displacement = models.IntegerField(null=True, blank=True)
     omra_number = models.CharField(max_length=300, null=True, blank=True)
     ama_number = models.CharField(max_length=300, null=True, blank=True)
 

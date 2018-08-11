@@ -42,15 +42,20 @@ class RegistrationForm(UserCreationForm):
 
 
 class EditProfileForm(UserChangeForm):
+    address = forms.CharField()
     class Meta:
-        model = User
+        model = Profile
         fields = (
-            'username',
             'email',
             'first_name',
             'last_name',
+            'address',
             'password'
         )
+    #
+    # def save(self, commit=True):
+    #     user = super(RegistrationForm, self).save(commit=False)
+    #     Profile.objects.update(address=user.address)
 
 
 # https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/

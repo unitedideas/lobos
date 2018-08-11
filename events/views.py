@@ -139,17 +139,33 @@ def event_register(request):
                                                last_name=form.last_name,
                                                )
 
-
                     user.save()
                     user.first_name = form.first_name
                     user.last_name = form.last_name
-                    Profile.user.address = form.address
+                    form.user = user
+                    user = Profile.objects.filter(user=user)
+                    user.update(address=form.address)
+                    user.update(gender=form.gender)
+                    user.update(birth_date=form.birth_date)
+                    user.update(phone_number=form.phone_number)
+                    user.update(country=form.country)
+                    user.update(address_line_two=form.address_line_two)
+                    user.update(city=form.city)
+                    user.update(state=form.state)
+                    user.update(zip_code=form.zip_code)
+                    user.update(emergency_contact_name=form.emergency_contact_name)
+                    user.update(emergency_contact_phone=form.emergency_contact_phone)
+                    user.update(omra_number=form.omra_number)
+                    user.update(ama_number=form.ama_number)
+
 
                     # RiderProfile.objects.all().last().delete()
                     # Profile.objects.update(address=form.address)
-                    form.user = user
+
 
                 else:
+                    print('formset not valid')
+                    print(formset_post.errors)
                     form.user = User.objects.get(username=form.email)
                 form.save()
 
