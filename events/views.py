@@ -133,7 +133,7 @@ def event_register(request):
                 # create username first by combining first, last and email used in the form
                 #  and check if in User.obj.username.exists
                 if not User.objects.filter(username=form.email).exists():
-                    user = User.objects.create(username=form.first_name+form.last_name+form.email,
+                    user = User.objects.create(username=form.email,
                                                email=form.email,
                                                first_name=form.first_name,
                                                last_name=form.last_name,
