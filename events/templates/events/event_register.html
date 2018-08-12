@@ -24,25 +24,25 @@
                         <form class="form-horizontal" method="POST" action="">
                             {% csrf_token %}
                             {{ formset.management_form }}
-                            <div style="padding: 20px 60px 20px 60px; margin-right: 15px;"
+                            <div style="background-color: #ffe673; padding: 20px 60px 20px 60px; margin-right: 15px;"
                                  class="row form-row">
-                                <div id="form" class="input-group">
+                                <div class="input-group">
                                     {% for form in formset %}
-
-                                        <div style="background-color: #ffe673">
-                                            {{ form }}
+                                        {{ form.as_p }}
+                                        <div v-bind:id="item_id" class="input-group-append">
                                         </div>
                                     {% endfor %}
-{#                                    <div style="padding-left: 60px; background-color: black">#}
-{#                                        <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>#}
-{#                                        <p v-on:click="delForm" class="btn btn-primary btn-lg">Delete Form</p>#}
-{#                                    </div>#}
+                                    <div style="padding-left: 60px; background-color: black">
+                                        <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
+                                        <p v-on:click="delForm" class="btn btn-primary btn-lg">Delete Form</p>
+                                        <p v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</p>
+                                    </div>
                                     <br>
 
                                 </div>
-                                <div style="padding-left: 60px; background-color: black">
-                                    <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
-                                </div>
+                            </div>
+                            <div style="padding-left: 60px; background-color: black">
+                                <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
                             </div>
                         </form>
                     </div>
@@ -62,5 +62,50 @@
         </div>
     </div>
 
+    <script>
+        new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#app',
+            data: {
+                message: 'Total Price: $160.00',
+                paypal_button: '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">\n' +
+                    '<input type="hidden" name="cmd" value="_s-xclick">\n' +
+                    '<input type="hidden" name="hosted_button_id" value="4X3VTSLSHYJP8">\n' +
+                    '<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">\n' +
+                    '<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="0" height="0">\n' +
+                    '</form>\n',
+                item_id: '',
+                count: 0,
+                list_of_form:[],
+            },
+            methods: {
+                reverseMessage: function () {
+                    this.message = this.message.split('').reverse().join('')
+                },
+                addForm: function () {
+                    this.count++
+                    console.log(this.count)
+                },
+                delForm: function () {
+                    this.count--
+                    console.log(this.count)
+
+                },
+                formID: function () {
+                    {#let formID = 'id_form-'+this.count+this.#}
+                    {#this.item_id = String(formID)#}
+                    {#console.log(this.item_id)#}
+                    for (form in formset()){
+                        console.log(form)}
+                },
+
+                list_out_forms: function () {
+                    for (form in formset()){
+                        console.log(form)
+                    }
+                }
+            }
+        })
+    </script>
 {% endblock %}
 
