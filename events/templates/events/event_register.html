@@ -34,11 +34,11 @@
                                     {% endfor %}
                                     <div style="padding-left: 60px; background-color: black">
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
-                                        <p v-on:click="delForm" class="btn btn-primary btn-lg">Delete Form</p>
-                                        <p v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</p>
+                                        <p v-on:click="regexit" class="btn btn-primary btn-lg">RegExIt</p>
+                                        <p v-on:click="formID" class="btn btn-primary btn-lg">formID</p>
                                     </div>
                                     <br>
-
+                                    <br>
                                 </div>
                             </div>
                             <div style="padding-left: 60px; background-color: black">
@@ -76,7 +76,7 @@
                     '</form>\n',
                 item_id: '',
                 count: 0,
-                list_of_form:[],
+                list_of_form: []
             },
             methods: {
                 reverseMessage: function () {
@@ -84,23 +84,27 @@
                 },
                 addForm: function () {
                     this.count++
+                    let total_forms = document.getElementById('id_form-TOTAL_FORMS')
+                    total_forms.name = 'form-TOTAL_FORMS'
+                    total_forms.value = this.count+1
                     console.log(this.count)
                 },
-                delForm: function () {
-                    this.count--
-                    console.log(this.count)
+                regexit: function (form) {
+                    console.log("I'm in here")
+                    console.log(form)
 
                 },
                 formID: function () {
                     {#let formID = 'id_form-'+this.count+this.#}
                     {#this.item_id = String(formID)#}
                     {#console.log(this.item_id)#}
-                    for (form in formset()){
-                        console.log(form)}
+                    for (let form in formset()) {
+                        console.log(form)
+                    }
                 },
 
                 list_out_forms: function () {
-                    for (form in formset()){
+                    for (form in formset()) {
                         console.log(form)
                     }
                 }
