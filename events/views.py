@@ -185,10 +185,11 @@ def event_register(request):
             formset = RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[
                 {
                     'first_name': request.user.first_name, 'last_name': request.user.last_name,
-                    'email': request.user.email,
+                    'email': request.user.email, 'address': request.user.profile.address
                 }])
 
             args = {'formset': formset, 'event': event}
+            print(formset)
             return render(request, 'events/event_register.html', args)
 
 
@@ -206,10 +207,11 @@ def event_register(request):
         formset = RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[
             {
                 'first_name': request.user.first_name, 'last_name': request.user.last_name,
-                'email': request.user.email,
+                'email': request.user.email, 'address': request.user.profile.address
             }])
 
         args = {'formset': formset, 'event': event}
+        print(formset)
         return render(request, 'events/event_register.html', args)
 
 
