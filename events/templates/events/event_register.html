@@ -30,11 +30,12 @@
                             <div style="background-color: #ffe673; padding: 20px 60px 20px 60px; margin-right: 15px;"
                                  class="row form-row">
                                 <div class="input-group">
-                                    {% for form in formset %}
-                                        <div v-bind:id="item_id" class="input-group-append">
-                                        <span v-html="vue_form"></span>
-                                        </div>
-                                    {% endfor %}
+                                    <span v-html="vue_form"></span>
+{#                                    {% for form in formset %}#}
+{#                                        <div v-bind:id="item_id" class="input-group-append">#}
+{#                                        <span v-html="vue_form"></span>#}
+{#                                        </div>#}
+{#                                    {% endfor %}#}
                                     <div style="padding-left: 60px; background-color: black">
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
                                         <p v-on:click="vue_django_form" class="btn btn-primary btn-lg">RegExIt</p>
@@ -80,7 +81,7 @@
                 item_id: '',
                 count: 0,
                 list_of_form: [],
-                vue_form:""
+                vue_form:"Nothing saved here"
 
             },
             methods: {
@@ -115,6 +116,7 @@
                 },
             },
             mounted: function (response) {
+                let app = this
                 console.log('In the mounted function')
                 axios.post("{% url 'event_formset' %}",
                     {processData: false, contentType: false}, {
@@ -126,7 +128,7 @@
                     .then(function (response) {
                         console.log('Response:')
                         console.log(response.data.formset)
-                        this.vue_form = response.data.formset
+                        app.vue_form = response.data.formset
                     })
             }
 
