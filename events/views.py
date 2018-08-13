@@ -15,7 +15,6 @@ from django.contrib.auth import update_session_auth_hash
 from .models import Event
 from django.http import JsonResponse
 import json
-import stringify
 
 def home(request):
     events = Event.objects.all().order_by('-event_date')[0:3]

@@ -9,6 +9,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- jQuery for PayPal -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 </head>
 {% block body %}
     <div id="app">
@@ -31,14 +34,14 @@
                                  class="row form-row">
                                 <div class="input-group">
                                     <span v-html="vue_form"></span>
-{#                                    {% for form in formset %}#}
-{#                                        <div v-bind:id="item_id" class="input-group-append">#}
-{#                                        <span v-html="vue_form"></span>#}
-{#                                        </div>#}
-{#                                    {% endfor %}#}
+                                    {#                                    {% for form in formset %}#}
+                                    {#                                        <div v-bind:id="item_id" class="input-group-append">#}
+                                    {#                                        <span v-html="vue_form"></span>#}
+                                    {#                                        </div>#}
+                                    {#                                    {% endfor %}#}
                                     <div style="padding-left: 60px; background-color: black">
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
-                                        <p v-on:click="vue_django_form" class="btn btn-primary btn-lg">RegExIt</p>
+                                        {#                                        <p v-on:click="list_out_forms" class="btn btn-primary btn-lg">RegExIt</p>#}
                                         <p v-on:click="formID" class="btn btn-primary btn-lg">formID</p>
                                     </div>
                                     <br>
@@ -52,12 +55,9 @@
                     </div>
                     <div class="col-sm-offset-7 " style="position: fixed; top: 500px; left: 150px; width: auto;">
                         <div style="position: relative; top: 0px; " class="col-md-8">
-                            <div>[[vue_form]]</div>
+                            <div>[[message]]</div>
                             <br>
-                            <div v-html='paypal_button'></div>
                             <br>
-                            <input v-model="message">
-                            <button v-on:click="reverseMessage">Reverse it</button>
                         </div>
                     </div>
                     <br>
@@ -65,7 +65,60 @@
             </div>
         </div>
     </div>
+<component is="paypalButton" v-if="job[0].job_state_id==8" :spanid="'pp-button'" :price="sumPrice" :jobtitle="job[0].job_title"></component>
+    <div id="paypal-button-container"></div>
 
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+
+    <script>
+
+        // Render the PayPal button
+
+        paypal.Button.render({
+
+            // Set your environment
+
+            env: 'sandbox', // sandbox | production
+
+            // Specify the style of the button
+
+            style: {
+                label: 'checkout',
+                size: 'small',    // small | medium | large | responsive
+                shape: 'pill',     // pill | rect
+                color: 'gold'      // gold | blue | silver | black
+            },
+
+            // PayPal Client IDs - replace with your own
+            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+
+            client: {
+                sandbox: 'Ab1Sz1kGg_pToL-VqcaNqUh1C4obLl11btkrD3nShf8FadP5sDn47sNiLVA7mHeWQKN9Fn14tMorYSag',
+                production: '<insert production client id>'
+            },
+
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: {total: '0.01', currency: 'USD'}
+                            }
+                        ]
+                    }
+                });
+            },
+
+            onAuthorize: function (data, actions) {
+                return actions.payment.execute().then(function () {
+                    window.alert('Payment Complete!');
+                });
+            }
+
+        }, '#paypal-button-container');
+
+    </script>
     <script>
         new Vue({
             delimiters: ['[[', ']]'],
@@ -81,58 +134,141 @@
                 item_id: '',
                 count: 0,
                 list_of_form: [],
-                vue_form:"Nothing saved here"
+                vue_form: "",
+
 
             },
-            methods: {
-                reverseMessage: function () {
-                    this.message = this.message.split('').reverse().join('')
-                },
-                addForm: function () {
-                    this.count++
-                    let total_forms = document.getElementById('id_form-TOTAL_FORMS')
-                    total_forms.name = 'form-TOTAL_FORMS'
-                    total_forms.value = this.count + 1
-                    console.log(this.count)
-                },
-                vue_django_form: function (response) {
-                    console.log("I'm in here")
-                    console.log(response)
+            methods:
+                {
+
+                    addForm: function () {
+                        this.count++
+                        let total_forms = document.getElementById('id_form-TOTAL_FORMS')
+                        total_forms.value = this.count + 1
+                        console.log(this.count)
+                    },
+
+                    delForm: function () {
+                        this.count--
+                        let total_forms = document.getElementById('id_form-TOTAL_FORMS')
+                        total_forms.value = this.count - 1
+                        console.log(this.count)
+                    },
+
+                    formID: function () {
+                        let formID = 'id_form-' + this.count
+                        this.item_id = String(formID)
+                        console.log(this.item_id)
+                    },
 
                 },
-                formID: function () {
-                    {#let formID = 'id_form-'+this.count+this.#}
-                    {#this.item_id = String(formID)#}
-                    {#console.log(this.item_id)#}
-                    for (let form in formset()) {
-                        console.log(form)
-                    }
+
+            mounted:
+
+                function () {
+                    let app = this
+                    console.log('In the mounted function')
+
+                    axios.post("{% url 'event_formset' %}",
+                        {processData: false, contentType: false},
+                        {
+                            headers:
+                                {
+                                    'X-CSRFToken': '{{ csrf_token }}',
+                                }
+                        })
+
+                        .then(function (response) {
+                            app.vue_form = response.data.formset
+                        })
                 },
-
-                list_out_forms: function () {
-                    for (form in formset()) {
-                        console.log(form)
-                    }
-                },
-            },
-            mounted: function (response) {
-                let app = this
-                console.log('In the mounted function')
-                axios.post("{% url 'event_formset' %}",
-                    {processData: false, contentType: false}, {
-                        headers: {
-                            'X-CSRFToken': '{{ csrf_token }}',
-                        }
-                    })
-
-                    .then(function (response) {
-                        console.log('Response:')
-                        console.log(response.data.formset)
-                        app.vue_form = response.data.formset
-                    })
-            }
-
         })
+
     </script>
+    <script>
+Vue.component('paypalButton', {
+
+  template: '<span :id="spanid"></span>',
+
+  mounted: function() {
+    this.createPaypalButton();
+
+  },
+
+  props: ['spanid','jobtitle','price'],
+
+  methods:  {
+    createPaypalButton: function() {
+
+      // Render the button into the container element
+       var uniqueID = "#"+this.spanid;
+       var vm = this;
+
+       paypal.Button.render({
+
+          env: 'sandbox',
+          locale: 'de_DE',
+          commit: true,
+
+          style: {
+               size:   'small', // tiny, small, medium
+               color: 'blue',
+               shape:  'rect'    // pill, rect
+           },
+
+           // Pass the client ids to use to create your transaction on sandbox and production environments
+           client: {
+               sandbox:    'xxxxxxxxx', // from https://developer.paypal.com/developer/applications/
+               production: '<insert production client id>'  // from https://developer.paypal.com/developer/applications/
+           },
+
+           // Pass the payment details for your transaction
+           // See https://developer.paypal.com/docs/api/payments/#payment_create for the expected json parameters
+
+           payment: function(data, actions) {
+
+               return actions.payment.create({
+                   transactions: [
+                       {
+                           amount: {
+                               total:    vm.price,
+                               currency: 'EUR'
+                           },
+
+                        }
+                   ]
+               });
+           },
+
+           // Display a "Pay Now" button rather than a "Continue" button
+
+           commit: true,
+
+           // Pass a function to be called when the customer completes the payment
+
+           onAuthorize: function(data, actions) {
+               return actions.payment.execute().then(function(response) {
+
+
+                  window.alert('Yeah, Gib uns noch mehr Geld!');
+                   console.log('The payment was completed!');
+               });
+           },
+
+           // Pass a function to be called when the customer cancels the payment
+
+           onCancel: function(data) {
+               window.alert('Oh man, Bezahl doch mal!');
+               console.log('The payment was cancelled!');
+           }
+
+       }, uniqueID);
+     }
+  }
+})
+
+</script>
+
+
 {% endblock %}
 

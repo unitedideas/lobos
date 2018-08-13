@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 <head>
-{% load static %}
+    <script src="https://www.paypalobjects.com/api/checkout.js" async></script>
+    {% load static %}
 
     {% block head %}
         <title>Upcoming Events</title>
@@ -12,16 +13,16 @@
 
     <div class="container">
     <div class="jumbotron">
-    <div class="row">
-        <div class="col-sm-7">
+        <div class="row">
+            <div class="col-sm-7">
 
-            <h1>Events Page</h1>
-            <p>The could be a notification, countdown, welcome, race results, links, Points leaders, whatever.</p>
+                <h1>Events Page</h1>
+                <p>The could be a notification, countdown, welcome, race results, links, Points leaders, whatever.</p>
+            </div>
+            <div class="col-md-5">
+                <img src="{% static "events/lobos logo.png" %}">
+            </div>
         </div>
-    <div class="col-md-5">
-        <img src="{% static "events/lobos logo.png" %}">
-    </div>
-    </div>
     </div>
     <h1 style="text-align: center;">Upcoming Events</h1>
 
