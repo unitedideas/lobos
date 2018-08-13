@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .models import Event
+from django.http import JsonResponse
+import json
 
 
 def home(request):
@@ -158,7 +160,6 @@ def event_register(request):
                     user.update(omra_number=form.omra_number)
                     user.update(ama_number=form.ama_number)
 
-
                     # RiderProfile.objects.all().last().delete()
                     # Profile.objects.update(address=form.address)
 
@@ -209,8 +210,8 @@ def event_register(request):
                 'first_name': request.user.first_name, 'last_name': request.user.last_name,
                 'email': request.user.email, 'address': request.user.profile.address
             }])
-
-        args = {'formset': formset, 'event': event}
+        vue_django_form = JsonResponse({'formset': formset})
+        args = {'vue_django_form': vue_django_form, 'formset': formset, 'event': event}
         print(formset)
         return render(request, 'events/event_register.html', args)
 
