@@ -17,5 +17,6 @@ urlpatterns = [
     path('event-confirmation/', views.event_confirmation, name='event_confirmation'),
     path('event-registration/', views.event_register, name='event_register'),
     path('event-registration/<event>', views.event_register, name='event_register'),
+    path('event_formset', views.event_formset, name='event_formset'),
 
 ]

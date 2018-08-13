@@ -15,7 +15,7 @@ from django.contrib.auth import update_session_auth_hash
 from .models import Event
 from django.http import JsonResponse
 import json
-
+import stringify
 
 def home(request):
     events = Event.objects.all().order_by('-event_date')[0:3]
@@ -193,9 +193,6 @@ def event_register(request):
             print(formset)
             return render(request, 'events/event_register.html', args)
 
-
-
-
     else:
         # can start with the current users filter queryset
         # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
@@ -210,9 +207,8 @@ def event_register(request):
                 'first_name': request.user.first_name, 'last_name': request.user.last_name,
                 'email': request.user.email, 'address': request.user.profile.address
             }])
-        vue_django_form = JsonResponse({'formset': formset})
-        args = {'vue_django_form': vue_django_form, 'formset': formset, 'event': event}
-        print(formset)
+
+        args = {'formset': formset, 'event': event}
         return render(request, 'events/event_register.html', args)
 
 
@@ -223,3 +219,14 @@ def event_confirmation(request):
 
 def id_generator(size=8, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+
+def event_formset(request):
+    formset = RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[
+        {
+            'first_name': request.user.first_name, 'last_name': request.user.last_name,
+            'email': request.user.email, 'address': request.user.profile.address
+        }])
+    formset = str(formset)
+    formset_to_vue = {'formset': formset}
+    return JsonResponse(formset_to_vue)

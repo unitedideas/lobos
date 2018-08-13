@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+
 <head>
 
     {# jQuery #}
     <script type="text/javascript" src="{% static "events/add_form_script.js" %}"></script>
     {# Vue.js CDN #}
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 {% block body %}
     <div id="app">
@@ -28,13 +31,13 @@
                                  class="row form-row">
                                 <div class="input-group">
                                     {% for form in formset %}
-                                        {{ form.as_p }}
                                         <div v-bind:id="item_id" class="input-group-append">
+                                        <span v-html="vue_form"></span>
                                         </div>
                                     {% endfor %}
                                     <div style="padding-left: 60px; background-color: black">
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
-                                        <p v-on:click="regexit" class="btn btn-primary btn-lg">RegExIt</p>
+                                        <p v-on:click="vue_django_form" class="btn btn-primary btn-lg">RegExIt</p>
                                         <p v-on:click="formID" class="btn btn-primary btn-lg">formID</p>
                                     </div>
                                     <br>
@@ -48,7 +51,7 @@
                     </div>
                     <div class="col-sm-offset-7 " style="position: fixed; top: 500px; left: 150px; width: auto;">
                         <div style="position: relative; top: 0px; " class="col-md-8">
-                            <div>[[message]]</div>
+                            <div>[[vue_form]]</div>
                             <br>
                             <div v-html='paypal_button'></div>
                             <br>
@@ -76,7 +79,9 @@
                     '</form>\n',
                 item_id: '',
                 count: 0,
-                list_of_form: []
+                list_of_form: [],
+                vue_form:""
+
             },
             methods: {
                 reverseMessage: function () {
@@ -86,12 +91,12 @@
                     this.count++
                     let total_forms = document.getElementById('id_form-TOTAL_FORMS')
                     total_forms.name = 'form-TOTAL_FORMS'
-                    total_forms.value = this.count+1
+                    total_forms.value = this.count + 1
                     console.log(this.count)
                 },
-                vue_django_form: function () {
+                vue_django_form: function (response) {
                     console.log("I'm in here")
-                    console.log(form)
+                    console.log(response)
 
                 },
                 formID: function () {
@@ -107,8 +112,24 @@
                     for (form in formset()) {
                         console.log(form)
                     }
-                }
+                },
+            },
+            mounted: function (response) {
+                console.log('In the mounted function')
+                axios.post("{% url 'event_formset' %}",
+                    {processData: false, contentType: false}, {
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        }
+                    })
+
+                    .then(function (response) {
+                        console.log('Response:')
+                        console.log(response.data.formset)
+                        this.vue_form = response.data.formset
+                    })
             }
+
         })
     </script>
 {% endblock %}
