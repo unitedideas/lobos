@@ -23,6 +23,7 @@ class Event(models.Model):
     map_location = models.CharField(max_length=800, null=True, blank=True)
     pro_time_est = models.TimeField(max_length=30, null=True, blank=True)
     am_time_est = models.TimeField(max_length=30, null=True, blank=True)
+    rider_limit = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]

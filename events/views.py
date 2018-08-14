@@ -14,7 +14,6 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .models import Event
 from django.http import JsonResponse
-import json
 def home(request):
     events = Event.objects.all().order_by('-event_date')[0:3]
     event_name = events.values_list('event_name', flat=True)
