@@ -42,7 +42,7 @@
                                     {#                                    {% endfor %}#}
                                     <div style="padding-left: 60px; background-color: black">
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
-                                        {#                                        <p v-on:click="list_out_forms" class="btn btn-primary btn-lg">RegExIt</p>#}
+                                        <p v-on:click="addEscortForm" class="btn btn-primary btn-lg">RegExIt</p>
                                         <p v-on:click="formID" class="btn btn-primary btn-lg">formID</p>
                                     </div>
                                     <br>
@@ -51,11 +51,21 @@
                             </div>
                             <div style="padding-left: 60px; background-color: black">
                                 <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
+                                <div class="btn btn-primary btn-lg">
+                                    <paypal-checkout
+                                            :amount='amountStr'
+                                            currency="USD"
+                                            :button-style="aStyle"
+                                            :client="paypal"
+                                            env="sandbox">
+                                    </paypal-checkout>
+                                </div>
                             </div>
                         </form>
                     </div>
-                    <div class="col-sm-offset-7 col-sm-5 col-md-5 col-lg-4" style="position: fixed; top: 520px; left: 100px; width: auto;">
-                        <div >
+                    <div class="col-sm-offset-7 col-sm-5 col-md-5 col-lg-4"
+                         style="position: fixed; top: 520px; left: 100px; width: auto;">
+                        <div>
                             <h3>[[totalPrice]]</h3>
                             <h3>$ [[amountInt]]</h3>
                             <br>
@@ -88,27 +98,36 @@
                         production: 'Aa2EMwpfZC-RkwuYd5FjEsuw5XOkYVmTk3K4GTJ1kTcMTuC5J2yV0mjhlua6mJg7Uf26YzPrMaCcixPT'
                     },
                     aStyle: {
-                        label: 'pay',
-                        size: 'small',
-                        shape: 'rect',
+                        label: 'checkout',
+                        size: 'responsive',
+                        shape: 'pill',
                         color: 'blue',
+                        tagline: 'false'
                     },
 
 
-                    escort:'10.00',
+                    escortCost: 10.00,
+                    escortRider: 'False',
+                    riderCost: 70.00,
+                    rider: 'True',
                     amountStr: '1.00',
                     amountInt: 1.00,
-                    title: ' Shane Title ',
                     totalPrice: 'Total Price:',
-                    item_id: '',
+                    itemsList: [],
                     count: 0,
-                    list_of_form: [],
                     vue_form: "",
 
                 }
             },
             methods:
                 {
+
+                    addEscortForm: function () {
+                        this.count++
+                        let total_forms = document.getElementById('id_form-TOTAL_FORMS')
+                        total_forms.value = this.count + 1
+                        console.log(this.count)
+                    },
 
                     addForm: function () {
                         this.count++
