@@ -11,6 +11,8 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- jQuery for PayPal -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-paypal-checkout@2.0.0/dist/vue-paypal-checkout.min.js"></script>
 
 </head>
 {% block body %}
@@ -57,6 +59,7 @@
                         <div style="position: relative; top: 0px; " class="col-md-8">
                             <div>[[message]]</div>
                             <br>
+                            <div id="paypal-button-container"></div>
                             <br>
                         </div>
                     </div>
@@ -65,8 +68,6 @@
             </div>
         </div>
     </div>
-<component is="paypalButton" v-if="job[0].job_state_id==8" :spanid="'pp-button'" :price="sumPrice" :jobtitle="job[0].job_title"></component>
-    <div id="paypal-button-container"></div>
 
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
@@ -185,89 +186,7 @@
         })
 
     </script>
-    <script>
-Vue.component('paypalButton', {
 
-  template: '<span :id="spanid"></span>',
-
-  mounted: function() {
-    this.createPaypalButton();
-
-  },
-
-  props: ['spanid','jobtitle','price'],
-
-  methods:  {
-    createPaypalButton: function() {
-
-      // Render the button into the container element
-       var uniqueID = "#"+this.spanid;
-       var vm = this;
-
-       paypal.Button.render({
-
-          env: 'sandbox',
-          locale: 'de_DE',
-          commit: true,
-
-          style: {
-               size:   'small', // tiny, small, medium
-               color: 'blue',
-               shape:  'rect'    // pill, rect
-           },
-
-           // Pass the client ids to use to create your transaction on sandbox and production environments
-           client: {
-               sandbox:    'xxxxxxxxx', // from https://developer.paypal.com/developer/applications/
-               production: '<insert production client id>'  // from https://developer.paypal.com/developer/applications/
-           },
-
-           // Pass the payment details for your transaction
-           // See https://developer.paypal.com/docs/api/payments/#payment_create for the expected json parameters
-
-           payment: function(data, actions) {
-
-               return actions.payment.create({
-                   transactions: [
-                       {
-                           amount: {
-                               total:    vm.price,
-                               currency: 'EUR'
-                           },
-
-                        }
-                   ]
-               });
-           },
-
-           // Display a "Pay Now" button rather than a "Continue" button
-
-           commit: true,
-
-           // Pass a function to be called when the customer completes the payment
-
-           onAuthorize: function(data, actions) {
-               return actions.payment.execute().then(function(response) {
-
-
-                  window.alert('Yeah, Gib uns noch mehr Geld!');
-                   console.log('The payment was completed!');
-               });
-           },
-
-           // Pass a function to be called when the customer cancels the payment
-
-           onCancel: function(data) {
-               window.alert('Oh man, Bezahl doch mal!');
-               console.log('The payment was cancelled!');
-           }
-
-       }, uniqueID);
-     }
-  }
-})
-
-</script>
 
 
 {% endblock %}
