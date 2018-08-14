@@ -27,7 +27,7 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-sm-8 col-md-8 col-lg-8">
                         <form class="form-horizontal" method="POST" action="">
                             {% csrf_token %}
                             {{ formset.management_form }}
@@ -54,12 +54,13 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-sm-offset-7 " style="position: fixed; top: 500px; left: 150px; width: auto;">
-                        <div style="position: relative; top: 0px; " class="col-md-8">
-                            <div>[[message]]</div>
+                    <div class="col-sm-offset-7 col-sm-5 col-md-5 col-lg-4" style="position: fixed; top: 520px; left: 100px; width: auto;">
+                        <div >
+                            <h3>[[totalPrice]]</h3>
+                            <h3>$ [[amountInt]]</h3>
                             <br>
                             <paypal-checkout
-                                    :amount='amount'
+                                    :amount='amountStr'
                                     currency="USD"
                                     :button-style="aStyle"
                                     :client="paypal"
@@ -92,9 +93,13 @@
                         shape: 'rect',
                         color: 'blue',
                     },
-                    amount: '1.00',
+
+
+                    escort:'10.00',
+                    amountStr: '1.00',
+                    amountInt: 1.00,
                     title: ' Shane Title ',
-                    message: 'Total Price: $160.00',
+                    totalPrice: 'Total Price:',
                     item_id: '',
                     count: 0,
                     list_of_form: [],
