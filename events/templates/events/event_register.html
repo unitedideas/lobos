@@ -11,8 +11,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- jQuery for PayPal -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://unpkg.com/vue-paypal-checkout@2.0.0/dist/vue-paypal-checkout.min.js"></script>
+
 
 </head>
 {% block body %}
@@ -59,7 +58,13 @@
                         <div style="position: relative; top: 0px; " class="col-md-8">
                             <div>[[message]]</div>
                             <br>
-                            <div id="paypal-button-container"></div>
+                            <paypal-checkout
+                                    :amount='amount'
+                                    currency="USD"
+                                    :button-style="aStyle"
+                                    :client="paypal"
+                                    env="sandbox">
+                            </paypal-checkout>
                             <br>
                         </div>
                     </div>
@@ -69,75 +74,33 @@
         </div>
     </div>
 
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-
-
+    <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
     <script>
 
-        // Render the PayPal button
-
-        paypal.Button.render({
-
-            // Set your environment
-
-            env: 'sandbox', // sandbox | production
-
-            // Specify the style of the button
-
-            style: {
-                label: 'checkout',
-                size: 'small',    // small | medium | large | responsive
-                shape: 'pill',     // pill | rect
-                color: 'gold'      // gold | blue | silver | black
-            },
-
-            // PayPal Client IDs - replace with your own
-            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
-
-            client: {
-                sandbox: 'Ab1Sz1kGg_pToL-VqcaNqUh1C4obLl11btkrD3nShf8FadP5sDn47sNiLVA7mHeWQKN9Fn14tMorYSag',
-                production: '<insert production client id>'
-            },
-
-            payment: function (data, actions) {
-                return actions.payment.create({
-                    payment: {
-                        transactions: [
-                            {
-                                amount: {total: '0.01', currency: 'USD'}
-                            }
-                        ]
-                    }
-                });
-            },
-
-            onAuthorize: function (data, actions) {
-                return actions.payment.execute().then(function () {
-                    window.alert('Payment Complete!');
-                });
-            }
-
-        }, '#paypal-button-container');
-
-    </script>
-    <script>
         new Vue({
             delimiters: ['[[', ']]'],
             el: '#app',
-            data: {
-                message: 'Total Price: $160.00',
-                paypal_button: '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">\n' +
-                    '<input type="hidden" name="cmd" value="_s-xclick">\n' +
-                    '<input type="hidden" name="hosted_button_id" value="4X3VTSLSHYJP8">\n' +
-                    '<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">\n' +
-                    '<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="0" height="0">\n' +
-                    '</form>\n',
-                item_id: '',
-                count: 0,
-                list_of_form: [],
-                vue_form: "",
+            data() {
+                return {
+                    paypal: {
+                        sandbox: 'Ab1Sz1kGg_pToL-VqcaNqUh1C4obLl11btkrD3nShf8FadP5sDn47sNiLVA7mHeWQKN9Fn14tMorYSag',
+                        production: 'Aa2EMwpfZC-RkwuYd5FjEsuw5XOkYVmTk3K4GTJ1kTcMTuC5J2yV0mjhlua6mJg7Uf26YzPrMaCcixPT'
+                    },
+                    aStyle: {
+                        label: 'pay',
+                        size: 'small',
+                        shape: 'rect',
+                        color: 'blue',
+                    },
+                    amount: '1.00',
+                    title: ' Shane Title ',
+                    message: 'Total Price: $160.00',
+                    item_id: '',
+                    count: 0,
+                    list_of_form: [],
+                    vue_form: "",
 
-
+                }
             },
             methods:
                 {
@@ -186,6 +149,7 @@
         })
 
     </script>
+
 
 
 
