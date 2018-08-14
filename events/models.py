@@ -36,7 +36,6 @@ class Profile(models.Model):
         (FEMALE, 'Female'),
         (MALE, 'Male'),
     )
-
     user = models.OneToOneField(User, default=None, null=True, blank=True, on_delete=models.CASCADE)
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
     birth_date = models.DateField(null=True, blank=True)
