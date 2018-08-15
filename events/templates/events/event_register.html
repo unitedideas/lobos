@@ -31,15 +31,14 @@
                         <form class="form-horizontal" method="POST" action="">
                             {% csrf_token %}
                             {{ formset.management_form }}
-                            <div style="background-color: #ffe673; padding: 20px 60px 20px 60px; margin-right: 15px;"
+                            <div style=" padding: 20px 60px 20px 60px; margin-right: 15px;"
                                  class="row form-row">
                                 <div class="input-group">
                                     <div v-for="form in formList">
                                         <p>In the list [[count]]</p>
-
-                                        <div v-html="form">
+                                        <br>
+                                        <div style="background-color: #ffe673; padding: 20px" v-html="form">
                                         </div>
-
                                     </div>
                                     <div style="padding-left: 60px; background-color: black">
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
@@ -130,16 +129,23 @@
 
                     addForm: function () {
                         this.count++
-                        let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
-                        (function (ele, idx) {ele.value = String(this.count)})
+                        let form_count = this.count
+                        form_count++
 
-                        total_forms.value = this.count + 1
                         let formID = 'id_form-' + this.count
                         incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
                         this.formList.push(incremented_form)
+                        this.$nextTick(() => {
+                            let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
+                            (function (ele, idx) {
+                                ele.value = form_count
+                            })
+                        })
+                        let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
+                        (function (ele, idx) {
+                            ele.value = form_count
+                        })
                         console.log(this.count)
-                        console.log(incremented_form)
-                        console.log(formList)
                     },
 
                     delForm: function () {
@@ -150,8 +156,6 @@
                         incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
                         this.formList.push(incremented_form)
                         console.log(this.count)
-                        console.log(incremented_form)
-                        console.log(formList)
 
                     },
 
