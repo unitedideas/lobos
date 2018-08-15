@@ -149,14 +149,26 @@
                     },
 
                     delForm: function () {
-                        this.count--
-                        let total_forms = document.getElementById('id_form-TOTAL_FORMS')
-                        total_forms.value = this.count - 1
-                        let formID = 'id_form-' + this.count
-                        incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
-                        this.formList.push(incremented_form)
-                        console.log(this.count)
+                        if (this.count != 0) {
+                            this.count--
+                            let form_count = this.count
+                            form_count++
 
+                            let formID = 'id_form-' + this.count
+                            this.formList.pop()
+                            this.$nextTick(() => {
+                                let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
+                                (function (ele, idx) {
+                                    ele.value = form_count
+                                })
+                            })
+                            let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
+                            (function (ele, idx) {
+                                ele.value = form_count
+                            })
+                            console.log(this.count)
+                        }
+                        else return
                     },
 
                     formID: function () {
