@@ -43,16 +43,17 @@
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
                                         <p v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</p>
                                         <p v-on:click="totalCost" class="btn btn-primary btn-lg">Total Cost</p>
+
                                     </div>
+
                                     <br>
+
                                     <br>
                                 </div>
                             </div>
                             <div style="padding-left: 60px; background-color: black">
                                 <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
                                 <div class="btn btn-primary btn-lg">
-                                    String - [[amountStr]]
-                                    Int - [[amountInt]]
                                     <paypal-checkout
                                             :amount='amountStr'
                                             currency="USD"
@@ -71,7 +72,7 @@
                          style="position: fixed; top: 520px; left: 100px; width: auto;">
                         <div>
                             <h3>Total Price:</h3>
-                            <h3>$ [[amountInt]]</h3>
+                            <h3>$ [[amountStr]]</h3>
                             <br>
                             <paypal-checkout
                                     :amount="amountStr"
@@ -120,8 +121,7 @@
                     escortCost: 10.00,
                     escortRider: 'False',
                     riderCost: 70.00,
-                    amountStr: String(this.amountInt),
-                    amountInt: 1.00,
+                    amountStr: '0.00',
                     formList: [],
                     count: 0,
                     vue_form: "",
@@ -152,7 +152,7 @@
                             }
                         }
                         console.log(total)
-                        this.amountInt = total.toFixed(2)
+                        this.amountStr = String(total.toFixed(2))
 
                     },
 
@@ -207,7 +207,6 @@
                         console.log(data);
                     },
                     paymentCompleted: function (data) {
-                        console.log('The payment was declined or cancled, please try again')
                         console.log(data);
                     },
                     paymentCancelled: function (data) {
