@@ -35,7 +35,6 @@
                                  class="row form-row">
                                 <div class="input-group">
                                     <div v-for="form in formList">
-                                        <p>In the list [[count]]</p>
                                         <br>
                                         <div style="background-color: #ffe673; padding: 20px" v-html="form">
                                         </div>
@@ -56,7 +55,10 @@
                                             currency="USD"
                                             :button-style="aStyle"
                                             :client="paypal"
-                                            env="sandbox">
+                                            env="sandbox"
+                                            v-on:payment-authorized="paymentAuthorized"
+                                            v-on:payment-completed="paymentCompleted"
+                                            v-on:payment-cancelled="paymentCancelled">
                                     </paypal-checkout>
                                 </div>
                             </div>
@@ -69,11 +71,14 @@
                             <h3>$ [[amountInt]]</h3>
                             <br>
                             <paypal-checkout
-                                    :amount='amountStr'
+                                    :amount="amountStr"
                                     currency="USD"
                                     :button-style="aStyle"
                                     :client="paypal"
-                                    env="sandbox">
+                                    env="sandbox"
+                                    v-on:payment-authorized="paymentAuthorized"
+                                    v-on:payment-completed="paymentCompleted"
+                                    v-on:payment-cancelled="paymentCancelled">
                             </paypal-checkout>
                             <br>
                         </div>
@@ -104,7 +109,11 @@
                         tagline: 'false'
                     },
 
-
+                    {#paypalItems:[#}
+                    {#    {#}
+                    {#        'name': this.#}
+                    {#    }#}
+                    {#],#}
                     escortCost: 10.00,
                     escortRider: 'False',
                     riderCost: 70.00,
@@ -114,6 +123,7 @@
                     formList: [],
                     count: 0,
                     vue_form: "",
+                    allRiderTypes: [],
 
                 }
             },
@@ -141,11 +151,6 @@
                                 ele.value = form_count
                             })
                         })
-                        let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
-                        (function (ele, idx) {
-                            ele.value = form_count
-                        })
-                        console.log(this.count)
                     },
 
                     delForm: function () {
@@ -162,11 +167,6 @@
                                     ele.value = form_count
                                 })
                             })
-                            let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
-                            (function (ele, idx) {
-                                ele.value = form_count
-                            })
-                            console.log(this.count)
                         }
                         else return
                     },
@@ -177,7 +177,27 @@
                         this.delForm()
                     },
 
+                    add_rider_type: function () {
+                        console.log('in the foo')
+                        this.paypalItems.push({"name": ""})
+                        console.log(this.paypalItems)
+                    },
+
+                    paymentAuthorized: function (data) {
+                        console.log('The payment was approved, make the button available')
+                        console.log(data);
+                    },
+                    paymentCompleted: function (data) {
+                        console.log('The payment was declined or cancled, please try again')
+                        console.log(data);
+                    },
+                    paymentCancelled: function (data) {
+                        console.log('The payment was declined or cancled, please try again')
+                        console.log(data);
+                    },
+
                 },
+
 
             mounted:
 
@@ -196,7 +216,8 @@
 
                         .then(function (response) {
                             app.vue_form = response.data.formset
-                            app.formList.push(response.data.formset)
+                            {#injected_form = app.vue_form.replace(/rider_class" /g, 'rider_class" @change="add_rider_type"')#}
+                            app.formList.push(app.vue_form)
                         })
                 },
         })

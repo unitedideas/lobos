@@ -27,20 +27,22 @@ class RegistrationForm(UserCreationForm):
         (MALE, 'Male'),
     )
 
-    email = forms.EmailField(required=False)
+    email = forms.EmailField()
+    first_name = forms.CharField(widget=forms.TextInput())
+    last_name = forms.CharField(widget=forms.TextInput())
     gender = forms.ChoiceField(choices=GENDER)
     birth_date = forms.DateField(required=False)
-    phone_number = forms.CharField()
-    country = forms.CharField()
-    address = forms.CharField()
-    address_line_two = forms.CharField(max_length=300)
-    city = forms.CharField(max_length=300)
-    state = forms.ChoiceField(choices=STATES, initial='OR')
-    zip_code = forms.CharField(max_length=5)
-    emergency_contact_name = forms.CharField(max_length=300)
-    emergency_contact_phone = forms.CharField(max_length=10)
-    omra_number = forms.CharField(max_length=300)
-    ama_number = forms.CharField(max_length=300)
+    phone_number = forms.CharField(required=False)
+    country = forms.CharField(required=False)
+    address = forms.CharField(required=False)
+    address_line_two = forms.CharField(required=False)
+    city = forms.CharField(max_length=300, required=False)
+    state = forms.ChoiceField(choices=STATES, initial='OR', required=False)
+    zip_code = forms.CharField(max_length=5, required=False)
+    emergency_contact_name = forms.CharField(max_length=300, required=False)
+    emergency_contact_phone = forms.CharField(max_length=10, required=False)
+    omra_number = forms.CharField(max_length=300, required=False)
+    ama_number = forms.CharField(max_length=300, required=False)
 
     class Meta:
         model = User
@@ -71,7 +73,8 @@ class RegistrationForm(UserCreationForm):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
-        user.username = self.cleaned_data['email']
+
+        user.username = user.first_name+user.last_name+user.email
         user.save()
         Profile.objects.update(gender=self.cleaned_data['gender'])
         Profile.objects.update(birth_date=self.cleaned_data['birth_date'])
@@ -101,10 +104,10 @@ class EditProfileForm(UserChangeForm):
     #     (MALE, 'Male'),
     # )
 
-    # email = forms.EmailField()
-    # first_name = forms.CharField()
-    # last_name = forms.CharField()
-    # password = forms.PasswordInput
+    email = forms.EmailField()
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    password = forms.PasswordInput
     # gender = forms.ChoiceField(choices=GENDER)
 
     class Meta:

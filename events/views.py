@@ -14,6 +14,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .models import Event
 from django.http import JsonResponse
+
+
 def home(request):
     events = Event.objects.all().order_by('-event_date')[0:3]
     event_name = events.values_list('event_name', flat=True)
@@ -131,8 +133,8 @@ def event_register(request):
                 #
                 # create username first by combining first, last and email used in the form
                 #  and check if in User.obj.username.exists
-                if not User.objects.filter(username=form.email).exists():
-                    user = User.objects.create(username=form.email,
+                if not User.objects.filter(username=form.first_name+form.last_name+form.email).exists():
+                    user = User.objects.create(username=form.first_name+form.last_name+form.email,
                                                email=form.email,
                                                first_name=form.first_name,
                                                last_name=form.last_name,
