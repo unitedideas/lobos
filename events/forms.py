@@ -143,4 +143,6 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'rider_number',
                                                'start_time',
                                                'event',
+                                               'id',
+                                               'registration_date_time'
                                            ))

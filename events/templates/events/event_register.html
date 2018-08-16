@@ -203,7 +203,6 @@
 
                 function () {
                     let app = this
-                    console.log('In the mounted function')
 
                     axios.post("{% url 'event_formset' %}",
                         {processData: false, contentType: false},

@@ -126,15 +126,20 @@ def event_register(request):
             confirmation_number = id_generator()
             for form in formset:
                 print('in the form loop')
-                print(form.email)
-
+                registered_rider_info = {}
+                created_username = form.first_name + form.last_name + form.email
                 form.confirmation_number = confirmation_number
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
+
                 #
                 # create username first by combining first, last and email used in the form
                 #  and check if in User.obj.username.exists
-                if not User.objects.filter(username=form.first_name + form.last_name + form.email).exists():
-                    user = User.objects.create(username=form.first_name + form.last_name + form.email,
+                if User.objects.filter(username=created_username).exists():
+                    user_id = User.objects.get(username=created_username).id
+
+                if not User.objects.filter(username=created_username).exists():
+                    print('The user does not exist')
+                    user = User.objects.create(username=created_username,
                                                email=form.email,
                                                first_name=form.first_name,
                                                last_name=form.last_name,
@@ -143,8 +148,8 @@ def event_register(request):
                     user.first_name = form.first_name
                     user.last_name = form.last_name
                     user.save()
+                    print('past the save')
                     form.user = user
-                    print(form.user)
                     user = Profile.objects.filter(user=user)
                     user.update(address=form.address)
                     user.update(gender=form.gender)
@@ -161,20 +166,29 @@ def event_register(request):
                     user.update(ama_number=form.ama_number)
 
                     # RiderProfile.objects.all().last().delete()
-                    # Profile.objects.update(address=form.address)
+                    registered_rider_info['Confirmation Number'] = confirmation_number
+                    form.save()
+
+                elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
+                    print('Already registered for this event')
+                    registered_rider_info['Confirmation Number'] = RiderProfile.objects.get(event=form.event, user=user_id).confirmation_number
 
                 else:
-                    print('formset not valid')
-                    print(formset_post.errors)
-                    form.user = User.objects.get(username=form.email)
-                form.save()
+                    print('The user exists')
+                    form.user = User.objects.get(username=created_username)
+                    registered_rider_info['Confirmation Number'] = confirmation_number
+                    form.save()
 
-            # args = {'event': formset.event, 'post_email': formset.email,
-            #         'confirmation_number': confirmation_number}
-            # email confirmation function here
-            # return redirect('/event-confirmation')
-            return render(request, 'events/event_confirmation.html')
-            # return render(request, 'events/event_confirmation.html', args)
+                print(registered_rider_info)
+
+                confirm = {'user1': {'User Name': 'Shane', 'conf': 'f6fjd8', 'email': 'Shaen@gmail.com'},
+                           'user2': {'User Name': 'Shane', 'conf': 'f6fjd8', 'email': 'Shaen@gmail.com'}}
+
+                args = {'confirm': confirm}
+                # email confirmation function here
+                # return redirect('/event-confirmation')
+                # return render(request, 'events/event_confirmation.html')
+                return render(request, 'events/event_confirmation.html', args)
         else:
             print('formset not valid')
             print(formset_post.errors)
@@ -185,7 +199,6 @@ def event_register(request):
             formset = prefill_form(request)
 
             args = {'formset': formset, 'event': event}
-            print(formset)
             return render(request, 'events/event_register.html', args)
 
     else:
@@ -225,41 +238,15 @@ def prefill_form(request):
     prof = request.user.profile
 
     for field in Profile._meta.get_fields():
-        profile_field_names.append(field.name)
-        field = str(field.name)
-        form_fill_dict[field] = getattr(prof, field)
+        if field.name is not 'id':
+            profile_field_names.append(field.name)
+            field = str(field.name)
+            form_fill_dict[field] = getattr(prof, field)
 
     user_field_names = ['first_name', 'last_name', 'email']
     user_prof = request.user
     for field in User._meta.get_fields():
-        print(field.name)
         field = str(field.name)
         if field in user_field_names:
             form_fill_dict[field] = getattr(user_prof, field)
-
-    # for field in user_field_names:
-    #     form_fill_dict[field] = getattr(user_prof, field)
     return RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[form_fill_dict])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,16 +7,20 @@
 {% block body %}
     <div class="container">
         <h1>Congrats!</h1>
-        <p>
-            You have successfully registered for the {{ user.event }}
-        </p>
-        <h1>Confirmation Number: {{ confirmation_number }}</h1>
-        <p>Username: {{ user }}</p>
-        <p>Username Email: {{ user.email }}</p>
-        <p>First Name: {{ user.first_name }}</p>
-        <p>Username: {{ post_user }}</p>
-        <p>Email: {{ post_email }}</p>
-        <p>Event: {{ event }}</p>
+        <h3>
+            You have successfully registered for the {{ confirm.event }}
+        </h3>
+        <br>
+        {% for thing in confirm %}
+            <h3>Confirmation Number: {{ thing.email }}</h3>
+            {#        <p>Username: {{ confirm.user }}</p>#}
+            {#        <p>Username Email: {{ user.email }}</p>#}
+            {#        <p>First Name: {{ user.first_name }}</p>#}
+            {#        <p>Username: {{ post_user }}</p>#}
+{#            <p>Email: {{ post_email }}</p>#}
+{#            <p>Event: {{ event }}</p>#}
+
+        {% endfor %}
     </div>
 
 {% endblock %}
