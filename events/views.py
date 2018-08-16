@@ -133,8 +133,8 @@ def event_register(request):
                 #
                 # create username first by combining first, last and email used in the form
                 #  and check if in User.obj.username.exists
-                if not User.objects.filter(username=form.first_name+form.last_name+form.email).exists():
-                    user = User.objects.create(username=form.first_name+form.last_name+form.email,
+                if not User.objects.filter(username=form.first_name + form.last_name + form.email).exists():
+                    user = User.objects.create(username=form.first_name + form.last_name + form.email,
                                                email=form.email,
                                                first_name=form.first_name,
                                                last_name=form.last_name,
@@ -162,7 +162,6 @@ def event_register(request):
                     # RiderProfile.objects.all().last().delete()
                     # Profile.objects.update(address=form.address)
 
-
                 else:
                     print('formset not valid')
                     print(formset_post.errors)
@@ -185,7 +184,7 @@ def event_register(request):
             formset = RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[
                 {
                     'first_name': request.user.first_name, 'last_name': request.user.last_name,
-                    'email': request.user.email, 'address': request.user.profile.address
+                    'email': request.user.email, 'address': request.user.profile.address,
                 }])
 
             args = {'formset': formset, 'event': event}
@@ -221,11 +220,19 @@ def id_generator(size=8, chars=string.ascii_uppercase + string.digits):
 
 
 def event_formset(request):
-    formset = RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[
-        {
-            'first_name': request.user.first_name, 'last_name': request.user.last_name,
-            'email': request.user.email, 'address': request.user.profile.address
-        }])
+    formset = prefill_form(request)
     formset = str(formset)
     formset_to_vue = {'formset': formset}
     return JsonResponse(formset_to_vue)
+
+
+def prefill_form(request):
+    for label in Profile.objects.values_list():
+        print(label)
+
+
+    # return RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[
+    #     {
+    #         'first_name': request.user.first_name, 'last_name': request.user.last_name,
+    #         'email': request.user.email, 'address': request.user.profile.address
+    #     }])

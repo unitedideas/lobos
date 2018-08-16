@@ -75,20 +75,22 @@ class RegistrationForm(UserCreationForm):
         user.email = self.cleaned_data['email']
 
         user.username = user.first_name+user.last_name+user.email
-        user.save()
-        Profile.objects.update(gender=self.cleaned_data['gender'])
-        Profile.objects.update(birth_date=self.cleaned_data['birth_date'])
-        Profile.objects.update(phone_number=self.cleaned_data['phone_number'])
-        Profile.objects.update(country=self.cleaned_data['country'])
-        Profile.objects.update(address=self.cleaned_data['address'])
-        Profile.objects.update(address_line_two=self.cleaned_data['address_line_two'])
-        Profile.objects.update(city=self.cleaned_data['city'])
-        Profile.objects.update(state=self.cleaned_data['state'])
-        Profile.objects.update(zip_code=self.cleaned_data['zip_code'])
-        Profile.objects.update(emergency_contact_name=self.cleaned_data['emergency_contact_name'])
-        Profile.objects.update(emergency_contact_phone=self.cleaned_data['emergency_contact_phone'])
-        Profile.objects.update(omra_number=self.cleaned_data['omra_number'])
-        Profile.objects.update(ama_number=self.cleaned_data['ama_number'])
+        username = user.username
+        # user.save()
+        new_user = Profile.objects.filter(user = user)
+        new_user.create(gender=self.cleaned_data['gender'])
+        # Profile.objects.update(birth_date=self.cleaned_data['birth_date'])
+        # Profile.objects.update(phone_number=self.cleaned_data['phone_number'])
+        # Profile.objects.update(country=self.cleaned_data['country'])
+        # Profile.objects.update(address=self.cleaned_data['address'])
+        # Profile.objects.update(address_line_two=self.cleaned_data['address_line_two'])
+        # Profile.objects.update(city=self.cleaned_data['city'])
+        # Profile.objects.update(state=self.cleaned_data['state'])
+        # Profile.objects.update(zip_code=self.cleaned_data['zip_code'])
+        # Profile.objects.update(emergency_contact_name=self.cleaned_data['emergency_contact_name'])
+        # Profile.objects.update(emergency_contact_phone=self.cleaned_data['emergency_contact_phone'])
+        # Profile.objects.update(omra_number=self.cleaned_data['omra_number'])
+        # Profile.objects.update(ama_number=self.cleaned_data['ama_number'])
         if commit:
             user.save()
         return user
