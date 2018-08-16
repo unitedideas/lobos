@@ -42,6 +42,7 @@
                                     <div style="padding-left: 60px; background-color: black">
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
                                         <p v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</p>
+                                        <p v-on:click="totalCost" class="btn btn-primary btn-lg">Total Cost</p>
                                     </div>
                                     <br>
                                     <br>
@@ -50,16 +51,18 @@
                             <div style="padding-left: 60px; background-color: black">
                                 <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
                                 <div class="btn btn-primary btn-lg">
-{#                                    <paypal-checkout#}
-{#                                            :amount='amountStr'#}
-{#                                            currency="USD"#}
-{#                                            :button-style="aStyle"#}
-{#                                            :client="paypal"#}
-{#                                            env="sandbox"#}
-{#                                            v-on:payment-authorized="paymentAuthorized"#}
-{#                                            v-on:payment-completed="paymentCompleted"#}
-{#                                            v-on:payment-cancelled="paymentCancelled">#}
-{#                                    </paypal-checkout>#}
+                                    String - [[amountStr]]
+                                    Int - [[amountInt]]
+                                    <paypal-checkout
+                                            :amount='amountStr'
+                                            currency="USD"
+                                            :button-style="aStyle"
+                                            :client="paypal"
+                                            env="sandbox"
+                                            v-on:payment-authorized="paymentAuthorized"
+                                            v-on:payment-completed="paymentCompleted"
+                                            v-on:payment-cancelled="paymentCancelled">
+                                    </paypal-checkout>
                                 </div>
                             </div>
                         </form>
@@ -70,16 +73,16 @@
                             <h3>Total Price:</h3>
                             <h3>$ [[amountInt]]</h3>
                             <br>
-{#                            <paypal-checkout#}
-{#                                    :amount="amountStr"#}
-{#                                    currency="USD"#}
-{#                                    :button-style="aStyle"#}
-{#                                    :client="paypal"#}
-{#                                    env="sandbox"#}
-{#                                    v-on:payment-authorized="paymentAuthorized"#}
-{#                                    v-on:payment-completed="paymentCompleted"#}
-{#                                    v-on:payment-cancelled="paymentCancelled">#}
-{#                            </paypal-checkout>#}
+                            <paypal-checkout
+                                    :amount="amountStr"
+                                    currency="USD"
+                                    :button-style="aStyle"
+                                    :client="paypal"
+                                    env="sandbox"
+                                    v-on:payment-authorized="paymentAuthorized"
+                                    v-on:payment-completed="paymentCompleted"
+                                    v-on:payment-cancelled="paymentCancelled">
+                            </paypal-checkout>
                             <br>
                         </div>
                     </div>
@@ -117,24 +120,40 @@
                     escortCost: 10.00,
                     escortRider: 'False',
                     riderCost: 70.00,
-                    rider: 'True',
-                    amountStr: '1.00',
+                    amountStr: String(this.amountInt),
                     amountInt: 1.00,
                     formList: [],
                     count: 0,
                     vue_form: "",
-                    allRiderTypes: [],
 
                 }
             },
             methods:
                 {
 
-                    addEscortForm: function () {
-                        this.count++
-                        let total_forms = document.getElementById('id_form-TOTAL_FORMS')
-                        total_forms.value = this.count + 1
-                        console.log(this.count)
+
+                    totalCost: function () {
+                        let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
+                        console.log('in the foo')
+                        let total = 0
+                        let allRiderTypes = []
+
+                        for (let i = 0; i < total_rider_classes.length; i++) {
+                            allRiderTypes.push(total_rider_classes[i].value)
+                        }
+
+                        for (let i = 0; i < allRiderTypes.length; i++) {
+                            if (allRiderTypes[i] !== 'Escort Rider') {
+                                total += this.riderCost
+
+                            } else {
+                                console.log('in the else')
+                                total += this.escortCost
+                            }
+                        }
+                        console.log(total)
+                        this.amountInt = total.toFixed(2)
+
                     },
 
                     addForm: function () {
