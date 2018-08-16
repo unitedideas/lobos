@@ -216,7 +216,6 @@
 
                         .then(function (response) {
                             app.vue_form = response.data.formset
-                            {#injected_form = app.vue_form.replace(/rider_class" /g, 'rider_class" @change="add_rider_type"')#}
                             app.formList.push(app.vue_form)
                         })
                 },

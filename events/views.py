@@ -140,10 +140,11 @@ def event_register(request):
                                                last_name=form.last_name,
                                                )
 
-                    user.save()
                     user.first_name = form.first_name
                     user.last_name = form.last_name
+                    user.save()
                     form.user = user
+                    print(form.user)
                     user = Profile.objects.filter(user=user)
                     user.update(address=form.address)
                     user.update(gender=form.gender)
@@ -181,11 +182,7 @@ def event_register(request):
             # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
 
             event = Event.objects.get(event_name=request.GET.get('event'))
-            formset = RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[
-                {
-                    'first_name': request.user.first_name, 'last_name': request.user.last_name,
-                    'email': request.user.email, 'address': request.user.profile.address,
-                }])
+            formset = prefill_form(request)
 
             args = {'formset': formset, 'event': event}
             print(formset)
@@ -200,11 +197,7 @@ def event_register(request):
         # print(RiderProfile.objects.user)
         # print(current_user_profile)
         event = Event.objects.get(event_name=request.GET.get('event'))
-        formset = RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[
-            {
-                'first_name': request.user.first_name, 'last_name': request.user.last_name,
-                'email': request.user.email, 'address': request.user.profile.address
-            }])
+        formset = prefill_form(request)
 
         args = {'formset': formset, 'event': event}
         return render(request, 'events/event_register.html', args)
@@ -227,12 +220,46 @@ def event_formset(request):
 
 
 def prefill_form(request):
-    for label in Profile.objects.values_list():
-        print(label)
+    form_fill_dict = {}
+    profile_field_names = []
+    prof = request.user.profile
+
+    for field in Profile._meta.get_fields():
+        profile_field_names.append(field.name)
+        field = str(field.name)
+        form_fill_dict[field] = getattr(prof, field)
+
+    user_field_names = ['first_name', 'last_name', 'email']
+    user_prof = request.user
+    for field in User._meta.get_fields():
+        print(field.name)
+        field = str(field.name)
+        if field in user_field_names:
+            form_fill_dict[field] = getattr(user_prof, field)
+
+    # for field in user_field_names:
+    #     form_fill_dict[field] = getattr(user_prof, field)
+    return RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[form_fill_dict])
 
 
-    # return RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[
-    #     {
-    #         'first_name': request.user.first_name, 'last_name': request.user.last_name,
-    #         'email': request.user.email, 'address': request.user.profile.address
-    #     }])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
