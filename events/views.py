@@ -124,9 +124,13 @@ def event_register(request):
             print('formset valid')
             formset = formset_post.save(commit=False)
             confirmation_number = id_generator()
+            print(len(formset))
+            count = 0
+            confirm = {}
             for form in formset:
+                count += 1
+                print(count)
                 print('in the form loop')
-                confirm = {}
                 created_username = form.first_name + form.last_name + form.email
                 form.confirmation_number = confirmation_number
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
@@ -148,7 +152,7 @@ def event_register(request):
                     user.first_name = form.first_name
                     user.last_name = form.last_name
                     user.save()
-                    print('past the save')
+                    print('saved new user')
                     form.user = user
                     user = Profile.objects.filter(user=user)
                     user.update(address=form.address)
@@ -166,35 +170,34 @@ def event_register(request):
                     user.update(ama_number=form.ama_number)
 
                     # RiderProfile.objects.all().last().delete()
-                    message = 'shane'
-                    username = 'cheek'
-                    first_name = ''
-                    last_name = ''
-                    email = ''
-                    confirmation = ''
-                    rider_class = ''
+                    message = ''
+                    username = created_username
+                    first_name = form.first_name
+                    last_name = form.last_name
+                    email = form.email
+                    rider_class = form.rider_class
 
                     confirm[created_username] = {'message': message,
                                                  'username': username,
                                                  'first_name': first_name,
                                                  'last_name': last_name,
                                                  'email': email,
-                                                 'confirmation': confirmation,
+                                                 'confirmation': confirmation_number,
                                                  'rider_class': rider_class}
                     form.save()
 
                 elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
                     print('Already registered for this event')
-                    username = 'cheek'
-                    confirmation = RiderProfile.objects.get(event=form.event, user=user_id).confirmation_number
-                    message = 'This rider, ' + username + ', has previously been registered.' +\
-                                                        ' Please contact the person you registered to verify.' \
-                                                        ' If they have been registered twice please contact us for a refund for that entry.' \
-                                                        ' Phone: 333-333-4444 or email: NotShane@Lobosevents.com'
+                    username = created_username
                     first_name = form.first_name
                     last_name = form.last_name
                     email = form.email
                     rider_class = form.rider_class
+                    confirmation = RiderProfile.objects.get(event=form.event, user=user_id).confirmation_number
+                    message = 'The rider, ' + first_name + ' ' + last_name + ', has previously been registered.' + \
+                              ' Please contact the person you registered to verify.' \
+                              ' If they have been registered twice please contact us for a refund for that entry.' \
+                              ' Phone: 333-333-4444 or email: NotShane@Lobosevents.com'
 
                     confirm[created_username] = {'message': message,
                                                  'username': username,
@@ -211,7 +214,6 @@ def event_register(request):
                     first_name = ''
                     last_name = ''
                     email = ''
-                    confirmation = ''
                     rider_class = ''
 
                     confirm[created_username] = {'message': message,
@@ -219,18 +221,18 @@ def event_register(request):
                                                  'first_name': first_name,
                                                  'last_name': last_name,
                                                  'email': email,
-                                                 'confirmation': confirmation,
+                                                 'confirmation': confirmation_number,
                                                  'rider_class': rider_class}
 
                     form.save()
 
-                print(confirm)
+            print(confirm)
 
-                args = {'event': form.event, 'confirm': confirm}
-                # email confirmation function here
-                # return redirect('/event-confirmation')
-                # return render(request, 'events/event_confirmation.html')
-                return render(request, 'events/event_confirmation.html', args)
+            args = {'event': form.event, 'confirm': confirm}
+            # email confirmation function here
+            # return redirect('/event-confirmation')
+            # return render(request, 'events/event_confirmation.html')
+            return render(request, 'events/event_confirmation.html', args)
         else:
             print('formset not valid')
             print(formset_post.errors)

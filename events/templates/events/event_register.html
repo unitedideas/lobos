@@ -50,16 +50,16 @@
                             <div style="padding-left: 60px; background-color: black">
                                 <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
                                 <div class="btn btn-primary btn-lg">
-                                    <paypal-checkout
-                                            :amount='amountStr'
-                                            currency="USD"
-                                            :button-style="aStyle"
-                                            :client="paypal"
-                                            env="sandbox"
-                                            v-on:payment-authorized="paymentAuthorized"
-                                            v-on:payment-completed="paymentCompleted"
-                                            v-on:payment-cancelled="paymentCancelled">
-                                    </paypal-checkout>
+{#                                    <paypal-checkout#}
+{#                                            :amount='amountStr'#}
+{#                                            currency="USD"#}
+{#                                            :button-style="aStyle"#}
+{#                                            :client="paypal"#}
+{#                                            env="sandbox"#}
+{#                                            v-on:payment-authorized="paymentAuthorized"#}
+{#                                            v-on:payment-completed="paymentCompleted"#}
+{#                                            v-on:payment-cancelled="paymentCancelled">#}
+{#                                    </paypal-checkout>#}
                                 </div>
                             </div>
                         </form>
@@ -70,16 +70,16 @@
                             <h3>Total Price:</h3>
                             <h3>$ [[amountInt]]</h3>
                             <br>
-                            <paypal-checkout
-                                    :amount="amountStr"
-                                    currency="USD"
-                                    :button-style="aStyle"
-                                    :client="paypal"
-                                    env="sandbox"
-                                    v-on:payment-authorized="paymentAuthorized"
-                                    v-on:payment-completed="paymentCompleted"
-                                    v-on:payment-cancelled="paymentCancelled">
-                            </paypal-checkout>
+{#                            <paypal-checkout#}
+{#                                    :amount="amountStr"#}
+{#                                    currency="USD"#}
+{#                                    :button-style="aStyle"#}
+{#                                    :client="paypal"#}
+{#                                    env="sandbox"#}
+{#                                    v-on:payment-authorized="paymentAuthorized"#}
+{#                                    v-on:payment-completed="paymentCompleted"#}
+{#                                    v-on:payment-cancelled="paymentCancelled">#}
+{#                            </paypal-checkout>#}
                             <br>
                         </div>
                     </div>

@@ -95,7 +95,6 @@ class RiderProfile(models.Model):
     address = models.CharField(max_length=300, null=True, blank=True)
     address_line_two = models.CharField(max_length=300, null=True, blank=True)
     city = models.CharField(max_length=300, null=True, blank=True)
-    # make a dropdown like from the diaper bank app
     state = models.CharField(max_length=2, null=True, blank=True, choices=STATES)
     zip_code = models.CharField(max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
