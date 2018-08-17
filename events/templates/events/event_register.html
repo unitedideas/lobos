@@ -12,7 +12,9 @@
     <!-- jQuery for PayPal -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-
+    {% block head %}
+        <title>Event Registration</title>
+    {% endblock %}
 </head>
 {% block body %}
     <div id="app">
@@ -31,6 +33,15 @@
                         <form class="form-horizontal" method="POST" action="">
                             {% csrf_token %}
                             {{ formset.management_form }}
+
+                            {% if errors %}
+                                {% for error in errors %}
+                                    <div class="p-3 mb-2 bg-danger text-white">
+                                        <h4>{{ error }}</h4>
+                                    </div>
+                                {% endfor %}
+
+                            {% endif %}
                             <div style="background-color: black; padding: 20px 60px 20px 60px; margin-right: 15px;"
                                  class="row form-row">
                                 <div class="input-group">

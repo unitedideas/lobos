@@ -118,6 +118,8 @@ def change_password(request):
 
 def event_register(request):
     if request.method == 'POST':
+        print(request.POST.get)
+
         formset_post = RiderProfileFormSet(request.POST)
 
         if formset_post.is_valid():
@@ -236,13 +238,14 @@ def event_register(request):
         else:
             print('formset not valid')
             print(formset_post.errors)
+            errors = formset_post.errors
             # can start with the current users filter queryset
             # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
 
             event = Event.objects.get(event_name=request.GET.get('event'))
             formset = prefill_form(request)
 
-            args = {'formset': formset, 'event': event}
+            args = {'formset': formset, 'event': event, 'errors': errors}
             return render(request, 'events/event_register.html', args)
 
     else:

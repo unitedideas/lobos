@@ -5,6 +5,7 @@ from .models import RiderProfile, Profile
 import os
 from django.forms import modelformset_factory
 from events.util import load_choices
+from django.forms import BaseModelFormSet
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
@@ -134,6 +135,11 @@ class EditProfileForm(UserChangeForm):
         return user
 
 
+class BaseRiderProfileFormSet(BaseModelFormSet):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
 # https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
 RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            exclude=(
@@ -145,4 +151,4 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'event',
                                                'id',
                                                'registration_date_time'
-                                           ))
+                                           ), formset=BaseRiderProfileFormSet)
