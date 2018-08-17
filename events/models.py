@@ -13,7 +13,7 @@ MAKES = load_choices(MAKES_PATH, True)
 
 class Event(models.Model):
     event_name = models.CharField(max_length=300, null=True, blank=True)
-    slogan = models.CharField(max_length=800, null=True, blank=True)
+    description = models.TextField(max_length=800, null=True, blank=True)
     pre_entry_cost = models.IntegerField()
     post_entry_cost = models.IntegerField()
     escort_rider_cost = models.IntegerField()

@@ -14,7 +14,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .models import Event
 from django.http import JsonResponse
-import json, requests
+import json
 
 
 def home(request):
@@ -26,10 +26,10 @@ def home(request):
     event_details = []
     event_location = []
     map_location = []
-    slogan = []
+    description = []
     pre_entry_cost = []
     post_entry_cost = []
-    escort_rider_cost= []
+    escort_rider_cost = []
     entry_closes = []
 
     for date in event_dates:
@@ -41,7 +41,7 @@ def home(request):
         event_details.append(event.event_details)
         event_location.append(event.event_location)
         map_location.append(event.map_location)
-        slogan.append(event.slogan)
+        description.append(event.slogan)
         pre_entry_cost.append(event.pre_entry_cost)
         post_entry_cost.append(event.post_entry_cost)
         entry_closes.append(event.entry_closes)
@@ -53,7 +53,7 @@ def home(request):
                          event_details,
                          event_location,
                          map_location,
-                         slogan,
+                         description,
                          pre_entry_cost,
                          post_entry_cost,
                          entry_closes,
@@ -283,13 +283,13 @@ def event_formset(request):
     event_date = json.loads(request.body)['event'][-4:]
     print(event_date)
     print(event)
-    escort_rider_costs = Event.objects.get(event_name=event, event_date__contains=event_date).escort_rider_cost
+    escort_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).escort_rider_cost
     reg_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).pre_entry_cost
-    print(escort_rider_costs)
+    print(escort_rider_cost)
     print(reg_rider_cost)
     # reg_rider_cost = Event.objects.get(event_name=request.GET.get('event')).pre_entry_cost
     # print(Event.objects.get(event_name=request.GET.get('event')))
-    formset_to_vue = {'reg_rider_cost': reg_rider_cost, 'escort_rider_costs': escort_rider_costs, 'formset': formset}
+    formset_to_vue = {'reg_rider_cost': reg_rider_cost, 'escort_rider_cost': escort_rider_cost, 'formset': formset}
     return JsonResponse(formset_to_vue)
 
 

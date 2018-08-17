@@ -127,7 +127,6 @@
 
 
                     escortCost: 10.00,
-                    escortRider: 'False',
                     riderCost: 70.00,
                     amountStr: '0.00',
                     formList: [],
@@ -254,6 +253,8 @@
                         .then(function (response) {
                             app.vue_form = response.data.formset.replace(/rider_class" /g, 'rider_class" oninput="select_change(this)"')
                             app.formList.push(app.vue_form)
+                            app.riderCost = Number(response.data.reg_rider_cost)
+                            app.escortCost = Number(response.data.escort_rider_cost)
                         })
                 },
 
