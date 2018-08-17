@@ -23,15 +23,15 @@
                 <p>Maybe a notice</p>
                 <p>Date</p>
                 <p>Location</p>
-
             </div>
+            <div id="log"></div>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-8 col-lg-8">
                         <form class="form-horizontal" method="POST" action="">
                             {% csrf_token %}
                             {{ formset.management_form }}
-                            <div style=" padding: 20px 60px 20px 60px; margin-right: 15px;"
+                            <div style="background-color: black; padding: 20px 60px 20px 60px; margin-right: 15px;"
                                  class="row form-row">
                                 <div class="input-group">
                                     <div v-for="form in formList">
@@ -51,7 +51,7 @@
                                     <br>
                                 </div>
                             </div>
-                            <div style="padding-left: 60px; background-color: black">
+                            <div style="margin: 0px 15px 100px -15px; padding: 0px 0px 60px 60px; background-color: black">
                                 <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
                                 <div class="btn btn-primary btn-lg">
                                     <paypal-checkout
@@ -96,7 +96,8 @@
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
     <script>
 
-        new Vue({
+
+        var app = new Vue({
             delimiters: ['[[', ']]'],
             el: '#app',
             data() {
@@ -112,6 +113,7 @@
                         color: 'blue',
                         tagline: 'false'
                     },
+
 
                     {#paypalItems:[#}
                     {#    {#}
@@ -214,6 +216,16 @@
                         console.log(data);
                     },
 
+                    select_change: function (e) {
+                        var id = e.id
+                        document.getElementById(id).onchange = function (e) {
+                            console.log('Something happened')
+                            totalCost()
+                        }
+
+                    }
+
+
                 },
 
 
@@ -232,11 +244,23 @@
                         })
 
                         .then(function (response) {
-                            app.vue_form = response.data.formset
+                            app.vue_form = response.data.formset.replace(/rider_class" /g, 'rider_class" oninput="select_change(this)"')
                             app.formList.push(app.vue_form)
                         })
                 },
+
         })
+
+    </script>
+    <script>
+        function select_change(e) {
+            var id = e.id
+            document.getElementById(id).onchange = function (e) {
+                console.log('Something happened')
+                app.totalCost()
+            }
+
+        }
 
     </script>
 
