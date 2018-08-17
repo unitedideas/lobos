@@ -126,11 +126,6 @@
                     },
 
 
-                    {#paypalItems:[#}
-                    {#    {#}
-                    {#        'name': this.#}
-                    {#    }#}
-                    {#],#}
                     escortCost: 10.00,
                     escortRider: 'False',
                     riderCost: 70.00,
@@ -248,11 +243,15 @@
                     axios.post("{% url 'event_formset' %}",
                         {processData: false, contentType: false},
                         {
+
+
                             headers:
                                 {
                                     'X-CSRFToken': '{{ csrf_token }}',
+                                    event: '{{ event }}',
                                 }
-                        })
+                        }
+                    )
 
                         .then(function (response) {
                             app.vue_form = response.data.formset.replace(/rider_class" /g, 'rider_class" oninput="select_change(this)"')

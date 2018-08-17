@@ -16,6 +16,7 @@ class Event(models.Model):
     slogan = models.CharField(max_length=800, null=True, blank=True)
     pre_entry_cost = models.CharField(max_length=800, null=True, blank=True)
     post_entry_cost = models.CharField(max_length=800, null=True, blank=True)
+    escort_rider_cost = models.CharField(max_length=800, null=True, blank=True)
     entry_closes = models.CharField(max_length=800, null=True, blank=True)
     event_date = models.DateField(max_length=30, null=True, blank=True)
     event_location = models.CharField(max_length=300, null=True, blank=True)

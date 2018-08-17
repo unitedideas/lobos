@@ -14,6 +14,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .models import Event
 from django.http import JsonResponse
+import json, requests
 
 
 def home(request):
@@ -275,6 +276,12 @@ def id_generator(size=8, chars=string.ascii_uppercase + string.digits):
 def event_formset(request):
     formset = prefill_form(request)
     formset = str(formset)
+    some = Event.objects.all()
+    print("next")
+    print(request.POST.get('event'))
+    # escort_rider_costs = Event.objects.get(event_name=request.GET.get('event')).escort_rider_cost
+    # reg_rider_cost = Event.objects.get(event_name=request.GET.get('event')).pre_entry_cost
+    # print(Event.objects.get(event_name=request.GET.get('event')))
     formset_to_vue = {'formset': formset}
     return JsonResponse(formset_to_vue)
 
