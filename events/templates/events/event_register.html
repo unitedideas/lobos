@@ -241,14 +241,12 @@
                     let app = this
 
                     axios.post("{% url 'event_formset' %}",
-                        {processData: false, contentType: false},
+                        {processData: false, contentType: false, event:'{{event}}'},
                         {
-
-
                             headers:
                                 {
                                     'X-CSRFToken': '{{ csrf_token }}',
-                                    event: '{{ event }}',
+                                    'event': '{{ event }}',
                                 }
                         }
                     )

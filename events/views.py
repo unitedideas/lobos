@@ -29,6 +29,7 @@ def home(request):
     slogan = []
     pre_entry_cost = []
     post_entry_cost = []
+    escort_rider_cost= []
     entry_closes = []
 
     for date in event_dates:
@@ -44,6 +45,7 @@ def home(request):
         pre_entry_cost.append(event.pre_entry_cost)
         post_entry_cost.append(event.post_entry_cost)
         entry_closes.append(event.entry_closes)
+        escort_rider_cost.append(event.escort_rider_cost)
 
     events_details = zip(event_name,
                          year_list,
@@ -54,7 +56,8 @@ def home(request):
                          slogan,
                          pre_entry_cost,
                          post_entry_cost,
-                         entry_closes)
+                         entry_closes,
+                         escort_rider_cost)
 
     context = {'events_details': events_details}
 
@@ -276,13 +279,17 @@ def id_generator(size=8, chars=string.ascii_uppercase + string.digits):
 def event_formset(request):
     formset = prefill_form(request)
     formset = str(formset)
-    some = Event.objects.all()
-    print("next")
-    print(request.POST.get('event'))
-    # escort_rider_costs = Event.objects.get(event_name=request.GET.get('event')).escort_rider_cost
+    event = json.loads(request.body)['event'][0:-5]
+    event_date = json.loads(request.body)['event'][-4:]
+    print(event_date)
+    print(event)
+    escort_rider_costs = Event.objects.get(event_name=event, event_date__contains=event_date).escort_rider_cost
+    reg_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).pre_entry_cost
+    print(escort_rider_costs)
+    print(reg_rider_cost)
     # reg_rider_cost = Event.objects.get(event_name=request.GET.get('event')).pre_entry_cost
     # print(Event.objects.get(event_name=request.GET.get('event')))
-    formset_to_vue = {'formset': formset}
+    formset_to_vue = {'reg_rider_cost': reg_rider_cost, 'escort_rider_costs': escort_rider_costs, 'formset': formset}
     return JsonResponse(formset_to_vue)
 
 
