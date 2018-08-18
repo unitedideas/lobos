@@ -15,6 +15,7 @@ from django.contrib.auth import update_session_auth_hash
 from .models import Event
 from django.http import JsonResponse
 import json
+from django.db.models import Count
 
 
 def home(request):
@@ -31,6 +32,14 @@ def home(request):
     post_entry_cost = []
     escort_rider_cost = []
     entry_closes = []
+    rider_limit = []
+    reg_riders = []
+    remaining_spots = []
+
+    for event in event_name:
+        event_id = Event.objects.get(event_name=event).id
+        reg_riders.append(RiderProfile.objects.filter(event=event_id).count())
+        print(reg_riders)
 
     for date in event_dates:
         year = str(date)[:4]
@@ -41,23 +50,39 @@ def home(request):
         event_details.append(event.event_details)
         event_location.append(event.event_location)
         map_location.append(event.map_location)
-        description.append(event.slogan)
+        description.append(event.description)
         pre_entry_cost.append(event.pre_entry_cost)
         post_entry_cost.append(event.post_entry_cost)
         entry_closes.append(event.entry_closes)
         escort_rider_cost.append(event.escort_rider_cost)
+        rider_limit.append(event.rider_limit)
 
-    events_details = zip(event_name,
-                         year_list,
-                         event_date,
-                         event_details,
-                         event_location,
-                         map_location,
-                         description,
-                         pre_entry_cost,
-                         post_entry_cost,
-                         entry_closes,
-                         escort_rider_cost)
+    for limit, rider in zip(rider_limit, reg_riders):
+
+        print('limit')
+        print(limit)
+        print('rider')
+        print(rider)
+        try:
+            remaining_spots.append(limit - rider)
+            print('remaining_spots')
+            print(remaining_spots)
+        except:
+            remaining_spots.append('TBD')
+
+    events_details = zip(event_name,        # 0
+                         year_list,         # 1
+                         event_date,        # 2
+                         event_details,     # 3
+                         event_location,    # 4
+                         map_location,      # 5
+                         description,       # 6
+                         pre_entry_cost,    # 7
+                         post_entry_cost,   # 8
+                         entry_closes,      # 9
+                         escort_rider_cost, # 10
+                         remaining_spots,   # 11
+                         )
 
     context = {'events_details': events_details}
 
@@ -215,15 +240,13 @@ def event_register(request):
                 else:
                     print('The user exists')
                     form.user = User.objects.get(username=created_username)
-                    message = 'shane'
-                    username = 'cheek'
-                    first_name = ''
-                    last_name = ''
-                    email = ''
-                    rider_class = ''
+                    username = created_username
+                    first_name = form.first_name
+                    last_name = form.last_name
+                    email = form.email
+                    rider_class = form.rider_class
 
-                    confirm[created_username] = {'message': message,
-                                                 'username': username,
+                    confirm[created_username] = {'username': username,
                                                  'first_name': first_name,
                                                  'last_name': last_name,
                                                  'email': email,
