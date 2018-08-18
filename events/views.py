@@ -39,7 +39,6 @@ def home(request):
     for event in event_name:
         event_id = Event.objects.get(event_name=event).id
         reg_riders.append(RiderProfile.objects.filter(event=event_id).count())
-        print(reg_riders)
 
     for date in event_dates:
         year = str(date)[:4]
@@ -59,14 +58,8 @@ def home(request):
 
     for limit, rider in zip(rider_limit, reg_riders):
 
-        print('limit')
-        print(limit)
-        print('rider')
-        print(rider)
         try:
             remaining_spots.append(limit - rider)
-            print('remaining_spots')
-            print(remaining_spots)
         except:
             remaining_spots.append('TBD')
 
@@ -147,7 +140,6 @@ def change_password(request):
 
 def event_register(request):
     if request.method == 'POST':
-        print(request.POST.get)
 
         formset_post = RiderProfileFormSet(request.POST)
 
@@ -155,12 +147,10 @@ def event_register(request):
             print('formset valid')
             formset = formset_post.save(commit=False)
             confirmation_number = id_generator()
-            print(len(formset))
             count = 0
             confirm = {}
             for form in formset:
                 count += 1
-                print(count)
                 print('in the form loop')
                 created_username = form.first_name + form.last_name + form.email
                 form.confirmation_number = confirmation_number
@@ -304,12 +294,8 @@ def event_formset(request):
     formset = str(formset)
     event = json.loads(request.body)['event'][0:-5]
     event_date = json.loads(request.body)['event'][-4:]
-    print(event_date)
-    print(event)
     escort_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).escort_rider_cost
     reg_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).pre_entry_cost
-    print(escort_rider_cost)
-    print(reg_rider_cost)
     # reg_rider_cost = Event.objects.get(event_name=request.GET.get('event')).pre_entry_cost
     # print(Event.objects.get(event_name=request.GET.get('event')))
     formset_to_vue = {'reg_rider_cost': reg_rider_cost, 'escort_rider_cost': escort_rider_cost, 'formset': formset}
