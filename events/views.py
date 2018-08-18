@@ -6,8 +6,6 @@ from events.forms import (
 )
 import random
 import string
-import datetime
-import urllib.parse
 from .models import RiderProfile, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
@@ -15,7 +13,7 @@ from django.contrib.auth import update_session_auth_hash
 from .models import Event
 from django.http import JsonResponse
 import json
-from django.db.models import Count
+import datetime
 
 
 def home(request):
@@ -35,10 +33,26 @@ def home(request):
     rider_limit = []
     reg_riders = []
     remaining_spots = []
+    remaining_time = []
 
     for event in event_name:
         event_id = Event.objects.get(event_name=event).id
         reg_riders.append(RiderProfile.objects.filter(event=event_id).count())
+
+    for date in event_dates:
+
+        tte = int((date - datetime.date.today()).days)
+
+        try:
+            if tte == 0:
+                remaining_time.append("It's Today!!!")
+            elif tte < 1:
+                remaining_time.append("Results to Come!")
+            else:
+                remaining_time.append(tte)
+        except:
+            remaining_time.append("TBD")
+
 
     for date in event_dates:
         year = str(date)[:4]
@@ -63,18 +77,19 @@ def home(request):
         except:
             remaining_spots.append('TBD')
 
-    events_details = zip(event_name,        # 0
-                         year_list,         # 1
-                         event_date,        # 2
-                         event_details,     # 3
-                         event_location,    # 4
-                         map_location,      # 5
-                         description,       # 6
-                         pre_entry_cost,    # 7
-                         post_entry_cost,   # 8
-                         entry_closes,      # 9
-                         escort_rider_cost, # 10
-                         remaining_spots,   # 11
+    events_details = zip(event_name,  # 0
+                         year_list,  # 1
+                         event_date,  # 2
+                         event_details,  # 3
+                         event_location,  # 4
+                         map_location,  # 5
+                         description,  # 6
+                         pre_entry_cost,  # 7
+                         post_entry_cost,  # 8
+                         entry_closes,  # 9
+                         escort_rider_cost,  # 10
+                         remaining_spots,  # 11
+                         remaining_time,  # 12
                          )
 
     context = {'events_details': events_details}
