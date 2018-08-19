@@ -175,7 +175,6 @@ def error_checking(request):
 
 
 def event_register(request):
-    error_checking(request)
     if request.method == 'POST':
 
         formset_post = RiderProfileFormSet(request.POST)
