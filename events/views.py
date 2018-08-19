@@ -53,7 +53,6 @@ def home(request):
         except:
             remaining_time.append("TBD")
 
-
     for date in event_dates:
         year = str(date)[:4]
         year_list.append(year)
@@ -154,18 +153,29 @@ def change_password(request):
 
 
 def error_checking(request):
+    print('in error checking')
+
+    print(request.POST.get)
     formset_post = RiderProfileFormSet(request.POST)
+    # total_for_count = json.loads(request.body)['management_form'],
+
+    # print(total_for_count)
+
     if formset_post.is_valid():
-        event_register()
+        print('the formset is valid')
+        print('passing to event_register')
+        # event_register()
     else:
         print('formset not valid')
         print(formset_post.errors)
         errors = formset_post.errors
         args = {'errors': errors}
         return JsonResponse(args)
+    return render(request, 'events/event_register.html')
 
 
 def event_register(request):
+    error_checking(request)
     if request.method == 'POST':
 
         formset_post = RiderProfileFormSet(request.POST)

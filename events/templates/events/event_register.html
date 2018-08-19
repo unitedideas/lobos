@@ -30,18 +30,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-8 col-lg-8">
-                        <form class="form-horizontal" method="POST" action="">
+                        {% if errors %}
+                            {% for error in errors %}
+                                <div class="p-3 mb-2 bg-danger text-white">
+                                    <h4>{{ error }}</h4>
+                                </div>
+                            {% endfor %}
+
+                        {% endif %}
+                        <form class="form-horizontal" method="POST">
                             {% csrf_token %}
                             {{ formset.management_form }}
-
-                            {% if errors %}
-                                {% for error in errors %}
-                                    <div class="p-3 mb-2 bg-danger text-white">
-                                        <h4>{{ error }}</h4>
-                                    </div>
-                                {% endfor %}
-
-                            {% endif %}
                             <div style="background-color: black; padding: 20px 60px 20px 60px; margin-right: 15px;"
                                  class="row form-row">
                                 <div class="input-group">
@@ -63,7 +62,8 @@
                                 </div>
                             </div>
                             <div style="margin: 0px 15px 100px -15px; padding: 0px 0px 60px 60px; background-color: black">
-                                <button v-on:click="reveal_pay" class="btn btn-primary btn-lg">Finish Registration</button>
+                                {#<button id="form_submit_button" style="display: none" type="submit" class="btn btn-primary btn-lg">Finish Registration</button>#}
+                                <div id="form_submit_button" v-on:click="reveal_pay" class="btn btn-primary btn-lg">AXIOS Finish Registration</div>
                                 <div class="btn btn-primary btn-lg">
                                     <paypal-checkout
                                             :amount='amountStr'
@@ -132,32 +132,33 @@
                     formList: [],
                     count: 0,
                     vue_form: "",
+                    formIsValid: 'False',
+                    paymentComplete: 'False',
 
                 }
             },
             methods:
                 {
-                    reveal_pay: function (){
-                    let app = this
+                    reveal_pay: function (request) {
+                        let app = this
+                        console.log('called the reveal_pay')
+                        console.log()
+                        axios.post("{% url 'error_checking' %}",
+                            {},
+                            {
+                                headers:
+                                    {
+                                        'X-CSRFToken': '{{ csrf_token }}',
 
-                    axios.post("{% url 'event_formset' %}",
-                        {event:'{{event}}'},
-                        {
-                            headers:
-                                {
-                                    'X-CSRFToken': '{{ csrf_token }}',
-                                    'event': '{{ event }}',
-                                }
-                        }
-                    )
+                                    }
+                            }
+                        )
 
-                        .then(function (response) {
-                            app.vue_form = response.data.formset.replace(/rider_class" /g, 'rider_class" oninput="select_change(this)"')
-                            app.formList.push(app.vue_form)
-                            app.riderCost = Number(response.data.reg_rider_cost)
-                            app.escortCost = Number(response.data.escort_rider_cost)
-                        })
-                },
+                            .then(function (response) {
+                                app.riderCost = Number(response.data.reg_rider_cost)
+                                app.escortCost = Number(response.data.escort_rider_cost)
+                            })
+                    },
 
 
                     totalCost: function () {
@@ -198,6 +199,8 @@
                                 ele.value = form_count
                             })
                         })
+                                                console.log(incremented_form)
+
                     },
 
                     delForm: function () {
@@ -261,7 +264,7 @@
                     let app = this
 
                     axios.post("{% url 'event_formset' %}",
-                        {processData: false, contentType: false, event:'{{event}}'},
+                        {processData: false, contentType: false, event: '{{event}}'},
                         {
                             headers:
                                 {
