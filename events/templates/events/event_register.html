@@ -38,7 +38,7 @@
                             {% endfor %}
 
                         {% endif %}
-                        <form class="form-horizontal" method="POST">
+                        <form id='reg_form' class="form-horizontal" method="POST">
                             {% csrf_token %}
                             {{ formset.management_form }}
                             <div style="background-color: black; padding: 20px 60px 20px 60px; margin-right: 15px;"
