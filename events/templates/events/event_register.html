@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                             <div style="margin: 0px 15px 100px -15px; padding: 0px 0px 60px 60px; background-color: black">
-                                <button type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
+                                <button v-on:click="reveal_pay" class="btn btn-primary btn-lg">Finish Registration</button>
                                 <div class="btn btn-primary btn-lg">
                                     <paypal-checkout
                                             :amount='amountStr'
