@@ -153,6 +153,18 @@ def change_password(request):
         return render(request, 'events/password_change.html', args)
 
 
+def error_checking(request):
+    formset_post = RiderProfileFormSet(request.POST)
+    if formset_post.is_valid():
+        event_register()
+    else:
+        print('formset not valid')
+        print(formset_post.errors)
+        errors = formset_post.errors
+        args = {'errors': errors}
+        return JsonResponse(args)
+
+
 def event_register(request):
     if request.method == 'POST':
 

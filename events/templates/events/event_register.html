@@ -137,6 +137,27 @@
             },
             methods:
                 {
+                    reveal_pay: function (){
+                    let app = this
+
+                    axios.post("{% url 'event_formset' %}",
+                        {event:'{{event}}'},
+                        {
+                            headers:
+                                {
+                                    'X-CSRFToken': '{{ csrf_token }}',
+                                    'event': '{{ event }}',
+                                }
+                        }
+                    )
+
+                        .then(function (response) {
+                            app.vue_form = response.data.formset.replace(/rider_class" /g, 'rider_class" oninput="select_change(this)"')
+                            app.formList.push(app.vue_form)
+                            app.riderCost = Number(response.data.reg_rider_cost)
+                            app.escortCost = Number(response.data.escort_rider_cost)
+                        })
+                },
 
 
                     totalCost: function () {
