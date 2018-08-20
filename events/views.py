@@ -154,10 +154,25 @@ def change_password(request):
 
 def error_checking(request):
     print('in error checking')
-    print(request.POST.get)
-    formset_post = RiderProfileFormSet(request.POST)
-    # formset_post = json.loads(request.body)['form_to_validate']
-    print(formset_post)
+    request_data = json.loads(request.body)['form_to_validate']  # The form as html string
+    # Error: AttributeError: 'str' object has no attribute 'get'
+
+
+
+    # request_data = json.load(request)  # The form as a dict {'form_to_validate': '<form id="reg_form" method.....}
+    #Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
+
+
+
+    # request_data = RiderProfileFormSet(request.POST)
+    #Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
+
+    # request_data.clean()
+    print(request_data)
+
+    formset_post = RiderProfileFormSet(request_data)
+
+
 
     if formset_post.is_valid():
         print('the formset is valid')
@@ -175,6 +190,7 @@ def event_register(request):
     if request.method == 'POST':
 
         formset_post = RiderProfileFormSet(request.POST)
+        print(type(formset_post))
 
         if formset_post.is_valid():
             print('formset valid')
@@ -278,7 +294,7 @@ def event_register(request):
 
                     form.save()
 
-            print(confirm)
+            # print(confirm)
 
             args = {'event': form.event, 'confirm': confirm}
             # email confirmation function here
