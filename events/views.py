@@ -154,12 +154,12 @@ def change_password(request):
 
 def error_checking(request):
     print('in error checking')
-    request_data = json.loads(request.body)['form_to_validate']  # The form as html string
+    # request_data = json.loads(request.body)['form_to_validate']  # The form as html string
     # Error: AttributeError: 'str' object has no attribute 'get'
 
 
 
-    # request_data = json.load(request)  # The form as a dict {'form_to_validate': '<form id="reg_form" method.....}
+    request_data = json.load(request)  # The form as a dict {'form_to_validate': '<form id="reg_form" method.....}
     #Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
 
 
@@ -168,6 +168,7 @@ def error_checking(request):
     #Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
 
     # request_data.clean()
+    # super(request_data).clean()
     print(request_data)
 
     formset_post = RiderProfileFormSet(request_data)
