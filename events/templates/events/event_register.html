@@ -37,7 +37,11 @@
                             {% endfor %}
 
                         {% endif %}
-                        <form method="POST" id="feedbackform" action="{% url 'error_checking' %}">
+
+
+
+
+                        <form v-on:submit.prevent="reveal_pay" method="POST" id="feedbackform">
                             {% csrf_token %}
                             {{ formset.management_form }}
                             <div style="background-color: black; padding: 20px 60px 20px 60px; margin-right: 15px;"
@@ -62,7 +66,7 @@
                                 {#<button id="form_submit_button" style="" type="submit" class="btn btn-primary btn-lg">Finish Registration</button>#}
                                 {#<div id="form_submit_button" v-on:click="reveal_pay" class="btn btn-primary btn-lg">AXIOS Finish Registration</div>#}
                                 <div v-show="formIsValid === 'False'">
-                                    <input type="submit" value="Check for Errors" class="btn btn-primary">
+                                    <input v-on:click="reveal_pay"  class="btn btn-primary" value=" Check for Errors">
                                 </div>
                                 <div v-show="formIsValid === 'True'" class="btn btn-primary btn-lg">
                                     <paypal-checkout
@@ -78,6 +82,11 @@
                                 </div>
                             </div>
                         </form>
+
+
+
+
+
                     </div>
                     <div class="col-sm-offset-7 col-sm-5 col-md-5 col-lg-4"
                          style="position: fixed; top: 500px; left: 100px; width: auto;">
@@ -136,30 +145,32 @@
                     vue_form: "",
                     formIsValid: 'False',
                     paymentComplete: 'False',
+                    formerrors: ''
 
                 }
             },
             methods:
                 {
-                    {#reveal_pay: function (request) {#}
-                    {#    let app = this#}
-                    {#    console.log('called the reveal_pay')#}
-                    {#    form_to_validate = document.getElementById('reg_form')#}
-                    {#    console.log(form_to_validate)#}
-                    {##}
-                    {#    axios.post("{% url 'error_checking' %}",#}
-                    {#        {'form_to_validate': form_to_validate},#}
-                    {#        {#}
-                    {#            headers:#}
-                    {#                {#}
-                    {#                    'X-CSRFToken': '{{ csrf_token }}',#}
-                    {#                }#}
-                    {#        }#}
-                    {#    )#}
-                    {#        .then(function (response) {#}
-                    {#            app.formIsValid = response.data.errors#}
-                    {#        })#}
-                    {# },#}
+
+
+                    reveal_pay: function () {
+                        let app = this
+                        console.log('called the reveal_pay')
+                        form_to_validate = JSON.stringify(document.getElementById('feedbackform'))
+
+                        axios.post("{% url 'error_checking' %}",
+                            {'form_to_validate': form_to_validate},
+                            {
+                                headers:
+                                    {
+                                        'X-CSRFToken': '{{ csrf_token }}',
+                                    }
+                            }
+                        )
+                            .then(function (response) {
+                                app.formIsValid = response.data.errors
+                            })
+                     },
 
 
                     totalCost: function () {
@@ -298,3 +309,31 @@
 
 {% endblock %}
 
+
+
+            {#reveal_pay: function (request) {#}
+                    {#    $(document).ready(function () {#}
+                    {#        $("#feedbackform").submit(function (event) {#}
+                    {#            event.preventDefault()#}
+                    {#            $.ajax({#}
+                    {#                data: $(this).serialize(),#}
+                    {#                type: $(this).attr('method'),#}
+                    {#                url: $(this).attr('action'),#}
+                    {#                success: function (response) {#}
+                    {#                    console.log(response)#}
+                    {#                    if (response['success']) {#}
+                    {#                        $("#feedbackmessage").html("<div class='alert alert-success'>klasjflaksjf;lkajs;dflkajs;dkflj</div>")#}
+                    {#                        $("#feedbackform").addClass("hidden")#}
+                    {#                    }#}
+                    {#                    if (response['error']) {#}
+                    {#                        $("#feedbackmessage").html("<div class='alert alert-danger'>" +#}
+                    {#                            response['error']['comment'] + "</div>")#}
+                    {#                    }#}
+                    {#                },#}
+                    {#                error: function (request, status, error) {#}
+                    {#                    console.log(request.responseText)#}
+                    {#                }#}
+                    {#            })#}
+                    {#        })#}
+                    {#    })#}
+                    {# },#}

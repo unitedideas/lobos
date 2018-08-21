@@ -154,36 +154,33 @@ def change_password(request):
 
 def error_checking(request):
     print('in error checking')
-    # request_data = json.loads(request.body)['form_to_validate']  # The form as html string
+    print(request.body)
+    # form = json.loads(request.body)['form_to_validate']  # The form as html string
     # Error: AttributeError: 'str' object has no attribute 'get'
 
+    # form = json.load(request.POST)  # The form as a dict {'form_to_validate': '<form id="reg_form" method.....}
+    # Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
 
+    # form = RiderProfileFormSet(request.POST)
+    # Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
 
-    # request_data = json.load(request.POST)  # The form as a dict {'form_to_validate': '<form id="reg_form" method.....}
-    #Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
+    # form.clean()
+    # super(form).clean()
+    form = RiderProfileFormSet(request.POST)
 
+    print(form)
 
-
-    # request_data = RiderProfileFormSet(request.POST)
-    #Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
-
-    # request_data.clean()
-    # super(request_data).clean()
-    # print(request_data)
-
-
-
-
-    if request.POST:
-        form = RiderProfileFormSet(request.POST)
-        print('made it')
-        if form.is_valid():
-            print('NOT')
-            return JsonResponse({'success': True})
-        else:
-            print('YES')
-            return JsonResponse({'error': form.errors})
-
+    print('made it')
+    if form.is_valid():
+        print('VALID')
+        v = {'success': "True"}
+        return JsonResponse(v)
+    else:
+        print('NOT VALID')
+        v = {'error': form.errors}
+        return JsonResponse(v)
+    v = {'Fail': 'Fail'}
+    return JsonResponse(v)
 
     # if formset_post.is_valid():
     #     print('the formset is valid')
