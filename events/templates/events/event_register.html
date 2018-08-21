@@ -4,7 +4,7 @@
 <head>
 
     {# jQuery #}
-    <script type="text/javascript" src="{% static "events/add_form_script.js" %}"></script>
+    <script type="text/javascript" src="{% static "events/JS.js" %}"></script>
     {# Vue.js CDN #}
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- Axios -->
@@ -51,8 +51,6 @@
                                     <div style="padding-left: 60px; background-color: black">
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
                                         <p v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</p>
-                                        <p v-on:click="totalCost" class="btn btn-primary btn-lg">Total Cost</p>
-
                                     </div>
 
                                     <br>
@@ -61,9 +59,12 @@
                                 </div>
                             </div>
                             <div style="margin: 0px 15px 100px -15px; padding: 0px 0px 60px 60px; background-color: black">
-                                <button id="form_submit_button" style="" type="submit" class="btn btn-primary btn-lg">Finish Registration</button>
-                                <div id="form_submit_button" v-on:click="reveal_pay" class="btn btn-primary btn-lg">AXIOS Finish Registration</div>
-                                <div class="btn btn-primary btn-lg">
+                                {#<button id="form_submit_button" style="" type="submit" class="btn btn-primary btn-lg">Finish Registration</button>#}
+                                {#<div id="form_submit_button" v-on:click="reveal_pay" class="btn btn-primary btn-lg">AXIOS Finish Registration</div>#}
+                                <div v-show="formIsValid === 'False'">
+                                    <input type="submit" value="Check for Errors" class="btn btn-primary">
+                                </div>
+                                <div v-show="formIsValid === 'True'" class="btn btn-primary btn-lg">
                                     <paypal-checkout
                                             :amount='amountStr'
                                             currency="USD"
@@ -76,25 +77,26 @@
                                     </paypal-checkout>
                                 </div>
                             </div>
-                            <input type="submit" value="Submit feedback" class="btn btn-primary">
                         </form>
                     </div>
                     <div class="col-sm-offset-7 col-sm-5 col-md-5 col-lg-4"
-                         style="position: fixed; top: 520px; left: 100px; width: auto;">
+                         style="position: fixed; top: 500px; left: 100px; width: auto;">
                         <div>
                             <h3>Total Price:</h3>
                             <h3>$ [[amountStr]]</h3>
                             <br>
-                            <paypal-checkout
-                                    :amount="amountStr"
-                                    currency="USD"
-                                    :button-style="aStyle"
-                                    :client="paypal"
-                                    env="sandbox"
-                                    v-on:payment-authorized="paymentAuthorized"
-                                    v-on:payment-completed="paymentCompleted"
-                                    v-on:payment-cancelled="paymentCancelled">
-                            </paypal-checkout>
+                            <div v-show="formIsValid === 'True'">
+                                <paypal-checkout
+                                        :amount="amountStr"
+                                        currency="USD"
+                                        :button-style="aStyle"
+                                        :client="paypal"
+                                        env="sandbox"
+                                        v-on:payment-authorized="paymentAuthorized"
+                                        v-on:payment-completed="paymentCompleted"
+                                        v-on:payment-cancelled="paymentCancelled">
+                                </paypal-checkout>
+                            </div>
                             <br>
                         </div>
                     </div>
@@ -139,25 +141,25 @@
             },
             methods:
                 {
-                    reveal_pay: function (request) {
-                        let app = this
-                        console.log('called the reveal_pay')
-                        form_to_validate = document.getElementById('reg_form')
-                        console.log(form_to_validate)
-
-                        axios.post("{% url 'error_checking' %}",
-                            {'form_to_validate': form_to_validate},
-                            {
-                                headers:
-                                    {
-                                        'X-CSRFToken': '{{ csrf_token }}',
-                                    }
-                            }
-                        )
-                            .then(function (response) {
-                                app.formIsValid = response.data.errors
-                            })
-                    },
+                    {#reveal_pay: function (request) {#}
+                    {#    let app = this#}
+                    {#    console.log('called the reveal_pay')#}
+                    {#    form_to_validate = document.getElementById('reg_form')#}
+                    {#    console.log(form_to_validate)#}
+                    {##}
+                    {#    axios.post("{% url 'error_checking' %}",#}
+                    {#        {'form_to_validate': form_to_validate},#}
+                    {#        {#}
+                    {#            headers:#}
+                    {#                {#}
+                    {#                    'X-CSRFToken': '{{ csrf_token }}',#}
+                    {#                }#}
+                    {#        }#}
+                    {#    )#}
+                    {#        .then(function (response) {#}
+                    {#            app.formIsValid = response.data.errors#}
+                    {#        })#}
+                    {# },#}
 
 
                     totalCost: function () {
@@ -292,33 +294,7 @@
         }
 
     </script>
-    <script>
-        $(document).ready(function () {
-            $("#feedbackform").submit(function (event) {
-                event.preventDefault();
-                $.ajax({
-                    data: $(this).serialize(),
-                    type: $(this).attr('method'),
-                    url: $(this).attr('action'),
-                    success: function (response) {
-                        console.log(response);
-                        if (response['success']) {
-                            $("#feedbackmessage").html("<div class='alert alert-success'>klasjflaksjf;lkajs;dflkajs;dkflj</div>");
-                            $("#feedbackform").addClass("hidden");
-                        }
-                        if (response['error']) {
-                            $("#feedbackmessage").html("<div class='alert alert-danger'>" +
-                                response['error']['comment'] + "</div>");
-                        }
-                    },
-                    error: function (request, status, error) {
-                        console.log(request.responseText);
-                    }
-                });
-            });
-            return false
-        })
-    </script>
+
 
 {% endblock %}
 
