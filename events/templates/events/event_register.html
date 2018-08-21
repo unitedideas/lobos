@@ -54,7 +54,7 @@
                                 <div v-show="formIsValid === 'False'">
                                     <div v-on:click="the3DayMethod" class="btn btn-primary" value="Check for Errors">Check for Errors</div>
                                 </div>
-                                <div v-show="formIsValid === 'True'">
+                                <div v-show=" paymentComplete === 'True'">
                                     <button type="submit">Finalize Registration!</button>
                                 </div>
                                 <div v-if="formSuccess === 'False'" class="p-3 mb-2 bg-danger text-white">
@@ -66,7 +66,7 @@
                                     </ul>
                                 </div>
 
-                                <div v-show="formIsValid === 'True'" class="btn btn-primary btn-lg">
+                                <div v-show="formSuccess === 'True' && paymentComplete === 'False'" class="btn btn-primary btn-lg">
                                     <paypal-checkout
                                             :amount='amountStr'
                                             currency="USD"
@@ -89,7 +89,7 @@
                             <h3>Total Price:</h3>
                             <h3>$ [[amountStr]]</h3>
                             <br>
-                            <div v-show="formIsValid === 'True'">
+                            <div v-show="formSuccess === 'True'">
                                 <paypal-checkout
                                         :amount="amountStr"
                                         currency="USD"
@@ -147,157 +147,162 @@
                 }
             },
 
-                methods:
-                    {
+            methods:
+                {
 
-                        the3DayMethod: function () {
-                            let app = this
-                            var object = {}
-                            forms = document.getElementById('feedbackform')
+                    the3DayMethod: function () {
+                        let app = this
+                        app.formSuccess = ''
+                        var object = {}
+                        forms = document.getElementById('feedbackform')
 
-                            var formData = new FormData(forms),
-                                result = {};
-                            for (var entry of formData.entries()) {
-                                result[entry[0]] = entry[1];
+                        var formData = new FormData(forms),
+                            result = {};
+                        for (var entry of formData.entries()) {
+                            result[entry[0]] = entry[1];
+                        }
+                        data = JSON.stringify(result)
+                        console.log('called the the3DayMethod')
+
+                        axios.post("{% url 'error_checking' %}",
+                            data,
+                            {
+                                headers:
+                                    {
+                                        'X-CSRFToken': '{{ csrf_token }}',
+                                    }
                             }
-                            data = JSON.stringify(result)
-                            console.log('called the the3DayMethod')
-
-                            axios.post("{% url 'error_checking' %}",
-                                data,
-                                {
-                                    headers:
-                                        {
-                                            'X-CSRFToken': '{{ csrf_token }}',
-                                        }
-                                }
-                            )
-                                .then(function (response) {
+                        )
+                            .then(function (response) {
                                     app.formerrors = response.data.errors
                                     app.formSuccess = response.data.success
                                     console.log(app.formSuccess)
-                                })
-                        },
+                            })
+                    },
 
 
-                        totalCost: function () {
-                            let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
-                            let total = 0
-                            let allRiderTypes = []
+                    totalCost: function () {
+                        let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
+                        let total = 0
+                        let allRiderTypes = []
 
-                            for (let i = 0; i < total_rider_classes.length; i++) {
-                                allRiderTypes.push(total_rider_classes[i].value)
+                        for (let i = 0; i < total_rider_classes.length; i++) {
+                            allRiderTypes.push(total_rider_classes[i].value)
+                        }
+
+                        for (let i = 0; i < allRiderTypes.length; i++) {
+                            if (allRiderTypes[i] !== 'Escort Rider') {
+                                total += this.riderCost
+
+                            } else {
+                                total += this.escortCost
                             }
+                        }
+                        console.log(total)
+                        this.amountStr = String(total.toFixed(2))
 
-                            for (let i = 0; i < allRiderTypes.length; i++) {
-                                if (allRiderTypes[i] !== 'Escort Rider') {
-                                    total += this.riderCost
+                    },
 
-                                } else {
-                                    total += this.escortCost
-                                }
-                            }
-                            console.log(total)
-                            this.amountStr = String(total.toFixed(2))
+                    addForm: function () {
+                        this.count++
+                        let form_count = this.count
+                        form_count++
 
-                        },
+                        let formID = 'id_form-' + this.count
+                        incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
+                        this.formList.push(incremented_form)
+                        this.$nextTick(() => {
+                            let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
+                            (function (ele, idx) {
+                                ele.value = form_count
+                            })
+                        })
+                    },
 
-                        addForm: function () {
-                            this.count++
+                    delForm: function () {
+                        if (this.count != 0) {
+                            this.count--
                             let form_count = this.count
                             form_count++
 
                             let formID = 'id_form-' + this.count
-                            incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
-                            this.formList.push(incremented_form)
+                            this.formList.pop()
                             this.$nextTick(() => {
                                 let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
                                 (function (ele, idx) {
                                     ele.value = form_count
                                 })
                             })
-                        },
+                        }
+                        else return
+                    },
 
-                        delForm: function () {
-                            if (this.count != 0) {
-                                this.count--
-                                let form_count = this.count
-                                form_count++
+                    formID: function () {
+                        let formID = 'id_form-' + this.count
+                        console.log(formID)
+                        this.delForm()
+                    },
 
-                                let formID = 'id_form-' + this.count
-                                this.formList.pop()
-                                this.$nextTick(() => {
-                                    let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
-                                    (function (ele, idx) {
-                                        ele.value = form_count
-                                    })
-                                })
-                            }
-                            else return
-                        },
+                    add_rider_type: function () {
+                        console.log('in the foo')
+                        this.paypalItems.push({"name": ""})
+                        console.log(this.paypalItems)
+                    },
 
-                        formID: function () {
-                            let formID = 'id_form-' + this.count
-                            console.log(formID)
-                            this.delForm()
-                        },
+                    paymentAuthorized: function (data) {
+                        console.log('The payment was authorized')
+                        console.log(data)
+                    },
+                    paymentCompleted: function (data) {
+                        console.log('The payment was completed')
+                        this.paymentComplete = 'True'
+                        console.log('Try and get a form submition off')
 
-                        add_rider_type: function () {
-                            console.log('in the foo')
-                            this.paypalItems.push({"name": ""})
-                            console.log(this.paypalItems)
-                        },
 
-                        paymentAuthorized: function (data) {
-                            console.log('The payment was approved, make the button available')
-                            console.log(data);
-                        },
-                        paymentCompleted: function (data) {
-                            console.log(data);
-                        },
-                        paymentCancelled: function (data) {
-                            console.log('The payment was declined or cancled, please try again')
-                            console.log(data);
-                        },
+                    },
+                    paymentCancelled: function (data) {
+                        console.log('The payment was declined or cancled, please try again')
+                        console.log(data)
+                    },
 
-                        select_change: function (e) {
-                            var id = e.id
-                            document.getElementById(id).onchange = function (e) {
-                                console.log('Something happened')
-                                totalCost()
-                            }
-
+                    select_change: function (e) {
+                        var id = e.id
+                        document.getElementById(id).onchange = function (e) {
+                            console.log('Something happened')
+                            totalCost()
                         }
 
+                    }
 
-                    },
+
+                },
 
 
-                mounted:
+            mounted:
 
-                    function () {
-                        let app = this
+                function () {
+                    let app = this
 
-                        axios.post("{% url 'event_formset' %}",
-                            {processData: false, contentType: false, event: '{{event}}'},
-                            {
-                                headers:
-                                    {
-                                        'X-CSRFToken': '{{ csrf_token }}',
-                                        'event': '{{ event }}',
-                                    }
-                            }
-                        )
+                    axios.post("{% url 'event_formset' %}",
+                        {processData: false, contentType: false, event: '{{event}}'},
+                        {
+                            headers:
+                                {
+                                    'X-CSRFToken': '{{ csrf_token }}',
+                                    'event': '{{ event }}',
+                                }
+                        }
+                    )
 
-                            .then(function (response) {
-                                app.vue_form = response.data.formset.replace(/rider_class" /g, 'rider_class" oninput="select_change(this)"')
-                                app.formList.push(app.vue_form)
-                                app.riderCost = Number(response.data.reg_rider_cost)
-                                app.escortCost = Number(response.data.escort_rider_cost)
-                            })
-                    },
+                        .then(function (response) {
+                            app.vue_form = response.data.formset.replace(/rider_class" /g, 'rider_class" oninput="select_change(this)"')
+                            app.formList.push(app.vue_form)
+                            app.riderCost = Number(response.data.reg_rider_cost)
+                            app.escortCost = Number(response.data.escort_rider_cost)
+                        })
+                },
 
-            })
+        })
 
     </script>
     <script>
