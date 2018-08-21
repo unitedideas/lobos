@@ -326,7 +326,6 @@ def event_formset(request):
     escort_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).escort_rider_cost
     reg_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).pre_entry_cost
     # reg_rider_cost = Event.objects.get(event_name=request.GET.get('event')).pre_entry_cost
-    # print(Event.objects.get(event_name=request.GET.get('event')))
     formset_to_vue = {'reg_rider_cost': reg_rider_cost, 'escort_rider_cost': escort_rider_cost, 'formset': formset}
     return JsonResponse(formset_to_vue)
 

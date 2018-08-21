@@ -62,6 +62,8 @@
                                     </ul>
                                 </div>
                                 <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
+                                    <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>
+                                    <div class="alert alert-warning" role="alert" v-show="payment_cancelled === 'True'">The payment was declined or canceled</div>
                                     <paypal-checkout
                                             :amount='amountStr'
                                             currency="USD"
@@ -73,7 +75,7 @@
                                             v-on:payment-cancelled="paymentCancelled">
                                     </paypal-checkout>
                                 </div>
-                                <button v-show="paymentComplete === 'True'"  class="btn btn-primary btn-lg">Finalize Registration!</button>
+                                <button v-show="paymentComplete === 'True'" class="btn btn-primary btn-lg">Finalize Registration!</button>
                             </div>
                         </form>
 
@@ -85,7 +87,9 @@
                             <h3>Total Price:</h3>
                             <h3>$ [[amountStr]]</h3>
                             <br>
-                                <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
+                            <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
+                                <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>
+                                <div class="alert alert-warning" role="alert" v-show="payment_cancelled === 'True'">The payment was declined or canceled</div>
                                 <paypal-checkout
                                         :amount="amountStr"
                                         currency="USD"
@@ -137,6 +141,7 @@
                     paymentComplete: 'False',
                     formerrors: {},
                     formSuccess: '',
+                    payment_cancelled: 'False'
                 }
             },
 
@@ -252,8 +257,11 @@
 
                     },
                     paymentCancelled: function (data) {
+                        this.payment_cancelled = 'False'
                         console.log('The payment was declined or cancled, please try again')
                         console.log(data)
+                        this.payment_cancelled = 'True'
+
                     },
 
                     select_change: function (e) {
