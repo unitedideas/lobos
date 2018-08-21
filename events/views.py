@@ -165,12 +165,13 @@ def error_checking(request):
     # Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
 
     # form.clean()
-    # super(form).clean()
+    # super(form.clean())
+    # super(form.ful_clean())
     form = RiderProfileFormSet(request.POST)
 
     print(form)
 
-    print('made it')
+    print('made it to validation')
     if form.is_valid():
         print('VALID')
         v = {'success': "True"}
@@ -179,8 +180,7 @@ def error_checking(request):
         print('NOT VALID')
         v = {'error': form.errors}
         return JsonResponse(v)
-    v = {'Fail': 'Fail'}
-    return JsonResponse(v)
+
 
     # if formset_post.is_valid():
     #     print('the formset is valid')

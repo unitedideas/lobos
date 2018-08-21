@@ -156,7 +156,7 @@
                     reveal_pay: function () {
                         let app = this
                         console.log('called the reveal_pay')
-                        form_to_validate = JSON.stringify(document.getElementById('feedbackform'))
+                        form_to_validate = document.getElementById('feedbackform')
 
                         axios.post("{% url 'error_checking' %}",
                             {'form_to_validate': form_to_validate},
