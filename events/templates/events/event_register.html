@@ -77,7 +77,8 @@
                                     </paypal-checkout>
                                 </div>
                             </div>
-                            <input type="submit" value="Submit feedback" class="btn btn-primary">inputut                      </form>
+                            <input type="submit" value="Submit feedback" class="btn btn-primary">
+                        </form>
                     </div>
                     <div class="col-sm-offset-7 col-sm-5 col-md-5 col-lg-4"
                          style="position: fixed; top: 520px; left: 100px; width: auto;">
@@ -300,15 +301,15 @@
                     data: $(this).serialize(),
                     type: $(this).attr('method'),
                     url: $(this).attr('action'),
-                    processData: false,
-                    contentType: false,
                     success: function (response) {
                         console.log(response);
                         if (response['success']) {
-                            console.log('Success');
+                            $("#feedbackmessage").html("<div class='alert alert-success'>klasjflaksjf;lkajs;dflkajs;dkflj</div>");
+                            $("#feedbackform").addClass("hidden");
                         }
                         if (response['error']) {
-                            console.log('Fail');
+                            $("#feedbackmessage").html("<div class='alert alert-danger'>" +
+                                response['error']['comment'] + "</div>");
                         }
                     },
                     error: function (request, status, error) {
