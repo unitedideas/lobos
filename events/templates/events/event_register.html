@@ -31,7 +31,7 @@
                     <div class="col-sm-8 col-md-8 col-lg-8">
 
 
-                        <form v-on:submit.prevent="the3DayMethod" method="POST" id="feedbackform">
+                        <form method="POST" id="feedbackform">
                             {% csrf_token %}
                             {{ formset.management_form }}
                             <div style="background-color: black; padding: 20px 60px 20px 60px; margin-right: 15px;"
@@ -54,9 +54,6 @@
                                 <div v-show="formIsValid === 'False'">
                                     <div v-on:click="the3DayMethod" class="btn btn-primary" value="Check for Errors">Check for Errors</div>
                                 </div>
-                                <div v-show=" paymentComplete === 'True'">
-                                    <button type="submit">Finalize Registration!</button>
-                                </div>
                                 <div v-if="formSuccess === 'False'" class="p-3 mb-2 bg-danger text-white">
                                     Please correct these errors:
                                     <ul id="v-for-formerrors">
@@ -65,8 +62,7 @@
                                         </li>
                                     </ul>
                                 </div>
-
-                                <div v-show="formSuccess === 'True' && paymentComplete === 'False'" class="btn btn-primary btn-lg">
+                                <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
                                     <paypal-checkout
                                             :amount='amountStr'
                                             currency="USD"
@@ -78,6 +74,7 @@
                                             v-on:payment-cancelled="paymentCancelled">
                                     </paypal-checkout>
                                 </div>
+                                <button v-show="paymentComplete === 'True'"  class="btn btn-primary btn-lg">Finalize Registration!</button>
                             </div>
                         </form>
 
@@ -89,7 +86,7 @@
                             <h3>Total Price:</h3>
                             <h3>$ [[amountStr]]</h3>
                             <br>
-                            <div v-show="formSuccess === 'True'">
+                                <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
                                 <paypal-checkout
                                         :amount="amountStr"
                                         currency="USD"
@@ -125,7 +122,7 @@
                     },
                     aStyle: {
                         label: 'checkout',
-                        size: 'responsive',
+                        size: 'small',
                         shape: 'pill',
                         color: 'blue',
                         tagline: 'false'
@@ -174,9 +171,9 @@
                             }
                         )
                             .then(function (response) {
-                                    app.formerrors = response.data.errors
-                                    app.formSuccess = response.data.success
-                                    console.log(app.formSuccess)
+                                app.formerrors = response.data.errors
+                                app.formSuccess = response.data.success
+                                console.log(app.formSuccess)
                             })
                     },
 
@@ -256,6 +253,7 @@
                     paymentCompleted: function (data) {
                         console.log('The payment was completed')
                         this.paymentComplete = 'True'
+                        console.log(this.paymentComplete)
                         console.log('Try and get a form submition off')
 
 
