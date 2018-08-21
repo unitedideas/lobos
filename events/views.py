@@ -167,20 +167,39 @@ def error_checking(request):
     # form.clean()
     # super(form.clean())
     # super(form.ful_clean())
-    form = RiderProfileFormSet(request.POST)
 
+    # A dictionary is needed to pass through a formset
+    # A dictionary is needed to pass through a formset
+    # A dictionary is needed to pass through a formset
+    # A dictionary is needed to pass through a formset
+    # A dictionary is needed to pass through a formset
+    # A dictionary is needed to pass through a formset
+    # A dictionary is needed to pass through a formset
+    # A dictionary is needed to pass through a formset
+    # A dictionary is needed to pass through a formset
+    # A dictionary is needed to pass through a formset
+    # Like this
+    form = {'form-TOTAL_FORMS': '2',
+            'form-INITIAL_FORMS': '0',
+            'form-MAX_NUM_FORMS': '',
+            'form-0-title': 'Test',
+            'form-0-pub_date': '1904-06-16',
+            'form-1-title': 'Test',
+            'form-1-pub_date': ''}
+
+    formset = RiderProfileFormSet(form)
     print(form)
 
     print('made it to validation')
-    if form.is_valid():
+
+    if formset.is_valid():
         print('VALID')
         v = {'success': "True"}
         return JsonResponse(v)
     else:
         print('NOT VALID')
-        v = {'error': form.errors}
+        v = {'error': formset.errors}
         return JsonResponse(v)
-
 
     # if formset_post.is_valid():
     #     print('the formset is valid')
