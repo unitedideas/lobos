@@ -6,6 +6,7 @@ import os
 from django.forms import modelformset_factory
 from events.util import load_choices
 from django.forms import BaseModelFormSet
+from django.core.exceptions import ValidationError
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
