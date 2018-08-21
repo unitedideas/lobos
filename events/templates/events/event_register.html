@@ -29,14 +29,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-8 col-lg-8">
-                        {% if errors %}
-                            {% for error in errors %}
-                                <div class="p-3 mb-2 bg-danger text-white">
-                                    <h4>{{ error }}</h4>
-                                </div>
-                            {% endfor %}
 
-                        {% endif %}
+                                <div v-if="formSuccess === 'False'" class="p-3 mb-2 bg-danger text-white">
+                                    <h4 v-for="(value, key, index) in formerrors">[[ key ]] : [[value]]</h4>
+                                </div>
 
 
 
@@ -56,17 +52,12 @@
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
                                         <p v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</p>
                                     </div>
-
-                                    <br>
-
                                     <br>
                                 </div>
                             </div>
                             <div style="margin: 0px 15px 100px -15px; padding: 0px 0px 60px 60px; background-color: black">
-                                {#<button id="form_submit_button" style="" type="submit" class="btn btn-primary btn-lg">Finish Registration</button>#}
-                                {#<div id="form_submit_button" v-on:click="the3DayMethod" class="btn btn-primary btn-lg">AXIOS Finish Registration</div>#}
                                 <div v-show="formIsValid === 'False'">
-                                    <input v-on:click="the3DayMethod" class="btn btn-primary" value=" Check for Errors">
+                                    <div v-on:click="the3DayMethod" class="btn btn-primary" value="Check for Errors">Check for Errors</div>
                                 </div>
                                 <div v-show="formIsValid === 'True'" class="btn btn-primary btn-lg">
                                     <paypal-checkout
@@ -142,13 +133,13 @@
                     vue_form: "",
                     formIsValid: 'False',
                     paymentComplete: 'False',
-                    formerrors: ''
+                    formerrors: {},
+                    formSuccess: '',
 
                 }
             },
             methods:
                 {
-
 
                     the3DayMethod: function () {
                         let app = this
@@ -161,7 +152,6 @@
                             result[entry[0]] = entry[1];
                         }
                         data = JSON.stringify(result)
-                        console.log(result);
                         console.log('called the the3DayMethod')
 
 
@@ -175,14 +165,15 @@
                             }
                         )
                             .then(function (response) {
-                                app.formIsValid = response.data.errors
+                                console.log('asdfjhsakljdfhjk')
+                                app.formerrors = response.data.errors[0]
+                                app.formSuccess = response.data.success
                             })
                     },
 
 
                     totalCost: function () {
                         let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
-                        console.log('in the foo')
                         let total = 0
                         let allRiderTypes = []
 
@@ -195,7 +186,6 @@
                                 total += this.riderCost
 
                             } else {
-                                console.log('in the else')
                                 total += this.escortCost
                             }
                         }

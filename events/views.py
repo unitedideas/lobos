@@ -155,43 +155,22 @@ def change_password(request):
 def error_checking(request):
     print('in error checking')
     forms = json.load(request)  # The form as html string
-    print('form')
-    print(forms)
-    print('-------------------------------------------')
-
     formset = RiderProfileFormSet(forms)
-    print('formset')
-    print(formset)
-    print('----------------------------------------------')
-
-    print('made it to validation')
-
     if formset.is_valid():
         print('VALID')
         v = {'success': "True"}
         return JsonResponse(v)
     else:
         print('NOT VALID')
-        v = {'error': formset.errors}
+        v = {'errors': formset.errors, 'success': "False"}
+        print(v)
         return JsonResponse(v)
-
-    # if formset_post.is_valid():
-    #     print('the formset is valid')
-    #     print('passing to event_register')
-    #     event_register(request)
-    # else:
-    #     print('formset not valid')
-    #     print(formset_post.errors)
-    #     errors = formset_post.errors
-    #     args = {'errors': errors}
-    #     return JsonResponse(args)
 
 
 def event_register(request):
     if request.method == 'POST':
 
         formset_post = RiderProfileFormSet(request.POST)
-        print(type(formset_post))
 
         if formset_post.is_valid():
             print('formset valid')
