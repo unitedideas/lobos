@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .models import Event
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 import json
 import datetime
 
@@ -159,7 +159,7 @@ def error_checking(request):
 
 
 
-    request_data = json.load(request)  # The form as a dict {'form_to_validate': '<form id="reg_form" method.....}
+    # request_data = json.load(request.POST)  # The form as a dict {'form_to_validate': '<form id="reg_form" method.....}
     #Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
 
 
@@ -169,22 +169,32 @@ def error_checking(request):
 
     # request_data.clean()
     # super(request_data).clean()
-    print(request_data)
-
-    formset_post = RiderProfileFormSet(request_data)
+    # print(request_data)
 
 
 
-    if formset_post.is_valid():
-        print('the formset is valid')
-        print('passing to event_register')
-        event_register(request)
-    else:
-        print('formset not valid')
-        print(formset_post.errors)
-        errors = formset_post.errors
-        args = {'errors': errors}
-        return JsonResponse(args)
+
+    if request.POST:
+        form = RiderProfileFormSet(request.POST)
+        print('made it')
+        if form.is_valid():
+            print('NOT')
+            return JsonResponse({'success': True})
+        else:
+            print('YES')
+            return JsonResponse({'error': form.errors})
+
+
+    # if formset_post.is_valid():
+    #     print('the formset is valid')
+    #     print('passing to event_register')
+    #     event_register(request)
+    # else:
+    #     print('formset not valid')
+    #     print(formset_post.errors)
+    #     errors = formset_post.errors
+    #     args = {'errors': errors}
+    #     return JsonResponse(args)
 
 
 def event_register(request):

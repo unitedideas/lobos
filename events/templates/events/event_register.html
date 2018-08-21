@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- jQuery for PayPal -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {% block head %}
         <title>Event Registration</title>
     {% endblock %}
@@ -38,7 +38,7 @@
                             {% endfor %}
 
                         {% endif %}
-                        <form id='reg_form' class="form-horizontal" method="POST">
+                        <form method="POST" id="feedbackform" action="{% url 'error_checking' %}">
                             {% csrf_token %}
                             {{ formset.management_form }}
                             <div style="background-color: black; padding: 20px 60px 20px 60px; margin-right: 15px;"
@@ -77,7 +77,7 @@
                                     </paypal-checkout>
                                 </div>
                             </div>
-                        </form>
+                            <input type="submit" value="Submit feedback" class="btn btn-primary">inputut                      </form>
                     </div>
                     <div class="col-sm-offset-7 col-sm-5 col-md-5 col-lg-4"
                          style="position: fixed; top: 520px; left: 100px; width: auto;">
@@ -142,11 +142,11 @@
                     reveal_pay: function (request) {
                         let app = this
                         console.log('called the reveal_pay')
-                        form_to_validate = document.getElementById('reg_form').outerHTML
+                        form_to_validate = document.getElementById('reg_form')
                         console.log(form_to_validate)
 
                         axios.post("{% url 'error_checking' %}",
-                            { 'form_to_validate': form_to_validate},
+                            {'form_to_validate': form_to_validate},
                             {
                                 headers:
                                     {
@@ -286,12 +286,37 @@
         function select_change(e) {
             var id = e.id
             document.getElementById(id).onchange = function (e) {
-                console.log('Something happened')
                 app.totalCost()
             }
 
         }
 
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#feedbackform").submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    data: $(this).serialize(),
+                    type: $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log(response);
+                        if (response['success']) {
+                            console.log('Success');
+                        }
+                        if (response['error']) {
+                            console.log('Fail');
+                        }
+                    },
+                    error: function (request, status, error) {
+                        console.log(request.responseText);
+                    }
+                });
+            });
+        })
     </script>
 
 {% endblock %}
