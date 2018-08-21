@@ -154,41 +154,15 @@ def change_password(request):
 
 def error_checking(request):
     print('in error checking')
-    print(request.body)
-    # form = json.loads(request.body)['form_to_validate']  # The form as html string
-    # Error: AttributeError: 'str' object has no attribute 'get'
+    forms = json.load(request)  # The form as html string
+    print('form')
+    print(forms)
+    print('-------------------------------------------')
 
-    # form = json.load(request.POST)  # The form as a dict {'form_to_validate': '<form id="reg_form" method.....}
-    # Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
-
-    # form = RiderProfileFormSet(request.POST)
-    # Error: ValidationError: ['ManagementForm data is missing or has been tampered with']
-
-    # form.clean()
-    # super(form.clean())
-    # super(form.ful_clean())
-
-    # A dictionary is needed to pass through a formset
-    # A dictionary is needed to pass through a formset
-    # A dictionary is needed to pass through a formset
-    # A dictionary is needed to pass through a formset
-    # A dictionary is needed to pass through a formset
-    # A dictionary is needed to pass through a formset
-    # A dictionary is needed to pass through a formset
-    # A dictionary is needed to pass through a formset
-    # A dictionary is needed to pass through a formset
-    # A dictionary is needed to pass through a formset
-    # Like this
-    form = {'form-TOTAL_FORMS': '2',
-            'form-INITIAL_FORMS': '0',
-            'form-MAX_NUM_FORMS': '',
-            'form-0-title': 'Test',
-            'form-0-pub_date': '1904-06-16',
-            'form-1-title': 'Test',
-            'form-1-pub_date': ''}
-
-    formset = RiderProfileFormSet(form)
-    print(form)
+    formset = RiderProfileFormSet(forms)
+    print('formset')
+    print(formset)
+    print('----------------------------------------------')
 
     print('made it to validation')
 

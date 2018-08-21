@@ -41,7 +41,7 @@
 
 
 
-                        <form v-on:submit.prevent="reveal_pay" method="POST" id="feedbackform">
+                        <form v-on:submit.prevent="the3DayMethod" method="POST" id="feedbackform">
                             {% csrf_token %}
                             {{ formset.management_form }}
                             <div style="background-color: black; padding: 20px 60px 20px 60px; margin-right: 15px;"
@@ -64,9 +64,9 @@
                             </div>
                             <div style="margin: 0px 15px 100px -15px; padding: 0px 0px 60px 60px; background-color: black">
                                 {#<button id="form_submit_button" style="" type="submit" class="btn btn-primary btn-lg">Finish Registration</button>#}
-                                {#<div id="form_submit_button" v-on:click="reveal_pay" class="btn btn-primary btn-lg">AXIOS Finish Registration</div>#}
+                                {#<div id="form_submit_button" v-on:click="the3DayMethod" class="btn btn-primary btn-lg">AXIOS Finish Registration</div>#}
                                 <div v-show="formIsValid === 'False'">
-                                    <input v-on:click="reveal_pay"  class="btn btn-primary" value=" Check for Errors">
+                                    <input v-on:click="the3DayMethod" class="btn btn-primary" value=" Check for Errors">
                                 </div>
                                 <div v-show="formIsValid === 'True'" class="btn btn-primary btn-lg">
                                     <paypal-checkout
@@ -82,9 +82,6 @@
                                 </div>
                             </div>
                         </form>
-
-
-
 
 
                     </div>
@@ -153,13 +150,23 @@
                 {
 
 
-                    reveal_pay: function () {
+                    the3DayMethod: function () {
                         let app = this
-                        console.log('called the reveal_pay')
-                        form_to_validate = document.getElementById('feedbackform')
+                        var object = {}
+                        forms = document.getElementById('feedbackform')
+
+                        var formData = new FormData(forms),
+                            result = {};
+                        for (var entry of formData.entries()) {
+                            result[entry[0]] = entry[1];
+                        }
+                        data = JSON.stringify(result)
+                        console.log(result);
+                        console.log('called the the3DayMethod')
+
 
                         axios.post("{% url 'error_checking' %}",
-                            {'form_to_validate': form_to_validate},
+                            data,
                             {
                                 headers:
                                     {
@@ -170,7 +177,7 @@
                             .then(function (response) {
                                 app.formIsValid = response.data.errors
                             })
-                     },
+                    },
 
 
                     totalCost: function () {
@@ -310,30 +317,3 @@
 {% endblock %}
 
 
-
-            {#reveal_pay: function (request) {#}
-                    {#    $(document).ready(function () {#}
-                    {#        $("#feedbackform").submit(function (event) {#}
-                    {#            event.preventDefault()#}
-                    {#            $.ajax({#}
-                    {#                data: $(this).serialize(),#}
-                    {#                type: $(this).attr('method'),#}
-                    {#                url: $(this).attr('action'),#}
-                    {#                success: function (response) {#}
-                    {#                    console.log(response)#}
-                    {#                    if (response['success']) {#}
-                    {#                        $("#feedbackmessage").html("<div class='alert alert-success'>klasjflaksjf;lkajs;dflkajs;dkflj</div>")#}
-                    {#                        $("#feedbackform").addClass("hidden")#}
-                    {#                    }#}
-                    {#                    if (response['error']) {#}
-                    {#                        $("#feedbackmessage").html("<div class='alert alert-danger'>" +#}
-                    {#                            response['error']['comment'] + "</div>")#}
-                    {#                    }#}
-                    {#                },#}
-                    {#                error: function (request, status, error) {#}
-                    {#                    console.log(request.responseText)#}
-                    {#                }#}
-                    {#            })#}
-                    {#        })#}
-                    {#    })#}
-                    {# },#}
