@@ -14,10 +14,45 @@
         <title>Event Registration</title>
     {% endblock %}
 </head>
+
 {% block body %}
     <div id="app">
-        <div class=container>
-            <div class="jumbotron">
+        <div class="header" id="myHeader">
+
+            <h3>Total Price: $[[amountStr]]</h3>
+                <div v-show="formIsValid === 'False'">
+                    <div v-on:click="the3DayMethod" class="btn btn-primary" value="Check for Errors">Check for Errors</div>
+                </div>
+                <div v-if="formSuccess === 'False'" class="p-3 mb-2 bg-danger text-white">
+                    Please correct these errors:
+                    <ul id="v-for-formerrors">
+                        <li v-for="(value, index) in formerrors">
+                            <h4>Rider Form: [[ ++index ]] - [[value]]</h4>
+                        </li>
+                    </ul>
+                </div>
+                <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
+                    <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>
+                    <div class="alert alert-warning" role="alert" v-show="payment_cancelled === 'True'">The payment was declined or canceled</div>
+                    <paypal-checkout
+                            :amount='amountStr'
+                            currency="USD"
+                            :button-style="aStyle"
+                            :client="paypal"
+                            env="sandbox"
+                            v-on:payment-authorized="paymentAuthorized"
+                            v-on:payment-completed="paymentCompleted"
+                            v-on:payment-cancelled="paymentCancelled">
+                    </paypal-checkout>
+                </div>
+                <button v-show="paymentComplete === 'True'" class="btn btn-primary btn-lg">Finalize Registration!</button>
+        </div>
+        <br>
+
+        <div class="container">
+
+
+            <div id="jumbotron" class="jumbotron">
                 <h1>{{ event }}</h1>
                 <p>A little history about the event here</p>
                 <p>Maybe a notice</p>
@@ -26,83 +61,42 @@
             </div>
             <div id="log"></div>
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 col-md-8 col-lg-8">
-
-
+                <div>
+                    <div>
                         <form method="POST" id="feedbackform">
                             {% csrf_token %}
                             {{ formset.management_form }}
-                            <div style="background-color: black; padding: 20px 60px 20px 60px; margin-right: 15px;"
+                            <div style=" margin-right: 15px;"
                                  class="row form-row">
                                 <div class="input-group">
                                     <div v-for="form in formList">
 
                                         <br>
-                                        <div style="background-color: #ffe673; padding: 20px" v-html="form">
+                                        <div style="background-color: #ffe673; padding: 60px; border-radius:5px" v-html="form">
                                         </div>
                                     </div>
-                                    <div style="padding-left: 60px; background-color: black">
+                                    <div>
                                         <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
                                         <p v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div style="margin: 0px 15px 100px -15px; padding: 0px 0px 60px 60px; background-color: black">
-                                <div v-show="formIsValid === 'False'">
-                                    <div v-on:click="the3DayMethod" class="btn btn-primary" value="Check for Errors">Check for Errors</div>
-                                </div>
-                                <div v-if="formSuccess === 'False'" class="p-3 mb-2 bg-danger text-white">
-                                    Please correct these errors:
-                                    <ul id="v-for-formerrors">
-                                        <li v-for="(value, index) in formerrors">
-                                            <h4>Rider Form: [[ ++index ]] - [[value]]</h4>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
-                                    <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>
-                                    <div class="alert alert-warning" role="alert" v-show="payment_cancelled === 'True'">The payment was declined or canceled</div>
-                                    <paypal-checkout
-                                            :amount='amountStr'
-                                            currency="USD"
-                                            :button-style="aStyle"
-                                            :client="paypal"
-                                            env="sandbox"
-                                            v-on:payment-authorized="paymentAuthorized"
-                                            v-on:payment-completed="paymentCompleted"
-                                            v-on:payment-cancelled="paymentCancelled">
-                                    </paypal-checkout>
-                                </div>
-                                <button v-show="paymentComplete === 'True'" class="btn btn-primary btn-lg">Finalize Registration!</button>
-                            </div>
-                        </form>
 
+                        </form>
+                        <button id="show-modal" @click="showModal = true">Show Modal</button>
+                        <!-- use the modal component, pass in the prop -->
+                        <modal v-if="showModal" @close="showModal = false">
+                            <!--
+                              you can use custom content here to overwrite
+                              default content
+                            -->
+                            <h3 slot="header">custom header</h3>
+                        </modal>
 
                     </div>
                     <div class="col-sm-offset-7 col-sm-5 col-md-5 col-lg-4"
                          style="position: fixed; top: 500px; left: 100px; width: auto;">
-                        <div>
-                            <h3>Total Price:</h3>
-                            <h3>$ [[amountStr]]</h3>
-                            <br>
-                            <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
-                                <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>
-                                <div class="alert alert-warning" role="alert" v-show="payment_cancelled === 'True'">The payment was declined or canceled</div>
-                                <paypal-checkout
-                                        :amount="amountStr"
-                                        currency="USD"
-                                        :button-style="aStyle"
-                                        :client="paypal"
-                                        env="sandbox"
-                                        v-on:payment-authorized="paymentAuthorized"
-                                        v-on:payment-completed="paymentCompleted"
-                                        v-on:payment-cancelled="paymentCancelled">
-                                </paypal-checkout>
-                            </div>
-                            <br>
-                        </div>
                     </div>
                     <br>
                 </div>
@@ -112,6 +106,9 @@
 
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
     <script>
+        Vue.component('modal', {
+            template: '#modal-template'
+        })
 
 
         var app = new Vue({
@@ -130,7 +127,7 @@
                         color: 'blue',
                         tagline: 'false'
                     },
-
+                    showModal: false,
                     escortCost: 10.00,
                     riderCost: 70.00,
                     amountStr: '0.00',
@@ -314,6 +311,59 @@
         }
 
     </script>
+    <script type="text/x-template" id="modal-template">
+        <transition name="modal">
+            <div class="modal-mask">
+                <div class="modal-wrapper">
+                    <div class="modal-container">
+
+                        <div class="modal-header">
+                            <slot name="header">
+                                default header
+                            </slot>
+                        </div>
+
+                        <div class="modal-body">
+                            <slot name="body">
+                                default body
+                            </slot>
+                        </div>
+
+                        <div class="modal-footer">
+                            <slot name="footer">
+                                default footer
+                                <button class="modal-default-button" @click="$emit('close')">
+                                    OK
+                                </button>
+                            </slot>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </script>
+
+    <script>
+        window.onscroll = function () {
+            myFunction()
+        };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+        var jummarg = document.getElementById("jumbotron")
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+                jummarg.classList.add('margin_100')
+            } else {
+                header.classList.remove("sticky");
+                jummarg.classList.remove('margin_100')
+
+            }
+        }
+    </script>
+
 
 {% endblock %}
 
