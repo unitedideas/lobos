@@ -17,42 +17,43 @@
 
 {% block body %}
     <div id="app">
-        <div class="header" id="myHeader">
+        <div class="header row" id="myHeader">
 
             <h3>Total Price: $[[amountStr]]</h3>
-                <div v-show="formIsValid === 'False'">
-                    <div v-on:click="the3DayMethod" class="btn btn-primary" value="Check for Errors">Check for Errors</div>
+            <div v-show="formIsValid === 'False'">
+                <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Check for Errors">Checkout</div>
+            </div>
+            <br>
+            <div v-if="formSuccess === 'False'" class="p-3 mb-2 bg-danger text-white">
+                <h3>Please correct these errors:</h3>
+                <div id="v-for-formerrors">
+                    <div v-for="(value, index, key) in formerrors">
+                        <h4>Rider Form: [[key]] [[ ++index ]] - [[value]]</h4>
+                    </div>
                 </div>
-                <div v-if="formSuccess === 'False'" class="p-3 mb-2 bg-danger text-white">
-                    Please correct these errors:
-                    <ul id="v-for-formerrors">
-                        <li v-for="(value, index) in formerrors">
-                            <h4>Rider Form: [[ ++index ]] - [[value]]</h4>
-                        </li>
-                    </ul>
-                </div>
-                <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
-                    <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>
-                    <div class="alert alert-warning" role="alert" v-show="payment_cancelled === 'True'">The payment was declined or canceled</div>
-                    <paypal-checkout
-                            :amount='amountStr'
-                            currency="USD"
-                            :button-style="aStyle"
-                            :client="paypal"
-                            env="sandbox"
-                            v-on:payment-authorized="paymentAuthorized"
-                            v-on:payment-completed="paymentCompleted"
-                            v-on:payment-cancelled="paymentCancelled">
-                    </paypal-checkout>
-                </div>
-                <button v-show="paymentComplete === 'True'" class="btn btn-primary btn-lg">Finalize Registration!</button>
+            </div>
+            <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
+                <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>
+                <div class="alert alert-warning" role="alert" v-show="payment_cancelled === 'True'">The payment was declined or canceled</div>
+                <paypal-checkout
+                        :amount='amountStr'
+                        currency="USD"
+                        :button-style="aStyle"
+                        :client="paypal"
+                        env="sandbox"
+                        v-on:payment-authorized="paymentAuthorized"
+                        v-on:payment-completed="paymentCompleted"
+                        v-on:payment-cancelled="paymentCancelled">
+                </paypal-checkout>
+            </div>
+            <button v-show="paymentComplete === 'True'" class="btn btn-primary btn-lg">Finalize Registration!</button>
         </div>
         <br>
 
         <div class="container">
 
 
-            <div id="jumbotron" class="jumbotron">
+            <div id="jumbotron" class="jumbotron" style="padding: 20px">
                 <h1>{{ event }}</h1>
                 <p>A little history about the event here</p>
                 <p>Maybe a notice</p>
@@ -72,12 +73,13 @@
                                     <div v-for="form in formList">
 
                                         <br>
-                                        <div style="background-color: #ffe673; padding: 60px; border-radius:5px" v-html="form">
+                                        <div style="background-color: #ffe673; padding: 20px; border-radius:5px" v-html="form">
                                         </div>
                                     </div>
-                                    <div>
-                                        <p v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</p>
-                                        <p v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</p>
+                                    <br>
+                                    <div class="container">
+                                        <span v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</span>
+                                        <span v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</span>
                                     </div>
                                     <br>
                                 </div>
@@ -94,9 +96,6 @@
                             <h3 slot="header">custom header</h3>
                         </modal>
 
-                    </div>
-                    <div class="col-sm-offset-7 col-sm-5 col-md-5 col-lg-4"
-                         style="position: fixed; top: 500px; left: 100px; width: auto;">
                     </div>
                     <br>
                 </div>
@@ -122,8 +121,8 @@
                     },
                     aStyle: {
                         label: 'checkout',
-                        size: 'small',
-                        shape: 'pill',
+                        size: 'medium',
+                        shape: 'rect',
                         color: 'blue',
                         tagline: 'false'
                     },
