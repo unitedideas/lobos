@@ -31,46 +31,6 @@ input, select {
 
 }
 
-.modal-mask {
-    position: fixed;
-    z-index: 9998;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .5);
-    display: table;
-    transition: opacity .3s ease;
-}
-
-.modal-wrapper {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.modal-container {
-    width: 300px;
-    margin: 0px auto;
-    padding: 20px 30px;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-    transition: all .3s ease;
-    font-family: Helvetica, Arial, sans-serif;
-}
-
-.modal-header h3 {
-    margin-top: 0;
-    color: #42b983;
-}
-
-.modal-body {
-    margin: 20px 0;
-}
-
-.modal-default-button {
-    float: right;
-}
 
 .top-container {
     background-color: #f1f1f1;
@@ -102,4 +62,104 @@ input, select {
 .margin_100 {
     margin-top: 100px;
 
+}
+
+
+$purple: #5c4084;
+
+body {
+  background-color: $purple;
+  padding: 50px;
+}
+.container {
+  padding: 40px 80px 15px 80px;
+  background-color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 800px;
+}
+.heading {
+  text-align: center;
+  h1 {
+    background: -webkit-linear-gradient(#fff, #999);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    text-align: center;
+    margin: 0 0 5px 0;
+    font-weight: 900;
+    font-size: 4rem;
+    color: #fff;
+  }
+  h4 {
+    color: lighten(#5c3d86,30%);
+    text-align: center;
+    margin: 0 0 35px 0;
+    font-weight: 400;
+    font-size: 24px;
+  }
+
+
+body {
+  background-color: purple;
+  padding: 50px;
+}
+.container {
+  padding: 40px 80px 15px 80px;
+  background-color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 800px;
+}
+.heading {
+  text-align: center;
+  .h1 {
+    background: -webkit-linear-gradient(#fff, #999);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    text-align: center;
+    margin: 0 0 5px 0;
+    font-weight: 900;
+    font-size: 4rem;
+    color: #fff;
+  }
+  .h4 {
+    text-align: center;
+    margin: 0 0 35px 0;
+    font-weight: 400;
+    font-size: 24px;
+  }
+
+.customModal {
+    box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.4);
+    left: calc(50vw - 300px);
+    position: absolute;
+    z-index: 999;
+    width: 600px;
+    top: 20vh;
+    border-radius: 5px;
+    overflow: hidden;
+}
+  .customModalTitle {
+      background-color: #eee;
+      text-align: left;
+      padding: 8px 12px;
+      font-size: 1.5em;
+  }
+.close {
+    line-height: 32px;
+    color: purple;
+}
+
+
+  .customModalBody {
+    background-color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    padding: 12px;
+  }
+  .customModalFooter {
+    background-color: #eee;
+    padding: 4px 12px;
+    text-align: left;
+  }
 }

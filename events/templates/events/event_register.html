@@ -62,32 +62,71 @@
                 <p>Location</p>
             </div>
             <div id="log"></div>
-                    <div>
-                        <form method="POST" id="feedbackform">
-                            {% csrf_token %}
-                            {{ formset.management_form }}
-                            <div style=" margin-right: 15px;"
-                                 class="row form-row">
-                                <div class="input-group">
-                                    <div v-for="form in formList">
-                                        <br>
-                                        <div style="background-color: #ffe673; padding: 20px; border-radius:5px; margin: 0px 15px 0px 15px" v-html="form">
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="container">
-                                        <span v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</span>
-                                        <span v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</span>
-                                    </div>
-                                    <br>
+            <div>
+                <form method="POST" id="feedbackform">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    <div style=" margin-right: 15px;"
+                         class="row form-row">
+                        <div class="input-group">
+                            <div v-for="form in formList">
+                                <br>
+                                <div style="background-color: #ffe673; padding: 20px; border-radius:5px; margin: 0px 15px 0px 15px" v-html="form">
                                 </div>
                             </div>
-
-                        </form>
-                        <button id="show-modal" @click="showModal = true">Show Modal</button>
-
+                            <br>
+                            <div class="container">
+                                <span v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</span>
+                                <span v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</span>
+                            </div>
+                            <br>
+                        </div>
                     </div>
-                    <br>
+
+                </form>
+
+            </div>
+            <br>
+
+            <div class="container">
+
+                <div class="form-group">
+                    <button class="btn btn-primary" @click.prevent="showModalOne = !showModalOne">Open Modal One</button>
+                    <button class="btn btn-primary" @click.prevent="showModalTwo = !showModalTwo">Open Modal Two</button>
+                </div>
+
+                <div class="customModal" v-if="showModalOne">
+                    <div class="customModalTitle">
+                        <button class="close" @click.prevent="showModalOne = !showModalOne">&times;</button>
+                        Modal One
+                    </div>
+                    <div class="customModalBody">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam tenetur veritatis saepe natus? Ex sunt, maxime quod hic repudiandae incidunt eligendi autem dignissimos
+                            mollitia, vel laborum quasi expedita ullam voluptate veniam nesciunt sequi est necessitatibus. Eum repellat nam animi laudantium?</p>
+                    </div>
+                    <div class="customModalFooter">
+                        <button class="btn btn-primary" @click.prevent="showModalOne = !showModalOne">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="customModal" v-if="showModalTwo">
+                    <div class="customModalTitle">
+                        <button class="close" @click.prevent="showModalTwo = !showModalTwo">&times;</button>
+                        Modal Two
+                    </div>
+                    <paypal-checkout
+                            :amount='amountStr'
+                            currency="USD"
+                            :button-style="aStyle"
+                            :client="paypal"
+                            env="sandbox"
+                            v-on:payment-authorized="paymentAuthorized"
+                            v-on:payment-completed="paymentCompleted"
+                            v-on:payment-cancelled="paymentCancelled">
+                    </paypal-checkout>
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -121,14 +160,13 @@
                     paymentComplete: 'False',
                     formerrors: {},
                     formSuccess: '',
-                    payment_cancelled: 'False'
+                    payment_cancelled: 'False',
+                    text: '',
+                    showModalOne: false,
+                    showModalTwo: false
                 }
             },
-            watch: {
-
-
-
-            },
+            watch: {},
 
             methods:
                 {
