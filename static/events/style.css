@@ -115,7 +115,7 @@ input, select {
 }
 
 .appear-leave-active {
-    animation: appear 800ms ease reverse;
+    animation: appear 600ms ease reverse;
 }
 
 @keyframes appear {
@@ -135,6 +135,6 @@ input, select {
         height: 125%;
     }
     100% {
-        top: 10%;
+        top: 0%;
     }
 }
