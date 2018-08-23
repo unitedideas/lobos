@@ -46,7 +46,7 @@
                         v-on:payment-cancelled="paymentCancelled">
                 </paypal-checkout>
             </div>
-            <button v-show="paymentComplete === 'True'" class="btn btn-primary btn-lg">Finalize Registration!</button>
+            <button hidden ref="submitButton" v-if="paymentComplete === 'True'" class="btn btn-primary btn-lg ">Finalize Registration!</button>
         </div>
         <br>
 
@@ -61,8 +61,6 @@
                 <p>Location</p>
             </div>
             <div id="log"></div>
-            <div class="container">
-                <div>
                     <div>
                         <form method="POST" id="feedbackform">
                             {% csrf_token %}
@@ -71,9 +69,8 @@
                                  class="row form-row">
                                 <div class="input-group">
                                     <div v-for="form in formList">
-
                                         <br>
-                                        <div style="background-color: #ffe673; padding: 20px; border-radius:5px" v-html="form">
+                                        <div style="background-color: #ffe673; padding: 20px; border-radius:5px; margin: 0px 15px 0px 15px" v-html="form">
                                         </div>
                                     </div>
                                     <br>
@@ -98,8 +95,6 @@
 
                     </div>
                     <br>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -139,6 +134,11 @@
                     formSuccess: '',
                     payment_cancelled: 'False'
                 }
+            },
+            watch: {
+
+
+
             },
 
             methods:
