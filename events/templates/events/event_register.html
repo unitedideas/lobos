@@ -20,40 +20,64 @@
         <div class="header row" id="myHeader">
 
             <h3>Total Price: $[[amountStr]]</h3>
-            <div v-show="formIsValid === 'False'">
-                <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Check for Errors">Checkout</div>
-            </div>
+            {#            <div v-show="!formSuccess">#}
+            <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
             <br>
-            <div v-if="formSuccess === 'False'" class="p-3 mb-2 bg-danger text-white">
+            {#            </div>#}
+            <br>
+            <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
                 <h3>Please correct these errors:</h3>
                 <div id="v-for-formerrors">
                     <div v-for="(value, index, key) in formerrors">
-                        <h4>Rider Form: [[key]] [[ ++index ]] - [[value]]</h4>
+                        <h4>Rider Form:[[ ++index ]] - [[value]]</h4>
                     </div>
                 </div>
             </div>
-            <div v-show="formSuccess === 'True' && paymentComplete === 'False'">
+            <div v-if="formSuccess">
 
-                <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>
-                <div class="alert alert-warning" role="alert" v-show="payment_cancelled === 'True'">The payment was declined or canceled</div>
-                <paypal-checkout
-                        :amount='amountStr'
-                        currency="USD"
-                        :button-style="aStyle"
-                        :client="paypal"
-                        env="sandbox"
-                        v-on:payment-authorized="paymentAuthorized"
-                        v-on:payment-completed="paymentCompleted"
-                        v-on:payment-cancelled="paymentCancelled">
-                </paypal-checkout>
+                <!-- 	modal -->
+                <transition name="appear">
+                    <div class="simple-modal" v-if="showModal">
+                        <h1>Final Step.. Almost There!</h1>
+                        <div>
+                            <button type="button" @click="showModal = false">[[ closeModal ]]</button>
+                        </div>
+
+                        <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>
+                        <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was declined or canceled</div>
+                        <paypal-checkout
+                                :amount='amountStr'
+                                currency="USD"
+                                :button-style="aStyle"
+                                :client="paypal"
+                                env="sandbox"
+                                v-on:payment-authorized="paymentAuthorized"
+                                v-on:payment-completed="paymentCompleted"
+                                v-on:payment-cancelled="paymentCancelled">
+                        </paypal-checkout>
+                    </div>
+                </transition>
+
+
+                {#                <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>#}
+                {#                <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was declined or canceled</div>#}
+                {#                <paypal-checkout#}
+                {#                        :amount='amountStr'#}
+                {#                        currency="USD"#}
+                {#                        :button-style="aStyle"#}
+                {#                        :client="paypal"#}
+                {#                        env="sandbox"#}
+                {#                        v-on:payment-authorized="paymentAuthorized"#}
+                {#                        v-on:payment-completed="paymentCompleted"#}
+                {#                        v-on:payment-cancelled="paymentCancelled">#}
+                {#                </paypal-checkout>#}
+
+
             </div>
-            <button hidden ref="submitButton" v-if="paymentComplete === 'True'" class="btn btn-primary btn-lg ">Finalize Registration!</button>
         </div>
-        <br>
+
 
         <div class="container">
-
-
             <div id="jumbotron" class="jumbotron" style="padding: 20px">
                 <h1>{{ event }}</h1>
                 <p>A little history about the event here</p>
@@ -61,7 +85,7 @@
                 <p>Date</p>
                 <p>Location</p>
             </div>
-            <div id="log"></div>
+
             <div>
                 <form method="POST" id="feedbackform">
                     {% csrf_token %}
@@ -82,50 +106,13 @@
                             <br>
                         </div>
                     </div>
+                    <button ref="submitButton" style='display: none'></button>
 
                 </form>
 
+
             </div>
             <br>
-
-            <div class="container">
-
-                <div class="form-group">
-                    <button class="btn btn-primary" @click.prevent="showModalOne = !showModalOne">Open Modal One</button>
-                    <button class="btn btn-primary" @click.prevent="showModalTwo = !showModalTwo">Open Modal Two</button>
-                </div>
-
-                <div class="customModal" v-if="showModalOne">
-                    <div class="customModalTitle">
-                        <button class="close" @click.prevent="showModalOne = !showModalOne">&times;</button>
-                        Modal One
-                    </div>
-                    <div class="customModalBody">
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam tenetur veritatis saepe natus? Ex sunt, maxime quod hic repudiandae incidunt eligendi autem dignissimos
-                            mollitia, vel laborum quasi expedita ullam voluptate veniam nesciunt sequi est necessitatibus. Eum repellat nam animi laudantium?</p>
-                    </div>
-                    <div class="customModalFooter">
-                        <button class="btn btn-primary" @click.prevent="showModalOne = !showModalOne">Cancel</button>
-                    </div>
-                </div>
-                <div class="customModal" v-if="showModalTwo">
-                    <div class="customModalTitle">
-                        <button class="close" @click.prevent="showModalTwo = !showModalTwo">&times;</button>
-                        Modal Two
-                    </div>
-                    <paypal-checkout
-                            :amount='amountStr'
-                            currency="USD"
-                            :button-style="aStyle"
-                            :client="paypal"
-                            env="sandbox"
-                            v-on:payment-authorized="paymentAuthorized"
-                            v-on:payment-completed="paymentCompleted"
-                            v-on:payment-cancelled="paymentCancelled">
-                    </paypal-checkout>
-                </div>
-
-            </div>
         </div>
     </div>
 
@@ -148,25 +135,32 @@
                         color: 'blue',
                         tagline: 'false'
                     },
-                    showModal: false,
                     escortCost: 10.00,
                     riderCost: 70.00,
                     amountStr: '0.00',
                     formList: [],
                     count: 0,
                     vue_form: "",
-                    formIsValid: 'False',
-                    paymentComplete: 'False',
+                    formIsValid: false,
+                    paymentComplete: false,
                     formerrors: {},
                     formSuccess: '',
-                    payment_cancelled: 'False',
-                    text: '',
-                    showModalOne: false,
-                    showModalTwo: false
+                    payment_cancelled: false,
+                    showcheckout: false,
+                    showModal: false,
+                    closeModal: 'Cancel',
                 }
             },
-            watch: {},
-
+            watch: {
+                paymentComplete() {
+                    this.$refs.submitButton.click();
+                },
+                formSuccess() {
+                    if (this.formSuccess === true) {
+                        this.showModal = true
+                    }
+                },
+            },
             methods:
                 {
                     the3DayMethod: function () {
@@ -272,17 +266,17 @@
                     },
                     paymentCompleted: function (data) {
                         console.log('The payment was completed')
-                        this.paymentComplete = 'True'
+                        this.paymentComplete = true
                         console.log(this.paymentComplete)
                         console.log('Try and get a form submition off')
 
 
                     },
                     paymentCancelled: function (data) {
-                        this.payment_cancelled = 'False'
+                        this.payment_cancelled = false
                         console.log('The payment was declined or cancled, please try again')
                         console.log(data)
-                        this.payment_cancelled = 'True'
+                        this.payment_cancelled = true
 
                     },
 
@@ -345,6 +339,7 @@
         var header = document.getElementById("myHeader");
         var sticky = header.offsetTop;
         var jummarg = document.getElementById("jumbotron")
+        {#var formfeedback = document.getElementById("formfeedback")#}
 
         function myFunction() {
             if (window.pageYOffset > sticky) {

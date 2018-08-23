@@ -31,7 +31,6 @@ input, select {
 
 }
 
-
 .top-container {
     background-color: #f1f1f1;
     padding: 30px;
@@ -59,107 +58,123 @@ input, select {
     width: 100%;
 
 }
+
 .margin_100 {
     margin-top: 100px;
 
 }
 
-
-$purple: #5c4084;
-
-body {
-  background-color: $purple;
-  padding: 50px;
-}
-.container {
-  padding: 40px 80px 15px 80px;
-  background-color: #fff;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 800px;
-}
-.heading {
-  text-align: center;
-  h1 {
-    background: -webkit-linear-gradient(#fff, #999);
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    text-align: center;
-    margin: 0 0 5px 0;
-    font-weight: 900;
-    font-size: 4rem;
-    color: #fff;
-  }
-  h4 {
-    color: lighten(#5c3d86,30%);
-    text-align: center;
-    margin: 0 0 35px 0;
-    font-weight: 400;
-    font-size: 24px;
-  }
-
-
-body {
-  background-color: purple;
-  padding: 50px;
-}
-.container {
-  padding: 40px 80px 15px 80px;
-  background-color: #fff;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 800px;
-}
-.heading {
-  text-align: center;
-  .h1 {
-    background: -webkit-linear-gradient(#fff, #999);
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    text-align: center;
-    margin: 0 0 5px 0;
-    font-weight: 900;
-    font-size: 4rem;
-    color: #fff;
-  }
-  .h4 {
-    text-align: center;
-    margin: 0 0 35px 0;
-    font-weight: 400;
-    font-size: 24px;
-  }
-
-.customModal {
-    box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.4);
-    left: calc(50vw - 300px);
+#applet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
     position: absolute;
-    z-index: 999;
-    width: 600px;
-    top: 20vh;
+    background: gold;
+    -webkit-perspective: 300px;
+    perspective: 300px;
+}
+
+.simple-modal {
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.19);
     border-radius: 5px;
-    overflow: hidden;
-}
-  .customModalTitle {
-      background-color: #eee;
-      text-align: left;
-      padding: 8px 12px;
-      font-size: 1.5em;
-  }
-.close {
-    line-height: 32px;
-    color: purple;
+    align-items: center;
+    padding: 300px;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /*dim the background*/
 }
 
+.simple-modal p {
+    text-align: center;
+}
 
-  .customModalBody {
-    background-color: #fff;
-    padding: 8px 12px;
-    text-align: left;
-    padding: 12px;
-  }
-  .customModalFooter {
-    background-color: #eee;
-    padding: 4px 12px;
-    text-align: left;
-  }
+.simple-modal button {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border-color: transparent;
+}
+
+.backdrop:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: black;
+    position: absolute;
+    -webkit-animation: backdrop 600ms ease forwards;
+    animation: backdrop 600ms ease forwards;
+}
+
+@-webkit-keyframes backdrop {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes backdrop {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.appear-enter-active {
+    animation: appear 700ms ease;
+}
+
+.appear-leave-active {
+    animation: appear 300ms ease reverse;
+}
+
+@-webkit-keyframes appear {
+    0% {
+        top: -100%;
+    }
+    2% {
+        height: 102%;
+    }
+    5% {
+        height: 115%;
+    }
+    10% {
+        height: 120%;
+    }
+    20% {
+        height: 125%;
+    }
+    100% {
+        top: 10%;
+    }
+}
+
+@keyframes appear {
+    0% {
+        top: -100%;
+    }
+    2% {
+        height: 102%;
+    }
+    5% {
+        height: 115%;
+    }
+    10% {
+        height: 120%;
+    }
+    20% {
+        height: 125%;
+    }
+    100% {
+        top: 10%;
+    }
 }

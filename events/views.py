@@ -158,13 +158,12 @@ def error_checking(request):
     formset = RiderProfileFormSet(forms)
     if formset.is_valid():
         print('VALID')
-        v = {'success': "True"}
-        return JsonResponse(v)
+        content = {'success': True}
+        return JsonResponse(content)
     else:
         print('NOT VALID')
-        v = {'errors': formset.errors, 'success': "False"}
-        print(v)
-        return JsonResponse(v)
+        content = {'errors': formset.errors, 'success': False}
+        return JsonResponse(content)
 
 
 def event_register(request):
