@@ -64,30 +64,19 @@ input, select {
 
 }
 
-#applet {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    background: gold;
-    -webkit-perspective: 300px;
-    perspective: 300px;
-}
 
 .simple-modal {
     box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.19);
     border-radius: 5px;
     align-items: center;
-    padding: 300px;
+    padding: 50% 100px ;
     z-index: 10;
     position: fixed;
     top: 0;
     left: 0px;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /*dim the background*/
+    background-color: rgba(0, 0, 0, 0.9); /*dim the background*/
 }
 
 .simple-modal p {
@@ -96,9 +85,8 @@ input, select {
 
 .simple-modal button {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
-    border-color: transparent;
+    right: 100px;
+    top: 100px;
 }
 
 .backdrop:after {
@@ -116,7 +104,7 @@ input, select {
         opacity: 1;
     }
     100% {
-        opacity: 0.5;
+        opacity: 1;
     }
 }
 
@@ -125,11 +113,12 @@ input, select {
         opacity: 0;
     }
     100% {
-        opacity: 0.5;
+        opacity: 1;
     }
 }
 
 .appear-enter-active {
+    -webkit-animation: appear 700ms ease;
     animation: appear 700ms ease;
 }
 

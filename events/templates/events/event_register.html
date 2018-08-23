@@ -33,17 +33,14 @@
                     </div>
                 </div>
             </div>
-            <div v-if="formSuccess">
-
-                <!-- 	modal -->
-                <transition name="appear">
+{#            <div v-if="formSuccess">#}
+                <!-- 	modal    -->
+                <transition v-if="formSuccess" name="appear ">
                     <div class="simple-modal" v-if="showModal">
-                        <h1>Final Step.. Almost There!</h1>
-                        <div>
-                            <button type="button" @click="showModal = false">[[ closeModal ]]</button>
-                        </div>
+                        <h1 style="color: whitesmoke;">Final Step.. Almost There!</h1>
+                            <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]</button>
 
-                        <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>
+{#                        <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>#}
                         <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was declined or canceled</div>
                         <paypal-checkout
                                 :amount='amountStr'
@@ -73,7 +70,7 @@
                 {#                </paypal-checkout>#}
 
 
-            </div>
+{#            </div>#}
         </div>
 
 
