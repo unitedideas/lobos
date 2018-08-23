@@ -33,14 +33,12 @@
                     </div>
                 </div>
             </div>
-{#            <div v-if="formSuccess">#}
-                <!-- 	modal    -->
-                <transition v-if="formSuccess" name="appear ">
-                    <div class="simple-modal" v-if="showModal">
+                <transition v-if="showModal" name="appear" >
+                    <div class="simple-modal" v-if="formSuccess">
                         <h1 style="color: whitesmoke;">Final Step.. Almost There!</h1>
-                            <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]</button>
+                        <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]</button>
 
-{#                        <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>#}
+                        {#                        <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>#}
                         <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was declined or canceled</div>
                         <paypal-checkout
                                 :amount='amountStr'
@@ -54,23 +52,6 @@
                         </paypal-checkout>
                     </div>
                 </transition>
-
-
-                {#                <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>#}
-                {#                <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was declined or canceled</div>#}
-                {#                <paypal-checkout#}
-                {#                        :amount='amountStr'#}
-                {#                        currency="USD"#}
-                {#                        :button-style="aStyle"#}
-                {#                        :client="paypal"#}
-                {#                        env="sandbox"#}
-                {#                        v-on:payment-authorized="paymentAuthorized"#}
-                {#                        v-on:payment-completed="paymentCompleted"#}
-                {#                        v-on:payment-cancelled="paymentCancelled">#}
-                {#                </paypal-checkout>#}
-
-
-{#            </div>#}
         </div>
 
 

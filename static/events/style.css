@@ -65,6 +65,8 @@ input, select {
 }
 
 
+
+
 .simple-modal {
     box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.19);
     border-radius: 5px;
@@ -95,17 +97,7 @@ input, select {
     height: 100%;
     background: black;
     position: absolute;
-    -webkit-animation: backdrop 600ms ease forwards;
     animation: backdrop 600ms ease forwards;
-}
-
-@-webkit-keyframes backdrop {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 1;
-    }
 }
 
 @keyframes backdrop {
@@ -117,34 +109,13 @@ input, select {
     }
 }
 
+
 .appear-enter-active {
-    -webkit-animation: appear 700ms ease;
-    animation: appear 700ms ease;
+    animation: appear 800ms ease;
 }
 
 .appear-leave-active {
-    animation: appear 300ms ease reverse;
-}
-
-@-webkit-keyframes appear {
-    0% {
-        top: -100%;
-    }
-    2% {
-        height: 102%;
-    }
-    5% {
-        height: 115%;
-    }
-    10% {
-        height: 120%;
-    }
-    20% {
-        height: 125%;
-    }
-    100% {
-        top: 10%;
-    }
+    animation: appear 800ms ease reverse;
 }
 
 @keyframes appear {
