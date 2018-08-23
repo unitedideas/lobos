@@ -2,6 +2,8 @@
 {% load static %}
 
 <head>
+
+
     {# jQuery #}
     <script type="text/javascript" src="{% static "events/JS.js" %}"></script>
     {# Vue.js CDN #}
@@ -14,16 +16,15 @@
         <title>Event Registration</title>
     {% endblock %}
 </head>
-
 {% block body %}
-    <div id="app">
+    <div id="app" v-cloak=>
+    <div class="sk-rotating-plane"></div>
         <div class="header row" id="myHeader">
-
-            <h3>Total Price: $[[amountStr]]</h3>
-            {#            <div v-show="!formSuccess">#}
-            <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
-            <br>
-            {#            </div>#}
+            <div v-show="showcheckout">
+                <h3>Total: $[[amountStr]]</h3>
+                <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
+                <br>
+            </div>
             <br>
             <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
                 <h3>Please correct these errors:</h3>
@@ -33,13 +34,16 @@
                     </div>
                 </div>
             </div>
-                <transition v-if="showModal" name="appear" >
-                    <div class="simple-modal" v-if="formSuccess">
-                        <h1 style="color: whitesmoke;">Final Step.. Almost There!</h1>
-                        <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]</button>
+            <transition v-if="showModal" name="appear">
+                <div class="simple-modal" v-if="formSuccess">
+                    <h1 style="color: whitesmoke;">{{ event }}</h1>
+                    <h1 style="color: whitesmoke;">Final Step.. Almost There!</h1>
+                    <br>
+                    <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]</button>
 
-                        {#                        <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>#}
-                        <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was declined or canceled</div>
+                    {#                        <div class="alert alert-success" role="alert">There are no errors proceed with payment</div>#}
+                    <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was declined or canceled</div>
+                    <div v-show="showPayPal">
                         <paypal-checkout
                                 :amount='amountStr'
                                 currency="USD"
@@ -51,49 +55,46 @@
                                 v-on:payment-cancelled="paymentCancelled">
                         </paypal-checkout>
                     </div>
-                </transition>
+                    <div v-show="!showPayPal">
+
+                    </div>
+                </div>
+            </transition>
         </div>
 
 
         <div class="container">
             <div id="jumbotron" class="jumbotron" style="padding: 20px">
-                <h1>{{ event }}</h1>
-                <p>A little history about the event here</p>
-                <p>Maybe a notice</p>
-                <p>Date</p>
-                <p>Location</p>
+                <h1 style="text-align: center">{{ event }} Registration</h1>
+                {#                <p>A little history about the event here</p>#}
+                {#                <p>Maybe a notice</p>#}
+                {#                <p>Date</p>#}
+                {#                <p>Location</p>#}
             </div>
 
             <div>
                 <form method="POST" id="feedbackform">
                     {% csrf_token %}
                     {{ formset.management_form }}
-                    <div style=" margin-right: 15px;"
-                         class="row form-row">
-                        <div class="input-group">
-                            <div v-for="form in formList">
-                                <br>
-                                <div style="background-color: #ffe673; padding: 20px; border-radius:5px; margin: 0px 15px 0px 15px" v-html="form">
-                                </div>
-                            </div>
+                    <div style="margin-right: 15px;" class="row">
+                        <div v-for="form in formList">
                             <br>
-                            <div class="container">
-                                <span v-on:click="addForm" class="btn btn-primary btn-lg">Add Form</span>
-                                <span v-on:click="formID" class="btn btn-primary btn-lg">Delete Form</span>
+                            <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
+                            <div style="background-color: #ffe673; padding: 20px; border-radius:5px; margin: 0px 15px 0px 15px" v-html="form">
                             </div>
-                            <br>
                         </div>
+                        <div style="text-align: center" class="row">
+                            <h3 v-on:click="addForm" class="btn btn-primary btn-lg col-sm-5 ">Add Form</h3>
+                            <h3 v-on:click="formID" class="btn btn-primary btn-lg col-sm-5 ">Delete Form</h3>
+                        </div>
+                        <br>
                     </div>
                     <button ref="submitButton" style='display: none'></button>
-
                 </form>
-
-
             </div>
             <br>
         </div>
     </div>
-
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
     <script>
 
@@ -108,7 +109,7 @@
                     },
                     aStyle: {
                         label: 'checkout',
-                        size: 'medium',
+                        size: 'large',
                         shape: 'rect',
                         color: 'blue',
                         tagline: 'false'
@@ -127,6 +128,7 @@
                     showcheckout: false,
                     showModal: false,
                     closeModal: 'Cancel',
+                    showPayPal: true
                 }
             },
             watch: {
@@ -187,8 +189,8 @@
                                 total += this.escortCost
                             }
                         }
-                        console.log(total)
                         this.amountStr = String(total.toFixed(2))
+                        this.showcheckout = true
 
                     },
 
@@ -239,6 +241,7 @@
                     },
 
                     paymentAuthorized: function (data) {
+                        this.showPayPal = false
                         console.log('The payment was authorized')
                         console.log(data)
                     },
@@ -255,6 +258,8 @@
                         console.log('The payment was declined or cancled, please try again')
                         console.log(data)
                         this.payment_cancelled = true
+                        this.showPayPal = true
+
 
                     },
 
@@ -294,7 +299,6 @@
                             app.escortCost = Number(response.data.escort_rider_cost)
                         })
                 },
-
         })
 
     </script>
@@ -330,7 +334,6 @@
             }
         }
     </script>
-
 
 {% endblock %}
 
