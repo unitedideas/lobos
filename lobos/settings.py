@@ -142,8 +142,21 @@ LOGIN_EXEMPT_URLS = (
     'password-reset/complete/',
 )
 
-EMAIL_HOST = 'localhost'
+# Email
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+EMAIL_PORT = EMAIL_PORT
+EMAIL_USE_TLS = EMAIL_USE_TLS
+DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
 
-EMAIL_PORT = 1025
 
+
+# For email testing
+#
+# EMAIL_HOST = 'localhost'
+#
+# EMAIL_PORT = 1025
+#
+# in terminal
 # python -m smtpd -n -c DebuggingServer localhost:1025
