@@ -18,7 +18,7 @@
 </head>
 {% block body %}
     <div id="app" v-cloak=>
-    <div class="sk-rotating-plane"></div>
+        <div class="sk-rotating-plane"></div>
         <div class="header row" id="myHeader">
             <div v-show="showcheckout">
                 <h3>Total: $[[amountStr]]</h3>
@@ -55,8 +55,10 @@
                                 v-on:payment-cancelled="paymentCancelled">
                         </paypal-checkout>
                     </div>
-                    <div v-show="!showPayPal">
-
+                    <div class="whirlpool" v-show="!showPayPal">
+                        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                        </svg>
                     </div>
                 </div>
             </transition>
