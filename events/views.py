@@ -422,8 +422,8 @@ def event_register(request):
 
 
 
-                    subject = 'You are registered for ' + form.event + ' !'
-                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                    subject = 'You are registered for ' + event + ' !'
+                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
@@ -436,7 +436,7 @@ def event_register(request):
 
                     subject, from_email, to = subject, from_email,to
 
-                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
@@ -444,7 +444,7 @@ def event_register(request):
                                         'or concerns, please contact us at ' \
                                         'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
 
-                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
