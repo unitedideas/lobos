@@ -7,16 +7,22 @@
 {% block body %}
     <div class="container">
         <h1>Congrats!</h1>
-        <p>
-            You have successfully registered for the {{ user.event }}
-        </p>
-        <h1>Confirmation Number: {{ confirmation_number }}</h1>
-        <p>Username: {{ user }}</p>
-        <p>Username Email: {{ user.email }}</p>
-        <p>First Name: {{ user.first_name }}</p>
-        <p>Username: {{ post_user }}</p>
-        <p>Email: {{ post_email }}</p>
-        <p>Event: {{ event }}</p>
+        <h3>
+            You have successfully registered for the {{ event }} event
+        </h3>
+        <br>
+        {% for key, item in confirm.items %}
+            {% if item.message %}
+                <h4 style="color: orangered">Attention: {{ item.message }}</h4>
+            {% endif %}
+            <h4>Username: {{ item.username }}</h4>
+            <h4>First Name: {{ item.first_name }}</h4>
+            <h4>Last Name: {{ item.last_name }}</h4>
+            <h4>Email: {{ item.email }}</h4>
+            <h4>Class: {{ item.rider_class }}</h4>
+            <h4>Confirmation: {{ item.confirmation }}</h4>
+            <br>
+        {% endfor %}
     </div>
 
 {% endblock %}

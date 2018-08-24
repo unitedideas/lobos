@@ -13,19 +13,49 @@ MAKES = load_choices(MAKES_PATH, True)
 
 class Event(models.Model):
     event_name = models.CharField(max_length=300, null=True, blank=True)
-    slogan = models.CharField(max_length=800, null=True, blank=True)
-    pre_entry_cost = models.CharField(max_length=800, null=True, blank=True)
-    post_entry_cost = models.CharField(max_length=800, null=True, blank=True)
+    description = models.TextField(max_length=1000, null=True, blank=True)
+    pre_entry_cost = models.IntegerField()
+    post_entry_cost = models.IntegerField()
+    escort_rider_cost = models.IntegerField()
     entry_closes = models.CharField(max_length=800, null=True, blank=True)
     event_date = models.DateField(max_length=30, null=True, blank=True)
     event_location = models.CharField(max_length=300, null=True, blank=True)
-    event_details = models.CharField(max_length=1000, null=True, blank=True)
+    event_details = models.TextField(max_length=1000, null=True, blank=True)
     map_location = models.CharField(max_length=800, null=True, blank=True)
     pro_time_est = models.TimeField(max_length=30, null=True, blank=True)
     am_time_est = models.TimeField(max_length=30, null=True, blank=True)
+    rider_limit = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
+
+
+class Profile(models.Model):
+    FEMALE = 'Female'
+    MALE = 'Male'
+
+    GENDER = (
+        (FEMALE, 'Female'),
+        (MALE, 'Male'),
+    )
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+    gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
+    birth_date = models.DateField(null=True, blank=True)
+    phone_number = models.CharField(max_length=10, null=True, blank=True)
+    country = models.CharField(max_length=300, null=True, blank=True)
+    address = models.CharField(max_length=300, null=True, blank=True)
+    address_line_two = models.CharField(max_length=300, null=True, blank=True)
+    city = models.CharField(max_length=300, null=True, blank=True)
+    state = models.CharField(max_length=2, null=True, blank=True, choices=STATES)
+    zip_code = models.CharField(max_length=5, null=True, blank=True)
+    emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
+    emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
+    omra_number = models.CharField(max_length=300, null=True, blank=True)
+    ama_number = models.CharField(max_length=300, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.user.first_name) + " " + str(self.user.last_name) + " - " + str(self.user)
+
 
 
 class RiderProfile(models.Model):
@@ -36,9 +66,6 @@ class RiderProfile(models.Model):
     CLASS60_70 = 'Class 60 and 70 Rider'
     ESCORT = 'Escort Rider'
 
-    FEMALE = 'Female'
-    MALE = 'Male'
-
     RIDER_CLASS = (
         (EXOVER16, 'Expert Schedule Classes - Over age 16'),
         (EXUNDER16, 'Expert Schedule Classes - 16 and under'),
@@ -48,14 +75,17 @@ class RiderProfile(models.Model):
         (ESCORT, 'Escort Rider'),
     )
 
+    FEMALE = 'Female'
+    MALE = 'Male'
+
     GENDER = (
         (FEMALE, 'Female'),
         (MALE, 'Male'),
     )
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, default=None, null=True, blank=True, on_delete=models.CASCADE)
-    rider_class = models.CharField(null=True, blank=True, max_length=100, choices=RIDER_CLASS)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    rider_class = models.CharField(max_length=100, choices=RIDER_CLASS)
     first_name = models.CharField(max_length=300, null=True, blank=True)
     last_name = models.CharField(max_length=300, null=True, blank=True)
     email = models.EmailField(max_length=300, null=True, blank=True)
@@ -66,7 +96,6 @@ class RiderProfile(models.Model):
     address = models.CharField(max_length=300, null=True, blank=True)
     address_line_two = models.CharField(max_length=300, null=True, blank=True)
     city = models.CharField(max_length=300, null=True, blank=True)
-    # make a dropdown like from the diaper bank app
     state = models.CharField(max_length=2, null=True, blank=True, choices=STATES)
     zip_code = models.CharField(max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
@@ -143,7 +172,8 @@ class Person(models.Model):
 
 def create_profile(sender, **kwargs):
     if kwargs['created']:
-        user_profile = RiderProfile.objects.create(user=kwargs['instance'])
+        user_profile = Profile.objects.create(user=kwargs['instance'])
 
 
 post_save.connect(create_profile, sender=User)
+

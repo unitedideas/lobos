@@ -7,14 +7,22 @@
 {% block body %}
     <div class="container">
         <h1>Edit Profile</h1>
-        <h4 class="alert alert-warning">{{ errors }}</h4>
-
+        <h3>Current Profile Info:</h3>
+        <h4>Username: {{ user }}</h4>
+        <h4>Email: {{ user.email }}</h4>
+        <h4>First Name: {{ user.first_name }}</h4>
+        <h4>Last Name: {{ user.last_name }}</h4>
         <form method="post">
+            {#            {% for item in form %}#}
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form }}
+            {#                {{ item.label }}#}
+            {#                {{ item }}#}
+            <br>
+            {#            {% endfor %}#}
+
             <button class="btn" type="submit">Submit</button>
         </form>
-
     </div>
 
 {% endblock %}

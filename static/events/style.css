@@ -5,7 +5,7 @@ body {
 .jumbotron {
     color: #333;
     background-color: #ffe673;
-
+    padding: 20px;
 }
 
 .navbar {
@@ -29,4 +29,210 @@ input, select {
     font-size: 20px;
     width: 100%;
 
+}
+
+.top-container {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+}
+
+.header {
+    background: #dedede;
+    color: #333;
+    z-index: 1;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.content {
+    padding: 16px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+}
+
+.margin_100 {
+    margin-top: 100px;
+
+}
+
+.simple-modal {
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    align-items: center;
+    padding: 200px;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /*dim the background*/
+}
+
+.simple-modal p {
+    text-align: center;
+}
+
+.simple-modal button {
+    position: absolute;
+    right: 100px;
+    top: 100px;
+}
+
+.backdrop:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: black;
+    position: absolute;
+    animation: backdrop 600ms ease forwards;
+}
+
+@keyframes backdrop {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.appear-enter-active {
+    animation: appear 800ms ease;
+}
+
+.appear-leave-active {
+    animation: appear 600ms ease reverse;
+}
+
+@keyframes appear {
+    0% {
+        top: -100%;
+    }
+    2% {
+        height: 102%;
+    }
+    5% {
+        height: 115%;
+    }
+    10% {
+        height: 120%;
+    }
+    20% {
+        height: 125%;
+    }
+    100% {
+        top: 0%;
+    }
+}
+
+
+.spinner {
+  -webkit-animation: rotator 1.4s linear infinite;
+          animation: rotator 1.4s linear infinite;
+}
+
+@-webkit-keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+
+@keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+.path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+          animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+
+@keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+  }
 }

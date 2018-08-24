@@ -1,3 +1,14 @@
+from .models import RiderProfile, Profile
+from django.conf import settings
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.core.mail import send_mail, send_mass_mail, EmailMultiAlternatives
+
+
+from .models import Event
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from events.forms import (
     RegistrationForm,
@@ -6,12 +17,8 @@ from events.forms import (
 )
 import random
 import string
-import urllib.parse
-from .models import RiderProfile
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
-from .models import Event
+import json
+import datetime
 
 
 def home(request):
@@ -23,10 +30,33 @@ def home(request):
     event_details = []
     event_location = []
     map_location = []
-    slogan = []
+    description = []
     pre_entry_cost = []
     post_entry_cost = []
+    escort_rider_cost = []
     entry_closes = []
+    rider_limit = []
+    reg_riders = []
+    remaining_spots = []
+    remaining_time = []
+
+    for event in event_name:
+        event_id = Event.objects.get(event_name=event).id
+        reg_riders.append(RiderProfile.objects.filter(event=event_id).count())
+
+    for date in event_dates:
+
+        tte = int((date - datetime.date.today()).days)
+
+        try:
+            if tte == 0:
+                remaining_time.append("It's Today!!!")
+            elif tte < 1:
+                remaining_time.append("Results to Come!")
+            else:
+                remaining_time.append(tte)
+        except:
+            remaining_time.append("TBD")
 
     for date in event_dates:
         year = str(date)[:4]
@@ -37,22 +67,34 @@ def home(request):
         event_details.append(event.event_details)
         event_location.append(event.event_location)
         map_location.append(event.map_location)
-        slogan.append(event.slogan)
+        description.append(event.description)
         pre_entry_cost.append(event.pre_entry_cost)
         post_entry_cost.append(event.post_entry_cost)
         entry_closes.append(event.entry_closes)
+        escort_rider_cost.append(event.escort_rider_cost)
+        rider_limit.append(event.rider_limit)
 
+    for limit, rider in zip(rider_limit, reg_riders):
 
-    events_details = zip(event_name,
-                         year_list,
-                         event_date,
-                         event_details,
-                         event_location,
-                         map_location,
-                         slogan,
-                         pre_entry_cost,
-                         post_entry_cost,
-                         entry_closes)
+        try:
+            remaining_spots.append(limit - rider)
+        except:
+            remaining_spots.append('TBD')
+
+    events_details = zip(event_name,  # 0
+                         year_list,  # 1
+                         event_date,  # 2
+                         event_details,  # 3
+                         event_location,  # 4
+                         map_location,  # 5
+                         description,  # 6
+                         pre_entry_cost,  # 7
+                         post_entry_cost,  # 8
+                         entry_closes,  # 9
+                         escort_rider_cost,  # 10
+                         remaining_spots,  # 11
+                         remaining_time,  # 12
+                         )
 
     context = {'events_details': events_details}
 
@@ -93,7 +135,7 @@ def edit_profile(request):
             args = {'form': form, 'errors': 'A user with that username already exists. Please choose a different one.'}
             return render(request, 'events/edit_profile.html', args)
     else:
-        form = EditProfileForm(instance=request.user)
+        form = EditProfileForm(instance=request.user.profile)
         args = {'form': form}
         return render(request, 'events/edit_profile.html', args)
 
@@ -115,101 +157,278 @@ def change_password(request):
         return render(request, 'events/password_change.html', args)
 
 
-# old registration saving for deletion before deployment
-# def event_register(request):
-#     if request.method == 'POST':
-#         event_form = RiderEventForm(request.POST)
-#
-#         if event_form.is_valid():
-#             event_post = event_form.save(commit=False)
-#             confirmation_number = id_generator()
-#             event_post.confirmation_number = confirmation_number
-#             event_post = event_form.save()
-#             # print(event_post.user)
-#             user = User.objects.get_or_create(username=event_post.email,
-#                                               email=event_post.email,
-#                                               first_name=event_post.first_name,
-#                                               last_name=event_post.last_name)[0]
-#             user.save()
-#             user.first_name = event_post.first_name
-#             user.last_name = event_post.last_name
-#
-#             RiderProfile.objects.all().last().delete()
-#             event_post.user = user
-#             event_post = event_form.save()
-#
-#             args = {'event': event_post.event, 'post_email': event_post.email,
-#                     'confirmation_number': confirmation_number}
-#             # email confirmation function here
-#             # return redirect('/event-confirmation')
-#             return render(request, 'events/event_confirmation.html', args)
-#
-#         else:
-#             event_form = RiderEventForm()
-#             args = {'event_form': event_form}
-#             return render(request, 'events/event_register.html', args)
-#     else:
-#         event_form = RiderEventForm()
-#         args = {'event_form': event_form}
-#         return render(request, 'events/event_register.html', args)
-#
-#
+def error_checking(request):
+    print('in error checking')
+    forms = json.load(request)  # The form as html string
+    formset = RiderProfileFormSet(forms)
+    if formset.is_valid():
+        print('VALID')
+        content = {'success': True}
+        return JsonResponse(content)
+    else:
+        print('NOT VALID')
+        content = {'errors': formset.errors, 'success': False}
+        return JsonResponse(content)
+
 
 def event_register(request):
     if request.method == 'POST':
+
         formset_post = RiderProfileFormSet(request.POST)
 
         if formset_post.is_valid():
             print('formset valid')
             formset = formset_post.save(commit=False)
             confirmation_number = id_generator()
+            count = 0
+            confirm = {}
             for form in formset:
+                count += 1
                 print('in the form loop')
-                print(form.email)
-
+                created_username = form.first_name + form.last_name + form.email
                 form.confirmation_number = confirmation_number
+                print(form.event)
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
+                event = str(form.event)
+                print(type(event))
+
+
                 #
                 # create username first by combining first, last and email used in the form
                 #  and check if in User.obj.username.exists
-                if not User.objects.filter(username=form.email).exists():
-                    user = User.objects.create(username=form.email,
+                if User.objects.filter(username=created_username).exists():
+                    user_id = User.objects.get(username=created_username).id
+
+                if not User.objects.filter(username=created_username).exists():
+                    print('The user does not exist')
+                    user = User.objects.create(username=created_username,
                                                email=form.email,
                                                first_name=form.first_name,
-                                               last_name=form.last_name)
-                    user.save()
+                                               last_name=form.last_name,
+                                               )
+
                     user.first_name = form.first_name
                     user.last_name = form.last_name
-
-                    RiderProfile.objects.all().last().delete()
+                    user.save()
+                    print('saved new user')
                     form.user = user
-                else:
-                    form.user = User.objects.get(username=form.email)
-                form.save()
+                    user = Profile.objects.filter(user=user)
+                    user.update(address=form.address)
+                    user.update(gender=form.gender)
+                    user.update(birth_date=form.birth_date)
+                    user.update(phone_number=form.phone_number)
+                    user.update(country=form.country)
+                    user.update(address_line_two=form.address_line_two)
+                    user.update(city=form.city)
+                    user.update(state=form.state)
+                    user.update(zip_code=form.zip_code)
+                    user.update(emergency_contact_name=form.emergency_contact_name)
+                    user.update(emergency_contact_phone=form.emergency_contact_phone)
+                    user.update(omra_number=form.omra_number)
+                    user.update(ama_number=form.ama_number)
 
-            # args = {'event': formset.event, 'post_email': formset.email,
-            #         'confirmation_number': confirmation_number}
+                    # RiderProfile.objects.all().last().delete()
+                    message = ''
+                    username = created_username
+                    first_name = form.first_name
+                    last_name = form.last_name
+                    email = form.email
+                    rider_class = form.rider_class
+
+                    confirm[created_username] = {'message': message,
+                                                 'username': username,
+                                                 'first_name': first_name,
+                                                 'last_name': last_name,
+                                                 'email': email,
+                                                 'confirmation': confirmation_number,
+                                                 'rider_class': rider_class}
+                    form.save()
+
+                    subject = 'You are registered for ' + event + ' !'
+                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+                    from_email = 'MrWolf@LobosEvents.com'
+                    to = email
+
+
+                    subject, from_email, to = subject, from_email,to
+
+                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'or concerns, please contact us at ' \
+                                        'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+
+
+
+                elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
+                    print('Already registered for this event')
+                    username = created_username
+                    first_name = form.first_name
+                    last_name = form.last_name
+                    email = form.email
+                    rider_class = form.rider_class
+                    confirmation = RiderProfile.objects.get(event=form.event, user=user_id).confirmation_number
+                    message = 'The rider, ' + first_name + ' ' + last_name + ', has previously been registered.' + \
+                              ' Please contact the person you registered to verify.' \
+                              ' If they have been registered twice please contact us for a refund for that entry.' \
+                              ' Phone: 333-333-4444 or email: NotShane@Lobosevents.com'
+
+                    confirm[created_username] = {'message': message,
+                                                 'username': username,
+                                                 'first_name': first_name,
+                                                 'last_name': last_name,
+                                                 'email': email,
+                                                 'confirmation': confirmation,
+                                                 'rider_class': rider_class}
+
+                    subject = 'You are registered for ' + event + ' !'
+                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+                    from_email = 'MrWolf@LobosEvents.com'
+                    to = email
+
+
+                    subject, from_email, to = subject, from_email,to
+
+                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'or concerns, please contact us at ' \
+                                        'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+
+
+                else:
+                    print('The user exists')
+                    form.user = User.objects.get(username=created_username)
+                    username = created_username
+                    first_name = form.first_name
+                    last_name = form.last_name
+                    email = form.email
+                    rider_class = form.rider_class
+
+                    confirm[created_username] = {'username': username,
+                                                 'first_name': first_name,
+                                                 'last_name': last_name,
+                                                 'email': email,
+                                                 'confirmation': confirmation_number,
+                                                 'rider_class': rider_class}
+
+                    form.save()
+
+            # print(confirm)
+
+
+
+
+
+                    subject = 'You are registered for ' + form.event + ' !'
+                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+                    from_email = 'MrWolf@LobosEvents.com'
+                    to = email
+
+
+                    subject, from_email, to = subject, from_email,to
+
+                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'or concerns, please contact us at ' \
+                                        'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+
+
+
+            # <a href = "mailto:blah@blah.com?subject=subject line&cc=nancy@blah.com, joe@blah.com&bcc=secret@blah.com" > linktext </a>
+
+
+
+            args = {'event': form.event, 'confirm': confirm}
             # email confirmation function here
             # return redirect('/event-confirmation')
-            return render(request, 'events/event_confirmation.html')
-            # return render(request, 'events/event_confirmation.html', args)
+            # return render(request, 'events/event_confirmation.html')
+            return render(request, 'events/event_confirmation.html', args)
         else:
             print('formset not valid')
             print(formset_post.errors)
+            errors = formset_post.errors
             # can start with the current users filter queryset
             # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
 
             event = Event.objects.get(event_name=request.GET.get('event'))
-            formset = RiderProfileFormSet()
-            args = {'formset': formset, 'event': event}
+            formset = prefill_form(request)
+
+            args = {'formset': formset, 'event': event, 'errors': errors}
             return render(request, 'events/event_register.html', args)
+
     else:
         # can start with the current users filter queryset
         # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
-        print(request.user)
-
+        # current_user_profile = RiderProfile.objects.get(user=request.user)
+        # current_user_profile = RiderProfile.objects.all()
+        # ride =request.user
+        # print(RiderProfile.objects.user)
+        # print(current_user_profile)
         event = Event.objects.get(event_name=request.GET.get('event'))
-        formset = RiderProfileFormSet(queryset=RiderProfile.objects.none())
+        formset = prefill_form(request)
+
         args = {'formset': formset, 'event': event}
         return render(request, 'events/event_register.html', args)
 
@@ -221,3 +440,35 @@ def event_confirmation(request):
 
 def id_generator(size=8, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+
+def event_formset(request):
+    formset = prefill_form(request)
+    formset = str(formset)
+    event = json.loads(request.body)['event'][0:-5]
+    event_date = json.loads(request.body)['event'][-4:]
+    escort_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).escort_rider_cost
+    reg_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).pre_entry_cost
+    # reg_rider_cost = Event.objects.get(event_name=request.GET.get('event')).pre_entry_cost
+    formset_to_vue = {'reg_rider_cost': reg_rider_cost, 'escort_rider_cost': escort_rider_cost, 'formset': formset}
+    return JsonResponse(formset_to_vue)
+
+
+def prefill_form(request):
+    form_fill_dict = {}
+    profile_field_names = []
+    prof = request.user.profile
+
+    for field in Profile._meta.get_fields():
+        if field.name is not 'id':
+            profile_field_names.append(field.name)
+            field = str(field.name)
+            form_fill_dict[field] = getattr(prof, field)
+
+    user_field_names = ['first_name', 'last_name', 'email']
+    user_prof = request.user
+    for field in User._meta.get_fields():
+        field = str(field.name)
+        if field in user_field_names:
+            form_fill_dict[field] = getattr(user_prof, field)
+    return RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[form_fill_dict])

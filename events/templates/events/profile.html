@@ -7,10 +7,23 @@
 {% block body %}
     <div class="container">
         <h1>Profile Info</h1>
-            <p>Username: {{ user }}</p>
-            <p>Email: {{ user.email }}</p>
-            <p>First Name: {{ user.first_name }}</p>
-            <p>Last Name: {{ user.last_name }}</p>
+        <h4>Username: {{ user }}</h4>
+        <h4>Email: {{ user.email }}</h4>
+        <h4>First Name: {{ user.first_name }}</h4>
+        <h4>Last Name: {{ user.last_name }}</h4>
+        <h4>Gender: {{ user.profile.gender }}</h4>
+        <h4>Birth Date: {{ user.profile.birth_date }}</h4>
+        <h4>Phone: {{ user.profile.phone_number }}</h4>
+        <h4>Country: {{ user.profile.country }}</h4>
+        <h4>Address: {{ user.profile.address }}</h4>
+        <h4>Address Cont.: {{ user.profile.address_line_two }}</h4>
+        <h4>City: {{ user.profile.city }}</h4>
+        <h4>State: {{ user.profile.state }}</h4>
+        <h4>Zip Code: {{ user.profile.zip_code }}</h4>
+        <h4>Emergency Contact: {{ user.profile.addemergency_contact_nameress }}</h4>
+        <h4>Emergency Contact Number: {{ user.profile.emergency_contact_phone }}</h4>
+        <h4>OMRA Number: {{ user.profile.omra_number }}</h4>
+        <h4>AMA Number: {{ user.profile.ama_number }}</h4>
     </div>
 
 {% endblock %}
