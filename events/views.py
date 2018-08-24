@@ -313,7 +313,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
                     from_email = 'MrWolf@LobosEvents.com'
@@ -326,7 +326,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'going to the LobosEvents website and click on reset password.\nIf you have questions ' \
                                         'or concerns, please contact us at ' \
                                         'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
 
@@ -334,7 +334,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
 
@@ -370,7 +370,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
                     from_email = 'MrWolf@LobosEvents.com'
@@ -383,7 +383,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'going to the LobosEvents website and click on reset password.\nIf you have questions ' \
                                         'or concerns, please contact us at ' \
                                         'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
 
@@ -391,7 +391,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
 
@@ -422,14 +422,12 @@ def event_register(request):
 
 
 
-
-
-                    subject = 'You are registered for ' + form.event + ' !'
-                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                    subject = 'You are registered for ' + event + ' !'
+                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
                     from_email = 'MrWolf@LobosEvents.com'
@@ -438,19 +436,19 @@ def event_register(request):
 
                     subject, from_email, to = subject, from_email,to
 
-                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'going to the LobosEvents website and click on reset password.\nIf you have questions ' \
                                         'or concerns, please contact us at ' \
                                         'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
 
-                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
 
@@ -483,13 +481,7 @@ def event_register(request):
             return render(request, 'events/event_register.html', args)
 
     else:
-        # can start with the current users filter queryset
-        # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
-        # current_user_profile = RiderProfile.objects.get(user=request.user)
-        # current_user_profile = RiderProfile.objects.all()
-        # ride =request.user
-        # print(RiderProfile.objects.user)
-        # print(current_user_profile)
+
         event = Event.objects.get(event_name=request.GET.get('event'))
         formset = prefill_form(request)
 
