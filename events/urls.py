@@ -2,6 +2,7 @@ from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('login/', auth_views.LoginView.as_view(template_name='events/login.html'), name='login'),
@@ -19,6 +20,6 @@ urlpatterns = [
     path('event-registration/<event>', views.event_register, name='event_register'),
     path('event_formset', views.event_formset, name='event_formset'),
     path('error_checking', views.error_checking, name='error_checking'),
-    path('profile/password/done', auth_views.PasswordChangeDoneView.as_view, name='password_change_done'),
+    path('profile/password/done', auth_views.PasswordChangeDoneView.as_view(template_name='events/password_change_done.html'), name='password_change_done'),
 
 ]
