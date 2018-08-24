@@ -4,21 +4,34 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.core.mail import send_mail, send_mass_mail, EmailMultiAlternatives
-
-
+from django.core.mail import send_mail, send_mass_mail, EmailMultiAlternatives, EmailMessage
 from .models import Event
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponsePermanentRedirect
 from django.shortcuts import render, redirect
 from events.forms import (
     RegistrationForm,
     EditProfileForm,
     RiderProfileFormSet,
 )
+from django.template.loader import render_to_string
 import random
 import string
 import json
 import datetime
+
+
+# working on email
+
+# def _send_email(to_list, subject, message, sender='example@example.com'):
+#     msg = EmailMessage(subject=subject, body=message, from_email=sender, bcc=to_list)
+#     msg.content_subtype = "html"  # Main content is now text/html
+#     return msg.send()
+#
+# def send_email():
+#     emails = RiderProfile.objects.all().values_list('email', flat=True)
+#     summary = get_data()
+#     msg_html = render_to_string('email.html', {'data': data})
+#     _send_email(emails, subject='Report', message=msg_html)
 
 
 def home(request):
@@ -185,11 +198,34 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            return redirect('/profile')
+            subject = 'LobosEvents.com Password Change'
+            from_email = 'MrWolf@LobosEvents.com'
+            to = request.user.email
+            first_name = request.user.first_name
+
+            text_content = 'Hi ' + first_name.title() + '\nYou recently requested to reset your password at LobosEvents.com. \n' \
+            'Your username is ' + username + '\n' \
+            'Your password is ' + password + '\n'\
+            'You can check out our upcoming events and register for them through the Lobos events site <a href = "http://www.lobosevents.com">Lobosevents.com</a>.\n' \
+            'Welcome from the Lobos Motorcycle Club!\n' \
+            '- The Lobos Team'
+
+
+            html_content = '<p>Thank you for registering at LobosEvents.com ' + first_name.title() + '. \n</p>' \
+            '<p>Your username is ' + username + '\n</p>' \
+            '<p>Your password is ' + password + '\n</p>'\
+            '<p>You can check out our upcoming events and register for them through the Lobos events site Lobosevents.com.\n</p>' \
+            '<p>Welcome from the Lobos Motorcycle Club!\n</p>' \
+            '<p>- The Lobos Team</p>'
+
+
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            return redirect('/profile/')
         else:
             errors = {'errors': formset.errors}
             return redirect('change_password', errors)
-
     else:
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
@@ -232,9 +268,6 @@ def event_register(request):
                 print(type(event))
 
 
-                #
-                # create username first by combining first, last and email used in the form
-                #  and check if in User.obj.username.exists
                 if User.objects.filter(username=created_username).exists():
                     user_id = User.objects.get(username=created_username).id
 
