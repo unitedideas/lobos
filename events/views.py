@@ -483,13 +483,7 @@ def event_register(request):
             return render(request, 'events/event_register.html', args)
 
     else:
-        # can start with the current users filter queryset
-        # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
-        # current_user_profile = RiderProfile.objects.get(user=request.user)
-        # current_user_profile = RiderProfile.objects.all()
-        # ride =request.user
-        # print(RiderProfile.objects.user)
-        # print(current_user_profile)
+
         event = Event.objects.get(event_name=request.GET.get('event'))
         formset = prefill_form(request)
 
