@@ -29,9 +29,8 @@
     {% for detail in events_details %}
         <div class="jumbotron row" style="margin: 0px 0px 50px 0px">
             <div class="col-md-6">
-                <a class="btn btn-lg btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
-                   methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
-                <h2>Remaining Spots: {{ detail.11 }} !</h2>
+
+                <h2>{{ detail.11 }} Spots Remaining!</h2>
                 <h3>{{ detail.6 }}</h3>
                 <p>Date: {{ detail.2 }}</p>
                 <p>Pre-entry: ${{ detail.7 }}</p>
@@ -41,9 +40,12 @@
                 <p>Details: {{ detail.3 }}</p>
 
             </div>
-            <div style="float: right; margin-top: 5%; text-align: center" class="col-md-5">
+            <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">
                 <h2>{{ detail.12 }}</h2>
                 <h2>Days Remaining!</h2>
+                <br>
+                <a class="btn btn-lg btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
+                   methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
             </div>
             <div style="float: right; margin-top: 50px; text-align: center" class="col-md-5">
                 <p>{{ detail.4 }}</p>
