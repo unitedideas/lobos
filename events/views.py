@@ -313,7 +313,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
                     from_email = 'MrWolf@LobosEvents.com'
@@ -326,7 +326,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'going to the LobosEvents website and click on reset password.\nIf you have questions ' \
                                         'or concerns, please contact us at ' \
                                         'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
 
@@ -334,7 +334,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
 
@@ -370,7 +370,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
                     from_email = 'MrWolf@LobosEvents.com'
@@ -383,7 +383,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'going to the LobosEvents website and click on reset password.\nIf you have questions ' \
                                         'or concerns, please contact us at ' \
                                         'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
 
@@ -391,7 +391,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
 
@@ -427,7 +427,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
                     from_email = 'MrWolf@LobosEvents.com'
@@ -440,7 +440,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'going to the LobosEvents website and click on reset password.\nIf you have questions ' \
                                         'or concerns, please contact us at ' \
                                         'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
 
@@ -448,7 +448,7 @@ def event_register(request):
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
                                         'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
                                         'password</a> link.\nIf you have questions or concerns, please contact us via ' \
                                         '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
 

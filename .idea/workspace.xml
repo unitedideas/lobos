@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce295c0c-db42-4afc-b697-969cd20fcabd" name="Default Changelist" comment="update .gitignore">
+    <list default="true" id="ce295c0c-db42-4afc-b697-969cd20fcabd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lobos/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/lobos/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +50,7 @@
           <entry key="gitignore" value="3" />
           <entry key="html" value="116" />
           <entry key="js" value="5" />
-          <entry key="py" value="128" />
+          <entry key="py" value="129" />
           <entry key="txt" value="7" />
         </counts>
       </usages-collector>
@@ -61,7 +62,7 @@
           <entry key="Image" value="1" />
           <entry key="JavaScript" value="5" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="128" />
+          <entry key="Python" value="129" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -70,8 +71,8 @@
           <entry key="gitignore" value="24" />
           <entry key="html" value="18526" />
           <entry key="js" value="68" />
-          <entry key="py" value="27005" />
-          <entry key="txt" value="7852" />
+          <entry key="py" value="27030" />
+          <entry key="txt" value="7897" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -80,8 +81,8 @@
           <entry key="HTML" value="18526" />
           <entry key="Hoi4 file" value="118" />
           <entry key="JavaScript" value="68" />
-          <entry key="PLAIN_TEXT" value="7758" />
-          <entry key="Python" value="27005" />
+          <entry key="PLAIN_TEXT" value="7803" />
+          <entry key="Python" value="27030" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -172,14 +173,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="519">
-              <caret line="426" column="65" selection-start-line="426" selection-start-column="65" selection-end-line="426" selection-end-column="65" />
+            <state relative-caret-position="1003">
+              <caret line="365" column="41" selection-start-line="365" selection-start-column="41" selection-end-line="365" selection-end-column="41" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lobos/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="409">
+              <caret line="32" column="37" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -204,8 +214,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>final</find>
-      <find>transi</find>
       <find>formsuccess</find>
       <find>checkout</find>
       <find>showCheckout</find>
@@ -234,11 +242,14 @@
       <find>password_chan</find>
       <find>p</find>
       <find>email</find>
+      <find>http://localhost:8000/password-reset/</find>
+      <find>host</find>
     </findStrings>
     <replaceStrings>
       <replace />
       <replace>formset</replace>
       <replace>user.update</replace>
+      <replace>http://www.lobosevents.com/profile/password/</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -273,7 +284,6 @@
         <option value="$PROJECT_DIR$/events/templates/events/event_confirmation.html" />
         <option value="$PROJECT_DIR$/events/models.py" />
         <option value="$PROJECT_DIR$/static/events/JS.js" />
-        <option value="$PROJECT_DIR$/lobos/settings.py" />
         <option value="$PROJECT_DIR$/lobos/secrets.py" />
         <option value="$PROJECT_DIR$/events/templates/events/home.html" />
         <option value="$PROJECT_DIR$/lobos/requirements.txt" />
@@ -290,6 +300,7 @@
         <option value="$PROJECT_DIR$/events/templates/base.html" />
         <option value="$PROJECT_DIR$/lobos/.gitignore" />
         <option value="$PROJECT_DIR$/events/views.py" />
+        <option value="$PROJECT_DIR$/lobos/settings.py" />
       </list>
     </option>
   </component>
@@ -406,6 +417,116 @@
       <recent name="$PROJECT_DIR$/events/templates" />
     </key>
   </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/db.sqlite3</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -477,27 +598,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00093" summary="Trying to post django formset via axios to perform form validation to prevent refreshing the page  when there is an error and resetting the user inputs. The user in puts could be multiple forms.">
-      <created>1534718950336</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1534718950336</updated>
-    </task>
-    <task id="LOCAL-00094" summary="Trying to post django formset via axios to perform form validation to prevent refreshing the page  when there is an error and resetting the user inputs. The user in puts could be multiple forms.">
-      <created>1534798264720</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1534798264720</updated>
-    </task>
-    <task id="LOCAL-00095" summary="Trying to post django formset via axios to perform form validation to prevent refreshing the page  when there is an error and resetting the user inputs. The user in puts could be multiple forms.">
-      <created>1534804491002</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1534804491002</updated>
     </task>
     <task id="LOCAL-00096" summary="Trying to post django formset via axios to perform form validation to prevent refreshing the page  when there is an error and resetting the user inputs. The user in puts could be multiple forms.">
       <created>1534809978917</created>
@@ -821,7 +921,28 @@
       <option name="project" value="LOCAL" />
       <updated>1535130502968</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="pythonanywhere not liking the email template">
+      <created>1535132882245</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1535132882245</updated>
+    </task>
+    <task id="LOCAL-00143" summary="pythonanywhere not liking the email template">
+      <created>1535132929944</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1535132929944</updated>
+    </task>
+    <task id="LOCAL-00144" summary="pythonanywhere not liking the email template">
+      <created>1535133086900</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1535133086901</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="TodoView">
@@ -904,7 +1025,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Now getting proper feed back from a purchase&#10;Need to create a vue component to watch if selector changes and update totat dynamically instead of a button" />
     <MESSAGE value="Created an outside JS function: onchange it gets the dynamic select id then calls the handler method to update the paypal pricing.&#10;&#10;need to handle the email confirmation and then I have to work on the backend of mass emailing" />
     <MESSAGE value="Added Error message to invalid forms and redirects back to registration page" />
     <MESSAGE value="Added remaining spots available on the home page" />
@@ -929,7 +1049,8 @@
     <MESSAGE value="MVP working, I will fork this to deploy on pythonanywhere" />
     <MESSAGE value="Working on email templates and password change page/ email" />
     <MESSAGE value="update .gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="update .gitignore" />
+    <MESSAGE value="pythonanywhere not liking the email template" />
+    <option name="LAST_COMMIT_MESSAGE" value="pythonanywhere not liking the email template" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/events/apps.py">
@@ -1040,13 +1161,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lobos/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="81" column="16" lean-forward="true" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -1167,11 +1281,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/events/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="426" column="65" selection-start-line="426" selection-start-column="65" selection-end-line="426" selection-end-column="65" />
+        <state relative-caret-position="1003">
+          <caret line="365" column="41" selection-start-line="365" selection-start-column="41" selection-end-line="365" selection-end-column="41" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="32" column="37" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
         </state>
       </provider>
     </entry>
