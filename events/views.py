@@ -202,22 +202,14 @@ def change_password(request):
             from_email = 'MrWolf@LobosEvents.com'
             to = request.user.email
             first_name = request.user.first_name
+            username = request.user.username
 
             text_content = 'Hi ' + first_name.title() + '\nYou recently requested to reset your password at LobosEvents.com. \n' \
-            'Your username is ' + username + '\n' \
-            'Your password is ' + password + '\n'\
-            'You can check out our upcoming events and register for them through the Lobos events site <a href = "http://www.lobosevents.com">Lobosevents.com</a>.\n' \
-            'Welcome from the Lobos Motorcycle Club!\n' \
-            '- The Lobos Team'
+            'Your username, in case you\'ve forgotten: ' + username
 
 
-            html_content = '<p>Thank you for registering at LobosEvents.com ' + first_name.title() + '. \n</p>' \
-            '<p>Your username is ' + username + '\n</p>' \
-            '<p>Your password is ' + password + '\n</p>'\
-            '<p>You can check out our upcoming events and register for them through the Lobos events site Lobosevents.com.\n</p>' \
-            '<p>Welcome from the Lobos Motorcycle Club!\n</p>' \
-            '<p>- The Lobos Team</p>'
-
+            html_content = 'Hi ' + first_name.title() + '\nYou recently requested to reset your password at LobosEvents.com. \n' \
+            'Your username, in case you\'ve forgotten: ' + username
 
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
