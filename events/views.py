@@ -422,8 +422,6 @@ def event_register(request):
 
 
 
-
-
                     subject = 'You are registered for ' + form.event + ' !'
                     contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
