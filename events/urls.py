@@ -19,5 +19,6 @@ urlpatterns = [
     path('event-registration/<event>', views.event_register, name='event_register'),
     path('event_formset', views.event_formset, name='event_formset'),
     path('error_checking', views.error_checking, name='error_checking'),
+    path('profile/password/done', auth_views.PasswordChangeDoneView.as_view, name='password_change_done'),
 
 ]
