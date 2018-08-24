@@ -70,11 +70,12 @@ class RegistrationForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['first_name'].replace(" ", "")
+        user.last_name = self.cleaned_data['last_name'].replace(" ", "")
+        user.email = self.cleaned_data['email'].replace(" ", "")
 
         user.username = user.first_name + user.last_name + user.email
+        user.username = user.username.replace(" ", "")
         user.save()
         new_user = Profile.objects.filter(user=user)
         new_user.update(gender=self.cleaned_data['gender'])

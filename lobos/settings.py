@@ -30,7 +30,7 @@ except ImportError:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.lobosevents.com']
+ALLOWED_HOSTS = ['www.lobosevents.com', 'localhost']
 
 # Application definition
 

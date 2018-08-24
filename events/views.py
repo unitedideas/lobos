@@ -123,10 +123,10 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
 
-            email = request.POST['email']
-            first_name = request.POST['first_name']
-            last_name = request.POST['last_name']
-            username = first_name+last_name+email.lower()
+            email = request.POST['email'].replace(" ", "")
+            first_name = request.POST['first_name'].replace(" ", "")
+            last_name = request.POST['last_name'].replace(" ", "")
+            username = first_name+last_name+email.lower().replace(" ", "")
             password = request.POST['password1']
 
             if User.objects.filter(username=username).exists():
