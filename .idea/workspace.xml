@@ -45,10 +45,10 @@
         <counts>
           <entry key="css" value="9" />
           <entry key="gif" value="1" />
-          <entry key="gitignore" value="4" />
+          <entry key="gitignore" value="5" />
           <entry key="html" value="116" />
           <entry key="js" value="5" />
-          <entry key="py" value="129" />
+          <entry key="py" value="130" />
           <entry key="txt" value="7" />
         </counts>
       </usages-collector>
@@ -59,8 +59,8 @@
           <entry key="Hoi4 file" value="7" />
           <entry key="Image" value="1" />
           <entry key="JavaScript" value="5" />
-          <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="129" />
+          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="Python" value="130" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -138,44 +138,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-                <marker date="1535104563000" expanded="true" signature="3706:3858" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="909">
-              <caret line="56" column="7" lean-forward="true" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="365" column="41" selection-start-line="365" selection-start-column="41" selection-end-line="365" selection-end-column="41" />
+            <state relative-caret-position="446">
+              <caret line="130" lean-forward="true" selection-start-line="130" selection-end-line="130" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -184,10 +150,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lobos/settings.py">
+        <entry file="file://$PROJECT_DIR$/events/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+            <state relative-caret-position="441">
+              <caret line="21" column="39" lean-forward="true" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -197,15 +166,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="147">
               <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/templates/events/reset_password_email.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="10" column="78" lean-forward="true" selection-start-line="10" selection-end-line="10" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -221,7 +181,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>formsuccess</find>
       <find>checkout</find>
       <find>showCheckout</find>
       <find>300</find>
@@ -249,8 +208,9 @@
       <find>password_chan</find>
       <find>p</find>
       <find>email</find>
-      <find>http://localhost:8000/password-reset/</find>
       <find>host</find>
+      <find>http://localhost:8000/password-reset/</find>
+      <find>user</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -606,20 +566,6 @@
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
     </task>
-    <task id="LOCAL-00098" summary="Trying to post django formset via axios to perform form validation to prevent refreshing the page  when there is an error and resetting the user inputs. The user in puts could be multiple forms.">
-      <created>1534816614490</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1534816614490</updated>
-    </task>
-    <task id="LOCAL-00099" summary="Trying to post django formset via axios to perform form validation to prevent refreshing the page  when there is an error and resetting the user inputs. The user in puts could be multiple forms.">
-      <created>1534818864219</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1534818864219</updated>
-    </task>
     <task id="LOCAL-00100" summary="Trying to post django formset via axios to perform form validation to prevent refreshing the page  when there is an error and resetting the user inputs. The user in puts could be multiple forms.">
       <created>1534825700556</created>
       <option name="number" value="00100" />
@@ -949,7 +895,21 @@
       <option name="project" value="LOCAL" />
       <updated>1535134286227</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="pythonanywhere not liking the email template">
+      <created>1535136511794</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1535136511794</updated>
+    </task>
+    <task id="LOCAL-00148" summary="pythonanywhere not liking the email template">
+      <created>1535136809825</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1535136809825</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="TodoView">
@@ -962,10 +922,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="36" y="22" width="1823" height="1418" extended-state="0" />
+    <frame x="36" y="22" width="2284" height="1418" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18921953" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15031222" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="0" />
@@ -1102,13 +1062,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="924">
           <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/events/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" selection-start-line="4" selection-end-line="8" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -1279,20 +1232,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/events/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="365" column="41" selection-start-line="365" selection-start-column="41" selection-end-line="365" selection-end-column="41" />
+        <state relative-caret-position="446">
+          <caret line="130" lean-forward="true" selection-start-line="130" selection-end-line="130" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lobos/settings.py">
+    <entry file="file://$PROJECT_DIR$/events/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+        <state relative-caret-position="441">
+          <caret line="21" column="39" lean-forward="true" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
