@@ -2,12 +2,26 @@
 
 {% block body %}
     <div class="container">
-    <h1>Register</h1>
+        <h1>Register</h1>
+        <h4>Your username will be you first and last name plus your email</h4>
+        <h4>Your new account information will be emailed to you</h4>
+        <h3>Required:</h3>
+        <ul>
+            <li>Email</li>
+            <li>First Name</li>
+            <li>Last Name</li>
+            <li>Password</li>
+        </ul>
+        {% if errors %}
+            <div class="alert alert-danger">{{ errors }}</div>
+            <div class="alert alert-danger">Your username will be you first and last name plus your email</div>
+        {% endif %}
         <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-            <button type="submit">Register</button>
-    </form>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary btn-lg" type="submit">Register</button>
+        </form>
     </div>
+    <br>
 
 {% endblock %}

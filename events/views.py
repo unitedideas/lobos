@@ -109,11 +109,49 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('/')
+
+            email = request.POST['email']
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            username = first_name+last_name+email.lower()
+            password = request.POST['password1']
+
+            if User.objects.filter(username=username).exists():
+                user_id = User.objects.get(username=username).id
+                form = RegistrationForm()
+                args = {'form': form, 'errors': 'A user with that username already exists. Please choose a different one.'}
+                return render(request, 'events/reg_form.html', args)
+
+            else:
+                form.save()
+                subject = 'Welcome to LobosEvents.com ' + first_name.title() +' !'
+                from_email = 'MrWolf@LobosEvents.com'
+                to = email
+
+                text_content = 'Thank you for registering at LobosEvents.com ' + first_name.title() + '. \n' \
+                'Your username is ' + username + '\n' \
+                'Your password is ' + password + '\n'\
+                'You can check out our upcoming events and register for them through the Lobos events site <a href = "http://www.lobosevents.com">Lobosevents.com</a>.\n' \
+                'Welcome from the Lobos Motorcycle Club!\n' \
+                '- The Lobos Team'
+
+
+                html_content = '<p>Thank you for registering at LobosEvents.com ' + first_name.title() + '. \n</p>' \
+                '<p>Your username is ' + username + '\n</p>' \
+                '<p>Your password is ' + password + '\n</p>'\
+                '<p>You can check out our upcoming events and register for them through the Lobos events site Lobosevents.com.\n</p>' \
+                '<p>Welcome from the Lobos Motorcycle Club!\n</p>' \
+                '<p>- The Lobos Team</p>'
+
+
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+                return redirect('/login/')
+
+
     else:
         form = RegistrationForm()
-
         args = {'form': form}
         return render(request, 'events/reg_form.html', args)
 
