@@ -1,3 +1,14 @@
+from .models import RiderProfile, Profile
+from django.conf import settings
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.core.mail import send_mail, send_mass_mail, EmailMultiAlternatives
+
+
+from .models import Event
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from events.forms import (
     RegistrationForm,
@@ -6,12 +17,6 @@ from events.forms import (
 )
 import random
 import string
-from .models import RiderProfile, Profile
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
-from .models import Event
-from django.http import HttpResponse, JsonResponse
 import json
 import datetime
 
@@ -182,7 +187,11 @@ def event_register(request):
                 print('in the form loop')
                 created_username = form.first_name + form.last_name + form.email
                 form.confirmation_number = confirmation_number
+                print(form.event)
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
+                event = str(form.event)
+                print(type(event))
+
 
                 #
                 # create username first by combining first, last and email used in the form
@@ -235,6 +244,42 @@ def event_register(request):
                                                  'rider_class': rider_class}
                     form.save()
 
+                    subject = 'You are registered for ' + event + ' !'
+                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+                    from_email = 'MrWolf@LobosEvents.com'
+                    to = email
+
+
+                    subject, from_email, to = subject, from_email,to
+
+                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'or concerns, please contact us at ' \
+                                        'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+
+
+
                 elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
                     print('Already registered for this event')
                     username = created_username
@@ -255,6 +300,42 @@ def event_register(request):
                                                  'email': email,
                                                  'confirmation': confirmation,
                                                  'rider_class': rider_class}
+
+                    subject = 'You are registered for ' + event + ' !'
+                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+                    from_email = 'MrWolf@LobosEvents.com'
+                    to = email
+
+
+                    subject, from_email, to = subject, from_email,to
+
+                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'or concerns, please contact us at ' \
+                                        'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+
+
                 else:
                     print('The user exists')
                     form.user = User.objects.get(username=created_username)
@@ -274,6 +355,50 @@ def event_register(request):
                     form.save()
 
             # print(confirm)
+
+
+
+
+
+                    subject = 'You are registered for ' + form.event + ' !'
+                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+                    from_email = 'MrWolf@LobosEvents.com'
+                    to = email
+
+
+                    subject, from_email, to = subject, from_email,to
+
+                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on reset password.\nIf you have questions ' \
+                                        'or concerns, please contact us at ' \
+                                        'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + form.event +\
+                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
+                                        'your username is ' + username + '. If you were signed up for this event in a ' \
+                                        'group; you will have to reset your password to gain access to the new account by ' \
+                                        'going to theLobosEvents website and click on the <a href = "http://localhost:8000/password-reset/">reset ' \
+                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
+                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
+
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+
+
+
+            # <a href = "mailto:blah@blah.com?subject=subject line&cc=nancy@blah.com, joe@blah.com&bcc=secret@blah.com" > linktext </a>
+
+
 
             args = {'event': form.event, 'confirm': confirm}
             # email confirmation function here

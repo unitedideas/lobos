@@ -104,9 +104,9 @@ class EditProfileForm(UserChangeForm):
     #     (MALE, 'Male'),
     # )
 
-    email = forms.EmailField()
-    first_name = forms.CharField()
-    last_name = forms.CharField()
+    email = forms.EmailField(required=False)
+    first_name = forms.CharField(required=False)
+    last_name = forms.CharField(required=False)
     password = forms.PasswordInput
 
     # gender = forms.ChoiceField(choices=GENDER)
