@@ -126,7 +126,7 @@ def register(request):
             email = request.POST['email'].replace(" ", "")
             first_name = request.POST['first_name'].replace(" ", "")
             last_name = request.POST['last_name'].replace(" ", "")
-            username = first_name+last_name+email.lower().replace(" ", "")
+            username = first_name.lower()+last_name.lower()+email.lower().replace(" ", "")
             password = request.POST['password1']
 
             if User.objects.filter(username=username).exists():
