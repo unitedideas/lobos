@@ -110,7 +110,7 @@ class RiderProfile(models.Model):
     # These items will not be in the form and must not be visible
     # confirmation will be generated, age on event day will be calculated
     # rider number and start time will be assigned
-    registration_date_time = models.DateTimeField(null=True, blank=True)
+    registration_date_time = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     age_on_event_day = models.IntegerField(null=True, blank=True)
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     rider_number = models.IntegerField(null=True, blank=True)

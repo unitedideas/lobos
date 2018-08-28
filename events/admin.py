@@ -10,12 +10,14 @@ admin.site.site_header = 'Lobos Events/ User Database'
 #  attempt to add infor rows above the riderprofile  <, not working
 class RiderProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'email', 'event')
+    readonly_fields = ('registration_date_time',)
+
 
     def user_info(self, obj):
         return obj.description
 
 
-admin.site.register(RiderProfile)
+admin.site.register(RiderProfile, RiderProfileAdmin)
 admin.site.register(Event)
 admin.site.register(Profile)
 
@@ -37,6 +39,10 @@ class CustomUserAdmin(UserAdmin):
             return list()
         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
 
+class RatingAdmin(admin.ModelAdmin):
+    readonly_fields = ('date',)
+
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+
