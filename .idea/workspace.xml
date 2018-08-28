@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce295c0c-db42-4afc-b697-969cd20fcabd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +70,7 @@
           <entry key="gitignore" value="31" />
           <entry key="html" value="18948" />
           <entry key="js" value="68" />
-          <entry key="py" value="27739" />
+          <entry key="py" value="27835" />
           <entry key="txt" value="8101" />
         </counts>
       </usages-collector>
@@ -81,7 +81,7 @@
           <entry key="Hoi4 file" value="118" />
           <entry key="JavaScript" value="68" />
           <entry key="PLAIN_TEXT" value="8014" />
-          <entry key="Python" value="27739" />
+          <entry key="Python" value="27835" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -141,22 +141,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
-              <caret line="125" column="49" lean-forward="true" selection-start-line="125" selection-start-column="49" selection-end-line="125" selection-end-column="49" />
+            <state relative-caret-position="-1061">
+              <caret line="76" column="32" lean-forward="true" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
-                <marker date="1535424909000" expanded="true" signature="2728:2737" ph="..." />
-                <marker date="1535424909000" expanded="true" signature="4231:4383" ph="..." />
+                <marker date="1535428149000" expanded="true" signature="2728:2737" ph="..." />
+                <marker date="1535428149000" expanded="true" signature="4231:4383" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/events/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="694">
-              <caret line="293" lean-forward="true" selection-start-line="293" selection-end-line="293" />
+            <state relative-caret-position="278">
+              <caret line="47" column="23" lean-forward="true" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -173,11 +173,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="651">
-              <caret line="111" column="75" selection-start-line="111" selection-start-column="75" selection-end-line="111" selection-end-column="75" />
+              <caret line="111" column="20" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="20" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -208,7 +208,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>request.</find>
       <find>.save</find>
       <find>commit=False</find>
       <find>war</find>
@@ -231,13 +230,14 @@
       <find>validat</find>
       <find>validtion</find>
       <find>unique</find>
-      <find>clean</find>
       <find>the user e</find>
       <find>print</find>
       <find>event</find>
       <find>form</find>
       <find>RiderProfileAdmin</find>
       <find>add form</find>
+      <find>clean</find>
+      <find>class</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -290,11 +290,11 @@
         <option value="$PROJECT_DIR$/events/templates/events/login.html" />
         <option value="$PROJECT_DIR$/events/templates/base.html" />
         <option value="$PROJECT_DIR$/events/templates/events/logout.html" />
-        <option value="$PROJECT_DIR$/events/forms.py" />
-        <option value="$PROJECT_DIR$/events/views.py" />
         <option value="$PROJECT_DIR$/events/templates/events/event_register.html" />
         <option value="$PROJECT_DIR$/events/admin.py" />
         <option value="$PROJECT_DIR$/events/models.py" />
+        <option value="$PROJECT_DIR$/events/forms.py" />
+        <option value="$PROJECT_DIR$/events/views.py" />
       </list>
     </option>
   </component>
@@ -482,13 +482,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00109" summary="Working not much CSS though">
-      <created>1534893448678</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1534893448678</updated>
     </task>
     <task id="LOCAL-00110" summary="CSS ed the form and the payment button/ cart">
       <created>1534978496879</created>
@@ -826,7 +819,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535427023918</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="Added a timestamp to the registration date">
+      <created>1535427882240</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1535427882240</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1138,18 +1138,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="125" column="49" lean-forward="true" selection-start-line="125" selection-start-column="49" selection-end-line="125" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <marker date="1535424909000" expanded="true" signature="2728:2737" ph="..." />
-            <marker date="1535424909000" expanded="true" signature="4231:4383" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/events/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -1167,12 +1155,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/views.py">
+    <entry file="file://$PROJECT_DIR$/events/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="694">
-          <caret line="293" lean-forward="true" selection-start-line="293" selection-end-line="293" />
+        <state relative-caret-position="-1061">
+          <caret line="76" column="32" lean-forward="true" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#24#0" expanded="true" />
+            <marker date="1535428149000" expanded="true" signature="2728:2737" ph="..." />
+            <marker date="1535428149000" expanded="true" signature="4231:4383" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1180,9 +1170,19 @@
     <entry file="file://$PROJECT_DIR$/events/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="651">
-          <caret line="111" column="75" selection-start-line="111" selection-start-column="75" selection-end-line="111" selection-end-column="75" />
+          <caret line="111" column="20" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="20" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="47" column="23" lean-forward="true" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

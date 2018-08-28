@@ -18,6 +18,7 @@ import random
 import string
 import json
 import datetime
+from datetime import date
 
 
 # working on email
@@ -253,6 +254,11 @@ def event_register(request):
                 count += 1
                 print('in the form loop')
                 created_username = form.first_name + form.last_name + form.email
+                print('form.birth_date')
+                print(form.birth_date)
+                print(type(form.birth_date))
+                age_on_event_day = form.birth_date - Event.event_date
+                print(age_on_event_day)
                 form.confirmation_number = confirmation_number
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
                 print(form.event)
@@ -292,7 +298,6 @@ def event_register(request):
                     user.update(omra_number=form.omra_number)
                     user.update(ama_number=form.ama_number)
 
-                    # RiderProfile.objects.all().last().delete()
                     message = ''
                     username = created_username
                     first_name = form.first_name
