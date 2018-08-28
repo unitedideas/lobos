@@ -3,9 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from events.util import load_choices
-from django.utils.text import slugify
-from django.core.exceptions import ValidationError
-
+from datetime import datetime
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
@@ -111,7 +109,7 @@ class RiderProfile(models.Model):
     # confirmation will be generated, age on event day will be calculated
     # rider number and start time will be assigned
     registration_date_time = models.DateTimeField(null=True, blank=True, auto_now_add=True)
-    age_on_event_day = models.IntegerField(null=True, blank=True)
+    age_on_event_day = models.IntegerField(null=True, blank=True,)
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     rider_number = models.IntegerField(null=True, blank=True)
     start_time = models.TimeField(max_length=30, null=True, blank=True)
