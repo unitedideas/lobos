@@ -3,6 +3,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from events.util import load_choices
+from django.utils.text import slugify
+from django.core.exceptions import ValidationError
+
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
@@ -50,11 +53,21 @@ class Profile(models.Model):
     zip_code = models.CharField(max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
     emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
-    omra_number = models.CharField(max_length=300, null=True, blank=True, unique=True, error_messages={'unique':"This email has already been registered."})
+    omra_number = models.CharField(max_length=300, null=True, blank=True, unique=True, error_messages={'unique':"This OMRA number has already been registered."})
     ama_number = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return str(self.user.first_name) + " " + str(self.user.last_name) + " - " + str(self.user)
+
+    def clean_omra_number(self):
+        print('in the clean method')
+        slug = self.cleaned_data['omra_number']
+
+        if Profile.objects.filter(slug=slug).exists():
+            raise ValidationError('This OMRA number is already registered')
+
+        return slug
+
 
 
 
@@ -119,6 +132,16 @@ class RiderProfile(models.Model):
 
     def __str__(self):
         return str(self.event) + ' ' + str(self.user)
+
+    def clean_omra_number(self):
+        print('in the clean method')
+        slug = self.cleaned_data['omra_number']
+
+        if Profile.objects.filter(slug=slug).exists():
+            raise ValidationError('This OMRA number is already registered')
+
+        return slug
+
 
 
 #

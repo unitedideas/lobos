@@ -7,6 +7,9 @@ from django.forms import modelformset_factory
 from django.forms import ModelForm, NumberInput, DateInput
 from events.util import load_choices
 from django.forms import BaseModelFormSet
+from django.utils.text import slugify
+from django.core.exceptions import ValidationError
+
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
@@ -72,6 +75,17 @@ class RegistrationForm(UserCreationForm):
             'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
         }
 
+    def clean_omra_number(self):
+        print('in the clean method')
+        slug = self.cleaned_data['omra_number']
+
+        if Profile.objects.filter(slug=slug).exists():
+            raise ValidationError('This OMRA number is already registered')
+
+        return slug
+
+
+
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name'].replace(" ", "")
@@ -98,6 +112,7 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
 
 
 class EditProfileForm(UserChangeForm):
@@ -157,7 +172,8 @@ class BaseRiderProfileFormSet(BaseModelFormSet):
 
 # https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
 RiderProfileFormSet = modelformset_factory(RiderProfile,
-                                           exclude=(
+                                           exclude=
+                                           (
                                                'user',
                                                'age_on_event_day',
                                                'confirmation_number',
@@ -166,7 +182,12 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'event',
                                                'id',
                                                'registration_date_time'
-                                           ), formset=BaseRiderProfileFormSet, widgets={
-        'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
-        'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
-    })
+                                           ),
+
+                                           formset=BaseRiderProfileFormSet,
+
+                                           widgets=
+                                           {
+                                               'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
+                                               'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'})
+                                           })
