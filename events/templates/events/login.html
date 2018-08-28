@@ -3,14 +3,14 @@
 {% block body %}
     <div class="container">
         <h1>Welcome!</h1>
-        <p>
-        You can log in here
-        </p>
-        <h2>Login</h2>
+        <h2>Login or <a href="/register/">Register Here</a></h2>
+        <h4>Username is your first name, last name and email:</h4>
+        <h4>Example: johnsmithjsmith@mail.com </h4>
         <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary btn-lg " type="submit">Login</button>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <h4>Forgot your password? <a href="/password-reset/">Reset it here.</a></h4>
+            <button class="btn btn-primary btn-lg " type="submit">Login</button>
         </form>
     </div>
     <br>
