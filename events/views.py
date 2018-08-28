@@ -257,8 +257,14 @@ def event_register(request):
                 print('form.birth_date')
                 print(form.birth_date)
                 print(type(form.birth_date))
-                age_on_event_day = form.birth_date - Event.event_date
-                print(age_on_event_day)
+
+
+
+                # need to calculate the age on the event date
+                # age_on_event_day = form.birth_date - Event.event_date
+                # print(age_on_event_day)
+
+
                 form.confirmation_number = confirmation_number
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
                 print(form.event)
