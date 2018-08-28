@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ce295c0c-db42-4afc-b697-969cd20fcabd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +70,7 @@
           <entry key="html" value="18948" />
           <entry key="js" value="68" />
           <entry key="py" value="27835" />
-          <entry key="txt" value="8101" />
+          <entry key="txt" value="8157" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -80,7 +79,7 @@
           <entry key="HTML" value="18948" />
           <entry key="Hoi4 file" value="118" />
           <entry key="JavaScript" value="68" />
-          <entry key="PLAIN_TEXT" value="8014" />
+          <entry key="PLAIN_TEXT" value="8070" />
           <entry key="Python" value="27835" />
         </counts>
       </usages-collector>
@@ -155,8 +154,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/events/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="47" column="23" lean-forward="true" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+            <state relative-caret-position="488">
+              <caret line="57" column="57" lean-forward="true" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -482,13 +481,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00110" summary="CSS ed the form and the payment button/ cart">
-      <created>1534978496879</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1534978496880</updated>
     </task>
     <task id="LOCAL-00111" summary="CSS ed the form and the payment button/ cart">
       <created>1534981774966</created>
@@ -826,7 +818,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535427882240</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="calculating the age of a rider on the date of the event">
+      <created>1535429545472</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1535429545472</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TodoView">
@@ -909,7 +908,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Migrations - textfield added" />
     <MESSAGE value="Trying to post django formset via axios to perform form validation to prevent refreshing the page  when there is an error and resetting the user inputs. The user in puts could be multiple forms." />
     <MESSAGE value="after a painstaking 2.5 days the I am back to the axios call for validating the form before submission, and it works!!!&#10;I had to create a JSON object key value pairs, send that to the view and unpack with json.load(request). I get to answer my own question on stackoverflow" />
     <MESSAGE value="Form is rendering a success message or errors" />
@@ -934,7 +932,8 @@
     <MESSAGE value="Added placeholders to phone and birthdate&#10;Changed the menu&#10;Added link from login to register" />
     <MESSAGE value="Trying to ensure a unique OMRA number is used" />
     <MESSAGE value="Added a timestamp to the registration date" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a timestamp to the registration date" />
+    <MESSAGE value="calculating the age of a rider on the date of the event" />
+    <option name="LAST_COMMIT_MESSAGE" value="calculating the age of a rider on the date of the event" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/events/apps.py">
@@ -1179,8 +1178,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/events/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="47" column="23" lean-forward="true" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+        <state relative-caret-position="488">
+          <caret line="57" column="57" lean-forward="true" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
