@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'simple_mail',
-    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -56,8 +54,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'lobos.middleware.LoginRequiredMiddleware'
 ]
-
-SIMPLE_MAIL_USE_CKEDITOR = True
 
 ROOT_URLCONF = 'lobos.urls'
 
