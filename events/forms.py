@@ -10,7 +10,6 @@ from django.forms import BaseModelFormSet
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 
-
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
 STATES = load_choices(STATES_PATH, True)
@@ -44,7 +43,7 @@ class RegistrationForm(UserCreationForm):
     zip_code = forms.CharField(max_length=5, required=False)
     emergency_contact_name = forms.CharField(max_length=300, required=False)
     emergency_contact_phone = forms.CharField(max_length=10, required=False)
-    omra_number = forms.CharField(max_length=300, required=False)
+    omra_number = forms.CharField(max_length=300, required=False,)
     ama_number = forms.CharField(max_length=300, required=False)
 
     class Meta:
@@ -74,17 +73,6 @@ class RegistrationForm(UserCreationForm):
             'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
             'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
         }
-
-    def clean_omra_number(self):
-        print('in the clean method')
-        slug = self.cleaned_data['omra_number']
-
-        if Profile.objects.filter(slug=slug).exists():
-            raise ValidationError('This OMRA number is already registered')
-
-        return slug
-
-
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
@@ -183,9 +171,7 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'id',
                                                'registration_date_time'
                                            ),
-
                                            formset=BaseRiderProfileFormSet,
-
                                            widgets=
                                            {
                                                'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),

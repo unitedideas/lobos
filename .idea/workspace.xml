@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ce295c0c-db42-4afc-b697-969cd20fcabd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/events/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/events/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +71,7 @@
           <entry key="gitignore" value="31" />
           <entry key="html" value="18890" />
           <entry key="js" value="68" />
-          <entry key="py" value="27367" />
+          <entry key="py" value="27531" />
           <entry key="txt" value="8008" />
         </counts>
       </usages-collector>
@@ -84,7 +82,7 @@
           <entry key="Hoi4 file" value="118" />
           <entry key="JavaScript" value="68" />
           <entry key="PLAIN_TEXT" value="7921" />
-          <entry key="Python" value="27367" />
+          <entry key="Python" value="27531" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -144,12 +142,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="41" column="34" lean-forward="true" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
+            <state relative-caret-position="228">
+              <caret line="86" column="59" lean-forward="true" selection-start-line="86" selection-start-column="59" selection-end-line="86" selection-end-column="59" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
-                <marker date="1535421055000" expanded="true" signature="2638:2647" ph="..." />
-                <marker date="1535421055000" expanded="true" signature="4140:4292" ph="..." />
+                <marker date="1535424786000" expanded="true" signature="2727:2736" ph="..." />
+                <marker date="1535424786000" expanded="true" signature="4464:4616" ph="..." />
               </folding>
             </state>
           </provider>
@@ -158,8 +156,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="228" column="21" selection-start-line="228" selection-start-column="21" selection-end-line="228" selection-end-column="21" />
+            <state relative-caret-position="399">
+              <caret line="146" column="123" selection-start-line="146" selection-start-column="123" selection-end-line="146" selection-end-column="123" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -170,8 +168,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/events/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="676">
-              <caret line="105" column="72" lean-forward="true" selection-start-line="105" selection-start-column="72" selection-end-line="105" selection-end-column="72" />
+            <state relative-caret-position="-128">
+              <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -190,10 +188,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>showpaypal</find>
-      <find>{% st</find>
-      <find>event</find>
-      <find>form.event</find>
       <find>fail_silently=False</find>
       <find>require</find>
       <find>dele</find>
@@ -217,9 +211,13 @@
       <find>http://localhost:8000/password-reset/</find>
       <find>user</find>
       <find>ModelForm</find>
-      <find>.lower</find>
       <find>time</find>
       <find>att</find>
+      <find>.lower</find>
+      <find>val</find>
+      <find>validat</find>
+      <find>validtion</find>
+      <find>unique</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -274,8 +272,8 @@
         <option value="$PROJECT_DIR$/events/templates/events/login.html" />
         <option value="$PROJECT_DIR$/events/templates/base.html" />
         <option value="$PROJECT_DIR$/events/templates/events/logout.html" />
-        <option value="$PROJECT_DIR$/events/forms.py" />
         <option value="$PROJECT_DIR$/events/views.py" />
+        <option value="$PROJECT_DIR$/events/forms.py" />
         <option value="$PROJECT_DIR$/events/models.py" />
       </list>
     </option>
@@ -464,20 +462,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00104" summary="Form is rendering a success message or errors">
-      <created>1534871871803</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1534871871803</updated>
-    </task>
-    <task id="LOCAL-00105" summary="creating the checkout flow">
-      <created>1534877661448</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1534877661448</updated>
     </task>
     <task id="LOCAL-00106" summary="checkout flow trying to get the paypal return to fire a form submission">
       <created>1534891309595</created>
@@ -808,7 +792,21 @@
       <option name="project" value="LOCAL" />
       <updated>1535420920338</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="Added placeholders to phone and birthdate&#10;Changed the menu&#10;Added link from login to register">
+      <created>1535422581312</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1535422581312</updated>
+    </task>
+    <task id="LOCAL-00154" summary="Added placeholders to phone and birthdate&#10;Changed the menu&#10;Added link from login to register">
+      <created>1535424750746</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1535424750746</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1099,16 +1097,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="228" column="21" selection-start-line="228" selection-start-column="21" selection-end-line="228" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lobos/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="409">
@@ -1130,18 +1118,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="41" column="34" lean-forward="true" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <marker date="1535421055000" expanded="true" signature="2638:2647" ph="..." />
-            <marker date="1535421055000" expanded="true" signature="4140:4292" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/events/templates/events/reg_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -1156,10 +1132,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/events/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="146" column="123" selection-start-line="146" selection-start-column="123" selection-end-line="146" selection-end-column="123" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="86" column="59" lean-forward="true" selection-start-line="86" selection-start-column="59" selection-end-line="86" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+            <marker date="1535424786000" expanded="true" signature="2727:2736" ph="..." />
+            <marker date="1535424786000" expanded="true" signature="4464:4616" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/events/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
-          <caret line="105" column="72" lean-forward="true" selection-start-line="105" selection-start-column="72" selection-end-line="105" selection-end-column="72" />
+        <state relative-caret-position="-128">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
