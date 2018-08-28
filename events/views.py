@@ -254,8 +254,8 @@ def event_register(request):
                 print('in the form loop')
                 created_username = form.first_name + form.last_name + form.email
                 form.confirmation_number = confirmation_number
-                print(form.event)
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
+                print(form.event)
                 event = str(form.event)
                 print(type(event))
 
@@ -265,6 +265,7 @@ def event_register(request):
 
                 if not User.objects.filter(username=created_username).exists():
                     print('The user does not exist')
+                    print('Creating a new profile')
                     user = User.objects.create(username=created_username,
                                                email=form.email,
                                                first_name=form.first_name,
@@ -401,7 +402,8 @@ def event_register(request):
 
 
                 else:
-                    print('The user exists')
+                    print('The user already has a profile')
+                    print('Registering this user for the event')
                     form.user = User.objects.get(username=created_username)
                     username = created_username
                     first_name = form.first_name
