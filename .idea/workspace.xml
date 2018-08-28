@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="added filter to events to start the email build &#10;and nav bar colors">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="added filter to events to start the email build &#10;and nav bar colors" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,13 +146,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00120" summary="Modal working just adjusting the css look/ feel for transitions">
-      <created>1535059223465</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1535059223465</updated>
     </task>
     <task id="LOCAL-00121" summary="PayPal button in modal is removed so someone doesn't pay twice">
       <created>1535064252595</created>
@@ -492,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535478476651</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added filter to events to start the email build &#10;and nav bar colors">
+      <created>1535479799417</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1535479799417</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
