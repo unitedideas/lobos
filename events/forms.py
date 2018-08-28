@@ -4,9 +4,9 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import RiderProfile, Profile
 import os
 from django.forms import modelformset_factory
+from django.forms import ModelForm, NumberInput, DateInput
 from events.util import load_choices
 from django.forms import BaseModelFormSet
-from django.core.exceptions import ValidationError
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
@@ -31,8 +31,8 @@ class RegistrationForm(UserCreationForm):
     first_name = forms.CharField(widget=forms.TextInput())
     last_name = forms.CharField(widget=forms.TextInput())
     gender = forms.ChoiceField(choices=GENDER, initial='Male')
-    birth_date = forms.DateField(required=False)
-    phone_number = forms.CharField(max_length=10, required=False)
+    birth_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'placeholder': '222333444'}))
+    phone_number = forms.CharField(max_length=10, required=False, widget=forms.DateInput(attrs={'placeholder': '12/14/1980'}))
     country = forms.CharField(required=False)
     address = forms.CharField(required=False)
     address_line_two = forms.CharField(required=False)
@@ -67,6 +67,10 @@ class RegistrationForm(UserCreationForm):
             'password1',
             'password2',
         )
+        widgets = {
+            'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
+            'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
+        }
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
@@ -97,7 +101,6 @@ class RegistrationForm(UserCreationForm):
 
 
 class EditProfileForm(UserChangeForm):
-
     class Meta:
         model = User
         fields = (
@@ -163,4 +166,7 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'event',
                                                'id',
                                                'registration_date_time'
-                                           ), formset=BaseRiderProfileFormSet)
+                                           ), formset=BaseRiderProfileFormSet, widgets={
+        'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
+        'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
+    })
