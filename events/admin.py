@@ -9,9 +9,9 @@ admin.site.site_header = 'Lobos Events/ User Database'
 
 #  attempt to add infor rows above the riderprofile  <, not working
 class RiderProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'email', 'event')
+    list_display = ('user', 'email', 'event',)
     readonly_fields = ('registration_date_time',)
-
+    search_fields = ("event__event_name","event__event_date",)
 
     def user_info(self, obj):
         return obj.description

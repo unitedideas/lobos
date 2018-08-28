@@ -28,31 +28,35 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div id="navbar" class="text-dark">
-                {% if user.is_authenticated %}
-                    <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/">Upcoming Events</a></li>
 
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/profile">Profile</a></li>
-                        <li><a href="/profile/edit">Edit Profile</a></li>
-                        <li><a href="/logout">Logout</a></li>
-                        <li><a class="navbar-brand">{{ request.user }}</a></li>
-                    </ul>
+                {% with url_name=request.resolver_match.url_name %}
+                    {% if user.is_authenticated %}
+                        <ul class="nav navbar-nav nav-pills">
+                            <li><a href="/"><strong>Home</strong></a></li>
+                            <li class="nav-item {% if url_name == 'home' %}myactive{% endif %}"><a href="/">Upcoming Events</a></li>
 
-                {% else %}
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item {% if url_name == 'profile' %}myactive{% endif %}"><a href="/profile">Profile</a></li>
+                            <li class="nav-item {% if url_name == 'edit_profile' %}myactive{% endif %}"><a href="/profile/edit">Edit Profile</a></li>
+                            <li class="nav-item {% if url_name == 'logout' %}myactive{% endif %}"><a href="/logout">Logout</a></li>
+                            <li><a class="navbar-brand"><strong>{{ request.user }}</strong></a></li>
+                        </ul>
 
-                    <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/">Upcoming Events</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/password-reset">Reset Password</a></li>
-                        <li><a href="/login">login</a></li>
-                        <li><a href="/register">Register</a></li>
-                    </ul>
-                {% endif %}
+                    {% else %}
+
+                        <ul class="nav navbar-nav">
+                            <li><a href="/">Home</a></li>
+                            <li class="nav-item {% if url_name == 'home' %}myactive{% endif %}"><a href="/">Upcoming Events</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item {% if url_name == 'password_reset' %}myactive{% endif %}"><a href="/password-reset">Reset Password</a></li>
+                            <li class="nav-item {% if url_name == 'register' %}myactive{% endif %}"><a href="/register">Register</a></li>
+                            <li class="nav-item {% if url_name == 'login' %}myactive{% endif %}"><a href="/login">login</a></li>
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+
 
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
