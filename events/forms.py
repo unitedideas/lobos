@@ -7,17 +7,11 @@ from django.forms import modelformset_factory
 from django.forms import ModelForm, NumberInput, DateInput
 from events.util import load_choices
 from django.forms import BaseModelFormSet
-from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
 STATES = load_choices(STATES_PATH, True)
-
-
-# widgets = {
-#             'name': Textarea(attrs={'cols': 80, 'rows': 20}),
-#         }
 
 
 class RegistrationForm(UserCreationForm):
@@ -43,7 +37,7 @@ class RegistrationForm(UserCreationForm):
     zip_code = forms.CharField(max_length=5, required=False)
     emergency_contact_name = forms.CharField(max_length=300, required=False)
     emergency_contact_phone = forms.CharField(max_length=10, required=False)
-    omra_number = forms.CharField(max_length=300, required=False,)
+    omra_number = forms.CharField(max_length=300, required=False, )
     ama_number = forms.CharField(max_length=300, required=False)
 
     class Meta:
@@ -102,7 +96,6 @@ class RegistrationForm(UserCreationForm):
         return user
 
 
-
 class EditProfileForm(UserChangeForm):
     class Meta:
         model = User
@@ -159,6 +152,7 @@ class BaseRiderProfileFormSet(BaseModelFormSet):
 
 
 # https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
+
 RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            exclude=
                                            (

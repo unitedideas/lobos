@@ -108,6 +108,8 @@ class RiderProfile(models.Model):
     # These items will not be in the form and must not be visible
     # confirmation will be generated, age on event day will be calculated
     # rider number and start time will be assigned
+    # registration_date_time is not editable with auto_now_add = true
+
     registration_date_time = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     age_on_event_day = models.IntegerField(null=True, blank=True,)
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
@@ -119,50 +121,6 @@ class RiderProfile(models.Model):
 
     def __str__(self):
         return str(self.event) + ' ' + str(self.user)
-
-
-
-
-#
-# class SpecialTest(models.Model):
-#     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
-#     special_test_num = models.IntegerField(null=True, blank=True)
-#
-#     def __str__(self):
-#         return str(self.event) + ' - ' + ' Lap/Special Test ' + str(self.special_test_num)
-
-#
-# class UserEvent(models.Model):
-#     # These will be needed in the form
-#     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     bike_make = models.CharField(max_length=300, null=True, blank=True)
-#     bike_displacement = models.IntegerField(null=True, blank=True)
-#     omra_number = models.CharField(max_length=300, null=True, blank=True)
-#     ama_number = models.CharField(max_length=300, null=True, blank=True)
-#
-#     # These items will not be in the form and must not be visible
-#     # confirmation will be generated, age on event day will be calculated
-#     # rider number and start time will be assigned
-#     age_on_event_day = models.IntegerField(null=True, blank=True)
-#     confirmation = models.CharField(max_length=300, null=True, blank=True)
-#     rider_number = models.IntegerField(null=True, blank=True)
-#     start_time = models.TimeField(max_length=300, null=True, blank=True)
-#
-#     def __str__(self):
-#         return str(self.user) + ' - ' + str(self.event) + ' - ' + str(self.rider_number)
-
-
-#
-# class UserSpecialTest(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     specialtest = models.ForeignKey(SpecialTest, on_delete=models.CASCADE)
-#     start_time = models.TimeField(max_length=300, null=True, blank=True)
-#     stop_time = models.TimeField(max_length=300, null=True, blank=True)
-#     total_time = models.FloatField(max_length=300, null=True, blank=True)
-#
-#     def __str__(self):
-#         return str(self.user) + ' ' + str(self.specialtest)
 
 
 class Person(models.Model):
