@@ -40,15 +40,16 @@
 
             </div>
             <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">
-                {% if detail.12 == 0 %}
-                    <strong>Link to results of the race</strong>
+                {% if detail.11 == 0 %}
+                    <h2>The race is sold out!</h2>
+                {% elif detail.12 == 0 %}
+                    <h2>Link to results of the race</h2>
                 {% elif detail.12 > 0 %}
                     <h2>{{ detail.12 }}</h2>
                     <h2>Days Remaining!</h2>
                     <br>
                     <a class="btn btn-lg btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
                        methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
-
                 {% endif %}
             </div>
             <div style="float: right; margin-top: 50px; text-align: center" class="col-md-5">

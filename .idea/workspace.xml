@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/events/templates/events/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/events/templates/events/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,16 +16,16 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="24" />
-          <entry key="html" value="166" />
+          <entry key="html" value="215" />
           <entry key="py" value="477" />
-          <entry key="txt" value="152" />
+          <entry key="txt" value="362" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="166" />
+          <entry key="HTML" value="215" />
           <entry key="Hoi4 file" value="62" />
-          <entry key="PLAIN_TEXT" value="114" />
+          <entry key="PLAIN_TEXT" value="324" />
           <entry key="Python" value="477" />
         </counts>
       </usages-collector>
@@ -82,8 +80,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="987">
-              <caret line="47" column="40" lean-forward="true" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
+            <state relative-caret-position="1029">
+              <caret line="49" column="24" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="24" />
+              <folding>
+                <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -242,13 +243,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00127" summary="MVP working, I will fork this to deploy on pythonanywhere">
-      <created>1535071046738</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1535071046738</updated>
     </task>
     <task id="LOCAL-00128" summary="MVP working, I will fork this to deploy on pythonanywhere">
       <created>1535090296208</created>
@@ -586,7 +580,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535564168982</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="changed the event page show / not show a registration button based on the days remaining until the event &gt; 0">
+      <created>1535574150391</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1535574150392</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -635,7 +636,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="creating the checkout flow" />
     <MESSAGE value="checkout flow trying to get the paypal return to fire a form submission" />
     <MESSAGE value="checkout flow is roughed in.&#10;1st - click check for errors button. if no errors the paypal button will appear&#10;2nd - click paypal button. If payment if confirmed the finalized registration button will appear&#10;3rd - Registration confirmed and saved to the database!!!" />
     <MESSAGE value="Working not much CSS though" />
@@ -660,7 +660,8 @@
     <MESSAGE value="added mail module, but didn't like it and rolling back" />
     <MESSAGE value="added filter to events to start the email build &#10;and nav bar colors" />
     <MESSAGE value="cleaning up some code" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaning up some code" />
+    <MESSAGE value="changed the event page show / not show a registration button based on the days remaining until the event &gt; 0" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the event page show / not show a registration button based on the days remaining until the event &gt; 0" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/events/templates/base.html">
@@ -877,8 +878,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="987">
-          <caret line="47" column="40" lean-forward="true" selection-start-line="47" selection-start-column="40" selection-end-line="47" selection-end-column="40" />
+        <state relative-caret-position="1029">
+          <caret line="49" column="24" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="24" />
+          <folding>
+            <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
