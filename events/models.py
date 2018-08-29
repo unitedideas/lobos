@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from events.util import load_choices
 from datetime import datetime
+from django.core.mail import send_mail
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
@@ -125,9 +126,48 @@ class RiderProfile(models.Model):
 
 class Person(models.Model):
     name = models.CharField(max_length=30)
-    email = models.EmailField(blank=True)
+    email = models.EmailField(null=True, blank=True,)
     birth_date = models.DateField()
     location = models.CharField(max_length=100, blank=True)
+
+
+class Mail(models.Model):
+    pass
+
+    class Meta:
+        verbose_name = "Email User"
+        verbose_name_plural = "Email Users"
+
+
+class MailText(models.Model):
+    subject = models.CharField(max_length=800)
+    message = models.TextField()
+    attachment = models.FileField(null=True, blank=True,)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    send_it = models.BooleanField(default=False)  # check it if you want to send your email
+
+    def save(self):
+        if self.send_it:
+            # First you create your list of users
+            user_list = []
+            print('after user list')
+
+            for u in self.user:
+                print('in the first form')
+                user_list.append(u.email)
+
+            # Then you can send the message.
+            send_mail(str(self.subject),
+                      str(self.message),
+                      'from@example.com',
+                      user_list,
+                      fail_silently=False)
+
+    class Meta:
+        verbose_name = "Emails to send"
+        verbose_name_plural = "Emails to send"
+
+
 
 
 def create_profile(sender, **kwargs):
