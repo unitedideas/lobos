@@ -11,7 +11,7 @@ admin.site.site_header = 'Lobos Events/ User Database'
 class RiderProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'email', 'event',)
     readonly_fields = ('registration_date_time',)
-    search_fields = ("event__event_name","event__event_date",)
+    search_fields = ("event__event_name", "event__event_date",)
 
     def user_info(self, obj):
         return obj.description
@@ -28,16 +28,17 @@ class ProfileInline(admin.StackedInline):
     verbose_name_plural = 'Profile'
     fk_name = 'user'
 
-class CustomUserAdmin(UserAdmin):
-    inlines = (ProfileInline, )
-    list_display = ('username', 'email', 'first_name', 'last_name')
-    list_select_related = ('profile', )
 
+class CustomUserAdmin(UserAdmin):
+    inlines = (ProfileInline,)
+    list_display = ('username', 'email', 'first_name', 'last_name')
+    list_select_related = ('profile',)
 
     def get_inline_instances(self, request, obj=None):
         if not obj:
             return list()
         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
+
 
 class RatingAdmin(admin.ModelAdmin):
     readonly_fields = ('date',)
@@ -45,4 +46,3 @@ class RatingAdmin(admin.ModelAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
-
