@@ -352,6 +352,7 @@ def event_register(request):
 
                 elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
                     print('Already registered for this event')
+                    form.user = User.objects.get(username=created_username)
                     username = created_username
                     first_name = form.first_name
                     last_name = form.last_name
@@ -364,7 +365,7 @@ def event_register(request):
                     message = 'The rider, ' + first_name + ' ' + last_name + ', has previously been registered.' + \
                               ' Please contact the person you registered to verify.' \
                               ' If they have been registered twice please contact us for a refund for that entry.' \
-                              ' Phone: 333-333-4444 or email: NotShane@Lobosevents.com'
+                              ' Email us at info@lobosmc.com'
 
                     confirm[created_username] = {'message': message,
                                                  'username': username,
