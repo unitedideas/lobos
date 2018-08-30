@@ -131,50 +131,6 @@ class Person(models.Model):
     location = models.CharField(max_length=100, blank=True)
 
 
-class Mail(models.Model):
-    events = Event.objects.all()
-    users = models.ManyToManyField(Event, blank=True, null=True)
-
-    class Meta:
-        verbose_name = "Email User"
-        verbose_name_plural = "Email Users"
-
-
-class MailText(models.Model):
-    subject = models.CharField(max_length=800)
-    message = models.TextField()
-    attachment = models.FileField(null=True, blank=True,)
-    group = models.ForeignKey(Mail, blank=True, null=True, on_delete=models.CASCADE)
-    send_it = models.BooleanField(default=False)  # check it if you want to send your email
-
-    def save(self):
-        if self.send_it:
-            print(self.group_id)
-            print(self.group_id)
-            # First you create your list of users
-            group = self.group
-            user_list = []
-
-            print('after user list')
-            print(self.group)
-            for user in self.groups:
-                print(user)
-                user_list.append(user.email)
-
-            # Then you can send the message.
-            send_mail(str(self.subject),
-                      str(self.message),
-                      'from@example.com',
-                      user_list,
-                      fail_silently=False)
-
-    class Meta:
-        verbose_name = "Emails to send"
-        verbose_name_plural = "Emails to send"
-
-
-
-
 def create_profile(sender, **kwargs):
     if kwargs['created']:
         user_profile = Profile.objects.create(user=kwargs['instance'])

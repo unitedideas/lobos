@@ -2,7 +2,7 @@ from import_export.admin import ImportExportModelAdmin
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from .models import RiderProfile, Event, Profile, Mail, MailText
+from .models import RiderProfile, Event, Profile
 
 admin.site.site_header = 'Lobos Events/ User Database'
 
@@ -46,17 +46,3 @@ class RatingAdmin(admin.ModelAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
-
-
-
-class MailAdmin(admin.ModelAdmin):
-    model = Mail
-
-admin.site.register(Mail)
-
-
-class MailTextAdmin(admin.ModelAdmin):
-    model = MailText
-
-
-admin.site.register(MailText)
