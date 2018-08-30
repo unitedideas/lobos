@@ -3,35 +3,58 @@
   <component name="ChangeListManager">
     <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FUSProjectUsageTrigger">
     <session id="827027264">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gitignore" value="2" />
-          <entry key="py" value="58" />
+          <entry key="gitignore" value="24" />
+          <entry key="html" value="250" />
+          <entry key="py" value="1241" />
+          <entry key="txt" value="455" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="58" />
+          <entry key="HTML" value="250" />
+          <entry key="Hoi4 file" value="62" />
+          <entry key="PLAIN_TEXT" value="417" />
+          <entry key="Python" value="1241" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gitignore" value="2" />
+          <entry key="gitignore" value="4" />
+          <entry key="html" value="2" />
+          <entry key="py" value="32" />
+          <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="HTML" value="2" />
+          <entry key="Hoi4 file" value="1" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="Python" value="32" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.4" value="2" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
     </session>
@@ -39,47 +62,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1596">
-              <caret line="76" column="32" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-                <marker date="1535428149000" expanded="true" signature="2728:2737" ph="..." />
-                <marker date="1535428149000" expanded="true" signature="4231:4383" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/events/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="260" column="16" lean-forward="true" selection-start-line="260" selection-start-column="16" selection-end-line="260" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/templates/events/event_register.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1911">
-              <caret line="91" column="100" selection-start-line="91" selection-start-column="100" selection-end-line="91" selection-end-column="100" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="111" column="20" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="20" />
+            <state relative-caret-position="899">
+              <caret line="130" column="59" selection-start-line="130" selection-start-column="59" selection-end-line="130" selection-end-column="59" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
+                <marker date="1535648192000" expanded="true" signature="6272:6273" ph="..." />
               </folding>
             </state>
           </provider>
@@ -88,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+            <state relative-caret-position="330">
+              <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -98,37 +87,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/templates/base.html">
+        <entry file="file://$PROJECT_DIR$/lobos/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="778">
-              <caret line="54" column="84" selection-start-line="54" selection-start-column="84" selection-end-line="54" selection-end-column="84" />
+            <state relative-caret-position="905">
+              <caret line="150" column="39" lean-forward="true" selection-start-line="150" selection-start-column="39" selection-end-line="150" selection-end-column="39" />
+              <folding>
+                <element signature="e#304#313#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/events/style.css">
+        <entry file="file://$PROJECT_DIR$/lobos/secrets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+            <state relative-caret-position="88">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/events/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lobos/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="313">
+              <caret line="374" column="21" lean-forward="true" selection-start-line="374" selection-start-column="21" selection-end-line="374" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -138,7 +124,26 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>date</find>
+      <find>active</find>
+      <find>contents</find>
+      <find>field</find>
+      <find>permalink</find>
+      <find>@permalink</find>
+      <find>from django.db.models.related import RelatedObject</find>
+      <find>SubfieldBase</find>
+      <find>email</find>
+      <find>filter</find>
+      <find>profile</find>
+      <find>events</find>
+      <find>subject</find>
+      <find>already reg</find>
+      <find>send</find>
+      <find>alre</find>
+      <find>send_mail</find>
     </findStrings>
+    <replaceStrings>
+      <replace>myactive</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="MERGE" />
@@ -156,8 +161,21 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/events/mails.py" />
+        <option value="$PROJECT_DIR$/lobos/urls.py" />
+        <option value="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/newsletter/models.py" />
+        <option value="$PROJECT_DIR$/lobos/requirements.txt" />
+        <option value="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/drip/utils.py" />
+        <option value="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/timedelta/fields.py" />
+        <option value="$PROJECT_DIR$/lobos/secrets.py" />
+        <option value="$PROJECT_DIR$/lobos/settings.py" />
+        <option value="$PROJECT_DIR$/events/forms.py" />
+        <option value="$PROJECT_DIR$/events/util.py" />
         <option value="$PROJECT_DIR$/lobos/.gitignore" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/events/templates/events/home.html" />
+        <option value="$PROJECT_DIR$/events/admin.py" />
+        <option value="$PROJECT_DIR$/events/models.py" />
         <option value="$PROJECT_DIR$/events/views.py" />
       </list>
     </option>
@@ -167,6 +185,12 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="36" />
+    <option name="y" value="23" />
+    <option name="width" value="1654" />
+    <option name="height" value="1418" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -189,6 +213,35 @@
               <item name="lobos" type="462c0819:PsiDirectoryNode" />
               <item name="events" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
+              <item name="events" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
+              <item name="events" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="events" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="events" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -196,8 +249,13 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.smartKeys" />
+  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lobos" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/events" />
     </key>
@@ -219,102 +277,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ce295c0c-db42-4afc-b697-969cd20fcabd" name="Default Changelist" comment="" />
+      <changelist id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="" />
       <created>1533159806822</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00119" summary="Modal working just adjusting the css look/ feel">
-      <created>1535059093058</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1535059093058</updated>
-    </task>
-    <task id="LOCAL-00120" summary="Modal working just adjusting the css look/ feel for transitions">
-      <created>1535059223465</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1535059223465</updated>
-    </task>
-    <task id="LOCAL-00121" summary="PayPal button in modal is removed so someone doesn't pay twice">
-      <created>1535064252595</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1535064252595</updated>
-    </task>
-    <task id="LOCAL-00122" summary="added spinner while waiting for paypal to process">
-      <created>1535065278028</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1535065278028</updated>
-    </task>
-    <task id="LOCAL-00123" summary="Added email structure to settings">
-      <created>1535065605369</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1535065605369</updated>
-    </task>
-    <task id="LOCAL-00124" summary="Created an automatic email that emails each user that is registered.&#10;Probably should create a template and a function so I don't have is printed 3 times&#10;or put it in a for loop before the confirmation page is rendered">
-      <created>1535070117845</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1535070117845</updated>
-    </task>
-    <task id="LOCAL-00125" summary="MVP working, I will fork this to deploy on pythonanywhere">
-      <created>1535070638988</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1535070638988</updated>
-    </task>
-    <task id="LOCAL-00126" summary="MVP working, I will fork this to deploy on pythonanywhere">
-      <created>1535070711890</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1535070711890</updated>
-    </task>
-    <task id="LOCAL-00127" summary="MVP working, I will fork this to deploy on pythonanywhere">
-      <created>1535071046738</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1535071046738</updated>
-    </task>
-    <task id="LOCAL-00128" summary="MVP working, I will fork this to deploy on pythonanywhere">
-      <created>1535090296208</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1535090296209</updated>
-    </task>
-    <task id="LOCAL-00129" summary="MVP working, I will fork this to deploy on pythonanywhere">
-      <created>1535094314237</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1535094314237</updated>
-    </task>
-    <task id="LOCAL-00130" summary="MVP working, I will fork this to deploy on pythonanywhere">
-      <created>1535100834341</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1535100834341</updated>
-    </task>
-    <task id="LOCAL-00131" summary="MVP working, I will fork this to deploy on pythonanywhere">
-      <created>1535101301390</created>
-      <option name="number" value="00131" />
-      <option name="presentableId" value="LOCAL-00131" />
-      <option name="project" value="LOCAL" />
-      <updated>1535101301390</updated>
     </task>
     <task id="LOCAL-00132" summary="MVP working, I will fork this to deploy on pythonanywhere">
       <created>1535101334401</created>
@@ -568,14 +535,105 @@
       <option name="project" value="LOCAL" />
       <updated>1535477284305</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added filter to events to start the email build &#10;and nav bar colors">
+      <created>1535478476651</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1535478476651</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added filter to events to start the email build &#10;and nav bar colors">
+      <created>1535479799417</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1535479799417</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added filter to events to start the email build &#10;and nav bar colors">
+      <created>1535495494196</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1535495494196</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added mail module, but didn't like it and rolling back">
+      <created>1535497248182</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1535497248182</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added filter to events to start the email build &#10;and nav bar colors">
+      <created>1535499874687</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1535499874687</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added filter to events to start the email build &#10;and nav bar colors">
+      <created>1535506883562</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1535506883562</updated>
+    </task>
+    <task id="LOCAL-00013" summary="cleaning up some code">
+      <created>1535563412129</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1535563412129</updated>
+    </task>
+    <task id="LOCAL-00014" summary="cleaning up some code">
+      <created>1535564168982</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1535564168982</updated>
+    </task>
+    <task id="LOCAL-00015" summary="changed the event page show / not show a registration button based on the days remaining until the event &gt; 0">
+      <created>1535574150391</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1535574150392</updated>
+    </task>
+    <task id="LOCAL-00016" summary="changed the event page show / not show a registration button based on the race entrants reaching max capacity &gt; 0">
+      <created>1535574433212</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1535574433212</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Attempting to add mail to the admin">
+      <created>1535581286462</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1535581286462</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Attempting to add mail to the admin">
+      <created>1535610256073</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1535610256073</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Attempting to add mail to the admin">
+      <created>1535648429203</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1535648429203</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="36" y="22" width="2284" height="1418" extended-state="0" />
+    <frame x="36" y="23" width="1654" height="1418" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1529884" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1662531" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="0" />
@@ -587,9 +645,9 @@
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.3298969" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3277053" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49955398" weight="0.83269376" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32847276" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.500446" side_tool="true" weight="0.83269376" />
       <window_info anchor="bottom" id="Terminal" order="12" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -599,13 +657,24 @@
       <window_info anchor="right" id="Database" order="4" weight="0.32957292" />
     </layout>
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="after a painstaking 2.5 days the I am back to the axios call for validating the form before submission, and it works!!!&#10;I had to create a JSON object key value pairs, send that to the view and unpack with json.load(request). I get to answer my own question on stackoverflow" />
-    <MESSAGE value="Form is rendering a success message or errors" />
-    <MESSAGE value="creating the checkout flow" />
-    <MESSAGE value="checkout flow trying to get the paypal return to fire a form submission" />
-    <MESSAGE value="checkout flow is roughed in.&#10;1st - click check for errors button. if no errors the paypal button will appear&#10;2nd - click paypal button. If payment if confirmed the finalized registration button will appear&#10;3rd - Registration confirmed and saved to the database!!!" />
     <MESSAGE value="Working not much CSS though" />
     <MESSAGE value="CSS ed the form and the payment button/ cart" />
     <MESSAGE value="Working on payment modal" />
@@ -625,10 +694,22 @@
     <MESSAGE value="Trying to ensure a unique OMRA number is used" />
     <MESSAGE value="Added a timestamp to the registration date" />
     <MESSAGE value="calculating the age of a rider on the date of the event" />
+    <MESSAGE value="added mail module, but didn't like it and rolling back" />
     <MESSAGE value="added filter to events to start the email build &#10;and nav bar colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="added filter to events to start the email build &#10;and nav bar colors" />
+    <MESSAGE value="cleaning up some code" />
+    <MESSAGE value="changed the event page show / not show a registration button based on the days remaining until the event &gt; 0" />
+    <MESSAGE value="changed the event page show / not show a registration button based on the race entrants reaching max capacity &gt; 0" />
+    <MESSAGE value="Attempting to add mail to the admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="Attempting to add mail to the admin" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/events/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="778">
+          <caret line="54" column="84" selection-start-line="54" selection-start-column="84" selection-end-line="54" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static/events/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -636,24 +717,155 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lobos/.gitignore">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/simple_mail/forms.py" />
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/simple_mail/mailer.py" />
+    <entry file="file://$PROJECT_DIR$/events/mails.py" />
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/simple_mail/admin.py" />
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/newsletter/models.py" />
+    <entry file="file://$PROJECT_DIR$/lobos/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state>
+          <caret column="27" selection-start-column="27" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/drip/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1186">
+          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/timedelta/fields.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1092">
+          <caret line="52" column="37" lean-forward="true" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/tests.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/urls.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#26#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+        <state relative-caret-position="231">
+          <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/event_register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1214">
+          <caret line="91" column="100" selection-start-line="91" selection-start-column="100" selection-end-line="91" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="34" column="49" lean-forward="true" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1659">
+          <caret line="79" column="26" selection-start-line="79" selection-start-column="19" selection-end-line="79" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/gis/admin/options.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/options.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="113" column="4" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="899">
+          <caret line="130" column="59" selection-start-line="130" selection-start-column="59" selection-end-line="130" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <marker date="1535648192000" expanded="true" signature="6272:6273" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/secrets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="905">
+          <caret line="150" column="39" lean-forward="true" selection-start-line="150" selection-start-column="39" selection-end-line="150" selection-end-column="39" />
+          <folding>
+            <element signature="e#304#313#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/events/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="260" column="16" lean-forward="true" selection-start-line="260" selection-start-column="16" selection-end-line="260" selection-end-column="16" />
+        <state relative-caret-position="313">
+          <caret line="374" column="21" lean-forward="true" selection-start-line="374" selection-start-column="21" selection-end-line="374" selection-end-column="21" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

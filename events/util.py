@@ -6,6 +6,7 @@ from datetime import (
     datetime
 )
 
+
 def load_choices(path, reversed=False):
     """ Load choices from a CSV file.
     The choices are expected to be a list of CSV pairs `v,k` where `k` is the
@@ -28,6 +29,7 @@ def load_choices(path, reversed=False):
             else:
                 choices.append((symbol, value))
     return choices
+
 
 def get_current_year():
     return datetime.now().year

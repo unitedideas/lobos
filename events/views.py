@@ -258,19 +258,13 @@ def event_register(request):
                 print(form.birth_date)
                 print(type(form.birth_date))
 
-
-
                 # need to calculate the age on the event date
                 # age_on_event_day = form.birth_date - Event.event_date
                 # print(age_on_event_day)
 
-
                 form.confirmation_number = confirmation_number
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
-                print(form.event)
                 event = str(form.event)
-                print(type(event))
-
 
                 if User.objects.filter(username=created_username).exists():
                     user_id = User.objects.get(username=created_username).id
@@ -358,26 +352,32 @@ def event_register(request):
 
                 elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
                     print('Already registered for this event')
+                    form.user = User.objects.get(username=created_username)
                     username = created_username
                     first_name = form.first_name
                     last_name = form.last_name
                     email = form.email
                     rider_class = form.rider_class
-                    confirmation = RiderProfile.objects.get(event=form.event, user=user_id).confirmation_number
+
+                    # if we want to send the old confirmation number, uncomment below code
+                    # confirmation = RiderProfile.objects.get(event=form.event, user=user_id).confirmation_number
+
                     message = 'The rider, ' + first_name + ' ' + last_name + ', has previously been registered.' + \
                               ' Please contact the person you registered to verify.' \
                               ' If they have been registered twice please contact us for a refund for that entry.' \
-                              ' Phone: 333-333-4444 or email: NotShane@Lobosevents.com'
+                              ' Email us at info@lobosmc.com'
 
                     confirm[created_username] = {'message': message,
                                                  'username': username,
                                                  'first_name': first_name,
                                                  'last_name': last_name,
                                                  'email': email,
-                                                 'confirmation': confirmation,
+                                                 'confirmation': confirmation_number,
                                                  'rider_class': rider_class}
+                    form.save()
 
                     subject = 'You are registered for ' + event + ' !'
+
                     contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
                                         'your username is ' + username + '. If you were signed up for this event in a ' \
@@ -431,10 +431,6 @@ def event_register(request):
 
                     form.save()
 
-            # print(confirm)
-
-
-
                     subject = 'You are registered for ' + event + ' !'
                     contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
                                       '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
@@ -477,8 +473,6 @@ def event_register(request):
 
             args = {'event': form.event, 'confirm': confirm}
             # email confirmation function here
-            # return redirect('/event-confirmation')
-            # return render(request, 'events/event_confirmation.html')
             return render(request, 'events/event_confirmation.html', args)
         else:
             print('formset not valid')
