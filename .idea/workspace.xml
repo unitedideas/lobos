@@ -22,16 +22,16 @@
         <counts>
           <entry key="gitignore" value="24" />
           <entry key="html" value="250" />
-          <entry key="py" value="740" />
-          <entry key="txt" value="406" />
+          <entry key="py" value="1207" />
+          <entry key="txt" value="455" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="250" />
           <entry key="Hoi4 file" value="62" />
-          <entry key="PLAIN_TEXT" value="368" />
-          <entry key="Python" value="740" />
+          <entry key="PLAIN_TEXT" value="417" />
+          <entry key="Python" value="1207" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -63,24 +63,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="32" lean-forward="true" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+            <state relative-caret-position="151">
+              <caret line="126" column="27" lean-forward="true" selection-start-line="126" selection-start-column="27" selection-end-line="126" selection-end-column="27" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <marker date="1535578296000" expanded="true" signature="7380:7385" ph="..." />
+                <marker date="1535589228000" expanded="true" signature="7590:7593" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/events/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="59" column="38" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
+            <state relative-caret-position="1235">
+              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -108,6 +108,8 @@
       <find>email</find>
       <find>filter</find>
       <find>profile</find>
+      <find>events</find>
+      <find>subject</find>
     </findStrings>
     <replaceStrings>
       <replace>myactive</replace>
@@ -155,8 +157,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="35" />
-    <option name="y" value="22" />
+    <option name="x" value="36" />
+    <option name="y" value="23" />
     <option name="width" value="1654" />
     <option name="height" value="1418" />
   </component>
@@ -190,6 +192,13 @@
             <path>
               <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
               <item name="lobos" type="462c0819:PsiDirectoryNode" />
+              <item name="events" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="events" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
               <item name="lobos" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -212,7 +221,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -243,13 +252,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00129" summary="MVP working, I will fork this to deploy on pythonanywhere">
-      <created>1535094314237</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1535094314237</updated>
     </task>
     <task id="LOCAL-00130" summary="MVP working, I will fork this to deploy on pythonanywhere">
       <created>1535100834341</created>
@@ -587,14 +589,21 @@
       <option name="project" value="LOCAL" />
       <updated>1535574433212</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Attempting to add mail to the admin">
+      <created>1535581286462</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1535581286462</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="35" y="22" width="1654" height="1418" extended-state="0" />
+    <frame x="36" y="23" width="1654" height="1418" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22518611" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1662531" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="0" />
@@ -636,7 +645,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="checkout flow is roughed in.&#10;1st - click check for errors button. if no errors the paypal button will appear&#10;2nd - click paypal button. If payment if confirmed the finalized registration button will appear&#10;3rd - Registration confirmed and saved to the database!!!" />
     <MESSAGE value="Working not much CSS though" />
     <MESSAGE value="CSS ed the form and the payment button/ cart" />
     <MESSAGE value="Working on payment modal" />
@@ -661,7 +669,8 @@
     <MESSAGE value="cleaning up some code" />
     <MESSAGE value="changed the event page show / not show a registration button based on the days remaining until the event &gt; 0" />
     <MESSAGE value="changed the event page show / not show a registration button based on the race entrants reaching max capacity &gt; 0" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the event page show / not show a registration button based on the race entrants reaching max capacity &gt; 0" />
+    <MESSAGE value="Attempting to add mail to the admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="Attempting to add mail to the admin" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/events/templates/base.html">
@@ -792,29 +801,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/events/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/events/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="32" lean-forward="true" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+        <state relative-caret-position="151">
+          <caret line="126" column="27" lean-forward="true" selection-start-line="126" selection-start-column="27" selection-end-line="126" selection-end-column="27" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1535578296000" expanded="true" signature="7380:7385" ph="..." />
+            <marker date="1535589228000" expanded="true" signature="7590:7593" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/events/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="59" column="38" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
+        <state relative-caret-position="1235">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/events/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

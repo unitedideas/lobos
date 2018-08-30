@@ -57,7 +57,6 @@ admin.site.register(Mail)
 
 class MailTextAdmin(admin.ModelAdmin):
     model = MailText
-    search_fields = ("event__event_name", "event__event_date",)
 
 
 admin.site.register(MailText)

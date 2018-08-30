@@ -132,7 +132,8 @@ class Person(models.Model):
 
 
 class Mail(models.Model):
-    pass
+    events = Event.objects.all()
+    users = models.ManyToManyField(Event, blank=True, null=True)
 
     class Meta:
         verbose_name = "Email User"
@@ -143,18 +144,22 @@ class MailText(models.Model):
     subject = models.CharField(max_length=800)
     message = models.TextField()
     attachment = models.FileField(null=True, blank=True,)
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    group = models.ForeignKey(Mail, blank=True, null=True, on_delete=models.CASCADE)
     send_it = models.BooleanField(default=False)  # check it if you want to send your email
 
     def save(self):
         if self.send_it:
+            print(self.group_id)
+            print(self.group_id)
             # First you create your list of users
+            group = self.group
             user_list = []
-            print('after user list')
 
-            for u in self.user:
-                print('in the first form')
-                user_list.append(u.email)
+            print('after user list')
+            print(self.group)
+            for user in self.groups:
+                print(user)
+                user_list.append(user.email)
 
             # Then you can send the message.
             send_mail(str(self.subject),
