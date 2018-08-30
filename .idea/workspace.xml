@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/templates/events/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/events/templates/events/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lobos/secrets.py" beforeDir="false" afterPath="$PROJECT_DIR$/lobos/secrets.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,16 +19,16 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="24" />
-          <entry key="html" value="407" />
+          <entry key="html" value="420" />
           <entry key="py" value="1557" />
-          <entry key="txt" value="548" />
+          <entry key="txt" value="617" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="407" />
+          <entry key="HTML" value="420" />
           <entry key="Hoi4 file" value="62" />
-          <entry key="PLAIN_TEXT" value="510" />
+          <entry key="PLAIN_TEXT" value="579" />
           <entry key="Python" value="1557" />
         </counts>
       </usages-collector>
@@ -107,11 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lobos/secrets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="220">
+              <caret line="10" column="50" selection-start-line="10" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -137,11 +137,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="886">
-              <caret line="56" column="88" selection-start-line="56" selection-start-column="88" selection-end-line="56" selection-end-column="88" />
+            <state relative-caret-position="440">
+              <caret line="42" column="50" lean-forward="true" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
               </folding>
@@ -207,7 +207,6 @@
         <option value="$PROJECT_DIR$/lobos/requirements.txt" />
         <option value="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/drip/utils.py" />
         <option value="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/timedelta/fields.py" />
-        <option value="$PROJECT_DIR$/lobos/secrets.py" />
         <option value="$PROJECT_DIR$/lobos/settings.py" />
         <option value="$PROJECT_DIR$/events/util.py" />
         <option value="$PROJECT_DIR$/lobos/.gitignore" />
@@ -217,6 +216,7 @@
         <option value="$PROJECT_DIR$/events/views.py" />
         <option value="$PROJECT_DIR$/events/forms.py" />
         <option value="$PROJECT_DIR$/events/templates/events/home.html" />
+        <option value="$PROJECT_DIR$/lobos/secrets.py" />
       </list>
     </option>
   </component>
@@ -432,13 +432,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00138" summary="Working on email templates and password change page/ email">
-      <created>1535128521664</created>
-      <option name="number" value="00138" />
-      <option name="presentableId" value="LOCAL-00138" />
-      <option name="project" value="LOCAL" />
-      <updated>1535128521664</updated>
     </task>
     <task id="LOCAL-00139" summary="Working on email templates and password change page/ email">
       <created>1535129716334</created>
@@ -776,8 +769,24 @@
       <option name="project" value="LOCAL" />
       <updated>1535656604089</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="render registrations button logic was wrong - correct">
+      <created>1535657225508</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1535657225508</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
+  </component>
+  <component name="TodoView" selected-index="2">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="36" y="23" width="1851" height="1418" extended-state="0" />
@@ -793,12 +802,12 @@
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" weight="0.3298969" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.3295626" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49955398" weight="0.6651584" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.500446" side_tool="true" weight="0.83269376" />
-      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.3295626" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -825,7 +834,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="CSS ed the form and the payment button/ cart" />
     <MESSAGE value="Working on payment modal" />
     <MESSAGE value="Test modal and paypal working and playing nice together" />
     <MESSAGE value="Modal working just adjusting the css look/ feel" />
@@ -850,7 +858,8 @@
     <MESSAGE value="changed the event page show / not show a registration button based on the race entrants reaching max capacity &gt; 0" />
     <MESSAGE value="Attempting to add mail to the admin" />
     <MESSAGE value="Preventing the user from creating a username that has capitals and spaces" />
-    <option name="LAST_COMMIT_MESSAGE" value="Preventing the user from creating a username that has capitals and spaces" />
+    <MESSAGE value="render registrations button logic was wrong - correct" />
+    <option name="LAST_COMMIT_MESSAGE" value="render registrations button logic was wrong - correct" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/events/templates/base.html">
@@ -963,13 +972,6 @@
     <entry file="file://$PROJECT_DIR$/events/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/lobos/secrets.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lobos/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="905">
@@ -1020,11 +1022,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="886">
-          <caret line="56" column="88" selection-start-line="56" selection-start-column="88" selection-end-line="56" selection-end-column="88" />
+        <state relative-caret-position="440">
+          <caret line="42" column="50" lean-forward="true" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/secrets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="50" selection-start-line="10" selection-end-line="11" />
         </state>
       </provider>
     </entry>
