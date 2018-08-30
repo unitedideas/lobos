@@ -75,7 +75,8 @@ class RegistrationForm(UserCreationForm):
         user.email = self.cleaned_data['email'].replace(" ", "")
 
         user.username = user.first_name + user.last_name + user.email
-        user.username = user.username.replace(" ", "")
+        user.username = user.username.replace(" ", "").lower()
+        print(user.username)
         user.save()
         new_user = Profile.objects.filter(user=user)
         new_user.update(gender=self.cleaned_data['gender'])

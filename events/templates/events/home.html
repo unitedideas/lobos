@@ -16,7 +16,7 @@
             <div class="col-sm-7">
 
                 <h1>Events Page</h1>
-                <p>The could be a notification, countdown, welcome, race results, links, Points leaders, whatever.</p>
+{#                <p>The could be a notification, countdown, welcome, race results, links, Points leaders, whatever.</p>#}
             </div>
             <div class="col-md-5">
                 <img src="{% static "events/lobos logo.png" %}">
@@ -54,10 +54,8 @@
                     <h2>Link to results of the race coming</h2>
                 {% elif detail.12 > 1 %}
                     <h2>{{ detail.12 }} Days Remaining!</h2>
-                    <br>
                 {% elif detail.12 == 1 %}
                     <h2>{{ detail.12 }} Day Remaining!</h2>
-                    <br>
                     <a class="btn btn-lg btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
                        methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
                 {% endif %}
