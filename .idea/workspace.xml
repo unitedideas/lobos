@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/events/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/templates/events/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/events/templates/events/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,8 +77,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/events/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="865">
-              <caret line="78" column="27" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
+            <state relative-caret-position="777">
+              <caret line="74" column="64" selection-start-line="74" selection-start-column="64" selection-end-line="74" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -122,8 +119,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
+            <state relative-caret-position="893">
+              <caret line="161" column="65" lean-forward="true" selection-start-line="161" selection-start-column="65" selection-end-line="161" selection-end-column="65" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -143,8 +140,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+            <state relative-caret-position="286">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
               </folding>
@@ -179,9 +176,9 @@
       <find>send_mail</find>
       <find>subject</find>
       <find>if</find>
-      <find>0</find>
-      <find>user.upd</find>
       <find>user</find>
+      <find>user.upd</find>
+      <find>0</find>
     </findStrings>
     <replaceStrings>
       <replace>myactive</replace>
@@ -434,13 +431,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00134" summary="MVP working, I will fork this to deploy on pythonanywhere">
-      <created>1535104107733</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1535104107734</updated>
     </task>
     <task id="LOCAL-00135" summary="MVP working, I will fork this to deploy on pythonanywhere">
       <created>1535106955408</created>
@@ -778,7 +768,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535652348003</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Attempting to add mail to the admin">
+      <created>1535656136016</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1535656136016</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -989,28 +986,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/events/templates/events/reg_form.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/events/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="128" lean-forward="true" selection-start-line="128" selection-end-line="128" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/events/models.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1023,10 +1000,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/events/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="893">
+          <caret line="161" column="65" lean-forward="true" selection-start-line="161" selection-start-column="65" selection-end-line="161" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/events/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="865">
-          <caret line="78" column="27" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
+        <state relative-caret-position="777">
+          <caret line="74" column="64" selection-start-line="74" selection-start-column="64" selection-end-line="74" selection-end-column="64" />
         </state>
       </provider>
     </entry>
