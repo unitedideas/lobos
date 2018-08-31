@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/events/templates/events/userregistertemplate.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lobos/secrets.py" beforeDir="false" afterPath="$PROJECT_DIR$/lobos/secrets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lobos/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lobos/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lobos/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/lobos/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,32 +24,32 @@
         <counts>
           <entry key="gitignore" value="24" />
           <entry key="html" value="420" />
-          <entry key="py" value="1557" />
-          <entry key="txt" value="617" />
+          <entry key="py" value="2023" />
+          <entry key="txt" value="661" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="420" />
-          <entry key="Hoi4 file" value="62" />
-          <entry key="PLAIN_TEXT" value="579" />
-          <entry key="Python" value="1557" />
+          <entry key="Hoi4 file" value="65" />
+          <entry key="PLAIN_TEXT" value="620" />
+          <entry key="Python" value="2023" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="4" />
-          <entry key="html" value="5" />
-          <entry key="py" value="33" />
-          <entry key="txt" value="1" />
+          <entry key="html" value="6" />
+          <entry key="py" value="35" />
+          <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="5" />
-          <entry key="Hoi4 file" value="1" />
+          <entry key="HTML" value="6" />
+          <entry key="Hoi4 file" value="2" />
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="33" />
+          <entry key="Python" value="35" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -62,35 +66,32 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/models.py">
+        <entry file="file://$PROJECT_DIR$/events/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="994">
-              <caret line="85" column="10" selection-start-line="85" selection-start-column="6" selection-end-line="85" selection-end-column="10" />
+            <state relative-caret-position="671">
+              <caret line="138" column="43" lean-forward="true" selection-start-line="138" selection-start-column="43" selection-end-line="138" selection-end-column="43" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
-                <marker date="1535648192000" expanded="true" signature="6272:6273" ph="..." />
+                <element signature="e#0#41#0" expanded="true" />
+                <marker date="1535678397000" expanded="true" signature="4806:4807" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/forms.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lobos/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="777">
-              <caret line="74" column="64" selection-start-line="74" selection-start-column="64" selection-end-line="74" selection-end-column="64" />
+            <state relative-caret-position="22">
+              <caret line="1" column="19" lean-forward="true" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/admin.py">
+        <entry file="file://$PROJECT_DIR$/lobos/secrets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-              <folding>
-                <element signature="e#0#54#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="110">
+              <caret line="5" column="48" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -98,31 +99,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lobos/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="905">
-              <caret line="150" column="39" lean-forward="true" selection-start-line="150" selection-start-column="39" selection-end-line="150" selection-end-column="39" />
+            <state relative-caret-position="3300">
+              <caret line="150" column="33" lean-forward="true" selection-start-line="150" selection-start-column="33" selection-end-line="150" selection-end-column="33" />
               <folding>
                 <element signature="e#304#313#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lobos/secrets.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" column="50" selection-start-line="10" selection-end-line="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="893">
-              <caret line="161" column="65" lean-forward="true" selection-start-line="161" selection-start-column="65" selection-end-line="161" selection-end-column="65" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -141,7 +121,7 @@
         <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="440">
-              <caret line="42" column="50" lean-forward="true" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
+              <caret line="42" column="50" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
               </folding>
@@ -177,8 +157,10 @@
       <find>subject</find>
       <find>if</find>
       <find>user</find>
-      <find>user.upd</find>
       <find>0</find>
+      <find>user.upd</find>
+      <find>default_from</find>
+      <find>send_mail()</find>
     </findStrings>
     <replaceStrings>
       <replace>myactive</replace>
@@ -204,19 +186,19 @@
         <option value="$PROJECT_DIR$/events/mails.py" />
         <option value="$PROJECT_DIR$/lobos/urls.py" />
         <option value="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/newsletter/models.py" />
-        <option value="$PROJECT_DIR$/lobos/requirements.txt" />
         <option value="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/drip/utils.py" />
         <option value="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/timedelta/fields.py" />
-        <option value="$PROJECT_DIR$/lobos/settings.py" />
         <option value="$PROJECT_DIR$/events/util.py" />
         <option value="$PROJECT_DIR$/lobos/.gitignore" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/events/admin.py" />
         <option value="$PROJECT_DIR$/events/models.py" />
-        <option value="$PROJECT_DIR$/events/views.py" />
         <option value="$PROJECT_DIR$/events/forms.py" />
         <option value="$PROJECT_DIR$/events/templates/events/home.html" />
         <option value="$PROJECT_DIR$/lobos/secrets.py" />
+        <option value="$PROJECT_DIR$/lobos/settings.py" />
+        <option value="$PROJECT_DIR$/events/views.py" />
+        <option value="$PROJECT_DIR$/lobos/requirements.txt" />
       </list>
     </option>
   </component>
@@ -295,8 +277,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/events/templates/events" />
       <recent name="$PROJECT_DIR$/events" />
+      <recent name="$PROJECT_DIR$/events/templates" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/lobos" />
     </key>
   </component>
@@ -432,13 +416,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00139" summary="Working on email templates and password change page/ email">
-      <created>1535129716334</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
-      <option name="project" value="LOCAL" />
-      <updated>1535129716334</updated>
     </task>
     <task id="LOCAL-00140" summary="update .gitignore">
       <created>1535129912087</created>
@@ -776,7 +753,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535657225508</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="adding mailgun email credentials">
+      <created>1535668216747</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1535668216747</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -834,7 +818,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Working on payment modal" />
     <MESSAGE value="Test modal and paypal working and playing nice together" />
     <MESSAGE value="Modal working just adjusting the css look/ feel" />
     <MESSAGE value="Modal working just adjusting the css look/ feel for transitions" />
@@ -859,7 +842,8 @@
     <MESSAGE value="Attempting to add mail to the admin" />
     <MESSAGE value="Preventing the user from creating a username that has capitals and spaces" />
     <MESSAGE value="render registrations button logic was wrong - correct" />
-    <option name="LAST_COMMIT_MESSAGE" value="render registrations button logic was wrong - correct" />
+    <MESSAGE value="adding mailgun email credentials" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding mailgun email credentials" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/events/templates/base.html">
@@ -881,13 +865,6 @@
     <entry file="file://$PROJECT_DIR$/events/mails.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/simple_mail/admin.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/newsletter/models.py" />
-    <entry file="file://$PROJECT_DIR$/lobos/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="27" selection-start-column="27" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lobos/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -972,16 +949,6 @@
     <entry file="file://$PROJECT_DIR$/events/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/lobos/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="905">
-          <caret line="150" column="39" lean-forward="true" selection-start-line="150" selection-start-column="39" selection-end-line="150" selection-end-column="39" />
-          <folding>
-            <element signature="e#304#313#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/events/templates/events/event_register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
@@ -1003,16 +970,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="161" column="65" lean-forward="true" selection-start-line="161" selection-start-column="65" selection-end-line="161" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/events/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="777">
@@ -1023,7 +980,7 @@
     <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
-          <caret line="42" column="50" lean-forward="true" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
+          <caret line="42" column="50" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
           </folding>
@@ -1032,8 +989,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lobos/secrets.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="50" selection-start-line="10" selection-end-line="11" />
+        <state relative-caret-position="110">
+          <caret line="5" column="48" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3300">
+          <caret line="150" column="33" lean-forward="true" selection-start-line="150" selection-start-column="33" selection-end-line="150" selection-end-column="33" />
+          <folding>
+            <element signature="e#304#313#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/userregistertemplate.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="671">
+          <caret line="138" column="43" lean-forward="true" selection-start-line="138" selection-start-column="43" selection-end-line="138" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <marker date="1535678397000" expanded="true" signature="4806:4807" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="19" lean-forward="true" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
         </state>
       </provider>
     </entry>

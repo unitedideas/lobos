@@ -13,6 +13,9 @@ from events.forms import (
     EditProfileForm,
     RiderProfileFormSet,
 )
+from django.template.loader import get_template
+from django.template import Context
+from anymail.message import attach_inline_image_file
 from django.template.loader import render_to_string
 import random
 import string
@@ -118,6 +121,28 @@ def home(request):
 def login(request):
     return render(request, 'events/login.html')
 
+def send_mail():
+    msg = EmailMultiAlternatives(
+        subject="Sent via mailgun",
+        body="Click to activate your account: http://example.com/activate",
+        from_email="Example <admin@example.com>",
+        to=["New User unitedideas@gmail.com", "shane@endurobox.com"],
+        reply_to=["Helpdesk <support@example.com>"])
+
+    # Include an inline image in the html:
+    # logo_cid = attach_inline_image_file(msg, "/path/to/logo.jpg")
+    html = get_template('userregistertemplate.html')
+    msg.attach_alternative(html, "text/html")
+
+    # Optional Anymail extensions:
+    msg.metadata = {"user_id": "8675309", "experiment_variation": 1}
+    msg.tags = ["activation", "onboarding"]
+    msg.track_clicks = True
+
+    # Send it:
+    msg.send()
+
+
 
 def register(request):
     if request.method == 'POST':
@@ -138,29 +163,30 @@ def register(request):
 
             else:
                 form.save()
-                subject = 'Welcome to LobosEvents.com ' + first_name.title() +' !'
-                from_email = 'MrWolf@LobosEvents.com'
-                to = email
-
-                text_content = 'Thank you for registering at LobosEvents.com ' + first_name.title() + '. \n' \
-                'Your username is ' + username + '\n' \
-                'Your password is ' + password + '\n'\
-                'You can check out our upcoming events and register for them through the Lobos events site <a href = "http://www.lobosevents.com">Lobosevents.com</a>.\n' \
-                'Welcome from the Lobos Motorcycle Club!\n' \
-                '- The Lobos Team'
-
-
-                html_content = '<p>Thank you for registering at LobosEvents.com ' + first_name.title() + '. \n</p>' \
-                '<p>Your username is ' + username + '\n</p>' \
-                '<p>Your password is ' + password + '\n</p>'\
-                '<p>You can check out our upcoming events and register for them through the Lobos events site Lobosevents.com.\n</p>' \
-                '<p>Welcome from the Lobos Motorcycle Club!\n</p>' \
-                '<p>- The Lobos Team</p>'
-
-
-                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
+                # subject = 'Welcome to LobosEvents.com ' + first_name.title() +' !'
+                # from_email = 'MrWolf@LobosEvents.com'
+                # to = email
+                #
+                # text_content = 'Thank you for registering at LobosEvents.com ' + first_name.title() + '. \n' \
+                # 'Your username is ' + username + '\n' \
+                # 'Your password is ' + password + '\n'\
+                # 'You can check out our upcoming events and register for them through the Lobos events site <a href = "http://www.lobosevents.com">Lobosevents.com</a>.\n' \
+                # 'Welcome from the Lobos Motorcycle Club!\n' \
+                # '- The Lobos Team'
+                #
+                #
+                # html_content = '<p>Thank you for registering at LobosEvents.com ' + first_name.title() + '. \n</p>' \
+                # '<p>Your username is ' + username + '\n</p>' \
+                # '<p>Your password is ' + password + '\n</p>'\
+                # '<p>You can check out our upcoming events and register for them through the Lobos events site Lobosevents.com.\n</p>' \
+                # '<p>Welcome from the Lobos Motorcycle Club!\n</p>' \
+                # '<p>- The Lobos Team</p>'
+                #
+                #
+                # msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                # msg.attach_alternative(html_content, "text/html")
+                # msg.send()
+                send_mail()
                 return redirect('/login/')
 
 

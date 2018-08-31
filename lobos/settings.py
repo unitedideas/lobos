@@ -14,7 +14,6 @@ import os
 from lobos.secrets import *
 import re
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,7 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'anymail',
 ]
+ANYMAIL = {
+    "MAILGUN_API_KEY": MAILGUN_ACCESS_KEY,
+    "MAILGUN_SENDER_DOMAIN": 'mg.lobosevents.com',
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"  # or sendgrid.EmailBackend, or...
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -103,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 AUTH_PROFILE_MODULE = "lobos.Profile"
 
 # Internationalization
@@ -141,15 +146,16 @@ LOGIN_EXEMPT_URLS = (
     r'^password-reset/confirm/(?P<uib64>[0-9A-Za-z]+)-(?P<token>.+)/$',
     'password-reset/complete/',
 )
-
 # Email
 EMAIL_HOST = EMAIL_HOST
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 EMAIL_PORT = EMAIL_PORT
 EMAIL_USE_TLS = EMAIL_USE_TLS
+DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
 
-
+MAILGUN_ACCESS_KEY = MAILGUN_ACCESS_KEY
+MAILGUN_SERVER_NAME = MAILGUN_SERVER_NAME
 
 # For email testing
 #
