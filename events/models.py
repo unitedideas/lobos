@@ -33,7 +33,6 @@ class Event(models.Model):
     amateur_under_16_cost = models.IntegerField()
     sixty_and_seventy_cost = models.IntegerField()
 
-
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
 
@@ -86,6 +85,8 @@ class RiderProfile(models.Model):
     JR = 'JR'
     SIXTY = '60'
     SEVENTY = '70'
+    FEMALE = 'Female'
+    MALE = 'Male'
 
     RIDER_CAT = (
         (EXOVER16, 'Expert Schedule Classes - Over age 16'),
@@ -95,6 +96,7 @@ class RiderProfile(models.Model):
         (CLASS60_70, 'Class 60 and 70 Rider'),
         (ESCORT, 'Escort Rider'),
     )
+
     RIDER_CLASS = (
         (AA, 'AA'),
         (OPENAM, 'Open Amateur'),
@@ -112,9 +114,6 @@ class RiderProfile(models.Model):
         (SEVENTY, '70'),
     )
 
-    FEMALE = 'Female'
-    MALE = 'Male'
-
     GENDER = (
         (FEMALE, 'Female'),
         (MALE, 'Male'),
@@ -122,7 +121,7 @@ class RiderProfile(models.Model):
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    rider_cat = models.CharField(max_length=100, choices=RIDER_CAT)
+    rider_cat = models.CharField('Rider Category', max_length=100, choices=RIDER_CAT)
     rider_class = models.CharField(max_length=100, choices=RIDER_CLASS)
     first_name = models.CharField(max_length=300, null=True, blank=True)
     last_name = models.CharField(max_length=300, null=True, blank=True)
@@ -143,13 +142,14 @@ class RiderProfile(models.Model):
     omra_number = models.CharField(max_length=300, null=True, blank=True, )
     ama_number = models.CharField(max_length=300, null=True, blank=True)
     escort_name = models.CharField('Your Escorts Name', max_length=300, null=True, blank=True)
+    group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000, null=True, blank=True)
 
     # These items will not be in the form and must not be visible
     # confirmation will be generated, age on event day will be calculated
     # rider number and start time will be assigned
     # registration_date_time is not editable with auto_now_add = true
 
-    registration_date_time = models.DateTimeField('Created Time', editable=True , auto_now_add=True)
+    registration_date_time = models.DateTimeField('Created Time', editable=True, auto_now_add=True)
     age_on_event_day = models.IntegerField(null=True, blank=True, )
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     rider_number = models.IntegerField(null=True, blank=True)

@@ -28,7 +28,7 @@ class RegistrationForm(UserCreationForm):
     last_name = forms.CharField(widget=forms.TextInput())
     gender = forms.ChoiceField(choices=GENDER, initial='Male')
     birth_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'placeholder': '12/14/1980'}))
-    phone_number = forms.CharField(max_length=10, required=False, widget=forms.DateInput(attrs={'placeholder': '2223334444'}))
+    phone_number = forms.CharField(max_length=10, required=False, widget=forms.NumberInput(attrs={'placeholder': '2223334444'}))
     country = forms.CharField(required=False)
     address = forms.CharField(required=False)
     address_line_two = forms.CharField(required=False)
@@ -170,5 +170,5 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
                                                'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
                                                'escort_name': DateInput(attrs={'placeholder': '14 and as of the day of the event require an escort'}),
-                                               'rider_class': DateInput(attrs={}),
+                                               'group_name': DateInput(attrs={'placeholder': 'John Smith, Jane Doe'}),
                                            })
