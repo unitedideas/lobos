@@ -168,5 +168,7 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            widgets=
                                            {
                                                'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
-                                               'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'})
+                                               'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
+                                               'escort_name': DateInput(attrs={'placeholder': '14 and as of the day of the event require an escort'}),
+                                               'rider_class': DateInput(attrs={}),
                                            })

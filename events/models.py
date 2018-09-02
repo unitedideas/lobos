@@ -27,6 +27,12 @@ class Event(models.Model):
     pro_time_est = models.TimeField(max_length=30, null=True, blank=True)
     am_time_est = models.TimeField(max_length=30, null=True, blank=True)
     rider_limit = models.IntegerField(null=True, blank=True)
+    expert_over_16_cost = models.IntegerField()
+    expert_under_16_cost = models.IntegerField()
+    amateur_over_16_cost = models.IntegerField()
+    amateur_under_16_cost = models.IntegerField()
+    sixty_and_seventy_cost = models.IntegerField()
+
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
@@ -66,14 +72,44 @@ class RiderProfile(models.Model):
     AMUNDER16 = 'Amateur Schedule Classes - 16 and under'
     CLASS60_70 = 'Class 60 and 70 Rider'
     ESCORT = 'Escort Rider'
+    AA = 'AA'
+    OPENAM = 'Open Amateur'
+    AM250 = '250 AM'
+    AM30 = '30 AM'
+    AM40 = '40 AM'
+    EXAM40 = '40 EX-AM'
+    EX50 = '50 EX'
+    AM50 = '50 AM'
+    SPORTSMN = 'Sportsman'
+    BEGINNER = 'Beginner'
+    WOMEN = 'Women'
+    JR = 'JR'
+    SIXTY = '60'
+    SEVENTY = '70'
 
-    RIDER_CLASS = (
+    RIDER_CAT = (
         (EXOVER16, 'Expert Schedule Classes - Over age 16'),
         (EXUNDER16, 'Expert Schedule Classes - 16 and under'),
         (AMOVER16, 'Amateur Schedule Classes - Over age 16'),
         (AMUNDER16, 'Expert Schedule Classes - 16 and under'),
         (CLASS60_70, 'Class 60 and 70 Rider'),
         (ESCORT, 'Escort Rider'),
+    )
+    RIDER_CLASS = (
+        (AA, 'AA'),
+        (OPENAM, 'Open Amateur'),
+        (AM250, '250 AM'),
+        (AM30, '30 AM'),
+        (AM40, '40 AM'),
+        (EXAM40, '40 EX-AM'),
+        (EX50, '50 EX'),
+        (AM50, '50 AM'),
+        (SPORTSMN, 'Sportsman'),
+        (BEGINNER, 'Beginner'),
+        (WOMEN, 'Women'),
+        (JR, 'JR'),
+        (SIXTY, '60'),
+        (SEVENTY, '70'),
     )
 
     FEMALE = 'Female'
@@ -86,6 +122,7 @@ class RiderProfile(models.Model):
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    rider_cat = models.CharField(max_length=100, choices=RIDER_CAT)
     rider_class = models.CharField(max_length=100, choices=RIDER_CLASS)
     first_name = models.CharField(max_length=300, null=True, blank=True)
     last_name = models.CharField(max_length=300, null=True, blank=True)
@@ -103,16 +140,17 @@ class RiderProfile(models.Model):
     emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
     bike_make = models.CharField(max_length=20, null=True, blank=True, choices=MAKES)
     bike_displacement = models.IntegerField(null=True, blank=True)
-    omra_number = models.CharField(max_length=300, null=True, blank=True,)
+    omra_number = models.CharField(max_length=300, null=True, blank=True, )
     ama_number = models.CharField(max_length=300, null=True, blank=True)
+    escort_name = models.CharField('Your Escorts Name', max_length=300, null=True, blank=True)
 
     # These items will not be in the form and must not be visible
     # confirmation will be generated, age on event day will be calculated
     # rider number and start time will be assigned
     # registration_date_time is not editable with auto_now_add = true
 
-    registration_date_time = models.DateTimeField(null=True, blank=True, auto_now_add=True)
-    age_on_event_day = models.IntegerField(null=True, blank=True,)
+    registration_date_time = models.DateTimeField('Created Time', editable=True , auto_now_add=True)
+    age_on_event_day = models.IntegerField(null=True, blank=True, )
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     rider_number = models.IntegerField(null=True, blank=True)
     start_time = models.TimeField(max_length=30, null=True, blank=True)
@@ -126,7 +164,7 @@ class RiderProfile(models.Model):
 
 class Person(models.Model):
     name = models.CharField(max_length=30)
-    email = models.EmailField(null=True, blank=True,)
+    email = models.EmailField(null=True, blank=True, )
     birth_date = models.DateField()
     location = models.CharField(max_length=100, blank=True)
 
@@ -137,4 +175,3 @@ def create_profile(sender, **kwargs):
 
 
 post_save.connect(create_profile, sender=User)
-
