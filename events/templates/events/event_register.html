@@ -164,7 +164,6 @@
                             result[entry[0]] = entry[1];
                         }
                         data = JSON.stringify(result)
-                        console.log('called the the3DayMethod')
                         axios.post("{% url 'error_checking' %}",
                             data,
                             {
