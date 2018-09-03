@@ -108,7 +108,6 @@ def login(request):
     return render(request, 'events/login.html')
 
 
-
 # Email
 
 
@@ -121,28 +120,24 @@ def send_mail_user_reg(email, first_name, last_name, username, password):
         to=[email],
         reply_to=["Lobos Support <info@lobosmc.com.com>"])
 
-    # Include an inline image in the html:
-    # logo_cid = attach_inline_image_file(msg, "/path/to/logo.jpg")
     html = loader.render_to_string(
-            '../templates/events/userregistertemplate.html',
-            {
-                'name': first_name.title() + " " + last_name.title(),
-                'username': username,
-                'first_name': first_name.title(),
-                'last_name': last_name.title,
-                'password': password,
-            }
-        )
+        '../templates/events/userregistertemplate.html',
+        {
+            'name': first_name.title() + " " + last_name.title(),
+            'username': username,
+            'first_name': first_name.title(),
+            'last_name': last_name.title,
+            'password': password,
+        }
+    )
     msg.attach_alternative(html, "text/html")
 
     # Optional Anymail extensions:
-    msg.metadata = {"user_id": "8675309", "experiment_variation": 1}
     msg.tags = ["activation", "onboarding"]
     msg.track_clicks = True
 
     # Send it:
     msg.send()
-
 
 
 def register(request):
@@ -153,40 +148,18 @@ def register(request):
             email = request.POST['email'].replace(" ", "")
             first_name = request.POST['first_name'].replace(" ", "")
             last_name = request.POST['last_name'].replace(" ", "")
-            username = first_name.lower()+last_name.lower()+email.lower().replace(" ", "")
+            username = first_name.lower() + last_name.lower() + email.lower().replace(" ", "")
             password = request.POST['password1']
 
             if User.objects.filter(username=username).exists():
                 user_id = User.objects.get(username=username).id
                 form = RegistrationForm()
-                args = {'form': form, 'errors': 'A user with that username already exists. Please choose a different one.'}
+                args = {'form': form,
+                        'errors': 'A user with that username already exists. Please choose a different one.'}
                 return render(request, 'events/reg_form.html', args)
 
             else:
                 form.save()
-                # subject = 'Welcome to LobosEvents.com ' + first_name.title() +' !'
-                # from_email = 'MrWolf@LobosEvents.com'
-                # to = email
-                #
-                # text_content = 'Thank you for registering at LobosEvents.com ' + first_name.title() + '. \n' \
-                # 'Your username is ' + username + '\n' \
-                # 'Your password is ' + password + '\n'\
-                # 'You can check out our upcoming events and register for them through the Lobos events site <a href = "http://www.lobosevents.com">Lobosevents.com</a>.\n' \
-                # 'Welcome from the Lobos Motorcycle Club!\n' \
-                # '- The Lobos Team'
-                #
-                #
-                # html_content = '<p>Thank you for registering at LobosEvents.com ' + first_name.title() + '. \n</p>' \
-                # '<p>Your username is ' + username + '\n</p>' \
-                # '<p>Your password is ' + password + '\n</p>'\
-                # '<p>You can check out our upcoming events and register for them through the Lobos events site Lobosevents.com.\n</p>' \
-                # '<p>Welcome from the Lobos Motorcycle Club!\n</p>' \
-                # '<p>- The Lobos Team</p>'
-                #
-                #
-                # msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                # msg.attach_alternative(html_content, "text/html")
-                # msg.send()
                 send_mail_user_reg(email, first_name, last_name, username, password)
                 return redirect('/login/')
 
@@ -233,11 +206,10 @@ def change_password(request):
             username = request.user.username
 
             text_content = 'Hi ' + first_name.title() + '\nYou recently requested to reset your password at LobosEvents.com. \n' \
-            'Your username, in case you\'ve forgotten: ' + username
-
+                                                        'Your username, in case you\'ve forgotten: ' + username
 
             html_content = 'Hi ' + first_name.title() + '\nYou recently requested to reset your password at LobosEvents.com. \n' \
-            'Your username, in case you\'ve forgotten: ' + username
+                                                        'Your username, in case you\'ve forgotten: ' + username
 
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
@@ -264,6 +236,36 @@ def error_checking(request):
         print('NOT VALID')
         content = {'errors': formset.errors, 'success': False}
         return JsonResponse(content)
+
+
+def event_mail(email, first_name, last_name, username, rider_cat, rider_class, event, confirmation_number):
+    msg = EmailMultiAlternatives(
+        subject="You're Registered!",
+        from_email="The Lobos Team <info@lobosmc.com.com>",
+        to=[email],
+        reply_to=["Lobos Support <info@lobosmc.com.com>"])
+
+    html = loader.render_to_string(
+        '../templates/events/eventregistertemplate.html',
+        {
+            'event': event,
+            'rider_cat':rider_cat,
+            'rider_class': rider_class,
+            'name': first_name.title() + " " + last_name.title(),
+            'username': username,
+            'first_name': first_name.title(),
+            'last_name': last_name.title,
+            'confirmation_number': confirmation_number,
+        }
+    )
+    msg.attach_alternative(html, "text/html")
+
+    # Optional Anymail extensions:
+    msg.tags = ["event_registration"]
+    msg.track_clicks = True
+
+    # Send it:
+    msg.send()
 
 
 def event_register(request):
@@ -343,40 +345,9 @@ def event_register(request):
                                                  'rider_class': rider_class}
                     form.save()
 
-                    subject = 'You are registered for ' + event + ' !'
-                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
-                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
-                                        'your username is ' + username + '. If you were signed up for this event in a ' \
-                                        'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
-                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
-                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
-                    from_email = 'MrWolf@LobosEvents.com'
-                    to = email
-
-
-                    subject, from_email, to = subject, from_email,to
-
-                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
-                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
-                                        'your username is ' + username + '. If you were signed up for this event in a ' \
-                                        'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to the LobosEvents website and click on reset password.\nIf you have questions ' \
-                                        'or concerns, please contact us at ' \
-                                        'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
-
-                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
-                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
-                                        'your username is ' + username + '. If you were signed up for this event in a ' \
-                                        'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
-                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
-                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
-
-                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                    msg.attach_alternative(html_content, "text/html")
-                    msg.send()
-
+                    #Email
+                    event_mail(email, first_name, last_name, username, rider_cat, rider_class, event,
+                               confirmation_number)
 
 
                 elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
@@ -403,44 +374,14 @@ def event_register(request):
                                                  'last_name': last_name,
                                                  'email': email,
                                                  'confirmation': confirmation_number,
-                                                   'rider_cat': rider_cat,
+                                                 'rider_cat': rider_cat,
                                                  'rider_class': rider_class}
                     form.save()
 
-                    subject = 'You are registered for ' + event + ' !'
+                    #Email
+                    event_mail(email, first_name, last_name, username, rider_cat, rider_class, event,
+                               confirmation_number)
 
-                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
-                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
-                                        'your username is ' + username + '. If you were signed up for this event in a ' \
-                                        'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
-                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
-                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
-                    from_email = 'MrWolf@LobosEvents.com'
-                    to = email
-
-
-                    subject, from_email, to = subject, from_email,to
-
-                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
-                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
-                                        'your username is ' + username + '. If you were signed up for this event in a ' \
-                                        'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to the LobosEvents website and click on reset password.\nIf you have questions ' \
-                                        'or concerns, please contact us at ' \
-                                        'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
-
-                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
-                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
-                                        'your username is ' + username + '. If you were signed up for this event in a ' \
-                                        'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
-                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
-                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
-
-                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                    msg.attach_alternative(html_content, "text/html")
-                    msg.send()
 
 
                 else:
@@ -459,49 +400,14 @@ def event_register(request):
                                                  'last_name': last_name,
                                                  'email': email,
                                                  'confirmation': confirmation_number,
-                                                   'rider_cat': rider_cat,
+                                                 'rider_cat': rider_cat,
                                                  'rider_class': rider_class}
 
                     form.save()
 
-                    subject = 'You are registered for ' + event + ' !'
-                    contact_message = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
-                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
-                                        'your username is ' + username + '. If you were signed up for this event in a ' \
-                                        'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
-                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
-                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
-                    from_email = 'MrWolf@LobosEvents.com'
-                    to = email
-
-
-                    subject, from_email, to = subject, from_email,to
-
-                    text_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
-                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
-                                        'your username is ' + username + '. If you were signed up for this event in a ' \
-                                        'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to the LobosEvents website and click on reset password.\nIf you have questions ' \
-                                        'or concerns, please contact us at ' \
-                                        'MrWolf@LobosEvents.com\nWe\'ll see you at the race!\n- The Lobos Team'
-
-                    html_content = 'Congrats! ' + first_name + ' you\'re registered for the ' + event +\
-                                      '.\nYour confirmation number is ' + confirmation_number +'\n As a reminder ' \
-                                        'your username is ' + username + '. If you were signed up for this event in a ' \
-                                        'group; you will have to reset your password to gain access to the new account by ' \
-                                        'going to the LobosEvents website and click on the <a href = "http://www.lobosevents.com/profile/password/">reset ' \
-                                        'password</a> link.\nIf you have questions or concerns, please contact us via ' \
-                                        '<a href = "mailto:MrWolf@LobosEvents.com" > Email </a>\nWe\'ll see you at the race!\n- The Lobos Team'
-
-                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                    msg.attach_alternative(html_content, "text/html")
-                    msg.send()
-
-
-
-            # <a href = "mailto:blah@blah.com?subject=subject line&cc=nancy@blah.com, joe@blah.com&bcc=secret@blah.com" > linktext </a>
-
+                    #Email
+                    event_mail(email, first_name, last_name, username, rider_cat, rider_class, event,
+                               confirmation_number)
 
 
             args = {'event': form.event, 'confirm': confirm}
