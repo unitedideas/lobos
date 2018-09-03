@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/events/templates/events/eventregistertemplate.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/templates/events/userregistertemplate.html" beforeDir="false" afterPath="$PROJECT_DIR$/events/templates/events/userregistertemplate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,16 +18,16 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="24" />
-          <entry key="html" value="1086" />
+          <entry key="html" value="1144" />
           <entry key="py" value="3430" />
-          <entry key="txt" value="1381" />
+          <entry key="txt" value="1551" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="1086" />
+          <entry key="HTML" value="1144" />
           <entry key="Hoi4 file" value="65" />
-          <entry key="PLAIN_TEXT" value="1340" />
+          <entry key="PLAIN_TEXT" value="1510" />
           <entry key="Python" value="3430" />
         </counts>
       </usages-collector>
@@ -39,7 +35,7 @@
         <counts>
           <entry key="css" value="1" />
           <entry key="gitignore" value="4" />
-          <entry key="html" value="14" />
+          <entry key="html" value="15" />
           <entry key="py" value="40" />
           <entry key="txt" value="3" />
         </counts>
@@ -47,7 +43,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="1" />
-          <entry key="HTML" value="14" />
+          <entry key="HTML" value="15" />
           <entry key="Hoi4 file" value="3" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="Python" value="40" />
@@ -65,33 +61,10 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/templates/events/eventregistertemplate.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="676">
-              <caret line="845" column="113" selection-start-line="845" selection-start-column="113" selection-end-line="845" selection-end-column="113" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/events/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="245" column="38" selection-start-line="245" selection-start-column="38" selection-end-line="245" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>RIDER_CLASS</find>
       <find>RIDER_Class</find>
       <find>rider_cl</find>
       <find>rider_cat</find>
@@ -118,9 +91,10 @@
       <find>mailchi</find>
       <find>#templa</find>
       <find>static</find>
-      <find>user</find>
       <find>name</find>
       <find>confir</find>
+      <find>user</find>
+      <find>username</find>
     </findStrings>
     <replaceStrings>
       <replace>myactive</replace>
@@ -160,11 +134,11 @@
         <option value="$PROJECT_DIR$/events/forms.py" />
         <option value="$PROJECT_DIR$/events/admin.py" />
         <option value="$PROJECT_DIR$/events/models.py" />
-        <option value="$PROJECT_DIR$/events/templates/events/event_register.html" />
         <option value="$PROJECT_DIR$/static/events/userregistertemplate.html" />
-        <option value="$PROJECT_DIR$/events/templates/events/eventregistertemplate.html" />
         <option value="$PROJECT_DIR$/events/templates/events/userregistertemplate.html" />
         <option value="$PROJECT_DIR$/events/views.py" />
+        <option value="$PROJECT_DIR$/events/templates/events/eventregistertemplate.html" />
+        <option value="$PROJECT_DIR$/events/templates/events/event_register.html" />
       </list>
     </option>
   </component>
@@ -174,10 +148,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="45" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="34" />
     <option name="y" value="22" />
-    <option name="width" value="2325" />
+    <option name="width" value="2526" />
     <option name="height" value="1418" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -233,6 +207,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="paypal&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.smartKeys" />
   </component>
@@ -380,20 +355,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00148" summary="pythonanywhere not liking the email template">
-      <created>1535136809825</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1535136809825</updated>
-    </task>
-    <task id="LOCAL-00149" summary="pythonanywhere not liking the email template">
-      <created>1535137330052</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1535137330052</updated>
     </task>
     <task id="LOCAL-00150" summary="Merge remote-tracking branch 'github/master'&#10;&#10;# Conflicts:&#10;#&#9;events/__pycache__/views.cpython-36.pyc&#10;#&#9;lobos/__pycache__/__init__.cpython-36.pyc&#10;#&#9;lobos/__pycache__/middleware.cpython-36.pyc&#10;#&#9;lobos/__pycache__/secrets.cpython-36.pyc&#10;#&#9;lobos/__pycache__/settings.cpython-36.pyc&#10;#&#9;lobos/__pycache__/urls.cpython-36.pyc">
       <created>1535139458512</created>
@@ -724,7 +685,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536003900771</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="completed the event registration email&#10;need to open the paypal account">
+      <created>1536005629444</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1536005629444</updated>
+    </task>
+    <task id="LOCAL-00037" summary="created the lobos paypal account.&#10;need the email activated and the account in production">
+      <created>1536008921275</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1536008921275</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -737,8 +712,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="34" y="22" width="2526" height="1418" extended-state="6" />
-    <editor active="true" />
+    <frame x="34" y="22" width="2526" height="1418" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1078905" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -782,8 +756,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Created an automatic email that emails each user that is registered.&#10;Probably should create a template and a function so I don't have is printed 3 times&#10;or put it in a for loop before the confirmation page is rendered" />
-    <MESSAGE value="MVP working, I will fork this to deploy on pythonanywhere" />
     <MESSAGE value="Working on email templates and password change page/ email" />
     <MESSAGE value="update .gitignore" />
     <MESSAGE value="pythonanywhere not liking the email template" />
@@ -807,7 +779,9 @@
     <MESSAGE value="Need to limit the sub selections of the class based on the category&#10;Need to pass in the category values to the vue" />
     <MESSAGE value="Passed the values from the event directly into the function to calculate the total cost of the registration for paypal" />
     <MESSAGE value="created the registration form template and am sending it through mailgun" />
-    <option name="LAST_COMMIT_MESSAGE" value="created the registration form template and am sending it through mailgun" />
+    <MESSAGE value="completed the event registration email&#10;need to open the paypal account" />
+    <MESSAGE value="created the lobos paypal account.&#10;need the email activated and the account in production" />
+    <option name="LAST_COMMIT_MESSAGE" value="created the lobos paypal account.&#10;need the email activated and the account in production" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/events/templates/base.html">
@@ -961,17 +935,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/templates/events/event_register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="49" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="49" />
-          <folding>
-            <element signature="n#style#0;n#h1#0;n#div#0;n#transition#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h1#1;n#div#0;n#transition#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/events/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
@@ -986,13 +949,6 @@
     <entry file="file://$PROJECT_DIR$/events/templates/events/reg_form.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/templates/events/eventregistertemplate.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
-          <caret line="845" column="113" selection-start-line="845" selection-start-column="113" selection-end-line="845" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/events/templates/events/userregistertemplate.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
@@ -1002,11 +958,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/events/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="245" column="38" selection-start-line="245" selection-start-column="38" selection-end-line="245" selection-end-column="38" />
+        <state relative-caret-position="219">
+          <caret line="275" column="35" lean-forward="true" selection-start-line="275" selection-start-column="35" selection-end-line="275" selection-end-column="35" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/eventregistertemplate.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="847" column="103" lean-forward="true" selection-start-line="847" selection-start-column="103" selection-end-line="847" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/event_register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4706">
+          <caret line="270" column="55" lean-forward="true" selection-start-line="270" selection-start-column="55" selection-end-line="270" selection-end-column="55" />
         </state>
       </provider>
     </entry>
