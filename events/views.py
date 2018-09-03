@@ -13,7 +13,7 @@ from events.forms import (
     EditProfileForm,
     RiderProfileFormSet,
 )
-from django.template.loader import get_template
+from django.template import loader
 from django.template import Context
 from anymail.message import attach_inline_image_file
 from django.template.loader import render_to_string
@@ -22,20 +22,6 @@ import string
 import json
 import datetime
 from datetime import date
-
-
-# working on email
-
-# def _send_email(to_list, subject, message, sender='example@example.com'):
-#     msg = EmailMessage(subject=subject, body=message, from_email=sender, bcc=to_list)
-#     msg.content_subtype = "html"  # Main content is now text/html
-#     return msg.send()
-#
-# def send_email():
-#     emails = RiderProfile.objects.all().values_list('email', flat=True)
-#     summary = get_data()
-#     msg_html = render_to_string('email.html', {'data': data})
-#     _send_email(emails, subject='Report', message=msg_html)
 
 
 def home(request):
@@ -121,17 +107,32 @@ def home(request):
 def login(request):
     return render(request, 'events/login.html')
 
-def send_mail():
+
+
+# Email
+
+
+def send_mail_user_reg(email, first_name, last_name, username, password):
+    print(email)
     msg = EmailMultiAlternatives(
-        subject="Sent via mailgun",
+        subject="Welcome to Lobos",
         body="Click to activate your account: http://example.com/activate",
-        from_email="Example <admin@example.com>",
-        to=["New User unitedideas@gmail.com", "shane@endurobox.com"],
-        reply_to=["Helpdesk <support@example.com>"])
+        from_email="The Lobos Team <info@lobosmc.com.com>",
+        to=[email],
+        reply_to=["Lobos Support <info@lobosmc.com.com>"])
 
     # Include an inline image in the html:
     # logo_cid = attach_inline_image_file(msg, "/path/to/logo.jpg")
-    html = get_template('userregistertemplate.html')
+    html = loader.render_to_string(
+            '../templates/events/userregistertemplate.html',
+            {
+                'name': first_name.title() + " " + last_name.title(),
+                'username': username,
+                'first_name': first_name.title(),
+                'last_name': last_name.title,
+                'password': password,
+            }
+        )
     msg.attach_alternative(html, "text/html")
 
     # Optional Anymail extensions:
@@ -186,7 +187,7 @@ def register(request):
                 # msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                 # msg.attach_alternative(html_content, "text/html")
                 # msg.send()
-                send_mail()
+                send_mail_user_reg(email, first_name, last_name, username, password)
                 return redirect('/login/')
 
 
