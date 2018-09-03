@@ -12,7 +12,6 @@ class RiderProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'email', 'event',)
     readonly_fields = ('registration_date_time',)
     search_fields = ("event__event_name", "event__event_date",)
-    readonly_fields = ('registration_date_time',)
 
     def user_info(self, obj):
         return obj.description

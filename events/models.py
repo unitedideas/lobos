@@ -92,7 +92,7 @@ class RiderProfile(models.Model):
         (EXOVER16, 'Expert Schedule Classes - Over age 16'),
         (EXUNDER16, 'Expert Schedule Classes - 16 and under'),
         (AMOVER16, 'Amateur Schedule Classes - Over age 16'),
-        (AMUNDER16, 'Expert Schedule Classes - 16 and under'),
+        (AMUNDER16, 'Amateur Schedule Classes - 16 and under'),
         (CLASS60_70, 'Class 60 and 70 Rider'),
         (ESCORT, 'Escort Rider'),
     )

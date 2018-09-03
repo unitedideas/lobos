@@ -23,10 +23,6 @@
         <div class="container">
             <div id="jumbotron" class="jumbotron" style="padding: 20px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
-                {#                <p>A little history about the event here</p>#}
-                {#                <p>Maybe a notice</p>#}
-                {#                <p>Date</p>#}
-                {#                <p>Location</p>#}
             </div>
 
             <div>
@@ -123,8 +119,6 @@
                         color: 'blue',
                         tagline: 'false'
                     },
-                    escortCost: 10.00,
-                    riderCost: 70.00,
                     amountStr: '0.00',
                     formList: [],
                     count: 0,
@@ -137,7 +131,7 @@
                     showcheckout: false,
                     showModal: false,
                     closeModal: 'Cancel',
-                    showPayPal: true
+                    showPayPal: true,
                 }
             },
             watch: {
@@ -190,11 +184,24 @@
                         }
 
                         for (let i = 0; i < allRiderTypes.length; i++) {
-                            if (allRiderTypes[i] !== 'Escort Rider') {
-                                total += this.riderCost
+                            if (allRiderTypes[i] === 'Escort Rider') {
+                                total += {{ event.escort_rider_cost }}
 
-                            } else {
-                                total += this.escortCost
+                            } else if (allRiderTypes[i] === 'Class 60 and 70 Rider') {
+                                total += {{ event.sixty_and_seventy_cost }}
+
+                            } else if (allRiderTypes[i] === 'Amateur Schedule Classes - 16 and under') {
+                                total += {{ event.amateur_under_16_cost }}
+
+                            } else if (allRiderTypes[i] === 'Amateur Schedule Classes - Over age 16') {
+                                total += {{ event.amateur_over_16_cost }}
+
+                            } else if (allRiderTypes[i] === 'Expert Schedule Classes - 16 and under') {
+                                total += {{ event.expert_under_16_cost }}
+
+                            } else if (allRiderTypes[i] === 'Expert Schedule Classes - Over age 16') {
+                                total += {{ event.expert_over_16_cost }}
+
                             }
                         }
                         this.amountStr = String(total.toFixed(2))
@@ -303,8 +310,6 @@
                         .then(function (response) {
                             app.vue_form = response.data.formset.replace(/rider_cat" /g, 'rider_cat" oninput="select_change(this)"')
                             app.formList.push(app.vue_form)
-                            app.riderCost = Number(response.data.reg_rider_cost)
-                            app.escortCost = Number(response.data.escort_rider_cost)
                         })
                 },
         })
@@ -319,28 +324,6 @@
 
         }
 
-    </script>
-
-    <script>
-        window.onscroll = function () {
-            myFunction()
-        };
-
-        var header = document.getElementById("myHeader");
-        var sticky = header.offsetTop;
-        var jummarg = document.getElementById("jumbotron")
-        {#var formfeedback = document.getElementById("formfeedback")#}
-
-        function myFunction() {
-            if (window.pageYOffset > sticky) {
-                header.classList.add("sticky");
-                jummarg.classList.add('margin_100')
-            } else {
-                header.classList.remove("sticky");
-                jummarg.classList.remove('margin_100')
-
-            }
-        }
     </script>
 
 {% endblock %}

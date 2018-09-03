@@ -522,6 +522,7 @@ def event_register(request):
     else:
 
         event = Event.objects.get(event_name=request.GET.get('event'))
+
         formset = prefill_form(request)
 
         args = {'formset': formset, 'event': event}
