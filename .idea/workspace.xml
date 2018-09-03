@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,8 +149,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="34" />
     <option name="y" value="22" />
-    <option name="width" value="2526" />
-    <option name="height" value="1418" />
+    <option name="width" value="1977" />
+    <option name="height" value="1144" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -191,6 +189,11 @@
             <path>
               <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
               <item name="lobos" type="462c0819:PsiDirectoryNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -216,11 +219,11 @@
       <recent name="$PROJECT_DIR$/events/templates/events" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/events/templates/events" />
       <recent name="$PROJECT_DIR$/static/events" />
       <recent name="$PROJECT_DIR$/events" />
       <recent name="$PROJECT_DIR$/events/templates" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
@@ -355,13 +358,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00150" summary="Merge remote-tracking branch 'github/master'&#10;&#10;# Conflicts:&#10;#&#9;events/__pycache__/views.cpython-36.pyc&#10;#&#9;lobos/__pycache__/__init__.cpython-36.pyc&#10;#&#9;lobos/__pycache__/middleware.cpython-36.pyc&#10;#&#9;lobos/__pycache__/secrets.cpython-36.pyc&#10;#&#9;lobos/__pycache__/settings.cpython-36.pyc&#10;#&#9;lobos/__pycache__/urls.cpython-36.pyc">
-      <created>1535139458512</created>
-      <option name="number" value="00150" />
-      <option name="presentableId" value="LOCAL-00150" />
-      <option name="project" value="LOCAL" />
-      <updated>1535139458512</updated>
     </task>
     <task id="LOCAL-00151" summary="Merge remote-tracking branch 'github/master'&#10;&#10;# Conflicts:&#10;#&#9;events/__pycache__/views.cpython-36.pyc&#10;#&#9;lobos/__pycache__/__init__.cpython-36.pyc&#10;#&#9;lobos/__pycache__/middleware.cpython-36.pyc&#10;#&#9;lobos/__pycache__/secrets.cpython-36.pyc&#10;#&#9;lobos/__pycache__/settings.cpython-36.pyc&#10;#&#9;lobos/__pycache__/urls.cpython-36.pyc">
       <created>1535415546489</created>
@@ -699,7 +695,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536008921275</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="created the lobos paypal account.&#10;need the email activated and the account in production">
+      <created>1536009380114</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1536009380114</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -712,9 +715,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="34" y="22" width="2526" height="1418" extended-state="0" />
+    <frame x="34" y="22" width="1977" height="1144" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1078905" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13850129" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="0" />
@@ -726,7 +729,7 @@
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.3295626" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49955398" weight="0.6651584" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49955398" visible="true" weight="0.6644487" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.500446" side_tool="true" weight="0.83269376" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.3295626" />
