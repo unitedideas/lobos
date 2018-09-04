@@ -138,11 +138,16 @@
                 paymentComplete() {
                     this.$refs.submitButton.click();
                 },
+
                 formSuccess() {
                     if (this.formSuccess === true) {
                         this.showModal = true
                     }
                 },
+
+                rider_cat_change(){
+
+                }
             },
             methods:
                 {
@@ -245,33 +250,23 @@
 
                     formID: function () {
                         let formID = 'id_form-' + this.count
-                        console.log(formID)
                         this.delForm()
                     },
 
                     add_rider_type: function () {
-                        console.log('in the foo')
                         this.paypalItems.push({"name": ""})
-                        console.log(this.paypalItems)
                     },
 
                     paymentAuthorized: function (data) {
                         this.showPayPal = false
-                        console.log('The payment was authorized')
-                        console.log(data)
                     },
+
                     paymentCompleted: function (data) {
-                        console.log('The payment was completed')
                         this.paymentComplete = true
-                        console.log(this.paymentComplete)
-                        console.log('Try and get a form submition off')
-
-
                     },
+
                     paymentCancelled: function (data) {
                         this.payment_cancelled = false
-                        console.log('The payment was declined or cancled, please try again')
-                        console.log(data)
                         this.payment_cancelled = true
                         this.showPayPal = true
 
@@ -281,7 +276,6 @@
                     select_change: function (e) {
                         var id = e.id
                         document.getElementById(id).onchange = function (e) {
-                            console.log('Something happened')
                             totalCost()
                         }
 
