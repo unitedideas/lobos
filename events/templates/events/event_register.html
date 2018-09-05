@@ -1,3 +1,5 @@
+
+
 {% extends "base.html" %}
 {% load static %}
 
@@ -15,6 +17,7 @@
     {% endblock %}
 </head>
 {% block body %}
+
     <div id="app" v-cloak=>
 
 
@@ -24,9 +27,11 @@
             </div>
 
             <div>
-                <form method="POST" id="feedbackform">
+                <form method="POST" id="feedbackform" v-for="(f, index) in forms" :key="index">
                     {% csrf_token %}
                     {{ formset.management_form }}
+
+
                     <div style="margin-right: 15px;" class="row">
                         <div v-for="form in formList">
                             <br>
@@ -99,8 +104,8 @@
         </div>
     </div>
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
-    <script>
 
+    <script>
         var app = new Vue({
             delimiters: ['[[', ']]'],
             el: '#app',
@@ -110,6 +115,7 @@
                         sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
                         {#production: 'Aa2EMwpfZC-RkwuYd5FjEsuw5XOkYVmTk3K4GTJ1kTcMTuC5J2yV0mjhlua6mJg7Uf26YzPrMaCcixPT'#}
                     },
+
                     aStyle: {
                         label: 'checkout',
                         size: 'large',
@@ -117,6 +123,7 @@
                         color: 'blue',
                         tagline: 'false'
                     },
+
                     amountStr: '0.00',
                     formList: [],
                     count: 0,
@@ -314,10 +321,23 @@
                         }
                     )
 
-                        .then(function (response) {
+                         .then(function (response) {
                             app.vue_form = response.data.formset.replace(/rider_cat" /g, 'rider_cat" oninput="select_change(this)"')
                             app.formList.push(app.vue_form)
-                        })
+                         })
+
+                        {#.then(function (response) {#}
+                        {#    app.vue_form = response.data.formset.replace(/<input type="text" name="form-0-rider_cat" maxlength="100" id="id_form-0-rider_cat">/g,#}
+                        {#        '<select v-model="f.selected"><option :value="null" :disabled="true">Select a number</option>' +#}
+                        {#        '<option v-for="option in Object.keys(f.options)" :key="option" :value="option">[[option]]</option></select>')#}
+                        {##}
+                        {#    app.vue_form = app.vue_form.replace(/<input type="text" name="form-0-rider_class" maxlength="100" id="id_form-0-rider_class">/g,#}
+                        {#        '<select v-model="f.subselected" :disabled="!f.selected"><option :value="null" :disabled="true">Select a letter</option>' +#}
+                        {#        '<option v-for="option in f.options[f.selected]" :key="option" :value="option">[[option]]</option></select>')#}
+                        {##}
+                        {#    console.log(app.vue_form)#}
+                        {#    app.formList.push(app.vue_form)#}
+                        {# }) #}
                 },
         })
 

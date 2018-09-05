@@ -163,6 +163,8 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'event',
                                                'id',
                                                'registration_date_time'
+                                               'rider_class'
+                                               'rider_cat'
                                            ),
                                            formset=BaseRiderProfileFormSet,
                                            widgets=
@@ -172,5 +174,6 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'escort_name': forms.TextInput(attrs={'placeholder': 'If you are not 14 years old by day of the event, an escort rider is required'}),
                                                'group_name': forms.TextInput(attrs={'placeholder': 'John Smith, Jane Doe'}),
                                                'rider_class': forms.Select(attrs={'v-model':"f.subselected", ':disabled':"!f.selected"}),
+                                               'rider_cat': forms.Select(attrs={'v-model':"f.selected", 'oninput':"select_change(this)"}),
 
                                            })

@@ -87,7 +87,8 @@ class RiderProfile(models.Model):
     SEVENTY = '70'
     FEMALE = 'Female'
     MALE = 'Male'
-    OPTION = 'option'
+    ONE = 'one'
+    OPTION = '[[option]]'
 
     RIDER_CAT = (
         (EXOVER16, 'Expert Schedule Classes - Over age 16'),
@@ -98,26 +99,23 @@ class RiderProfile(models.Model):
         (ESCORT, 'Escort Rider'),
     )
 
-    RIDER_CLASS = (
-        (OPTION, '[[option]]'),
-    )
 
-    # RIDER_CLASS = (
-    #     (AA, 'AA'),
-    #     (OPENAM, 'Open Amateur'),
-    #     (AM250, '250 AM'),
-    #     (AM30, '30 AM'),
-    #     (AM40, '40 AM'),
-    #     (EXAM40, '40 EX-AM'),
-    #     (EX50, '50 EX'),
-    #     (AM50, '50 AM'),
-    #     (SPORTSMN, 'Sportsman'),
-    #     (BEGINNER, 'Beginner'),
-    #     (WOMEN, 'Women'),
-    #     (JR, 'JR'),
-    #     (SIXTY, '60'),
-    #     (SEVENTY, '70'),
-    # )
+    RIDER_CLASS = (
+        (AA, 'AA'),
+        (OPENAM, 'Open Amateur'),
+        (AM250, '250 AM'),
+        (AM30, '30 AM'),
+        (AM40, '40 AM'),
+        (EXAM40, '40 EX-AM'),
+        (EX50, '50 EX'),
+        (AM50, '50 AM'),
+        (SPORTSMN, 'Sportsman'),
+        (BEGINNER, 'Beginner'),
+        (WOMEN, 'Women'),
+        (JR, 'JR'),
+        (SIXTY, '60'),
+        (SEVENTY, '70'),
+    )
 
     GENDER = (
         (FEMALE, 'Female'),
