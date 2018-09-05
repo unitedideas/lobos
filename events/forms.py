@@ -171,4 +171,6 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
                                                'escort_name': forms.TextInput(attrs={'placeholder': 'If you are not 14 years old by day of the event, an escort rider is required'}),
                                                'group_name': forms.TextInput(attrs={'placeholder': 'John Smith, Jane Doe'}),
+                                               'rider_class': forms.Select(attrs={'v-model':"f.subselected", ':disabled':"!f.selected"}),
+
                                            })
