@@ -69,7 +69,8 @@ class RiderProfile(models.Model):
     EXUNDER16 = 'Expert Schedule Classes - 16 and under'
     AMOVER16 = 'Amateur Schedule Classes - Over age 16'
     AMUNDER16 = 'Amateur Schedule Classes - 16 and under'
-    CLASS60_70 = 'Class 60 and 70 Rider'
+    CLASS60 = '60 Class'
+    CLASS70 = '70 Class'
     ESCORT = 'Escort Rider'
     AA = 'AA'
     OPENAM = 'Open Amateur'
@@ -85,6 +86,7 @@ class RiderProfile(models.Model):
     JR = 'JR'
     SIXTY = '60'
     SEVENTY = '70'
+    CLASS60_70 ='Class 60 and 70 Rider'
     FEMALE = 'Female'
     MALE = 'Male'
     ONE = 'one'
@@ -100,22 +102,63 @@ class RiderProfile(models.Model):
     )
 
 
-    RIDER_CLASS = (
-        (AA, 'AA'),
-        (OPENAM, 'Open Amateur'),
-        (AM250, '250 AM'),
-        (AM30, '30 AM'),
-        (AM40, '40 AM'),
-        (EXAM40, '40 EX-AM'),
-        (EX50, '50 EX'),
-        (AM50, '50 AM'),
-        (SPORTSMN, 'Sportsman'),
-        (BEGINNER, 'Beginner'),
-        (WOMEN, 'Women'),
-        (JR, 'JR'),
-        (SIXTY, '60'),
-        (SEVENTY, '70'),
-    )
+    RIDER_CLASS = [
+        ('Expert Schedule Classes - Over age 16', [
+            (AA, 'AA'),
+            (OPENAM, 'Open Amateur'),
+            (AM250, '250 AM'),
+            (AM30, '30 AM'),
+            (EXAM40, '40 EX-AM')
+        ]),
+        ('Expert Schedule Classes - 16 and under', [
+            (AA, 'AA'),
+            (OPENAM, 'Open Amateur'),
+            (AM250, '250 AM')
+        ]),
+        ('Amateur Schedule Classes - Over age 16', [
+            (OPENAM, 'Open Amateur'),
+            (AM250, '250 AM'),
+            (AM30, '30 AM'),
+            (EXAM40, '40 EX-AM'),
+            (AM40, '40 AM'),
+            (EX50, '50 EX'),
+            (AM50, '50 AM'),
+            (SPORTSMN, 'Sportsman'),
+            (BEGINNER, 'Beginner'),
+            (WOMEN, 'Women')
+        ]),
+        ('Amateur Schedule Classes - 16 and under', [
+            (OPENAM, 'Open Amateur'),
+            (AM250, '250 AM'),
+            (SPORTSMN, 'Sportsman'),
+            (BEGINNER, 'Beginner'),
+            (WOMEN, 'Women'),
+            (JR, 'JR')
+        ]),
+        ('Class 60 and 70 Rider', [
+            (CLASS60, '60 Class'),
+            (CLASS70, '70 Class')
+        ]),
+        ('Escort Rider', [
+            (ESCORT, 'Escort Rider')]
+         )]
+
+    # RIDER_CLASS = (
+    #     (AA, 'AA'),
+    #     (OPENAM, 'Open Amateur'),
+    #     (AM250, '250 AM'),
+    #     (AM30, '30 AM'),
+    #     (AM40, '40 AM'),
+    #     (EXAM40, '40 EX-AM'),
+    #     (EX50, '50 EX'),
+    #     (AM50, '50 AM'),
+    #     (SPORTSMN, 'Sportsman'),
+    #     (BEGINNER, 'Beginner'),
+    #     (WOMEN, 'Women'),
+    #     (JR, 'JR'),
+    #     (SIXTY, '60'),
+    #     (SEVENTY, '70'),
+    # )
 
     GENDER = (
         (FEMALE, 'Female'),
@@ -124,8 +167,8 @@ class RiderProfile(models.Model):
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    rider_cat = models.CharField('Rider Category', max_length=100, choices=RIDER_CAT)
-    rider_class = models.CharField(max_length=100, choices=RIDER_CLASS)
+    rider_cat = models.CharField('Rider Category', max_length=1000, choices=RIDER_CAT)
+    rider_class = models.CharField(max_length=1000, choices=RIDER_CLASS)
     first_name = models.CharField(max_length=300, null=True, blank=True)
     last_name = models.CharField(max_length=300, null=True, blank=True)
     email = models.EmailField(max_length=300, null=True, blank=True)
@@ -145,7 +188,8 @@ class RiderProfile(models.Model):
     omra_number = models.CharField(max_length=300, null=True, blank=True, )
     ama_number = models.CharField(max_length=300, null=True, blank=True)
     escort_name = models.CharField('Your Escorts Name', max_length=300, null=True, blank=True)
-    group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000, null=True, blank=True)
+    group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
+                                  null=True, blank=True)
 
     # These items will not be in the form and must not be visible
     # confirmation will be generated, age on event day will be calculated
