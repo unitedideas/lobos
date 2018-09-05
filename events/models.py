@@ -102,6 +102,23 @@ class RiderProfile(models.Model):
         (OPTION, '[[option]]'),
     )
 
+    # RIDER_CLASS = (
+    #     (AA, 'AA'),
+    #     (OPENAM, 'Open Amateur'),
+    #     (AM250, '250 AM'),
+    #     (AM30, '30 AM'),
+    #     (AM40, '40 AM'),
+    #     (EXAM40, '40 EX-AM'),
+    #     (EX50, '50 EX'),
+    #     (AM50, '50 AM'),
+    #     (SPORTSMN, 'Sportsman'),
+    #     (BEGINNER, 'Beginner'),
+    #     (WOMEN, 'Women'),
+    #     (JR, 'JR'),
+    #     (SIXTY, '60'),
+    #     (SEVENTY, '70'),
+    # )
+
     GENDER = (
         (FEMALE, 'Female'),
         (MALE, 'Male'),
