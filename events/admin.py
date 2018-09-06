@@ -1,5 +1,3 @@
-from import_export import resources
-from import_export.admin import ImportExportModelAdmin
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -47,22 +45,4 @@ class RatingAdmin(admin.ModelAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
-
-
-class RiderProfileResource(resources.ModelResource):
-
-    class Meta:
-        model = RiderProfile
-# To affect which model fields will be included in an import-export
-# resource, use the fields option to whitelist fields:
-        # fields = ('id', 'name', 'author', 'price',)
-
-
-# An explicit order for exporting fields can be set using the export_order option:
-        # export_order = ('id', 'price', 'author', 'name')
-
-class RiderProfileAdmin(ImportExportModelAdmin):
-    pass
-
-
 
