@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/events/templates/events/import.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/events/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lobos/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lobos/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lobos/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/lobos/settings.py" afterDir="false" />
     </list>
     <list id="96de7d3c-6dab-4e83-96ee-8cf336713065" name="created the lobos paypal account." comment="created the lobos paypal account.&#10;need the email activated and the account in production&#10;&#10;(cherry picked from commit e8a5bb031dc9371d814bafe2684bb0a7ccb8a0d5)">
@@ -30,16 +31,16 @@
         <counts>
           <entry key="gitignore" value="24" />
           <entry key="html" value="1927" />
-          <entry key="py" value="4897" />
-          <entry key="txt" value="1746" />
+          <entry key="py" value="4937" />
+          <entry key="txt" value="1747" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="1927" />
-          <entry key="Hoi4 file" value="65" />
+          <entry key="Hoi4 file" value="66" />
           <entry key="PLAIN_TEXT" value="1705" />
-          <entry key="Python" value="4897" />
+          <entry key="Python" value="4937" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -49,14 +50,14 @@
           <entry key="html" value="26" />
           <entry key="png" value="1" />
           <entry key="py" value="51" />
-          <entry key="txt" value="4" />
+          <entry key="txt" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
           <entry key="HTML" value="26" />
-          <entry key="Hoi4 file" value="4" />
+          <entry key="Hoi4 file" value="5" />
           <entry key="Image" value="1" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="Python" value="51" />
@@ -95,14 +96,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="289">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
-                <marker date="1536262480000" expanded="true" signature="1470:1472" ph="..." />
+                <marker date="1536275322000" expanded="true" signature="1416:1417" ph="..." />
               </folding>
             </state>
           </provider>
@@ -111,8 +112,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lobos/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="740">
-              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+            <state relative-caret-position="298">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
               <folding>
                 <element signature="e#304#313#0" expanded="true" />
               </folding>
@@ -120,11 +121,23 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lobos/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="108" lean-forward="true" selection-start-column="84" selection-end-column="108" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-278">
-              <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
+            <state relative-caret-position="-295">
+              <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -160,9 +173,9 @@
       <find>BEGINN</find>
       <find>cat</find>
       <find>import</find>
-      <find>debug</find>
-      <find>riderprofile</find>
       <find>httpR</find>
+      <find>riderprofile</find>
+      <find>debug</find>
     </findStrings>
     <replaceStrings>
       <replace>myactive</replace>
@@ -195,7 +208,6 @@
         <option value="$PROJECT_DIR$/lobos/.gitignore" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/lobos/secrets.py" />
-        <option value="$PROJECT_DIR$/lobos/requirements.txt" />
         <option value="$PROJECT_DIR$/static/events/userregistertemplate.html" />
         <option value="$PROJECT_DIR$/events/templates/events/userregistertemplate.html" />
         <option value="$PROJECT_DIR$/events/templates/events/home.html" />
@@ -204,9 +216,10 @@
         <option value="$PROJECT_DIR$/events/templates/events/event_register.html" />
         <option value="$PROJECT_DIR$/events/templates/events/event_confirmation.html" />
         <option value="$PROJECT_DIR$/events/templates/events/eventregistertemplate.html" />
+        <option value="$PROJECT_DIR$/events/views.py" />
         <option value="$PROJECT_DIR$/lobos/settings.py" />
         <option value="$PROJECT_DIR$/events/admin.py" />
-        <option value="$PROJECT_DIR$/events/views.py" />
+        <option value="$PROJECT_DIR$/lobos/requirements.txt" />
       </list>
     </option>
   </component>
@@ -319,13 +332,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00011" summary="added filter to events to start the email build &#10;and nav bar colors">
-      <created>1535499874687</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1535499874687</updated>
     </task>
     <task id="LOCAL-00012" summary="added filter to events to start the email build &#10;and nav bar colors">
       <created>1535506883562</created>
@@ -663,7 +669,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536203889204</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Not working... &#10;Trying to add a dynamic select field to the event registration field form through django widget attr.&#10;Resorted to a OPTSELECT">
+      <created>1536271701199</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1536271701200</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -677,6 +690,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1138" y="44" width="1352" height="1418" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24427481" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -814,13 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lobos/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="19" lean-forward="true" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lobos/secrets.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -908,31 +915,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/events/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-295">
+          <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+            <marker date="1536275322000" expanded="true" signature="1416:1417" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lobos/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="740">
-          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        <state relative-caret-position="298">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
           <folding>
             <element signature="e#304#313#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/views.py">
+    <entry file="file://$PROJECT_DIR$/lobos/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-278">
-          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/events/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-            <marker date="1536262480000" expanded="true" signature="1470:1472" ph="..." />
-          </folding>
+        <state>
+          <caret column="108" lean-forward="true" selection-start-column="84" selection-end-column="108" />
         </state>
       </provider>
     </entry>

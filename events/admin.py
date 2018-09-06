@@ -10,18 +10,17 @@ admin.site.site_header = 'Lobos Events/ User Database'
 class RiderProfileExportAdmin(ImportExportModelAdmin):
     pass
 
-#  attempt to add infor rows above the riderprofile  <, not working
-# class RiderProfileAdmin(admin.ModelAdmin):
-#     list_display = ('user', 'email', 'event',)
-#     readonly_fields = ('registration_date_time',)
-#     search_fields = ("event__event_name", "event__event_date",)
-#
-#     def user_info(self, obj):
-#         return obj.description
+ # attempt to add infor rows above the riderprofile  <, not working
+class RiderProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'email', 'event',)
+    readonly_fields = ('registration_date_time',)
+    search_fields = ("event__event_name", "event__event_date",)
+
+    def user_info(self, obj):
+        return obj.description
 
 
 
-# admin.site.register(RiderProfileAdmin)
 admin.site.register(Event)
 admin.site.register(Profile)
 
