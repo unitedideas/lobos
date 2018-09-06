@@ -1,22 +1,27 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from .models import RiderProfile, Event, Profile
 
 admin.site.site_header = 'Lobos Events/ User Database'
 
+@admin.register(RiderProfile)
+class RiderProfileExportAdmin(ImportExportModelAdmin):
+    pass
 
 #  attempt to add infor rows above the riderprofile  <, not working
-class RiderProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'email', 'event',)
-    readonly_fields = ('registration_date_time',)
-    search_fields = ("event__event_name", "event__event_date",)
+# class RiderProfileAdmin(admin.ModelAdmin):
+#     list_display = ('user', 'email', 'event',)
+#     readonly_fields = ('registration_date_time',)
+#     search_fields = ("event__event_name", "event__event_date",)
+#
+#     def user_info(self, obj):
+#         return obj.description
 
-    def user_info(self, obj):
-        return obj.description
 
 
-admin.site.register(RiderProfile, RiderProfileAdmin)
+# admin.site.register(RiderProfileAdmin)
 admin.site.register(Event)
 admin.site.register(Profile)
 

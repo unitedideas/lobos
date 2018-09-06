@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'anymail',
+    'import_export',
 ]
 ANYMAIL = {
     "MAILGUN_API_KEY": MAILGUN_ACCESS_KEY,
