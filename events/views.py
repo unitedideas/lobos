@@ -272,7 +272,6 @@ def event_register(request):
     if request.method == 'POST':
 
         formset_post = RiderProfileFormSet(request.POST)
-
         if formset_post.is_valid():
             print('formset valid')
             formset = formset_post.save(commit=False)
@@ -280,12 +279,12 @@ def event_register(request):
             count = 0
             confirm = {}
             for form in formset:
+                print(form.rider_class)
                 count += 1
                 print('in the form loop')
                 created_username = form.first_name + form.last_name + form.email
                 print('form.birth_date')
                 print(form.birth_date)
-                print(type(form.birth_date))
 
                 # need to calculate the age on the event date
                 # age_on_event_day = form.birth_date - Event.event_date

@@ -76,8 +76,13 @@ class RiderProfile(models.Model):
     OPENAM = 'Open Amateur'
     AM250 = '250 AM'
     AM30 = '30 AM'
+    EXOVER16AA = 'AA'
+    EXOVER16OPENAM = 'Open Amateur'
+    EXOVER16AM250 = '250 AM'
+    EXOVER16AM30 = '30 AM'
     AM40 = '40 AM'
     EXAM40 = '40 EX-AM'
+    EXOVER16EXAM40 = '40 EX-AM'
     EX50 = '50 EX'
     AM50 = '50 AM'
     SPORTSMN = 'Sportsman'
@@ -103,44 +108,44 @@ class RiderProfile(models.Model):
 
 
     RIDER_CLASS = [
-        ('Expert Schedule Classes - Over age 16', [
-            (AA, 'AA'),
-            (OPENAM, 'Open Amateur'),
-            (AM250, '250 AM'),
-            (AM30, '30 AM'),
-            (EXAM40, '40 EX-AM')
+        (EXOVER16, [
+            ('EXOVER16AA', 'AA'),
+            ('EXOVER16OPENAM', 'Open Amateur'),
+            ('EXOVER16AM250', '250 AM'),
+            ('EXOVER16AM30', '30 AM'),
+            ('EXOVER16EXAM40', '40 EX-AM')
         ]),
-        ('Expert Schedule Classes - 16 and under', [
-            (AA, 'AA'),
-            (OPENAM, 'Open Amateur'),
-            (AM250, '250 AM')
+        (EXUNDER16, [
+            ('EXUNDER16AA', 'AA'),
+            ('EXUNDER16OPENAM', 'Open Amateur'),
+            ('EXUNDER16AM250', '250 AM')
         ]),
-        ('Amateur Schedule Classes - Over age 16', [
-            (OPENAM, 'Open Amateur'),
-            (AM250, '250 AM'),
-            (AM30, '30 AM'),
-            (EXAM40, '40 EX-AM'),
-            (AM40, '40 AM'),
-            (EX50, '50 EX'),
-            (AM50, '50 AM'),
-            (SPORTSMN, 'Sportsman'),
-            (BEGINNER, 'Beginner'),
-            (WOMEN, 'Women')
+        (AMOVER16, [
+            ('AMOVER16OPENAM', 'Open Amateur'),
+            ('AMOVER16AM250', '250 AM'),
+            ('AMOVER16AM30', '30 AM'),
+            ('AMOVER16EXAM40', '40 EX-AM'),
+            ('AMOVER16AM40', '40 AM'),
+            ('AMOVER16EX50', '50 EX'),
+            ('AMOVER16AM50', '50 AM'),
+            ('AMOVER16SPORTSMN', 'Sportsman'),
+            ('AMOVER16BEGINNER', 'Beginner'),
+            ('AMOVER16WOMEN', 'Women')
         ]),
-        ('Amateur Schedule Classes - 16 and under', [
-            (OPENAM, 'Open Amateur'),
-            (AM250, '250 AM'),
-            (SPORTSMN, 'Sportsman'),
-            (BEGINNER, 'Beginner'),
-            (WOMEN, 'Women'),
-            (JR, 'JR')
+        (AMUNDER16, [
+            ('AMUNDER16OPENAM', 'Open Amateur'),
+            ('AMUNDER16AM250', '250 AM'),
+            ('AMUNDER16SPORTSMN', 'Sportsman'),
+            ('AMUNDER16BEGINNER', 'Beginner'),
+            ('AMUNDER16WOMEN', 'Women'),
+            ('AMUNDER16JR', 'JR')
         ]),
-        ('Class 60 and 70 Rider', [
-            (CLASS60, '60 Class'),
-            (CLASS70, '70 Class')
+        (CLASS60_70, [
+            ('CLASS60', '60 Class'),
+            ('CLASS70', '70 Class')
         ]),
-        ('Escort Rider', [
-            (ESCORT, 'Escort Rider')]
+        (ESCORT, [
+            ('ESCORT', 'Escort Rider')]
          )]
 
     # RIDER_CLASS = (
