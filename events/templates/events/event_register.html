@@ -2,9 +2,7 @@
 {% load static %}
 
 <head>
-
-
-    {# jQuery #}
+    {# javascript #}
     <script type="text/javascript" src="{% static "events/JS.js" %}"></script>
     {# Vue.js CDN #}
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -52,7 +50,7 @@
         </div>
         <div class="sk-rotating-plane"></div>
         <div class="header row" id="">
-             <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
+            <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
                 <h3>Please correct these errors:</h3>
                 <div id="v-for-formerrors">
                     <div v-for="(value, index, key) in formerrors">
@@ -132,17 +130,31 @@
                     showModal: false,
                     closeModal: 'Cancel',
                     showPayPal: true,
+
+                    forms: [{
+                        selected: null,
+                        subselected: null,
+                        options: {
+                            one: ['A', 'B'],
+                            two: ['C', 'D']
+                        }
+                    }]
                 }
             },
             watch: {
                 paymentComplete() {
                     this.$refs.submitButton.click();
                 },
+
                 formSuccess() {
                     if (this.formSuccess === true) {
                         this.showModal = true
                     }
                 },
+
+                rider_cat_change() {
+
+                }
             },
             methods:
                 {
@@ -185,22 +197,28 @@
 
                         for (let i = 0; i < allRiderTypes.length; i++) {
                             if (allRiderTypes[i] === 'Escort Rider') {
-                                total += {{ event.escort_rider_cost }}
+                                total +=
+                                {{ event.escort_rider_cost }}
 
                             } else if (allRiderTypes[i] === 'Class 60 and 70 Rider') {
-                                total += {{ event.sixty_and_seventy_cost }}
+                                total +=
+                                {{ event.sixty_and_seventy_cost }}
 
                             } else if (allRiderTypes[i] === 'Amateur Schedule Classes - 16 and under') {
-                                total += {{ event.amateur_under_16_cost }}
+                                total +=
+                                {{ event.amateur_under_16_cost }}
 
                             } else if (allRiderTypes[i] === 'Amateur Schedule Classes - Over age 16') {
-                                total += {{ event.amateur_over_16_cost }}
+                                total +=
+                                {{ event.amateur_over_16_cost }}
 
                             } else if (allRiderTypes[i] === 'Expert Schedule Classes - 16 and under') {
-                                total += {{ event.expert_under_16_cost }}
+                                total +=
+                                {{ event.expert_under_16_cost }}
 
                             } else if (allRiderTypes[i] === 'Expert Schedule Classes - Over age 16') {
-                                total += {{ event.expert_over_16_cost }}
+                                total +=
+                                {{ event.expert_over_16_cost }}
 
                             }
                         }
@@ -245,33 +263,23 @@
 
                     formID: function () {
                         let formID = 'id_form-' + this.count
-                        console.log(formID)
                         this.delForm()
                     },
 
                     add_rider_type: function () {
-                        console.log('in the foo')
                         this.paypalItems.push({"name": ""})
-                        console.log(this.paypalItems)
                     },
 
                     paymentAuthorized: function (data) {
                         this.showPayPal = false
-                        console.log('The payment was authorized')
-                        console.log(data)
                     },
+
                     paymentCompleted: function (data) {
-                        console.log('The payment was completed')
                         this.paymentComplete = true
-                        console.log(this.paymentComplete)
-                        console.log('Try and get a form submition off')
-
-
                     },
+
                     paymentCancelled: function (data) {
                         this.payment_cancelled = false
-                        console.log('The payment was declined or cancled, please try again')
-                        console.log(data)
                         this.payment_cancelled = true
                         this.showPayPal = true
 
@@ -281,7 +289,6 @@
                     select_change: function (e) {
                         var id = e.id
                         document.getElementById(id).onchange = function (e) {
-                            console.log('Something happened')
                             totalCost()
                         }
 
