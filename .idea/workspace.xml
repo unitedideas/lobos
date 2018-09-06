@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="Not working... &#10;Trying to add a dynamic select field to the event registration field form through django widget attr.&#10;Resorted to a OPTSELECT">
-      <change afterPath="$PROJECT_DIR$/events/templates/events/import.html" afterDir="false" />
+    <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/admin.py" afterDir="false" />
     </list>
     <list id="96de7d3c-6dab-4e83-96ee-8cf336713065" name="created the lobos paypal account." comment="created the lobos paypal account.&#10;need the email activated and the account in production&#10;&#10;(cherry picked from commit e8a5bb031dc9371d814bafe2684bb0a7ccb8a0d5)">
       <changelist_data name="Unitedideas" email="unitedideas@gmail.com" date="1536008921000">
@@ -80,21 +77,27 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="9" />
+          <entry key="py" value="4" />
+          <entry key="txt" value="37" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="9" />
+          <entry key="PLAIN_TEXT" value="37" />
+          <entry key="Python" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="html" value="1" />
+          <entry key="py" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="1" />
+          <entry key="Python" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -110,11 +113,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/templates/events/import.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lobos/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="19" column="36" lean-forward="true" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+              <folding>
+                <element signature="e#304#313#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1135,13 +1150,6 @@
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
     </task>
-    <task id="LOCAL-00009" summary="added filter to events to start the email build &#10;and nav bar colors">
-      <created>1535495494196</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1535495494196</updated>
-    </task>
     <task id="LOCAL-00010" summary="added mail module, but didn't like it and rolling back">
       <created>1535497248182</created>
       <option name="number" value="00010" />
@@ -1478,7 +1486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536203768271</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Adding import export to RiderProfile">
+      <created>1536258186128</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1536258186129</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -1492,6 +1507,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="39" y="22" width="1401" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12877116" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1535,7 +1551,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Trying to ensure a unique OMRA number is used" />
     <MESSAGE value="Added a timestamp to the registration date" />
     <MESSAGE value="calculating the age of a rider on the date of the event" />
     <MESSAGE value="added mail module, but didn't like it and rolling back" />
@@ -1560,7 +1575,8 @@
     <MESSAGE value="Trying to add a dynamic select field to the event registration field form through django widget attr - working" />
     <MESSAGE value="Not working...&#10;Trying to add a dynamic select field to the event registration field form through django widget attr" />
     <MESSAGE value="Not working... &#10;Trying to add a dynamic select field to the event registration field form through django widget attr.&#10;Resorted to a OPTSELECT" />
-    <option name="LAST_COMMIT_MESSAGE" value="Not working... &#10;Trying to add a dynamic select field to the event registration field form through django widget attr.&#10;Resorted to a OPTSELECT" />
+    <MESSAGE value="Adding import export to RiderProfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding import export to RiderProfile" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/events/templates/base.html">
@@ -1729,20 +1745,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lobos/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="29" column="13" lean-forward="true" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding>
-            <element signature="e#304#313#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/events/templates/events/import.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lobos/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="19" column="36" lean-forward="true" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+          <folding>
+            <element signature="e#304#313#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
