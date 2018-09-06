@@ -2,6 +2,13 @@
 {% load static %}
 
 <head>
+    <script> var submitFocus = false;
+
+    $(window).keydown(function (event) {
+        if (event.keyCode == 13 && submitFocus == false) {
+            window.event.keyCode = 9;
+        }
+    });</script>
     {# javascript #}
     <script type="text/javascript" src="{% static "events/JS.js" %}"></script>
     {# Vue.js CDN #}

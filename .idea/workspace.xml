@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="Adding import export to RiderProfile">
+    <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lobos/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/lobos/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/events/templates/events/event_register.html" beforeDir="false" afterPath="$PROJECT_DIR$/events/templates/events/event_register.html" afterDir="false" />
     </list>
     <list id="96de7d3c-6dab-4e83-96ee-8cf336713065" name="created the lobos paypal account." comment="created the lobos paypal account.&#10;need the email activated and the account in production&#10;&#10;(cherry picked from commit e8a5bb031dc9371d814bafe2684bb0a7ccb8a0d5)">
       <changelist_data name="Unitedideas" email="unitedideas@gmail.com" date="1536008921000">
@@ -78,27 +78,27 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="9" />
-          <entry key="py" value="163" />
-          <entry key="txt" value="37" />
+          <entry key="html" value="240" />
+          <entry key="py" value="168" />
+          <entry key="txt" value="39" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="9" />
-          <entry key="PLAIN_TEXT" value="37" />
-          <entry key="Python" value="163" />
+          <entry key="HTML" value="240" />
+          <entry key="PLAIN_TEXT" value="39" />
+          <entry key="Python" value="168" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="1" />
+          <entry key="html" value="2" />
           <entry key="py" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="1" />
+          <entry key="HTML" value="2" />
           <entry key="Python" value="4" />
         </counts>
       </usages-collector>
@@ -107,34 +107,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/events/admin.py">
+        <entry file="file://$PROJECT_DIR$/events/templates/events/event_register.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+            <state relative-caret-position="85">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lobos/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="41" column="25" lean-forward="true" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
-              <folding>
-                <element signature="e#304#313#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="19" selection-start-column="13" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -143,16 +122,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user</find>
-      <find>username</find>
-      <find>14</find>
-      <find>push</find>
-      <find>options</find>
-      <find>formList</find>
-      <find>v-for=&quot;(f, index) in forms&quot; :key=&quot;index&quot;</find>
-      <find>forms</find>
       <find>class</find>
-      <find>form</find>
       <find>requi</find>
       <find>true</find>
       <find>console.log(</find>
@@ -169,10 +139,19 @@
       <find>static</find>
       <find>project_dir</find>
       <find>models</find>
-      <find>import</find>
       <find>RiderProfileAdmin</find>
       <find>IMPORT_EXPORT_USE_TRANSACTIONS</find>
+      <find>debug</find>
       <find>riderprofile</find>
+      <find>import</find>
+      <find>submitB</find>
+      <find>submit</find>
+      <find>subm</find>
+      <find>vali</find>
+      <find>3</find>
+      <find>metho</find>
+      <find>form</find>
+      <find>3day</find>
     </findStrings>
     <replaceStrings>
       <replace>myactive</replace>
@@ -211,12 +190,12 @@
         <option value="$PROJECT_DIR$/events/templates/events/home.html" />
         <option value="$PROJECT_DIR$/events/forms.py" />
         <option value="$PROJECT_DIR$/events/models.py" />
-        <option value="$PROJECT_DIR$/events/templates/events/event_register.html" />
         <option value="$PROJECT_DIR$/events/templates/events/event_confirmation.html" />
         <option value="$PROJECT_DIR$/events/templates/events/eventregistertemplate.html" />
         <option value="$PROJECT_DIR$/events/views.py" />
-        <option value="$PROJECT_DIR$/lobos/settings.py" />
         <option value="$PROJECT_DIR$/events/admin.py" />
+        <option value="$PROJECT_DIR$/lobos/settings.py" />
+        <option value="$PROJECT_DIR$/events/templates/events/event_register.html" />
       </list>
     </option>
   </component>
@@ -226,10 +205,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="39" />
     <option name="y" value="22" />
-    <option name="width" value="753" />
+    <option name="width" value="1052" />
     <option name="height" value="878" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -251,6 +230,19 @@
             <path>
               <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
               <item name="lobos" type="462c0819:PsiDirectoryNode" />
+              <item name="events" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
+              <item name="events" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lobos" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lobos" type="462c0819:PsiDirectoryNode" />
+              <item name="events" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="events" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -1106,27 +1098,6 @@
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
     </task>
-    <task id="LOCAL-00013" summary="cleaning up some code">
-      <created>1535563412129</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1535563412129</updated>
-    </task>
-    <task id="LOCAL-00014" summary="cleaning up some code">
-      <created>1535564168982</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1535564168982</updated>
-    </task>
-    <task id="LOCAL-00015" summary="changed the event page show / not show a registration button based on the days remaining until the event &gt; 0">
-      <created>1535574150391</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1535574150392</updated>
-    </task>
     <task id="LOCAL-00016" summary="changed the event page show / not show a registration button based on the race entrants reaching max capacity &gt; 0">
       <created>1535574433212</created>
       <option name="number" value="00016" />
@@ -1449,7 +1420,28 @@
       <option name="project" value="LOCAL" />
       <updated>1536261706542</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Added import export to RiderProfile">
+      <created>1536263366484</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1536263366484</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Added import export to RiderProfile">
+      <created>1536263391039</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1536263391040</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Added import export to RiderProfile">
+      <created>1536263591149</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1536263591150</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -1462,10 +1454,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="39" y="22" width="753" height="878" extended-state="0" />
-    <editor active="true" />
+    <frame x="38" y="22" width="1402" height="878" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.042194095" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19264705" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="0" />
@@ -1507,7 +1498,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added a timestamp to the registration date" />
     <MESSAGE value="calculating the age of a rider on the date of the event" />
     <MESSAGE value="added mail module, but didn't like it and rolling back" />
     <MESSAGE value="added filter to events to start the email build &#10;and nav bar colors" />
@@ -1532,7 +1522,8 @@
     <MESSAGE value="Not working...&#10;Trying to add a dynamic select field to the event registration field form through django widget attr" />
     <MESSAGE value="Not working... &#10;Trying to add a dynamic select field to the event registration field form through django widget attr.&#10;Resorted to a OPTSELECT" />
     <MESSAGE value="Adding import export to RiderProfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding import export to RiderProfile" />
+    <MESSAGE value="Added import export to RiderProfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added import export to RiderProfile" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/events/templates/base.html">
@@ -1622,13 +1613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/templates/events/event_register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="943">
-          <caret line="227" selection-start-line="227" selection-end-line="227" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/events/templates/events/reset_password.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1688,17 +1672,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="13" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lobos/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="41" column="25" lean-forward="true" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+        <state relative-caret-position="152">
+          <caret line="23" column="3" lean-forward="true" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
           <folding>
             <element signature="e#304#313#0" expanded="true" />
           </folding>
@@ -1711,6 +1688,23 @@
           <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="19" selection-start-column="13" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/event_register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#form#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
