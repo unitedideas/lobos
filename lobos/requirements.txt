@@ -1,2 +1,3 @@
-django-import-export==1.0.1
+pip install -e git+https://github.com/django-import-export/django-import-export.git#egg=django-import-export
+
 django-anymail==4.1
