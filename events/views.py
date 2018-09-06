@@ -238,7 +238,7 @@ def error_checking(request):
         return JsonResponse(content)
 
 
-def event_mail(email, first_name, last_name, username, rider_cat, rider_class, event, confirmation_number):
+def event_mail(email, first_name, last_name, username, rider_class, event, confirmation_number):
     msg = EmailMultiAlternatives(
         subject="You're Registered!",
         from_email="The Lobos Team <info@lobosmc.com.com>",
@@ -249,7 +249,6 @@ def event_mail(email, first_name, last_name, username, rider_cat, rider_class, e
         '../templates/events/eventregistertemplate.html',
         {
             'event': event,
-            'rider_cat':rider_cat,
             'rider_class': rider_class,
             'name': first_name.title() + " " + last_name.title(),
             'username': username,
@@ -331,7 +330,6 @@ def event_register(request):
                     first_name = form.first_name
                     last_name = form.last_name
                     email = form.email
-                    rider_cat = form.rider_cat
                     rider_class = form.rider_class
 
                     confirm[created_username] = {'message': message,
@@ -340,12 +338,11 @@ def event_register(request):
                                                  'last_name': last_name,
                                                  'email': email,
                                                  'confirmation': confirmation_number,
-                                                 'rider_cat': rider_cat,
                                                  'rider_class': rider_class}
                     form.save()
 
                     #Email
-                    event_mail(email, first_name, last_name, username, rider_cat, rider_class, event,
+                    event_mail(email, first_name, last_name, username, rider_class, event,
                                confirmation_number)
 
 
@@ -356,7 +353,6 @@ def event_register(request):
                     first_name = form.first_name
                     last_name = form.last_name
                     email = form.email
-                    rider_cat = form.rider_cat
                     rider_class = form.rider_class
 
                     # if we want to send the old confirmation number, uncomment below code
@@ -373,12 +369,11 @@ def event_register(request):
                                                  'last_name': last_name,
                                                  'email': email,
                                                  'confirmation': confirmation_number,
-                                                 'rider_cat': rider_cat,
                                                  'rider_class': rider_class}
                     form.save()
 
                     #Email
-                    event_mail(email, first_name, last_name, username, rider_cat, rider_class, event,
+                    event_mail(email, first_name, last_name, username, rider_class, event,
                                confirmation_number)
 
 
@@ -391,7 +386,6 @@ def event_register(request):
                     first_name = form.first_name
                     last_name = form.last_name
                     email = form.email
-                    rider_cat = form.rider_cat
                     rider_class = form.rider_class
 
                     confirm[created_username] = {'username': username,
@@ -399,13 +393,12 @@ def event_register(request):
                                                  'last_name': last_name,
                                                  'email': email,
                                                  'confirmation': confirmation_number,
-                                                 'rider_cat': rider_cat,
                                                  'rider_class': rider_class}
 
                     form.save()
 
                     #Email
-                    event_mail(email, first_name, last_name, username, rider_cat, rider_class, event,
+                    event_mail(email, first_name, last_name, username, rider_class, event,
                                confirmation_number)
 
 
