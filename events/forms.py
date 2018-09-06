@@ -28,7 +28,8 @@ class RegistrationForm(UserCreationForm):
     last_name = forms.CharField(widget=forms.TextInput())
     gender = forms.ChoiceField(choices=GENDER, initial='Male')
     birth_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'placeholder': '12/14/1980'}))
-    phone_number = forms.CharField(max_length=10, required=False, widget=forms.NumberInput(attrs={'placeholder': '2223334444'}))
+    phone_number = forms.CharField(max_length=10, required=False,
+                                   widget=forms.NumberInput(attrs={'placeholder': '2223334444'}))
     country = forms.CharField(required=False)
     address = forms.CharField(required=False)
     address_line_two = forms.CharField(required=False)
@@ -155,6 +156,7 @@ class BaseRiderProfileFormSet(BaseModelFormSet):
 RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            exclude=
                                            (
+                                               'rider_cat',
                                                'user',
                                                'age_on_event_day',
                                                'confirmation_number',
@@ -162,18 +164,17 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'start_time',
                                                'event',
                                                'id',
-                                               'registration_date_time'
-                                               'rider_class'
-                                               'rider_cat'
+                                               'registration_date_time',
                                            ),
                                            formset=BaseRiderProfileFormSet,
                                            widgets=
                                            {
                                                'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
                                                'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
-                                               'escort_name': forms.TextInput(attrs={'placeholder': 'If you are not 14 years old by day of the event, an escort rider is required'}),
-                                               'group_name': forms.TextInput(attrs={'placeholder': 'John Smith, Jane Doe'}),
-                                               'rider_cat': forms.Select(attrs={'oninput':"select_change(this)"}),
-                                               'rider_class': forms.Select(attrs={'oninput':"select_change(this)"}),
+                                               'escort_name': forms.TextInput(attrs={
+                                                   'placeholder': 'If you are not 15 years old by day of the event, an escort rider is required'}),
+                                               'group_name': forms.TextInput(
+                                                   attrs={'placeholder': 'John Smith, Jane Doe'}),
+                                               'rider_class': forms.Select(attrs={'oninput': "select_change(this)"}),
 
                                            })

@@ -65,87 +65,84 @@ class Profile(models.Model):
 
 
 class RiderProfile(models.Model):
-    EXOVER16 = 'Expert Schedule Classes - Over age 16'
-    EXUNDER16 = 'Expert Schedule Classes - 16 and under'
-    AMOVER16 = 'Amateur Schedule Classes - Over age 16'
-    AMUNDER16 = 'Amateur Schedule Classes - 16 and under'
-    CLASS60 = '60 Class'
-    CLASS70 = '70 Class'
-    ESCORT = 'Escort Rider'
-    AA = 'AA'
-    OPENAM = 'Open Amateur'
-    AM250 = '250 AM'
-    AM30 = '30 AM'
-    EXOVER16AA = 'AA'
-    EXOVER16OPENAM = 'Open Amateur'
-    EXOVER16AM250 = '250 AM'
-    EXOVER16AM30 = '30 AM'
-    AM40 = '40 AM'
-    EXAM40 = '40 EX-AM'
-    EXOVER16EXAM40 = '40 EX-AM'
-    EX50 = '50 EX'
-    AM50 = '50 AM'
-    SPORTSMN = 'Sportsman'
-    BEGINNER = 'Beginner'
-    WOMEN = 'Women'
-    JR = 'JR'
-    SIXTY = '60'
-    SEVENTY = '70'
-    CLASS60_70 ='Class 60 and 70 Rider'
+
+    # RIDER_CAT = (
+    #     (EXO16, 'Expert Schedule Classes - Over age 16 '),
+    #     (EXU16, 'Expert Schedule Classes - 16 and under '),
+    #     (AMO16, 'Amateur Schedule Classes - Over age 16 '),
+    #     (AMU16, 'Amateur Schedule Classes - 16 and under '),
+    #     (C60_70, 'Class 60 and 70 Rider '),
+    #     (ES, 'Escort Rider '),
+    # )
     FEMALE = 'Female'
     MALE = 'Male'
-    ONE = 'one'
-    OPTION = '[[option]]'
 
-    RIDER_CAT = (
-        (EXOVER16, 'Expert Schedule Classes - Over age 16'),
-        (EXUNDER16, 'Expert Schedule Classes - 16 and under'),
-        (AMOVER16, 'Amateur Schedule Classes - Over age 16'),
-        (AMUNDER16, 'Amateur Schedule Classes - 16 and under'),
-        (CLASS60_70, 'Class 60 and 70 Rider'),
-        (ESCORT, 'Escort Rider'),
-    )
+    EXO16 = 'Expert over 16 '
+    EXU16 = 'Expert 16 and under '
+    AMO16 = 'Amateur over 16 '
+    AMU16 = 'Amateur 16 and under '
+    C60_70 = 'Class 60 and 70 '
+    ES = 'Escort Rider'
+
+    C60 = '60 Class'
+    C70 = '70 Class'
+    AA = 'AA'
+    OAM = 'Open Amateur'
+    AM250 = '250 AM'
+    EX250 = '250 EX'
+    AM30 = '30 AM'
+    EX30 = '30 EX'
+    AM40 = '40 AM'
+    EXAM40 = '40 EX-AM'
+    EXEX40 = '40 EX-EX'
+    EX50 = '50 EX'
+    AM50 = '50 AM'
+    SSMN = 'Sportsman'
+    BEG = 'Beginner'
+    WO = 'Women'
+    JR = 'Jr.'
+    OEX = 'Open Expert'
 
 
     RIDER_CLASS = [
-        (EXOVER16, [
-            ('EXOVER16AA', 'AA'),
-            ('EXOVER16OPENAM', 'Open Amateur'),
-            ('EXOVER16AM250', '250 AM'),
-            ('EXOVER16AM30', '30 AM'),
-            ('EXOVER16EXAM40', '40 EX-AM')
+        (EXO16, [
+            (EXO16 + AA, AA),
+            (EXO16 + OEX, OEX),
+            (EXO16 + EX250, EX250),
+            (EXO16 + EX30, EX30),
+            (EXO16 + EXEX40, EXEX40)
         ]),
-        (EXUNDER16, [
-            ('EXUNDER16AA', 'AA'),
-            ('EXUNDER16OPENAM', 'Open Amateur'),
-            ('EXUNDER16AM250', '250 AM')
+        (EXU16, [
+            (EXU16 + AA, AA),
+            (EXU16 + OEX, OEX),
+            (EXU16 + EX250, EX250)
         ]),
-        (AMOVER16, [
-            ('AMOVER16OPENAM', 'Open Amateur'),
-            ('AMOVER16AM250', '250 AM'),
-            ('AMOVER16AM30', '30 AM'),
-            ('AMOVER16EXAM40', '40 EX-AM'),
-            ('AMOVER16AM40', '40 AM'),
-            ('AMOVER16EX50', '50 EX'),
-            ('AMOVER16AM50', '50 AM'),
-            ('AMOVER16SPORTSMN', 'Sportsman'),
-            ('AMOVER16BEGINNER', 'Beginner'),
-            ('AMOVER16WOMEN', 'Women')
+        (AMO16, [
+            (AMO16 + OAM, OAM),
+            (AMO16 + AM250, AM250),
+            (AMO16 + AM30, AM30),
+            (AMO16 + EXAM40, EXAM40),
+            (AMO16 + AM40, AM40),
+            (AMO16 + AM50, AM50),
+            (AMO16 + EX50, EX50),
+            (AMO16 + SSMN, SSMN),
+            (AMO16 + BEG, BEG),
+            (AMO16 + WO, WO)
         ]),
-        (AMUNDER16, [
-            ('AMUNDER16OPENAM', 'Open Amateur'),
-            ('AMUNDER16AM250', '250 AM'),
-            ('AMUNDER16SPORTSMN', 'Sportsman'),
-            ('AMUNDER16BEGINNER', 'Beginner'),
-            ('AMUNDER16WOMEN', 'Women'),
-            ('AMUNDER16JR', 'JR')
+        (AMU16, [
+            (AMU16 + OAM, OAM),
+            (AMU16 + AM250, AM250),
+            (AMU16 + SSMN, SSMN),
+            (AMU16 + BEG, BEG),
+            (AMU16 + WO, WO),
+            (AMU16 + JR, JR),
         ]),
-        (CLASS60_70, [
-            ('CLASS60', '60 Class'),
-            ('CLASS70', '70 Class')
+        (C60_70, [
+            (C60, C60),
+            (C70, C70)
         ]),
-        (ESCORT, [
-            ('ESCORT', 'Escort Rider')]
+        (ES, [
+            (ES, ES)]
          )]
 
     # RIDER_CLASS = (
@@ -172,7 +169,7 @@ class RiderProfile(models.Model):
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    rider_cat = models.CharField('Rider Category', max_length=1000, choices=RIDER_CAT)
+    rider_cat = models.CharField('Rider Category', max_length=1000, null=True, blank=True)
     rider_class = models.CharField(max_length=1000, choices=RIDER_CLASS)
     first_name = models.CharField(max_length=300, null=True, blank=True)
     last_name = models.CharField(max_length=300, null=True, blank=True)

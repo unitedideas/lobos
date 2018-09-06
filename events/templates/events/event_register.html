@@ -152,9 +152,6 @@
                     }
                 },
 
-                rider_cat_change() {
-
-                }
             },
             methods:
                 {
@@ -187,36 +184,38 @@
                     },
 
                     totalCost: function () {
-                        let total_rider_classes = document.querySelectorAll('select[id*="rider_cat"]')
+                        let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
+                        console.log(total_rider_classes)
                         let total = 0
                         let allRiderTypes = []
 
                         for (let i = 0; i < total_rider_classes.length; i++) {
                             allRiderTypes.push(total_rider_classes[i].value)
+                            console.log(allRiderTypes)
                         }
 
                         for (let i = 0; i < allRiderTypes.length; i++) {
-                            if (allRiderTypes[i] === 'Escort Rider') {
+                            if (allRiderTypes[i].includes('Escort')) {
                                 total +=
                                 {{ event.escort_rider_cost }}
 
-                            } else if (allRiderTypes[i] === 'Class 60 and 70 Rider') {
+                            } else if (allRiderTypes[i].includes('Class')) {
                                 total +=
                                 {{ event.sixty_and_seventy_cost }}
 
-                            } else if (allRiderTypes[i] === 'Amateur Schedule Classes - 16 and under') {
+                            } else if (allRiderTypes[i].includes('Amateur 16')) {
                                 total +=
                                 {{ event.amateur_under_16_cost }}
 
-                            } else if (allRiderTypes[i] === 'Amateur Schedule Classes - Over age 16') {
+                            } else if (allRiderTypes[i].includes('Amateur over')) {
                                 total +=
                                 {{ event.amateur_over_16_cost }}
 
-                            } else if (allRiderTypes[i] === 'Expert Schedule Classes - 16 and under') {
+                            } else if (allRiderTypes[i].includes('Expert 16')) {
                                 total +=
                                 {{ event.expert_under_16_cost }}
 
-                            } else if (allRiderTypes[i] === 'Expert Schedule Classes - Over age 16') {
+                            } else if (allRiderTypes[i].includes('Expert over')) {
                                 total +=
                                 {{ event.expert_over_16_cost }}
 
@@ -315,7 +314,7 @@
                     )
 
                         .then(function (response) {
-                            app.vue_form = response.data.formset.replace(/rider_cat" /g, 'rider_cat" oninput="select_change(this)"')
+                            app.vue_form = response.data.formset
                             app.formList.push(app.vue_form)
                         })
                 },
