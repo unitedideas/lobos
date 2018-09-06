@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/events/templates/events/event_confirmation.html" beforeDir="false" afterPath="$PROJECT_DIR$/events/templates/events/event_confirmation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/events/templates/events/eventregistertemplate.html" beforeDir="false" afterPath="$PROJECT_DIR$/events/templates/events/eventregistertemplate.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/events/views.py" afterDir="false" />
     </list>
     <list id="96de7d3c-6dab-4e83-96ee-8cf336713065" name="created the lobos paypal account." comment="created the lobos paypal account.&#10;need the email activated and the account in production&#10;&#10;(cherry picked from commit e8a5bb031dc9371d814bafe2684bb0a7ccb8a0d5)">
@@ -26,24 +29,24 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="24" />
-          <entry key="html" value="1849" />
-          <entry key="py" value="4601" />
+          <entry key="html" value="1927" />
+          <entry key="py" value="4685" />
           <entry key="txt" value="1746" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="1849" />
+          <entry key="HTML" value="1927" />
           <entry key="Hoi4 file" value="65" />
           <entry key="PLAIN_TEXT" value="1705" />
-          <entry key="Python" value="4601" />
+          <entry key="Python" value="4685" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="1" />
           <entry key="gitignore" value="4" />
-          <entry key="html" value="22" />
+          <entry key="html" value="26" />
           <entry key="py" value="47" />
           <entry key="txt" value="4" />
         </counts>
@@ -51,7 +54,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="1" />
-          <entry key="HTML" value="22" />
+          <entry key="HTML" value="26" />
           <entry key="Hoi4 file" value="4" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="Python" value="47" />
@@ -112,17 +115,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/events/templates/events/event_confirmation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/events/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="667">
-              <caret line="92" column="18" lean-forward="true" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
+            <state relative-caret-position="408">
+              <caret line="24" column="50" lean-forward="true" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -130,11 +124,52 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/events/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="604">
-              <caret line="251" selection-start-line="251" selection-end-line="251" />
+            <state relative-caret-position="503">
+              <caret line="203" column="44" lean-forward="true" selection-start-line="203" selection-start-column="44" selection-end-line="203" selection-end-column="44" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/events/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="472">
+              <caret line="162" column="7" lean-forward="true" selection-start-line="162" selection-start-column="7" selection-end-line="162" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/events/templates/events/reset_password.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/events/templates/events/password_reset_confirm.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/events/templates/events/password_change.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/events/templates/events/eventregistertemplate.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="841" column="77" lean-forward="true" selection-start-line="841" selection-start-column="77" selection-end-line="841" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -167,11 +202,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mail</find>
-      <find>send_mail</find>
-      <find>riderCost</find>
-      <find>welcom</find>
-      <find>get_temp</find>
       <find>example</find>
       <find>h1</find>
       <find>*|</find>
@@ -195,8 +225,13 @@
       <find>console.log(</find>
       <find>required</find>
       <find>BEGINNER</find>
-      <find>BEGINN</find>
+      <find>_cat</find>
+      <find>password re</find>
+      <find>id_</find>
+      <find>event_mail</find>
+      <find>event_mail(</find>
       <find>cat</find>
+      <find>BEGINN</find>
     </findStrings>
     <replaceStrings>
       <replace>myactive</replace>
@@ -234,12 +269,12 @@
         <option value="$PROJECT_DIR$/events/admin.py" />
         <option value="$PROJECT_DIR$/static/events/userregistertemplate.html" />
         <option value="$PROJECT_DIR$/events/templates/events/userregistertemplate.html" />
-        <option value="$PROJECT_DIR$/events/templates/events/eventregistertemplate.html" />
         <option value="$PROJECT_DIR$/events/templates/events/home.html" />
         <option value="$PROJECT_DIR$/events/forms.py" />
         <option value="$PROJECT_DIR$/events/models.py" />
         <option value="$PROJECT_DIR$/events/templates/events/event_register.html" />
         <option value="$PROJECT_DIR$/events/templates/events/event_confirmation.html" />
+        <option value="$PROJECT_DIR$/events/templates/events/eventregistertemplate.html" />
         <option value="$PROJECT_DIR$/events/views.py" />
       </list>
     </option>
@@ -465,20 +500,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00006" summary="added filter to events to start the email build &#10;and nav bar colors">
-      <created>1535477284305</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1535477284305</updated>
-    </task>
-    <task id="LOCAL-00007" summary="added filter to events to start the email build &#10;and nav bar colors">
-      <created>1535478476651</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1535478476651</updated>
     </task>
     <task id="LOCAL-00008" summary="added filter to events to start the email build &#10;and nav bar colors">
       <created>1535479799417</created>
@@ -809,7 +830,21 @@
       <option name="project" value="LOCAL" />
       <updated>1536201126038</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Not working... &#10;Trying to add a dynamic select field to the event registration field form through django widget attr.&#10;Resorted to a OPTSELECT">
+      <created>1536201689836</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1536201689836</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Not working... &#10;Trying to add a dynamic select field to the event registration field form through django widget attr.&#10;Resorted to a OPTSELECT">
+      <created>1536201717803</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1536201717803</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -999,27 +1034,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/templates/events/eventregistertemplate.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19522" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/events/templates/events/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="21" column="64" lean-forward="true" selection-start-line="21" selection-start-column="64" selection-end-line="21" selection-end-column="64" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/events/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="928">
-          <caret line="167" column="45" lean-forward="true" selection-start-line="167" selection-start-column="45" selection-end-line="167" selection-end-column="45" />
-          <folding>
-            <element signature="e#4262#4283#0" />
           </folding>
         </state>
       </provider>
@@ -1042,24 +1062,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/reset_password.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/password_reset_confirm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/password_change.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="928">
+          <caret line="167" column="45" lean-forward="true" selection-start-line="167" selection-start-column="45" selection-end-line="167" selection-end-column="45" />
+          <folding>
+            <element signature="e#4262#4283#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/events/templates/events/event_confirmation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="408">
+          <caret line="24" column="50" lean-forward="true" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events/eventregistertemplate.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="841" column="77" lean-forward="true" selection-start-line="841" selection-start-column="77" selection-end-line="841" selection-end-column="77" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/events/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="92" column="18" lean-forward="true" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
+        <state relative-caret-position="472">
+          <caret line="162" column="7" lean-forward="true" selection-start-line="162" selection-start-column="7" selection-end-line="162" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/events/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="604">
-          <caret line="251" selection-start-line="251" selection-end-line="251" />
+        <state relative-caret-position="503">
+          <caret line="203" column="44" lean-forward="true" selection-start-line="203" selection-start-column="44" selection-end-line="203" selection-end-column="44" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

@@ -115,7 +115,6 @@ def send_mail_user_reg(email, first_name, last_name, username, password):
     print(email)
     msg = EmailMultiAlternatives(
         subject="Welcome to Lobos",
-        body="Click to activate your account: http://example.com/activate",
         from_email="The Lobos Team <info@lobosmc.com.com>",
         to=[email],
         reply_to=["Lobos Support <info@lobosmc.com.com>"])
