@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="21672860-610a-461d-9aa4-2bff871f18a2" name="Default Changelist" comment="" />
     <list id="96de7d3c-6dab-4e83-96ee-8cf336713065" name="created the lobos paypal account." comment="created the lobos paypal account.&#10;need the email activated and the account in production&#10;&#10;(cherry picked from commit e8a5bb031dc9371d814bafe2684bb0a7ccb8a0d5)">
       <changelist_data name="Unitedideas" email="unitedideas@gmail.com" date="1536008921000">
         <option name="date" value="1536008921000" />
@@ -129,8 +126,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+            <state>
+              <caret selection-end-line="41" />
             </state>
           </provider>
         </entry>
@@ -334,13 +331,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533159806822</updated>
-    </task>
-    <task id="LOCAL-00014" summary="cleaning up some code">
-      <created>1535564168982</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1535564168982</updated>
     </task>
     <task id="LOCAL-00015" summary="changed the event page show / not show a registration button based on the days remaining until the event &gt; 0">
       <created>1535574150391</created>
@@ -678,7 +668,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536330873495</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Not working... &#10;Trying to add a dynamic select field to the event registration field form through django widget attr.&#10;Resorted to a OPTSELECT">
+      <created>1536330897252</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1536330897252</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -692,7 +689,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="367" y="22" width="1352" height="1418" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24809161" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -708,7 +704,7 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49955398" weight="0.6644042" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.500446" side_tool="true" weight="0.83269376" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.500446" side_tool="true" weight="0.8325792" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.3295626" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -936,8 +932,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+        <state>
+          <caret selection-end-line="41" />
         </state>
       </provider>
     </entry>
