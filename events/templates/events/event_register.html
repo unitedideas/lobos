@@ -2,13 +2,6 @@
 {% load static %}
 
 <head>
-    <script> var submitFocus = false;
-
-    $(window).keydown(function (event) {
-        if (event.keyCode == 13 && submitFocus == false) {
-            window.event.keyCode = 9;
-        }
-    });</script>
     {# javascript #}
     <script type="text/javascript" src="{% static "events/JS.js" %}"></script>
     {# Vue.js CDN #}
@@ -20,9 +13,10 @@
     {% block head %}
         <title>Event Registration</title>
     {% endblock %}
+
 </head>
 {% block body %}
-    <div id="app" v-cloak=>
+    <div id="app" >
 
 
         <div class="container">
@@ -31,7 +25,7 @@
             </div>
 
             <div>
-                <form method="POST" id="feedbackform">
+                <form method="POST" id="feedbackform" v-on:keydown.13.prevent="the3DayMethod">
                     {% csrf_token %}
                     {{ formset.management_form }}
                     <div style="margin-right: 15px;" class="row">
@@ -50,7 +44,7 @@
                         </div>
                         <br>
                     </div>
-                    <button ref="submitButton" style='display: none'></button>
+                    <button v-on ref="submitButton" style='display: none'></button>
                 </form>
             </div>
             <br>
