@@ -187,8 +187,8 @@ class RiderProfile(models.Model):
     emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
     bike_make = models.CharField(max_length=20, null=True, blank=True, choices=MAKES)
     bike_displacement = models.IntegerField(null=True, blank=True)
-    omra_number = models.CharField(max_length=300, null=True, blank=True, )
-    ama_number = models.CharField(max_length=300, null=True, blank=True)
+    # omra_number = models.CharField(max_length=300, null=True, blank=True, )
+    # ama_number = models.CharField(max_length=300, null=True, blank=True)
     escort_name = models.CharField('Your Escorts Name', max_length=300, null=True, blank=True)
     group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
                                   null=True, blank=True)
