@@ -82,7 +82,7 @@
                                 currency="USD"
                                 :button-style="aStyle"
                                 :client="paypal"
-                                env="production"
+                                env="sandbox"
                                 v-on:payment-authorized="paymentAuthorized"
                                 v-on:payment-completed="paymentCompleted"
                                 v-on:payment-cancelled="paymentCancelled">
@@ -109,7 +109,7 @@
                 return {
                     paypal: {
                         sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
-                        production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
+                        production: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W'
                     },
                     aStyle: {
                         label: 'checkout',
