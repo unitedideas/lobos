@@ -321,8 +321,6 @@ def event_register(request):
                     user.update(zip_code=form.zip_code)
                     user.update(emergency_contact_name=form.emergency_contact_name)
                     user.update(emergency_contact_phone=form.emergency_contact_phone)
-                    user.update(omra_number=form.omra_number)
-                    user.update(ama_number=form.ama_number)
 
                     message = ''
                     username = created_username
