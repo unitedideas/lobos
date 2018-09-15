@@ -281,7 +281,7 @@ def event_register(request):
                 count += 1
                 print('in the form loop')
                 created_username = form.first_name + form.last_name + form.email
-                created_username = created_username.lower()
+                created_username = created_username.replace(" ", "").lower()
 
                 print('created_username')
                 print(created_username)
