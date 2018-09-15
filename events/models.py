@@ -57,8 +57,6 @@ class Profile(models.Model):
     zip_code = models.CharField(max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
     emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
-    omra_number = models.CharField(max_length=300, null=True, blank=True, )
-    ama_number = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return str(self.user.first_name) + " " + str(self.user.last_name) + " - " + str(self.user)

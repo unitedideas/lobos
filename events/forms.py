@@ -38,8 +38,6 @@ class RegistrationForm(UserCreationForm):
     zip_code = forms.CharField(max_length=5, required=False)
     emergency_contact_name = forms.CharField(max_length=300, required=False)
     emergency_contact_phone = forms.CharField(max_length=10, required=False)
-    omra_number = forms.CharField(max_length=300, required=False, )
-    ama_number = forms.CharField(max_length=300, required=False)
 
     class Meta:
         model = User
@@ -59,8 +57,6 @@ class RegistrationForm(UserCreationForm):
             'zip_code',
             'emergency_contact_name',
             'emergency_contact_phone',
-            'omra_number',
-            'ama_number',
             'password1',
             'password2',
         )
@@ -89,8 +85,6 @@ class RegistrationForm(UserCreationForm):
         new_user.update(zip_code=self.cleaned_data['zip_code'])
         new_user.update(emergency_contact_name=self.cleaned_data['emergency_contact_name'])
         new_user.update(emergency_contact_phone=self.cleaned_data['emergency_contact_phone'])
-        new_user.update(omra_number=self.cleaned_data['omra_number'])
-        new_user.update(ama_number=self.cleaned_data['ama_number'])
         if commit:
             user.save()
         return user
@@ -138,8 +132,6 @@ class EditProfileForm(UserChangeForm):
     #     # Profile.objects.update(zip_code=self.cleaned_data['zip_code'])
     #     # Profile.objects.update(emergency_contact_name=self.cleaned_data['emergency_contact_name'])
     #     # Profile.objects.update(emergency_contact_phone=self.cleaned_data['emergency_contact_phone'])
-    #     # Profile.objects.update(omra_number=self.cleaned_data['omra_number'])
-    #     # Profile.objects.update(ama_number=self.cleaned_data['ama_number'])
     #
     #     if commit:
     #         user.save()
