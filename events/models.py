@@ -24,14 +24,14 @@ class Event(models.Model):
     event_location = models.CharField(max_length=300, null=True, blank=True)
     event_details = models.TextField(max_length=1000, null=True, blank=True)
     map_location = models.CharField(max_length=800, null=True, blank=True)
-    pro_time_est = models.TimeField(max_length=30, null=True, blank=True)
-    am_time_est = models.TimeField(max_length=30, null=True, blank=True)
+    expert_time_est = models.TimeField(max_length=30, null=True, blank=True)
+    amateur_time_est = models.TimeField(max_length=30, null=True, blank=True)
     rider_limit = models.IntegerField(null=True, blank=True)
     expert_over_16_cost = models.IntegerField()
     expert_under_16_cost = models.IntegerField()
     amateur_over_16_cost = models.IntegerField()
     amateur_under_16_cost = models.IntegerField()
-    sixty_and_seventy_cost = models.IntegerField()
+    class_60_and_class_70_cost = models.IntegerField()
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
