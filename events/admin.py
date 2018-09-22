@@ -2,9 +2,10 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from .models import RiderProfile, Event, Profile
+from .models import RiderProfile, Event, Profile, Codes
 
 admin.site.site_header = 'Lobos Events/ User Database'
+admin.site.register(Codes)
 
 @admin.register(RiderProfile)
 class RiderProfileExportAdmin(ImportExportModelAdmin):

@@ -1,4 +1,4 @@
-from .models import RiderProfile, Profile
+from .models import RiderProfile, Profile, Codes
 from django.conf import settings
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -425,10 +425,11 @@ def event_register(request):
     else:
 
         event = Event.objects.get(event_name=request.GET.get('event'))
+        codes = Codes.objects.all()
 
         formset = prefill_form(request)
 
-        args = {'formset': formset, 'event': event}
+        args = {'formset': formset, 'event': event, 'codes': codes}
         return render(request, 'events/event_register.html', args)
 
 

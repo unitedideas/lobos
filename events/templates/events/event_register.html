@@ -17,8 +17,6 @@
 </head>
 {% block body %}
     <div id="app">
-
-
         <div class="container">
             <div id="jumbotron" class="jumbotron" style="padding: 20px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
@@ -59,48 +57,56 @@
                     </div>
                 </div>
             </div>
+
             <div v-show="showcheckout" class="container">
-                <h3>You'll need an AMA Membership to ride the event. Save waiting in line at the event and join
+                <h3>**You'll need an AMA Membership to ride the event. Save waiting in line at the event and join
                     <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online!</a>
                 </h3>
-                <h3>Total: $[[amountStr]]</h3>
-                <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
                 <br>
+                <div>
+                    <h3>Raincheck:
+                        <input style="width: 25%" v-model="discountCode" type="text" name="discount_code"
+                               placeholder="Raincheck Code">
+                    </h3>
+                </div>
             </div>
             <br>
-            <transition v-if="showModal" name="appear">
-                <div class="simple-modal" v-if="formSuccess">
-                    <h1 style="color: whitesmoke;">{{ event }}</h1>
-                    <h1 style="color: whitesmoke;">Final Step.. Almost There!</h1>
-                    <br>
-                    <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]
-                    </button>
-
-                    <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was declined or
-                        canceled
-                    </div>
-                    <div v-show="showPayPal">
-                        <paypal-checkout
-                                :amount='amountStr'
-                                currency="USD"
-                                :button-style="aStyle"
-                                :client="paypal"
-                                env="production"
-                                v-on:payment-authorized="paymentAuthorized"
-                                v-on:payment-completed="paymentCompleted"
-                                v-on:payment-cancelled="paymentCancelled">
-                        </paypal-checkout>
-                    </div>
-                    <div class="whirlpool" v-show="!showPayPal">
-                        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33"
-                                    r="30"></circle>
-                        </svg>
-                    </div>
-                </div>
-            </transition>
+            <h3>Total: $[[amountStr]]</h3>
+            <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
         </div>
+        <br>
+        <transition v-if="showModal" name="appear">
+            <div class="simple-modal" v-if="formSuccess">
+                <h1 style="color: whitesmoke;">{{ event }}</h1>
+                <h1 style="color: whitesmoke;">Final Step.. Almost There!</h1>
+                <br>
+                <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]
+                </button>
+                <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was declined or
+                    canceled
+                </div>
+                <div v-show="showPayPal">
+                    <paypal-checkout
+                            :amount='amountStr'
+                            currency="USD"
+                            :button-style="aStyle"
+                            :client="paypal"
+                            env="production"
+                            v-on:payment-authorized="paymentAuthorized"
+                            v-on:payment-completed="paymentCompleted"
+                            v-on:payment-cancelled="paymentCancelled">
+                    </paypal-checkout>
+                </div>
+                <div class="whirlpool" v-show="!showPayPal">
+                    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33"
+                                r="30"></circle>
+                    </svg>
+                </div>
+            </div>
+        </transition>
+    </div>
     </div>
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
     <script>
@@ -134,6 +140,7 @@
                     showModal: false,
                     closeModal: 'Cancel',
                     showPayPal: true,
+                    discountCode: '',
 
                     forms: [{
                         selected: null,
@@ -322,6 +329,7 @@
                             app.formList.push(app.vue_form)
                         })
                 },
+
         })
 
     </script>
