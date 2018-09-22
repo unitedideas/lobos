@@ -32,7 +32,7 @@ class Event(models.Model):
     amateur_under_16_cost = models.IntegerField()
     class_60_and_class_70_cost = models.IntegerField()
     escort_rider_cost = models.IntegerField()
-    open_registration = models.BooleanField(null=True, blank=True, default=False)
+    open_registration = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]

@@ -48,20 +48,24 @@
 
             </div>
             <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">
-                {% if detail.11 <= 0 %}
-                    <h2>The race is sold out!</h2>
-                {% elif detail.12 <= 0 %}
-                    <h2>Race results coming soon</h2>
-                {% elif detail.12 > 1 %}
-                    <h2>{{ detail.12 }} Days Remaining!</h2>
-                    <br>
-                    <a class="btn btn-lg btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
-                       methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
-                {% elif detail.12 == 1 %}
-                    <h2>{{ detail.12 }} Day Remaining!</h2>
-                    <br>
-                    <a class="btn btn-lg btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
-                       methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
+                {% if detail.13 == False %}
+                    <h2>{{ detail.0 }} {{ detail.1 }} registration opening soon!</h2>
+                {% else %}
+                    {% if detail.11 <= 0 %}
+                        <h2>The race is sold out!</h2>
+                    {% elif detail.12 <= 0 %}
+                        <h2>Race results coming soon</h2>
+                    {% elif detail.12 > 1 %}
+                        <h2>{{ detail.12 }} Days Until Race Day!</h2>
+                        <br>
+                        <a class="btn btn-lg btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
+                           methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
+                    {% elif detail.12 == 1 %}
+                        <h2>{{ detail.12 }} Day Left!</h2>
+                        <br>
+                        <a class="btn btn-lg btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
+                           methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
+                    {% endif %}
                 {% endif %}
             </div>
             <div style="float: right; margin-top: 50px; text-align: center" class="col-md-5">

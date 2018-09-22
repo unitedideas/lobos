@@ -42,6 +42,7 @@ def home(request):
     reg_riders = []
     remaining_spots = []
     remaining_time = []
+    open_registration = []
 
     for event in event_name:
         event_id = Event.objects.get(event_name=event).id
@@ -76,6 +77,7 @@ def home(request):
         entry_closes.append(event.entry_closes)
         escort_rider_cost.append(event.escort_rider_cost)
         rider_limit.append(event.rider_limit)
+        open_registration.append(event.open_registration)
 
     for limit, rider in zip(rider_limit, reg_riders):
 
@@ -97,6 +99,7 @@ def home(request):
                          escort_rider_cost,  # 10
                          remaining_spots,  # 11
                          remaining_time,  # 12
+                         open_registration,  # 13
                          )
 
     context = {'events_details': events_details}
