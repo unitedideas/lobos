@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    {#fontawsome CDN#}
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
     {# Vue.js CDN #}
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
@@ -20,11 +24,15 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109842707-2"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-      gtag('config', 'UA-109842707-2');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-109842707-2');
     </script>
 
     {% block head %}
@@ -45,13 +53,17 @@
                     {% if user.is_authenticated %}
                         <ul class="nav navbar-nav nav-pills">
                             <li><a href="/"><strong>Home</strong></a></li>
-                            <li class="nav-item {% if url_name == 'home' %}myactive{% endif %}"><a href="/">Upcoming Events</a></li>
+                            <li class="nav-item {% if url_name == 'home' %}myactive{% endif %}"><a href="/">Upcoming
+                                Events</a></li>
 
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item {% if url_name == 'profile' %}myactive{% endif %}"><a href="/profile">Profile</a></li>
-                            <li class="nav-item {% if url_name == 'edit_profile' %}myactive{% endif %}"><a href="/profile/edit">Edit Profile</a></li>
-                            <li class="nav-item {% if url_name == 'logout' %}myactive{% endif %}"><a href="/logout">Logout</a></li>
+                            <li class="nav-item {% if url_name == 'profile' %}myactive{% endif %}"><a href="/profile">Profile</a>
+                            </li>
+                            <li class="nav-item {% if url_name == 'edit_profile' %}myactive{% endif %}"><a
+                                    href="/profile/edit">Edit Profile</a></li>
+                            <li class="nav-item {% if url_name == 'logout' %}myactive{% endif %}"><a href="/logout">Logout</a>
+                            </li>
                             <li><a class="navbar-brand"><strong>{{ request.user }}</strong></a></li>
                         </ul>
 
@@ -59,12 +71,16 @@
 
                         <ul class="nav navbar-nav">
                             <li><a href="/">Home</a></li>
-                            <li class="nav-item {% if url_name == 'home' %}myactive{% endif %}"><a href="/">Upcoming Events</a></li>
+                            <li class="nav-item {% if url_name == 'home' %}myactive{% endif %}"><a href="/">Upcoming
+                                Events</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item {% if url_name == 'password_reset' %}myactive{% endif %}"><a href="/password-reset">Reset Password</a></li>
-                            <li class="nav-item {% if url_name == 'register' %}myactive{% endif %}"><a href="/register">Register</a></li>
-                            <li class="nav-item {% if url_name == 'login' %}myactive{% endif %}"><a href="/login">login</a></li>
+                            <li class="nav-item {% if url_name == 'password_reset' %}myactive{% endif %}"><a
+                                    href="/password-reset">Reset Password</a></li>
+                            <li class="nav-item {% if url_name == 'register' %}myactive{% endif %}"><a href="/register">Register</a>
+                            </li>
+                            <li class="nav-item {% if url_name == 'login' %}myactive{% endif %}"><a
+                                    href="/login">login</a></li>
                         </ul>
                     {% endif %}
                 {% endwith %}

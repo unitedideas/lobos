@@ -4,10 +4,11 @@
     {% load static %}
 
     {% block head %}
-        <title>Upcoming Events</title>
+        <title>Lobos Events</title>
     {% endblock %}
 </head>
 <body>
+
 {% block body %}
 
     <div class="container">
@@ -25,7 +26,7 @@
     </div>
     <h1 style="text-align: center;">Upcoming Events</h1>
 
-     {% for detail in events_details %}
+    {% for detail in events_details %}
         <div class="jumbotron row" style="margin: 0px 0px 50px 0px">
             <div class="col-md-6">
 
@@ -71,6 +72,20 @@
             <div style="float: right; margin-top: 50px; text-align: center" class="col-md-5">
                 <p>{{ detail.4 }}</p>
                 <p>{{ detail.5 | safe }}</p>
+                <h2>Share It!</h2>
+                <a class="fa fa-facebook" href="https://www.facebook.com/sharer/sharer.php?u=lobosevents.com"
+                   target="_blank">
+                </a>
+                <a class="fa fa-twitter" href="https://www.facebook.com/sharer/sharer.php?u=lobosevents.com"
+                   target="_blank">
+                </a>
+                <a class="fa fa-instagram" href="https://www.facebook.com/sharer/sharer.php?u=lobosevents.com"
+                   target="_blank">
+                </a>
+                <a class="fa fa-pinterest" href="https://www.facebook.com/sharer/sharer.php?u=lobosevents.com"
+                   target="_blank">
+                </a>
+
             </div>
         </div>
     {% endfor %}
