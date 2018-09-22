@@ -3,8 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from events.util import load_choices
-from datetime import datetime
-from django.core.mail import send_mail
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
@@ -65,14 +63,6 @@ class Profile(models.Model):
 
 class RiderProfile(models.Model):
 
-    # RIDER_CAT = (
-    #     (EXO16, 'Expert Schedule Classes - Over age 16 '),
-    #     (EXU16, 'Expert Schedule Classes - 16 and under '),
-    #     (AMO16, 'Amateur Schedule Classes - Over age 16 '),
-    #     (AMU16, 'Amateur Schedule Classes - 16 and under '),
-    #     (C60_70, 'Class 60 and 70 Rider '),
-    #     (ES, 'Escort Rider '),
-    # )
     FEMALE = 'Female'
     MALE = 'Male'
 
@@ -144,23 +134,6 @@ class RiderProfile(models.Model):
             (ES, ES)]
          )]
 
-    # RIDER_CLASS = (
-    #     (AA, 'AA'),
-    #     (OPENAM, 'Open Amateur'),
-    #     (AM250, '250 AM'),
-    #     (AM30, '30 AM'),
-    #     (AM40, '40 AM'),
-    #     (EXAM40, '40 EX-AM'),
-    #     (EX50, '50 EX'),
-    #     (AM50, '50 AM'),
-    #     (SPORTSMN, 'Sportsman'),
-    #     (BEGINNER, 'Beginner'),
-    #     (WOMEN, 'Women'),
-    #     (JR, 'JR'),
-    #     (SIXTY, '60'),
-    #     (SEVENTY, '70'),
-    # )
-
     GENDER = (
         (FEMALE, 'Female'),
         (MALE, 'Male'),
@@ -169,24 +142,24 @@ class RiderProfile(models.Model):
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     rider_cat = models.CharField('Rider Category', max_length=1000, null=True, blank=True)
-    rider_class = models.CharField(max_length=1000, choices=RIDER_CLASS)
-    first_name = models.CharField(max_length=300, null=True, blank=True)
-    last_name = models.CharField(max_length=300, null=True, blank=True)
-    email = models.EmailField(max_length=300, null=True, blank=True)
+    rider_class = models.CharField('Rider Class (required)',max_length=1000, choices=RIDER_CLASS)
+    first_name = models.CharField('First Name (required)', max_length=300)
+    last_name = models.CharField('Last Name (required)', max_length=300)
+    email = models.EmailField('Last Name (required)', max_length=300)
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
-    birth_date = models.DateField(null=True, blank=True)
-    phone_number = models.CharField(max_length=10, null=True, blank=True)
+    birth_date = models.DateField('Birth Date (required)')
+    phone_number = models.CharField('Phone Number', max_length=10, null=True, blank=True)
     country = models.CharField(max_length=300, null=True, blank=True)
     address = models.CharField(max_length=300, null=True, blank=True)
     address_line_two = models.CharField(max_length=300, null=True, blank=True)
     city = models.CharField(max_length=300, null=True, blank=True)
     state = models.CharField(max_length=2, null=True, blank=True, choices=STATES)
-    zip_code = models.CharField(max_length=5, null=True, blank=True)
-    emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
-    emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
-    bike_make = models.CharField(max_length=20, null=True, blank=True, choices=MAKES)
-    bike_displacement = models.IntegerField(null=True, blank=True)
-    escort_name = models.CharField('Your Escorts Name', max_length=300, null=True, blank=True)
+    zip_code = models.CharField('Zip Code', max_length=5, null=True, blank=True)
+    emergency_contact_name = models.CharField('Emergency Contact Name', max_length=300, null=True, blank=True)
+    emergency_contact_phone = models.CharField('Emergency Contact Phone', max_length=10, null=True, blank=True)
+    bike_make = models.CharField('Bike Manufacturer',max_length=20, choices=MAKES)
+    bike_displacement = models.IntegerField('Bike Displacement', null=True, blank=True)
+    escort_name = models.CharField('Your Escort’s Name: (Must register only in the Escort class) Add another rider, below (required)', max_length=300)
     group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
                                   null=True, blank=True)
 
