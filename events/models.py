@@ -18,7 +18,6 @@ class Event(models.Model):
     description = models.TextField(max_length=1000, null=True, blank=True)
     pre_entry_cost = models.IntegerField()
     post_entry_cost = models.IntegerField()
-    escort_rider_cost = models.IntegerField()
     entry_closes = models.CharField(max_length=800, null=True, blank=True)
     event_date = models.DateField(max_length=30, null=True, blank=True)
     event_location = models.CharField(max_length=300, null=True, blank=True)
@@ -32,6 +31,7 @@ class Event(models.Model):
     amateur_over_16_cost = models.IntegerField()
     amateur_under_16_cost = models.IntegerField()
     class_60_and_class_70_cost = models.IntegerField()
+    escort_rider_cost = models.IntegerField()
     open_registration = models.BooleanField(null=True, blank=True, default=False)
 
     def __str__(self):
