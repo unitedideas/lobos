@@ -16,7 +16,7 @@
 
 </head>
 {% block body %}
-    <div id="app" >
+    <div id="app">
 
 
         <div class="container">
@@ -59,7 +59,10 @@
                     </div>
                 </div>
             </div>
-            <div v-show="showcheckout">
+            <div v-show="showcheckout" class="container">
+                <h3>You'll need an AMA Membership to ride the event. Save waiting in line at the event and join
+                    <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online!</a>
+                </h3>
                 <h3>Total: $[[amountStr]]</h3>
                 <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
                 <br>

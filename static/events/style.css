@@ -2,15 +2,20 @@ body {
     background-color: #dedede;
 }
 
+a[target="_blank"]:after {
+    content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+    margin: 0 3px 0 5px;
+}
+
 .fa {
-  padding: 10px;
-  font-size: 30px;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 2px;
-  border-radius: 50%;
+    padding: 10px;
+    font-size: 30px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
 }
 
 .fa:hover {
@@ -18,36 +23,34 @@ body {
 }
 
 .fa-facebook {
-  background: #3B5998;
-  color: white;
+    background: #3B5998;
+    color: white;
 }
 
 .fa-twitter {
-  background: #55ACEE;
-  color: white;
+    background: #55ACEE;
+    color: white;
 }
 
 .fa-google {
-  background: #dd4b39;
-  color: white;
+    background: #dd4b39;
+    color: white;
 }
 
 .fa-instagram {
-  background: #125688;
-  color: white;
+    background: #125688;
+    color: white;
 }
 
 .fa-pinterest {
-  background: #cb2027;
-  color: white;
+    background: #cb2027;
+    color: white;
 }
 
-
-.myactive{
+.myactive {
     background-color: rgb(51, 122, 183);
     border-radius: 5px;
 }
-
 
 .jumbotron {
     color: #333;
@@ -182,104 +185,106 @@ input, select {
     }
 }
 
-
 .spinner {
-  -webkit-animation: rotator 1.4s linear infinite;
-          animation: rotator 1.4s linear infinite;
+    -webkit-animation: rotator 1.4s linear infinite;
+    animation: rotator 1.4s linear infinite;
 }
 
 @-webkit-keyframes rotator {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(270deg);
-            transform: rotate(270deg);
-  }
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
 }
 
 @keyframes rotator {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(270deg);
-            transform: rotate(270deg);
-  }
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
 }
+
 .path {
-  stroke-dasharray: 187;
-  stroke-dashoffset: 0;
-  -webkit-transform-origin: center;
-          transform-origin: center;
-  -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
-          animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+    stroke-dasharray: 187;
+    stroke-dashoffset: 0;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+    animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
 }
 
 @-webkit-keyframes colors {
-  0% {
-    stroke: #4285F4;
-  }
-  25% {
-    stroke: #DE3E35;
-  }
-  50% {
-    stroke: #F7C223;
-  }
-  75% {
-    stroke: #1B9A59;
-  }
-  100% {
-    stroke: #4285F4;
-  }
+    0% {
+        stroke: #4285F4;
+    }
+    25% {
+        stroke: #DE3E35;
+    }
+    50% {
+        stroke: #F7C223;
+    }
+    75% {
+        stroke: #1B9A59;
+    }
+    100% {
+        stroke: #4285F4;
+    }
 }
 
 @keyframes colors {
-  0% {
-    stroke: #4285F4;
-  }
-  25% {
-    stroke: #DE3E35;
-  }
-  50% {
-    stroke: #F7C223;
-  }
-  75% {
-    stroke: #1B9A59;
-  }
-  100% {
-    stroke: #4285F4;
-  }
+    0% {
+        stroke: #4285F4;
+    }
+    25% {
+        stroke: #DE3E35;
+    }
+    50% {
+        stroke: #F7C223;
+    }
+    75% {
+        stroke: #1B9A59;
+    }
+    100% {
+        stroke: #4285F4;
+    }
 }
+
 @-webkit-keyframes dash {
-  0% {
-    stroke-dashoffset: 187;
-  }
-  50% {
-    stroke-dashoffset: 46.75;
-    -webkit-transform: rotate(135deg);
-            transform: rotate(135deg);
-  }
-  100% {
-    stroke-dashoffset: 187;
-    -webkit-transform: rotate(450deg);
-            transform: rotate(450deg);
-  }
+    0% {
+        stroke-dashoffset: 187;
+    }
+    50% {
+        stroke-dashoffset: 46.75;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: 187;
+        -webkit-transform: rotate(450deg);
+        transform: rotate(450deg);
+    }
 }
+
 @keyframes dash {
-  0% {
-    stroke-dashoffset: 187;
-  }
-  50% {
-    stroke-dashoffset: 46.75;
-    -webkit-transform: rotate(135deg);
-            transform: rotate(135deg);
-  }
-  100% {
-    stroke-dashoffset: 187;
-    -webkit-transform: rotate(450deg);
-            transform: rotate(450deg);
-  }
+    0% {
+        stroke-dashoffset: 187;
+    }
+    50% {
+        stroke-dashoffset: 46.75;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: 187;
+        -webkit-transform: rotate(450deg);
+        transform: rotate(450deg);
+    }
 }
