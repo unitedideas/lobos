@@ -23,8 +23,10 @@ import json
 import datetime
 from datetime import date
 
-def adminemail(reauest):
-    pass
+
+def adminemail(request):
+    return render(request, 'events/adminemail.html')
+
 
 def home(request):
     events = Event.objects.all().order_by('-event_date')[0:3]
@@ -347,7 +349,7 @@ def event_register(request):
                                                  'rider_class': rider_class}
                     form.save()
 
-                    #Email
+                    # Email
                     event_mail(email, first_name, last_name, username, rider_class, event,
                                confirmation_number)
 
@@ -378,7 +380,7 @@ def event_register(request):
                                                  'rider_class': rider_class}
                     form.save()
 
-                    #Email
+                    # Email
                     event_mail(email, first_name, last_name, username, rider_class, event,
                                confirmation_number)
 
@@ -403,10 +405,9 @@ def event_register(request):
 
                     form.save()
 
-                    #Email
+                    # Email
                     event_mail(email, first_name, last_name, username, rider_class, event,
                                confirmation_number)
-
 
             args = {'event': form.event, 'confirm': confirm}
             # email confirmation function here
