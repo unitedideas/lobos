@@ -23,10 +23,8 @@ import json
 import datetime
 from datetime import date
 
-
 def adminemail(request):
     return render(request, 'events/adminemail.html')
-
 
 def home(request):
     events = Event.objects.all().order_by('-event_date')[0:3]
