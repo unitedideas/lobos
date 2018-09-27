@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+<head>
+    {% load static %}
+    {# javascript #}
+    <script type="text/javascript" src="{% static "events/JS.js" %}"></script>
+    {# Vue.js CDN #}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    {% block head %}
+        <title>Admin Email</title>
+    {% endblock %}
+</head>
+
+{% block body %}
+    <div id="app">
+        <select v-model="subject">Select the persons to be emailed</select>
+        <br>
+        <input style="font-size: 20px" v-model="title" placeholder="placeholder text for title">
+        <br>
+        <textarea style="height: 300px; width: 700px; font-size: 20px" v-model="message"
+                  placeholder="placeholder text for message"></textarea>
+    </div>
+    <script>
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#app',
+            data() {
+                return {
+                    message: "this and that",
+                    title: "Title here",
+                    subject: "Subject here",
+
+                }
+            }
+        })
+    </script>
+{% endblock %}
+
