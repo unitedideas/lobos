@@ -48,6 +48,7 @@ def adminemail(request):
             # Event.objects.filter(event_name=event_name).filter(event_date__contains=event_year):
             #     print('in the for loop')
             recipients = list(Event.objects.filter(event_name=event_name).filter(event_date__contains=event_year).values_list('riderprofile__email', flat=True))
+            print(recipients)
         else:
             recipients = list(recipients)
         args = {'allEmails': allEmails, 'events': events,
@@ -71,6 +72,7 @@ def general_email(subject, header, subheader, emailmessage, recipients):
         reply_to=["Lobos Support <info@lobosmc.com>"],
     )
     msg.merge_data = {}
+    msg.merge_global_data = {}
 
     html = loader.render_to_string(
         '../templates/events/generalemail.html',
