@@ -31,23 +31,48 @@ def adminemail(request):
     allEmails = list(RiderProfile.objects.values_list("email", flat=True))
     args = {'allEmails': allEmails, 'events': events}
     if request.method == 'POST':
-        args = {'allEmails': allEmails, 'events': events,"madeit": "<h3 class='bg-success'>Your email was successfully sent!</h3>"}
+        data = request.POST
+        print(request.POST)
+        count = 0
+        for d in data:
+            count+=1
+            print(d)
+            print(count)
+            print(type(d))
+        args = {'allEmails': allEmails, 'events': events,"success": "<h3 class='bg-success'>Your email was successfully sent!</h3>"}
+        # general_email(subject, header, subheader, message, recipients)
         return render(request, 'events/adminemail.html', args)
-
     else:
         events = list(Event.objects.all())
         allEmails = list(RiderProfile.objects.values_list("email", flat=True))
-        print(type(allEmails))
-        print(allEmails)
-
-        for event in events:
-            print(event)
-            # if RiderProfile.objects.filter(event=event):
-            #     for rider in RiderProfile.objects.filter(event=event):
-            #         print(rider.email)
-
         args = {'allEmails': allEmails, 'events': events}
         return render(request, 'events/adminemail.html', args)
+
+
+def general_email(subject, header, subheader, emailMessage, recipients):
+    msg = EmailMultiAlternatives(
+        subject=subject,
+        from_email="The Lobos Team <info@lobosmc.com>",
+        to=[recipients],
+        reply_to=["Lobos Support <info@lobosmc.com>"])
+
+    html = loader.render_to_string(
+        '../templates/events/generalemail.html',
+        {
+            'header': header,
+            'subheader': subheader,
+            'message': emailMessage,
+
+        }
+    )
+    msg.attach_alternative(html, "text/html")
+
+    # Optional Anymail extensions:
+    msg.tags = ["general communication"]
+    msg.track_clicks = True
+
+    # Send it:
+    msg.send()
 
 
 def home(request):
@@ -141,12 +166,11 @@ def login(request):
 
 
 def send_mail_user_reg(email, first_name, last_name, username, password):
-    print(email)
     msg = EmailMultiAlternatives(
         subject="Welcome to Lobos",
-        from_email="The Lobos Team <info@lobosmc.com.com>",
+        from_email="The Lobos Team <info@lobosmc.com>",
         to=[email],
-        reply_to=["Lobos Support <info@lobosmc.com.com>"])
+        reply_to=["Lobos Support <info@lobosmc.com>"])
 
     html = loader.render_to_string(
         '../templates/events/userregistertemplate.html',
@@ -269,9 +293,9 @@ def error_checking(request):
 def event_mail(email, first_name, last_name, username, rider_class, event, confirmation_number):
     msg = EmailMultiAlternatives(
         subject="You're Registered!",
-        from_email="The Lobos Team <info@lobosmc.com.com>",
+        from_email="The Lobos Team <info@lobosmc.com>",
         to=[email],
-        reply_to=["Lobos Support <info@lobosmc.com.com>"])
+        reply_to=["Lobos Support <info@lobosmc.com>"])
 
     html = loader.render_to_string(
         '../templates/events/eventregistertemplate.html',

@@ -16,12 +16,13 @@
 
 {% block body %}
     <div id="app" class="container">
-        <div style="text-align: center">{{ madeit | safe }}</div>
+        <div style="text-align: center">{{ success | safe }}</div>
         <br>
-        <form method="POST" id="adminemail">
+                    {#                start of form                 #}
+        <form method="POST" name="emailForm" id="adminemail">
             {% csrf_token %}
             <h4>Select the recipients: </h4>
-            <select required v-model="recipients">
+            <select name="recipients" required v-model="recipients">
                 <option>All Persons in the Database</option>
                 <option disabled>------Events:------</option>
                 {% for event in events %}
@@ -34,23 +35,24 @@
                 <option>three</option>
             </select>
             <div>
-                <h4>Subject line of the email: </h4> <input v-on:keydown.13.prevent required class="input-row"
+                <h4>Subject line of the email: </h4> <input name="subject" v-on:keydown.13.prevent required class="input-row"
                                                             v-model="subject" style="font-size: 20px"
                                                             v-model="title"
                                                             placeholder="Subject of the Email Here">
                 <br>
-                <h4>Header: </h4> <input v-on:keydown.13.prevent v-model="header" style="font-size: 20px"
+                <h4>Header: </h4> <input name="header" v-on:keydown.13.prevent v-model="header" style="font-size: 20px"
                                          v-model="title"
                                          placeholder="Big Header Here, This is not required">
                 <br>
-                <h4>Sub-header: </h4> <input v-on:keydown.13.prevent v-model="subheader" style="font-size: 20px"
+                <h4>Sub-header: </h4> <input name="subheader" v-on:keydown.13.prevent v-model="subheader" style="font-size: 20px"
                                              v-model="title"
-                                             placeholder="The sub-header Here, This is not required">
+                                             placeholder="Sub-header Here, This is not required">
                 <br>
-                <h4>Message: </h4> <textarea required v-model="message"
+                <h4>Message: </h4> <textarea value="message" name="message" required v-model="message"
                                              style="height: 300px; width: 100%; font-size: 20px"
                                              placeholder="Main Message Here"></textarea>
                 <br>
+                {#                end of form                 #}
                 <h1 style="text-align:center">Below is the email preview:</h1>
                 <h3 style="text-align:center">The dotted line only represents the area of the email and will not be
                     included in the email.</h3>
@@ -699,7 +701,7 @@
                 <h3 class="bg-danger ">Submitting will immediately send this email. Are you sure you want to email
                     [[recipients]]?</h3>
                 <br>
-                <button class="btn btn-lg btn-primary">Submit</button>
+                <button class="btn btn-lg btn-primary" >Submit</button>
             </div>
             <br>
         </form>
@@ -722,6 +724,13 @@
             watch: {
                 message: function (val) {
                     this.emailMessage = val.replace(/\n/g, "<br>")
+                }
+            },
+            method:{
+                formSubmit: function () {
+                    document.emailForm.message.value = this.emailMessage
+                    console.log(document.emailForm.message.value)
+                    return true
                 }
             }
         })
