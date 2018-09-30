@@ -49,6 +49,7 @@
                                              style="height: 300px; width: 100%; font-size: 20px"
                                              placeholder="Main Message Here"></textarea>
                 <br>
+                <h3>[[emailMessage]]</h3>
                 <h1 style="text-align:center">Below is the email preview:</h1>
                 <h3 style="text-align:center">The dotted line only represents the area of the email and will not be
                     included in the email.</h3>
@@ -173,7 +174,7 @@
                                                                                                             style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px; text-align: center"
                                                                                                             valign="top">
                                                                                                             <h1>[[header]]</h1>
-                                                                                                            <pre style="background-color: transparent; border: none"><h4 v-html="message"></h4></pre>
+                                                                                                            <h4 v-html="emailMessage"></h4>
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     </tbody>
@@ -706,7 +707,7 @@
             },
             watch: {
                 message: function (val) {
-                    this.emailMessage = val.replace("\n", "<br>")
+                    this.emailMessage = val.replace(/\n/g, "<br>")
                 }
             }
         })
