@@ -32,7 +32,6 @@
                 {% for email in allEmails %}
                     <option>{{ email }}</option>
                 {% endfor %}
-                <option>three</option>
             </select>
             <div>
                 <h4>Subject line of the email: </h4> <input name="subject" v-on:keydown.13.prevent required class="input-row"
