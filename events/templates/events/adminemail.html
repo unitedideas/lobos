@@ -44,8 +44,8 @@
                                          placeholder="Big Header Here, This is not required">
                 <br>
                 <h4>Sub-header: </h4> <input v-on:keydown.13.prevent v-model="subheader" style="font-size: 20px"
-                                         v-model="title"
-                                         placeholder="The sub-header Here, This is not required">
+                                             v-model="title"
+                                             placeholder="The sub-header Here, This is not required">
                 <br>
                 <h4>Message: </h4> <textarea required v-model="message"
                                              style="height: 300px; width: 100%; font-size: 20px"
@@ -54,6 +54,7 @@
                 <h1 style="text-align:center">Below is the email preview:</h1>
                 <h3 style="text-align:center">The dotted line only represents the area of the email and will not be
                     included in the email.</h3>
+                <br>
 
                 <div style="outline: 5px dashed darkolivegreen">
 
@@ -67,7 +68,8 @@
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
                                             <td align="center" valign="top" id="templateHeader" data-template-container>
-                                                <a class="center" href="http://www.facebook.com/Lobos-MC-363657980318015/"
+                                                <a class="center"
+                                                   href="http://www.lobosmc.com/"
                                                    target="_blank"><img
                                                         src="{% static "events/lobos logo.png" %}"
                                                         alt="Lobos Logo"
@@ -693,7 +695,7 @@
                 </div>
             </div>
             <div style="text-align: center">
-
+                <br>
                 <h3 class="bg-danger ">Submitting will immediately send this email. Are you sure you want to email
                     [[recipients]]?</h3>
                 <br>
