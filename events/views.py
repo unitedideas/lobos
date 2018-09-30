@@ -33,14 +33,20 @@ def adminemail(request):
     if request.method == 'POST':
         data = request.POST
         print(request.POST)
-        count = 0
-        for d in data:
-            count+=1
-            print(d)
-            print(count)
-            print(type(d))
+        subject = request.POST.get("subject")
+        header = request.POST.get("header")
+        subheader = request.POST.get("subheader")
+
+        message = request.POST.get("message").replace('\n', '<br>')
+
+        print(message)
+
+        recipients = request.POST.get("recipients")
+
         args = {'allEmails': allEmails, 'events': events,"success": "<h3 class='bg-success'>Your email was successfully sent!</h3>"}
-        # general_email(subject, header, subheader, message, recipients)
+
+        general_email(subject, header, subheader, message, recipients)
+
         return render(request, 'events/adminemail.html', args)
     else:
         events = list(Event.objects.all())
@@ -49,11 +55,11 @@ def adminemail(request):
         return render(request, 'events/adminemail.html', args)
 
 
-def general_email(subject, header, subheader, emailMessage, recipients):
+def general_email(subject, header, subheader, message, recipients):
     msg = EmailMultiAlternatives(
         subject=subject,
         from_email="The Lobos Team <info@lobosmc.com>",
-        to=[recipients],
+        to=["unitedideas@gmail.com"],
         reply_to=["Lobos Support <info@lobosmc.com>"])
 
     html = loader.render_to_string(
@@ -61,7 +67,7 @@ def general_email(subject, header, subheader, emailMessage, recipients):
         {
             'header': header,
             'subheader': subheader,
-            'message': emailMessage,
+            'message': message,
 
         }
     )

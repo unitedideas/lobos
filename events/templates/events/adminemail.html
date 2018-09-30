@@ -726,13 +726,13 @@
                     this.emailMessage = val.replace(/\n/g, "<br>")
                 }
             },
-            method:{
-                formSubmit: function () {
-                    document.emailForm.message.value = this.emailMessage
-                    console.log(document.emailForm.message.value)
-                    return true
-                }
-            }
+            {#method:{#}
+            {#    formSubmit: function () {#}
+            {#        document.emailForm.message.value = this.emailMessage#}
+            {#        console.log(document.emailForm.message.value)#}
+            {#        return true#}
+            {#    }#}
+            {# }#}
         })
     </script>
 {% endblock %}
