@@ -36,16 +36,24 @@ def adminemail(request):
         subject = request.POST.get("subject")
         header = request.POST.get("header")
         subheader = request.POST.get("subheader")
-
-        message = request.POST.get("message").replace('\n', '<br>')
-
-        print(message)
-
+        emailmessage = request.POST.get("message").replace('\n', '<br>')
         recipients = request.POST.get("recipients")
 
-        args = {'allEmails': allEmails, 'events': events,"success": "<h3 class='bg-success'>Your email was successfully sent!</h3>"}
+        if recipients == 'All Persons in the Database':
+            recipients = allEmails
+        elif "@" not in recipients:
+            # getting the emails for the selected event
+            event_name = recipients[:-5]
+            event_year = recipients[-4:]
+            # Event.objects.filter(event_name=event_name).filter(event_date__contains=event_year):
+            #     print('in the for loop')
+            recipients = list(Event.objects.filter(event_name=event_name).filter(event_date__contains=event_year).values_list('riderprofile__email', flat=True))
+        else:
+            recipients = list(recipients)
+        args = {'allEmails': allEmails, 'events': events,
+                "success": "<h3 class='bg-success'>Your email was successfully sent!</h3>"}
 
-        general_email(subject, header, subheader, message, recipients)
+        general_email(subject, header, subheader, emailmessage, recipients)
 
         return render(request, 'events/adminemail.html', args)
     else:
@@ -55,19 +63,21 @@ def adminemail(request):
         return render(request, 'events/adminemail.html', args)
 
 
-def general_email(subject, header, subheader, message, recipients):
+def general_email(subject, header, subheader, emailmessage, recipients):
     msg = EmailMultiAlternatives(
         subject=subject,
         from_email="The Lobos Team <info@lobosmc.com>",
-        to=["unitedideas@gmail.com"],
-        reply_to=["Lobos Support <info@lobosmc.com>"])
+        to=recipients,
+        reply_to=["Lobos Support <info@lobosmc.com>"],
+    )
+    msg.merge_data = {}
 
     html = loader.render_to_string(
         '../templates/events/generalemail.html',
         {
             'header': header,
             'subheader': subheader,
-            'message': message,
+            'message': emailmessage,
 
         }
     )
