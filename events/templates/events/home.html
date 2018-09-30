@@ -12,7 +12,7 @@
 {% block body %}
 
     <div class="container">
-    <div class="jumbotron" id="jumbo">
+    <div class="jumbotron" id="jumbo" style="margin-top: 10px">
         <div class="row">
             <div class="col-sm-5">
 
@@ -31,10 +31,10 @@
             </div>
         </div>
     </div>
-    <h1 style="text-align: center;">Upcoming Events</h1>
+    <h1 style="text-align: center; background-color: #ffe673; padding: 15px; border-radius: 5px; margin: 15px 0px 30px 0px">Upcoming Events</h1>
 
     {% for detail in events_details %}
-        <div class="jumbotron row" id="jumbo" style="margin: 0px 0px 50px 0px">
+        <div class="jumbotron row" id="jumbo" style="margin: 10px 0px 30px 0px">
             <div class="col-md-6">
 
                 {% if detail.12 > 0 %}
@@ -76,7 +76,7 @@
                     {% endif %}
                 {% endif %}
             </div>
-            <div style="float: right; margin-top: 50px; text-align: center" class="col-md-5">
+            <div style="float: right; margin-top: 30px; text-align: center" class="col-md-5">
                 <p><b>{{ detail.4 }}</b></p>
                 <p>{{ detail.5 | safe }}</p>
                 <h2>Share It!</h2>
