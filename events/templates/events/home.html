@@ -40,17 +40,17 @@
                     {% endif %}
                 {% endif %}
                 <h3>{{ detail.6 }}</h3>
-                <p>Date: {{ detail.2 }}</p>
-                <p>Pre-entry: ${{ detail.7 }}</p>
-                <p>Post-entry: ${{ detail.8 }}</p>
-                <p>Escort Rider: ${{ detail.10 }}</p>
-                <p>Entry closes {{ detail.9 }}</p>
-                <p>Details: {{ detail.3 | safe }}</p>
+                <p><b>Date:</b> {{ detail.2 }}</p>
+                <p><b>Pre-entry:</b> ${{ detail.7 }}</p>
+                <p><b>Post-entry:</b> ${{ detail.8 }}</p>
+                <p><b>Escort Rider:</b> ${{ detail.10 }}</p>
+                <p><b>Entry closes</b> {{ detail.9 }}</p>
+                <p><b>Details:</b> {{ detail.3 | safe }}</p>
 
             </div>
             <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">
                 {% if detail.13 == False %}
-                    <h2>{{ detail.0 }} {{ detail.1 }} registration opening soon!</h2>
+                    <h2>{{ detail.0 }} {{ detail.1 }} registration closed</h2>
                 {% else %}
                     {% if detail.11 <= 0 %}
                         <h2>The race is sold out!</h2>
@@ -70,7 +70,7 @@
                 {% endif %}
             </div>
             <div style="float: right; margin-top: 50px; text-align: center" class="col-md-5">
-                <p>{{ detail.4 }}</p>
+                <p><b>{{ detail.4 }}</b></p>
                 <p>{{ detail.5 | safe }}</p>
                 <h2>Share It!</h2>
                 <a class="fa fa-facebook" href="https://www.facebook.com/sharer/sharer.php?u=lobosevents.com"
