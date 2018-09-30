@@ -153,7 +153,7 @@ class RiderProfile(models.Model):
     rider_class = models.CharField('Rider Class (required)',max_length=1000, choices=RIDER_CLASS)
     first_name = models.CharField('First Name (required)', max_length=300)
     last_name = models.CharField('Last Name (required)', max_length=300)
-    email = models.EmailField('Last Name (required)', max_length=300)
+    email = models.EmailField('Email (required)', max_length=300)
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
     birth_date = models.DateField('Birth Date (required)')
     phone_number = models.CharField('Phone Number', max_length=10, null=True, blank=True)

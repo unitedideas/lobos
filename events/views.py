@@ -4,6 +4,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import send_mail, send_mass_mail, EmailMultiAlternatives, EmailMessage
 from .models import Event
 from django.http import JsonResponse, HttpResponsePermanentRedirect
@@ -23,8 +24,31 @@ import json
 import datetime
 from datetime import date
 
+
+@staff_member_required
 def adminemail(request):
-    return render(request, 'events/adminemail.html')
+    events = list(Event.objects.all())
+    allEmails = list(RiderProfile.objects.values_list("email", flat=True))
+    args = {'allEmails': allEmails, 'events': events}
+    if request.method == 'POST':
+        args = {'allEmails': allEmails, 'events': events,"madeit": "<h3 class='bg-success'>Your email was successfully sent!</h3>"}
+        return render(request, 'events/adminemail.html', args)
+
+    else:
+        events = list(Event.objects.all())
+        allEmails = list(RiderProfile.objects.values_list("email", flat=True))
+        print(type(allEmails))
+        print(allEmails)
+
+        for event in events:
+            print(event)
+            # if RiderProfile.objects.filter(event=event):
+            #     for rider in RiderProfile.objects.filter(event=event):
+            #         print(rider.email)
+
+        args = {'allEmails': allEmails, 'events': events}
+        return render(request, 'events/adminemail.html', args)
+
 
 def home(request):
     events = Event.objects.all().order_by('-event_date')[0:3]

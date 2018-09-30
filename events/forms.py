@@ -102,43 +102,6 @@ class EditProfileForm(UserChangeForm):
             'password',
         )
 
-    # # FEMALE = 'Female'
-    # # MALE = 'Male'
-    # #
-    # # GENDER = (
-    # #     (FEMALE, 'Female'),
-    # #     (MALE, 'Male'),
-    # # )
-    #
-    # email = forms.EmailField(required=False)
-    # first_name = forms.CharField(required=False)
-    # last_name = forms.CharField(required=False)
-    # password = forms.PasswordInput
-    #
-    # # gender = forms.ChoiceField(choices=GENDER)
-    #
-    # class Meta:
-    #     model = User
-    #     fields = ['email', 'first_name', 'last_name', 'password']
-    #
-    # def save(self, commit=True):
-    #     user = super(EditProfileForm, self).save(commit=False)
-    #     # Profile.objects.update(gender=self.cleaned_data['gender'])
-    #     # Profile.objects.update(birth_date=self.cleaned_data['birth_date'])
-    #     # Profile.objects.update(phone_number=self.cleaned_data['phone_number'])
-    #     # Profile.objects.update(country=self.cleaned_data['country'])
-    #     # Profile.objects.update(address=self.cleaned_data['address'])
-    #     # Profile.objects.update(address_line_two=self.cleaned_data['address_line_two'])
-    #     # Profile.objects.update(city=self.cleaned_data['city'])
-    #     # Profile.objects.update(state=self.cleaned_data['state'])
-    #     # Profile.objects.update(zip_code=self.cleaned_data['zip_code'])
-    #     # Profile.objects.update(emergency_contact_name=self.cleaned_data['emergency_contact_name'])
-    #     # Profile.objects.update(emergency_contact_phone=self.cleaned_data['emergency_contact_phone'])
-    #
-    #     if commit:
-    #         user.save()
-    #     return user
-
 
 class BaseRiderProfileFormSet(BaseModelFormSet):
     def __init__(self, *args, **kwargs):
