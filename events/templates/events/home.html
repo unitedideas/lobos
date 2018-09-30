@@ -45,7 +45,7 @@
                 <p>Post-entry: ${{ detail.8 }}</p>
                 <p>Escort Rider: ${{ detail.10 }}</p>
                 <p>Entry closes {{ detail.9 }}</p>
-                <p>Details: {{ detail.3 }}</p>
+                <p>Details: {{ detail.3 | safe }}</p>
 
             </div>
             <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">
