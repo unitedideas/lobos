@@ -18,7 +18,7 @@
     <div id="app" class="container">
         <div style="text-align: center">{{ success | safe }}</div>
         <br>
-                    {#                start of form                 #}
+        {#                start of form                 #}
         <form method="POST" name="emailForm" id="adminemail">
             {% csrf_token %}
             <h4>Select the recipients: </h4>
@@ -34,7 +34,8 @@
                 {% endfor %}
             </select>
             <div>
-                <h4>Subject line of the email: </h4> <input name="subject" v-on:keydown.13.prevent required class="input-row"
+                <h4>Subject line of the email: </h4> <input name="subject" v-on:keydown.13.prevent required
+                                                            class="input-row"
                                                             v-model="subject" style="font-size: 20px"
                                                             v-model="title"
                                                             placeholder="Subject of the Email Here">
@@ -43,7 +44,8 @@
                                          v-model="title"
                                          placeholder="Big Header Here, This is not required">
                 <br>
-                <h4>Sub-header: </h4> <input name="subheader" v-on:keydown.13.prevent v-model="subheader" style="font-size: 20px"
+                <h4>Sub-header: </h4> <input name="subheader" v-on:keydown.13.prevent v-model="subheader"
+                                             style="font-size: 20px"
                                              v-model="title"
                                              placeholder="Sub-header Here, This is not required">
                 <br>
@@ -700,7 +702,7 @@
                 <h3 class="bg-danger ">Submitting will immediately send this email. Are you sure you want to email
                     [[recipients]]?</h3>
                 <br>
-                <button class="btn btn-lg btn-primary" >Submit</button>
+                <button class="btn btn-lg btn-primary">Submit</button>
             </div>
             <br>
         </form>

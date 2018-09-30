@@ -17,7 +17,7 @@
 </head>
 {% block body %}
     <div id="app">
-        <div class="container">
+        <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
             <div id="jumbotron" class="jumbotron" style="padding: 20px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
             </div>
@@ -48,7 +48,8 @@
             <br>
         </div>
         <div class="sk-rotating-plane"></div>
-        <div class="header row" id="">
+        <br>
+        <div class="container" style="background-color: #ffe673; padding: 0px 0px 15px 0px; border-radius: 5px; text-align: center; margin-top: 10px;">
             <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
                 <h3>Please correct these errors:</h3>
                 <div id="v-for-formerrors">

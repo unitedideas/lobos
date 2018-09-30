@@ -1,5 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
+<html>
 <head>
+    <style type="text/css">
+        body {
+            background: url('{% static "events/bgimages/cameron-kirby-326348-unsplash.jpg" %}') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
 
     {#Bootstrap CDN#}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -16,7 +27,6 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'></script>
 
     {# static files #}
-    {% load static %}
     <link rel="stylesheet" href='{% static "events/style.css" %}' type="text/css">
     <link rel="stylesheet" href='{% static "events/JS.js" %}' type="text/css">
 

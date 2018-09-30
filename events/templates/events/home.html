@@ -12,7 +12,7 @@
 {% block body %}
 
     <div class="container">
-    <div class="jumbotron">
+    <div class="jumbotron" id="jumbo">
         <div class="row">
             <div class="col-sm-5">
 
@@ -27,14 +27,14 @@
 
             </div>
             <div style="float: right" class="col-sm-5">
-                <img src="{% static "events/lobos logo.png" %}">
+                <img src="{% static "events/lobos logo.png" %}" style="width: 90%; height: 90%">
             </div>
         </div>
     </div>
     <h1 style="text-align: center;">Upcoming Events</h1>
 
     {% for detail in events_details %}
-        <div class="jumbotron row" style="margin: 0px 0px 50px 0px">
+        <div class="jumbotron row" id="jumbo" style="margin: 0px 0px 50px 0px">
             <div class="col-md-6">
 
                 {% if detail.12 > 0 %}

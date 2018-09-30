@@ -28,7 +28,8 @@ from datetime import date
 @staff_member_required
 def adminemail(request):
     events = list(Event.objects.all())
-    allEmails = list(RiderProfile.objects.values_list("email", flat=True))
+    allEmails = list(User.objects.values_list("email", flat=True))
+    print(allEmails)
     args = {'allEmails': allEmails, 'events': events}
     if request.method == 'POST':
         data = request.POST
