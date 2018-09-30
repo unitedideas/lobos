@@ -87,9 +87,9 @@ a[x-apple-data-detectors] {
     line-height: inherit !important;
 }
 
-.templateContainer {
-    max-width: 600px !important;
-}
+/*.templateContainer {*/
+    /*max-width: 600px !important;*/
+/*}*/
 
 a.mcnButton {
     display: block;
@@ -447,12 +447,12 @@ h4 {
     text-decoration: underline;
 }
 
-@media only screen and (min-width: 768px) {
-    .templateContainer {
-        width: 600px !important;
-    }
+/*@media only screen and (min-width: 768px) {*/
+    /*.templateContainer {*/
+        /*width: 600px !important;*/
+    /*}*/
 
-}
+/*}*/
 
 @media only screen and (max-width: 480px) {
     body, table, td, p, a, li, blockquote {
