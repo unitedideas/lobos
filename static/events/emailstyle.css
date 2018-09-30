@@ -3,10 +3,11 @@ p {
     padding: 0;
 }
 
-pre{
-    background-color: transparent;
-    border: none;
-
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 table {

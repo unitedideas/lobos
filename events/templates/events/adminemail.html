@@ -1,17 +1,15 @@
 {% extends 'base.html' %}
 <head>
     {% load static %}
-    {# javascript #}
-    <script type="text/javascript" src="{% static "events/JS.js" %}"></script>
     {# Vue.js CDN #}
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <!-- Axios -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Style -->
     <link rel="stylesheet" href='{% static "events/emailstyle.css" %}' type="text/css">
 
 
     {% block head %}
+        <link rel="stylesheet" href='{% static "events/emailstyle.css" %}' type="text/css">
+
         <title>Admin Email</title>
     {% endblock %}
 </head>
@@ -22,7 +20,7 @@
         <br>
         <form method="POST" id="adminemail">
             {% csrf_token %}
-            <h3>Select the recipients: </h3>
+            <h4>Select the recipients: </h4>
             <select required v-model="recipients">
                 <option>All Persons in the Database</option>
                 <option disabled>------Events:------</option>
@@ -36,20 +34,23 @@
                 <option>three</option>
             </select>
             <div>
-                <h3>Subject line of the email: </h3> <input v-on:keydown.13.prevent required class="input-row"
+                <h4>Subject line of the email: </h4> <input v-on:keydown.13.prevent required class="input-row"
                                                             v-model="subject" style="font-size: 20px"
                                                             v-model="title"
                                                             placeholder="Subject of the Email Here">
                 <br>
-                <h3>Header: </h3> <input v-on:keydown.13.prevent v-model="header" style="font-size: 20px"
+                <h4>Header: </h4> <input v-on:keydown.13.prevent v-model="header" style="font-size: 20px"
                                          v-model="title"
                                          placeholder="Big Header Here, This is not required">
                 <br>
-                <h3>Message: </h3> <textarea required v-model="message"
+                <h4>Sub-header: </h4> <input v-on:keydown.13.prevent v-model="subheader" style="font-size: 20px"
+                                         v-model="title"
+                                         placeholder="The sub-header Here, This is not required">
+                <br>
+                <h4>Message: </h4> <textarea required v-model="message"
                                              style="height: 300px; width: 100%; font-size: 20px"
                                              placeholder="Main Message Here"></textarea>
                 <br>
-                <h3>[[emailMessage]]</h3>
                 <h1 style="text-align:center">Below is the email preview:</h1>
                 <h3 style="text-align:center">The dotted line only represents the area of the email and will not be
                     included in the email.</h3>
@@ -66,6 +67,13 @@
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
                                             <td align="center" valign="top" id="templateHeader" data-template-container>
+                                                <a class="center" href="http://www.facebook.com/Lobos-MC-363657980318015/"
+                                                   target="_blank"><img
+                                                        src="{% static "events/lobos logo.png" %}"
+                                                        alt="Lobos Logo"
+                                                        width="300"
+                                                        height="300"></a>
+
                                                 <!--[if (gte mso 9)|(IE)]>
 									<table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
 									<tr>
@@ -173,7 +181,10 @@
                                                                                                         <td class="mcnTextContent"
                                                                                                             style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px; text-align: center"
                                                                                                             valign="top">
-                                                                                                            <h1>[[header]]</h1>
+                                                                                                            <h1>
+                                                                                                                [[header]]</h1>
+                                                                                                            <h3>
+                                                                                                                [[subheader]]</h3>
                                                                                                             <h4 v-html="emailMessage"></h4>
                                                                                                         </td>
                                                                                                     </tr>
@@ -699,8 +710,9 @@
             data() {
                 return {
                     message: "",
-                    emailMessage: "empty",
+                    emailMessage: "",
                     header: "",
+                    subheader: "",
                     subject: "",
                     recipients: "None Selected",
                 }
