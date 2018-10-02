@@ -38,7 +38,7 @@ class RegistrationForm(UserCreationForm):
     zip_code = forms.CharField(max_length=5, required=False)
     emergency_contact_name = forms.CharField(max_length=300, required=False)
     emergency_contact_phone = forms.CharField(max_length=10, required=False,
-                                   widget=forms.NumberInput(attrs={'placeholder': '2223334444'}))
+                                              widget=forms.NumberInput(attrs={'placeholder': '2223334444'}))
 
     class Meta:
         model = User
@@ -127,7 +127,8 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            widgets=
                                            {
                                                'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
-                                               'emergency_contact_phone': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
+                                               'emergency_contact_phone': NumberInput(
+                                                   attrs={'placeholder': 'Example: 222333444'}),
                                                'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
                                                'escort_name': forms.TextInput(attrs={
                                                    'placeholder': 'If you are under 15 on the day of the event, a registered escort rider is required. 15 and over type “none”.'}),
