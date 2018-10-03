@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 try:
     from lobos.secrets import SECRET_KEY
 except ImportError:
@@ -48,7 +47,7 @@ ANYMAIL = {
     "MAILGUN_API_KEY": MAILGUN_ACCESS_KEY,
     "MAILGUN_SENDER_DOMAIN": 'mg.lobosevents.com',
 }
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"  # or sendgrid.EmailBackend, or...
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 
 
 MIDDLEWARE = [
