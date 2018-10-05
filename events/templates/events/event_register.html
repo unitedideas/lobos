@@ -142,6 +142,7 @@
                     closeModal: 'Cancel',
                     showPayPal: true,
                     discountCode: '',
+                    upsale:'',
                 }
             },
             watch: {
@@ -198,28 +199,22 @@
 
                         for (let i = 0; i < allRiderTypes.length; i++) {
                             if (allRiderTypes[i].includes('Escort')) {
-                                total +=
-                                {{ event.escort_rider_cost }}
+                                total += {{ event.escort_rider_cost }}
 
                             } else if (allRiderTypes[i].includes('Class')) {
-                                total +=
-                                {{ event.class_60_and_class_70_cost }}
+                                total += {{ event.class_60_and_class_70_cost }}
 
                             } else if (allRiderTypes[i].includes('Amateur 16')) {
-                                total +=
-                                {{ event.amateur_under_16_cost }}
+                                total += {{ event.amateur_under_16_cost }}
 
                             } else if (allRiderTypes[i].includes('Amateur over')) {
-                                total +=
-                                {{ event.amateur_over_16_cost }}
+                                total += {{ event.amateur_over_16_cost }}
 
                             } else if (allRiderTypes[i].includes('Expert 16')) {
-                                total +=
-                                {{ event.expert_under_16_cost }}
+                                total += {{ event.expert_under_16_cost }}
 
                             } else if (allRiderTypes[i].includes('Expert over')) {
-                                total +=
-                                {{ event.expert_over_16_cost }}
+                                total += {{ event.expert_over_16_cost }}
 
                             }
                         }
