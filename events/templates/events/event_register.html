@@ -49,7 +49,8 @@
         </div>
         <div class="sk-rotating-plane"></div>
         <br>
-        <div class="container" style="background-color: #ffe673; padding: 0px 0px 15px 0px; border-radius: 5px; text-align: center; margin-top: 10px;">
+        <div class="container"
+             style="background-color: #ffe673; padding: 0px 0px 15px 0px; border-radius: 5px; text-align: center; margin-top: 10px;">
             <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
                 <h3>Please correct these errors:</h3>
                 <div id="v-for-formerrors">
@@ -78,8 +79,16 @@
         <br>
         <transition v-if="showModal" name="appear">
             <div class="simple-modal" v-if="formSuccess">
-                <h1 style="color: whitesmoke;">{{ event }}</h1>
-                <h1 style="color: whitesmoke;">Final Step.. Almost There!</h1>
+                <h1 style="color: whitesmoke;">Registering for {{ event }}</h1>
+                <h1 style="color: whitesmoke;">You are registering:</h1>
+                <h3 v-for = "item in allRiderTypes" style="color: whitesmoke;">[[item]]</h3>
+                <h1 style="color: whitesmoke;">Wait!</h1>
+                <br>
+                <h3 style="color: whitesmoke;">Don't be the only one without {{ event }} swag!</h3>
+                <h3 style="color: whitesmoke;">Add your merch here.</h3>
+                <div class="row"></div>
+                <div  class="col-sm-6"><img src="{% static "events/lobos logo.png" %}" style="width: 40%; height: 40%"></div>
+                <div  class="col-sm-6"><img src="{% static "events/lobos logo.png" %}" style="width: 40%; height: 40%"></div>
                 <br>
                 <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]
                 </button>
@@ -142,7 +151,8 @@
                     closeModal: 'Cancel',
                     showPayPal: true,
                     discountCode: '',
-                    upsale:'',
+                    merchUpsale: '',
+                    allRiderTypes:"None",
                 }
             },
             watch: {
@@ -191,6 +201,7 @@
                         let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
                         let total = 0
                         let allRiderTypes = []
+                        this.allRiderTypes = allRiderTypes
 
                         for (let i = 0; i < total_rider_classes.length; i++) {
                             allRiderTypes.push(total_rider_classes[i].value)
@@ -199,22 +210,28 @@
 
                         for (let i = 0; i < allRiderTypes.length; i++) {
                             if (allRiderTypes[i].includes('Escort')) {
-                                total += {{ event.escort_rider_cost }}
+                                total +=
+                                {{ event.escort_rider_cost }}
 
                             } else if (allRiderTypes[i].includes('Class')) {
-                                total += {{ event.class_60_and_class_70_cost }}
+                                total +=
+                                {{ event.class_60_and_class_70_cost }}
 
                             } else if (allRiderTypes[i].includes('Amateur 16')) {
-                                total += {{ event.amateur_under_16_cost }}
+                                total +=
+                                {{ event.amateur_under_16_cost }}
 
                             } else if (allRiderTypes[i].includes('Amateur over')) {
-                                total += {{ event.amateur_over_16_cost }}
+                                total +=
+                                {{ event.amateur_over_16_cost }}
 
                             } else if (allRiderTypes[i].includes('Expert 16')) {
-                                total += {{ event.expert_under_16_cost }}
+                                total +=
+                                {{ event.expert_under_16_cost }}
 
                             } else if (allRiderTypes[i].includes('Expert over')) {
-                                total += {{ event.expert_over_16_cost }}
+                                total +=
+                                {{ event.expert_over_16_cost }}
 
                             }
                         }
