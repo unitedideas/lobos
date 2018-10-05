@@ -1,5 +1,6 @@
 """
-Utitility methods
+Django-import-export module
+Utility methods
 """
 import csv
 from datetime import (
