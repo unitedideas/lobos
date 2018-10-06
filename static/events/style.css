@@ -2,13 +2,28 @@ body {
     background-color: #dedede;
 }
 
-.container{
-    padding-left: 0px;padding-right: 0px;
+.container {
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 a[target="_blank"]:after {
     content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
     margin: 0 3px 0 5px;
+}
+
+table{
+    vertical-align: center;
+    text-align: center;
+}
+
+td{
+    vertical-align: center;
+    text-align: center;
+}
+tr{
+    vertical-align: center;
+    text-align: center;
 }
 
 .fa {
@@ -62,7 +77,7 @@ a[target="_blank"]:after {
 }
 
 #jumbo {
-  padding: 40px;
+    padding: 40px;
 }
 
 .navbar {
