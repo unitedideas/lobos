@@ -88,10 +88,8 @@
                 {#                <br>#}
                 <h3 style="color: whitesmoke;">Don't be left out!</h3>
                 <br>
-                <div>
                     <div class="row">
-                        <div class="col-sm-7 "><img src="https://i.giphy.com/media/xU8by8LEnqwFO/giphy.webp"
-                                                    style="width: 80%; height: 80%">
+                        <div class="col-sm-7 "><img src="{% static "events/bgimages/rainjacket.gif" %}" style="width: 99%; height: 99%">
                             <h4 style="color: whitesmoke;" class="center">The Official {{ event }} Hoodie</h4>
                             <h4 style="color: whitesmoke;" class="center">30th Anniversary Edition</h4>
                         </div>
@@ -103,8 +101,8 @@
                                         <th style="color: #ffe673; text-align: center;">QUANTITY</th>
                                         <th style="color: #ffe673; text-align: center;">COST</th>
                                     <tr>
-                                        <td>
-                                            <select style="min-width: 140px">
+                                        <td  style="padding-top: 10px">
+                                            <select style="min-width: 140px;">
                                                 <option>XS</option>
                                                 <option>S</option>
                                                 <option>M</option>
@@ -129,7 +127,6 @@
                         </div>
                     </div>
 
-                </div>
                 <br>
                 <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]
                 </button>
