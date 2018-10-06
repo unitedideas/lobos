@@ -86,153 +86,163 @@
                 {#                <h1 style="color: whitesmoke;">You are registering:</h1>#}
                 {#                <h3 v-for="item in allRiderTypes" style="color: whitesmoke;">[[item]]</h3>#}
                 {#                <br>#}
-                <h3 style="color: whitesmoke;">Don't be left out!</h3>
-                <br>
-                {# start of the merch table#}
-                <div class="row">
-                    <div class="col-sm-5 "><img src="{% static "events/bgimages/rainjacket.gif" %}"
-                                                style="width: 99%; height: 99%">
-                        <h4 style="color: whitesmoke;" class="center">The Official {{ event }} Hoodie</h4>
-                        <h4 style="color: whitesmoke;" class="center">30th Anniversary Edition</h4>
-                    </div>
-                    <div class="col-sm-7">
-                        <div>
-                            <table class="table text-center" style="padding-right: 20px;">
-                                <tr>
-                                    <th style="color: #ffe673; text-align: center; width: 50px;"></th>
-                                    <th style="color: #ffe673; text-align: center;">SIZE</th>
-                                    <th style="color: #ffe673; text-align: center;">QUANTITY</th>
-                                    <th style="color: #ffe673; text-align: center;">COST</th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input style="width: 40px;" type="checkbox" v-model="xsml">
-                                    </td>
-                                    <td>
-                                        <label>X-Small</label>
-                                    </td>
-                                    <td v-if="xsml" style="vertical-align: center"><input v-model='merchQTY'
-                                                                                          style="text-align: center; max-width: 40px"
-                                                                                          type="number" min="0"
-                                                                                          step="1" value="0">
-                                    </td>
-                                    <td v-else="xsml">
-                                        <div style="text-align: center; max-width: 40px"></div>
-                                    </td>
-                                    <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input style="width: 40px;" type="checkbox" v-model="sml">
-                                    </td>
-                                    <td>
-                                        <label>Small</label>
-                                    </td>
-                                    <td v-if="sml" style="vertical-align: center"><input v-model='merchQTY'
-                                                                                         style="text-align: center; max-width: 40px"
-                                                                                         type="number" min="0"
-                                                                                         step="1" value="0">
-                                    </td>
-                                    <td v-else="sml">
-                                        <div style="text-align: center; max-width: 40px"></div>
-                                    </td>
-                                    <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input style="width: 40px;" type="checkbox" v-model="med">
-                                    </td>
-                                    <td>
-                                        <label>Medium</label>
-                                    </td>
-                                    <td v-if="med" style="vertical-align: center"><input v-model='merchQTY'
-                                                                                         style="text-align: center; max-width: 40px"
-                                                                                         type="number" min="0"
-                                                                                         step="1" value="0">
-                                    </td>
-                                    <td v-else="med">
-                                        <div style="text-align: center; max-width: 40px"></div>
-                                    </td>
-                                    <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input style="width: 40px;" type="checkbox" v-model="lrg">
-                                    </td>
-                                    <td>
-                                        <label>Large</label>
-                                    </td>
-                                    <td v-if="lrg" style="vertical-align: center"><input v-model='merchQTY'
-                                                                                         style="text-align: center; max-width: 40px"
-                                                                                         type="number" min="0"
-                                                                                         step="1" value="0">
-                                    </td>
-                                    <td v-else="lrg">
-                                        <div style="text-align: center; max-width: 40px"></div>
-                                    </td>
-                                    <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input style="width: 40px;" type="checkbox" v-model="xlrg">
-                                    </td>
-                                    <td>
-                                        <label>X-Large</label>
-                                    </td>
-                                    <td v-if="xlrg" style="vertical-align: center"><input v-model='merchQTY'
-                                                                                          style="text-align: center; max-width: 40px"
-                                                                                          type="number" min="0"
-                                                                                          step="1" value="0">
-                                    </td>
-                                    <td v-else="xlrg">
-                                        <div style="text-align: center; max-width: 40px"></div>
-                                    </td>
-                                    <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input style="width: 40px;" type="checkbox" v-model="xxlrg">
-                                    </td>
-                                    <td>
-                                        <label>2X-Large</label>
-                                    </td>
-                                    <td v-if="xxlrg" style="vertical-align: center"><input v-model='merchQTY'
-                                                                                           style="text-align: center; max-width: 40px"
-                                                                                           type="number" min="0"
-                                                                                           step="1" value="0">
-                                    </td>
-                                    <td v-else="xxlrg">
-                                        <div style="text-align: center; max-width: 40px"></div>
-                                    </td>
-                                    <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input style="width: 40px;" type="checkbox" v-model="xxxlrg">
-                                    </td>
-                                    <td>
-                                        <label>3X-Large</label>
-                                    </td>
-                                    <td v-if="xxxlrg" style="vertical-align: center"><input v-model='merchQTY'
-                                                                                            style="text-align: center; max-width: 40px"
-                                                                                            type="number" min="0"
-                                                                                            step="1" value="0">
-                                    </td>
-                                    <td v-else="xxxlrg">
-                                        <div style="text-align: center; max-width: 40px"></div>
-                                    </td>
-                                    <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
-                                </tr>
+                {% if event.merchandise %} }
+                    <h3 style="color: whitesmoke;">Don't be left out!</h3>
+                    <br>
+                    {# start of the merch table#}
+                    <div class="row">
+                        <div class="col-sm-7"><img src="{% static "events/bgimages/rainjacket.gif" %}"
+                                                   style="width: 99%; height: 99%">
+                            <h4 style="color: whitesmoke;" class="center">The Official {{ event }} Hoodie</h4>
+                            <h4 style="color: whitesmoke;" class="center">30th Anniversary Edition</h4>
+                        </div>
+                        <div class="col-sm-5">
+                            <div>
+                                <table class="table text-center" style="padding-right: 20px;">
+                                    <tr>
+                                        <th style="color: #ffe673; text-align: center; width: 50px;"></th>
+                                        <th style="color: #ffe673; text-align: center;">SIZE</th>
+                                        <th style="color: #ffe673; text-align: center;">QUANTITY</th>
+                                        <th style="color: #ffe673; text-align: center;">COST</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input style="width: 40px;" type="checkbox" v-model="xsml">
+                                        </td>
+                                        <td>
+                                            <label>X-Small</label>
+                                        </td>
+                                        <td v-if="xsml" style="vertical-align: center"><input v-model='merchQTY'
+                                                                                              style="text-align: center; max-width: 40px"
+                                                                                              type="number" min="0"
+                                                                                              step="1" value="0">
+                                        </td>
+                                        <td v-else="xsml">
+                                            <div style="text-align: center; max-width: 40px"></div>
+                                        </td>
+                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input style="width: 40px;" type="checkbox" v-model="sml">
+                                        </td>
+                                        <td>
+                                            <label>Small</label>
+                                        </td>
+                                        <td v-if="sml" style="vertical-align: center"><input v-model='merchQTY'
+                                                                                             style="text-align: center; max-width: 40px"
+                                                                                             type="number" min="0"
+                                                                                             step="1" value="0">
+                                        </td>
+                                        <td v-else="sml">
+                                            <div style="text-align: center; max-width: 40px"></div>
+                                        </td>
+                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input style="width: 40px;" type="checkbox" v-model="med">
+                                        </td>
+                                        <td>
+                                            <label>Medium</label>
+                                        </td>
+                                        <td v-if="med" style="vertical-align: center"><input v-model='merchQTY'
+                                                                                             style="text-align: center; max-width: 40px"
+                                                                                             type="number" min="0"
+                                                                                             step="1" value="0">
+                                        </td>
+                                        <td v-else="med">
+                                            <div style="text-align: center; max-width: 40px"></div>
+                                        </td>
+                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input style="width: 40px;" type="checkbox" v-model="lrg">
+                                        </td>
+                                        <td>
+                                            <label>Large</label>
+                                        </td>
+                                        <td v-if="lrg" style="vertical-align: center"><input v-model='merchQTY'
+                                                                                             style="text-align: center; max-width: 40px"
+                                                                                             type="number" min="0"
+                                                                                             step="1" value="0">
+                                        </td>
+                                        <td v-else="lrg">
+                                            <div style="text-align: center; max-width: 40px"></div>
+                                        </td>
+                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input style="width: 40px;" type="checkbox" v-model="xlrg">
+                                        </td>
+                                        <td>
+                                            <label>X-Large</label>
+                                        </td>
+                                        <td v-if="xlrg" style="vertical-align: center"><input v-model='merchQTY'
+                                                                                              style="text-align: center; max-width: 40px"
+                                                                                              type="number" min="0"
+                                                                                              step="1" value="0">
+                                        </td>
+                                        <td v-else="xlrg">
+                                            <div style="text-align: center; max-width: 40px"></div>
+                                        </td>
+                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input style="width: 40px;" type="checkbox" v-model="xxlrg">
+                                        </td>
+                                        <td>
+                                            <label>2X-Large</label>
+                                        </td>
+                                        <td v-if="xxlrg" style="vertical-align: center"><input v-model='merchQTY'
+                                                                                               style="text-align: center; max-width: 40px"
+                                                                                               type="number" min="0"
+                                                                                               step="1" value="0">
+                                        </td>
+                                        <td v-else="xxlrg">
+                                            <div style="text-align: center; max-width: 40px"></div>
+                                        </td>
+                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input style="width: 40px;" type="checkbox" v-model="xxxlrg">
+                                        </td>
+                                        <td>
+                                            <label>3X-Large</label>
+                                        </td>
+                                        <td v-if="xxxlrg" style="vertical-align: center"><input v-model='merchQTY'
+                                                                                                style="text-align: center; max-width: 40px"
+                                                                                                type="number" min="0"
+                                                                                                step="1" value="0">
+                                        </td>
+                                        <td v-else="xxxlrg">
+                                            <div style="text-align: center; max-width: 40px"></div>
+                                        </td>
+                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
+                                    </tr>
 
-                            </table>
-                        </div>
-                        <div style="text-align: left;">
-                            <h3 style="color: whitesmoke;">Registration: [[regTotal]]</h3>
-                            <h3 style="color: whitesmoke;">Merch: [[merchTotal]]</h3>
-                            <h3 style="color: whitesmoke;">Total: [[amountStr]]</h3>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div style="text-align: center;">
+                        <div style="background-color: #ffe673; height: 5px;"></div>
+                        <h3 style="color: whitesmoke;">Registration: [[regTotal]]</h3>
+                        <h3 style="color: whitesmoke;">Merch: [[merchTotal]]</h3>
+                        <h3 style="color: whitesmoke;">Total: [[amountStr]]</h3>
+                    </div>
+
+                {% else %}
+                    <div style="text-align: center; ">
+                        <h3 style="color: whitesmoke;">Registration Total:</h3>
+                        <h3 style="color: whitesmoke;">$[[regTotal]]</h3>
+                    </div>
+                {% endif %}
+
 
                 <br>
                 <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]

@@ -114,14 +114,12 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            (
                                                'rider_cat',
                                                'user',
-                                               'age_on_event_day',
                                                'confirmation_number',
                                                'rider_number',
                                                'start_time',
                                                'event',
                                                'id',
                                                'registration_date_time',
-                                               'merchandise',
                                            ),
                                            formset=BaseRiderProfileFormSet,
                                            widgets=
@@ -135,5 +133,7 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'group_name': forms.TextInput(
                                                    attrs={'placeholder': 'John Smith, Jane Doe'}),
                                                'rider_class': forms.Select(attrs={'oninput': "select_change(this)"}),
+                                               'merchandise': forms.HiddenInput(),
+                                               'age_on_event_day': forms.HiddenInput(),
 
                                            })
