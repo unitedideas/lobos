@@ -31,6 +31,7 @@ class Event(models.Model):
     class_60_and_class_70_cost = models.IntegerField()
     escort_rider_cost = models.IntegerField()
     open_registration = models.BooleanField(default=False)
+    merchandise = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
@@ -170,6 +171,7 @@ class RiderProfile(models.Model):
     escort_name = models.CharField('Your Escort’s Name: (Must register only in the Escort class) Add another rider, below (required)', max_length=300)
     group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
                                   null=True, blank=True)
+    merchandise = models.TextField(max_length=1000, null=True, blank=True)
 
     # These items will not be in the form and must not be visible
     # confirmation will be generated, age on event day will be calculated
