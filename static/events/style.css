@@ -125,7 +125,7 @@ input, select {
     box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.19);
     border-radius: 5px;
     align-items: center;
-    padding: 200px;
+    padding: 100px;
     z-index: 10;
     position: fixed;
     top: 0;
@@ -134,6 +134,9 @@ input, select {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.9); /*dim the background*/
     text-align: center;
+    max-height: calc(100vh);
+    overflow-y: auto;
+
 }
 
 .simple-modal p {
@@ -143,7 +146,7 @@ input, select {
 .simple-modal button {
     position: absolute;
     right: 100px;
-    top: 100px;
+    top: 70px;
 }
 
 .backdrop:after {
