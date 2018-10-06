@@ -122,6 +122,7 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'event',
                                                'id',
                                                'registration_date_time',
+                                               'merchandise',
                                            ),
                                            formset=BaseRiderProfileFormSet,
                                            widgets=
