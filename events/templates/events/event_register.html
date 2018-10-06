@@ -100,7 +100,9 @@
                             <div>
                                 <table class="table text-center" style="padding-right: 20px;">
                                     <tr>
-                                        <th style="color: #ffe673; text-align: center; width: 50px;"></th>
+                                        <th style="color: #ffe673; text-align: center; width: 50px;">
+                                            <input style="width: 40px;" type="checkbox" checked disabled="true" >
+                                        </th>
                                         <th style="color: #ffe673; text-align: center;">SIZE</th>
                                         <th style="color: #ffe673; text-align: center;">QUANTITY</th>
                                         <th style="color: #ffe673; text-align: center;">COST</th>
@@ -112,7 +114,7 @@
                                         <td>
                                             <label>X-Small</label>
                                         </td>
-                                        <td v-if="xsml" style="vertical-align: center"><input v-model='merchQTY'
+                                        <td v-if="xsml" style="vertical-align: center"><input v-model='xsmlqty'
                                                                                               style="text-align: center; max-width: 40px"
                                                                                               type="number" min="0"
                                                                                               step="1" value="0">
@@ -129,7 +131,7 @@
                                         <td>
                                             <label>Small</label>
                                         </td>
-                                        <td v-if="sml" style="vertical-align: center"><input v-model='merchQTY'
+                                        <td v-if="sml" style="vertical-align: center"><input v-model='smlqty'
                                                                                              style="text-align: center; max-width: 40px"
                                                                                              type="number" min="0"
                                                                                              step="1" value="0">
@@ -146,7 +148,7 @@
                                         <td>
                                             <label>Medium</label>
                                         </td>
-                                        <td v-if="med" style="vertical-align: center"><input v-model='merchQTY'
+                                        <td v-if="med" style="vertical-align: center"><input v-model='medqty'
                                                                                              style="text-align: center; max-width: 40px"
                                                                                              type="number" min="0"
                                                                                              step="1" value="0">
@@ -163,7 +165,7 @@
                                         <td>
                                             <label>Large</label>
                                         </td>
-                                        <td v-if="lrg" style="vertical-align: center"><input v-model='merchQTY'
+                                        <td v-if="lrg" style="vertical-align: center"><input v-model='lrgqty'
                                                                                              style="text-align: center; max-width: 40px"
                                                                                              type="number" min="0"
                                                                                              step="1" value="0">
@@ -180,7 +182,7 @@
                                         <td>
                                             <label>X-Large</label>
                                         </td>
-                                        <td v-if="xlrg" style="vertical-align: center"><input v-model='merchQTY'
+                                        <td v-if="xlrg" style="vertical-align: center"><input v-model='xlrgqty'
                                                                                               style="text-align: center; max-width: 40px"
                                                                                               type="number" min="0"
                                                                                               step="1" value="0">
@@ -197,7 +199,7 @@
                                         <td>
                                             <label>2X-Large</label>
                                         </td>
-                                        <td v-if="xxlrg" style="vertical-align: center"><input v-model='merchQTY'
+                                        <td v-if="xxlrg" style="vertical-align: center"><input v-model='xxlrgqty'
                                                                                                style="text-align: center; max-width: 40px"
                                                                                                type="number" min="0"
                                                                                                step="1" value="0">
@@ -214,7 +216,7 @@
                                         <td>
                                             <label>3X-Large</label>
                                         </td>
-                                        <td v-if="xxxlrg" style="vertical-align: center"><input v-model='merchQTY'
+                                        <td v-if="xxxlrg" style="vertical-align: center"><input v-model='xxxlrgqty'
                                                                                                 style="text-align: center; max-width: 40px"
                                                                                                 type="number" min="0"
                                                                                                 step="1" value="0">
@@ -308,12 +310,20 @@
                     closeModal: "Cancel",
                     showPayPal: true,
                     discountCode: '',
-                    merchTotal: 0.00,
-                    merchQTY: 0.00,
+                    merchTotal: "0.00",
+                    merchQTY: 0,
                     merchCost: 45,
                     allRiderTypes: "None",
                     regTotal: 0.00,
                     overallTotal: 0.00,
+                    xsmlqty: 0,
+                    smlqty: 0,
+                    medqty: 0,
+                    lrgqty: 0,
+                    xlrgqty: 0,
+                    xxlrgqty: 0,
+                    xxxlrgqty: 0,
+
                     xsml: false,
                     sml: false,
                     med: false,
