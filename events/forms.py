@@ -107,7 +107,6 @@ class BaseRiderProfileFormSet(BaseModelFormSet):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-
 # https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
 
 RiderProfileFormSet = modelformset_factory(RiderProfile,
