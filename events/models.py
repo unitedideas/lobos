@@ -31,7 +31,12 @@ class Event(models.Model):
     class_60_and_class_70_cost = models.IntegerField()
     escort_rider_cost = models.IntegerField()
     open_registration = models.BooleanField(default=False)
-    merchandise = models.BooleanField(default=False)
+    hat = models.BooleanField(default=False)
+    hat_image = models.CharField(max_length=300, null=True, blank=True)
+    hoodie = models.BooleanField(default=False)
+    hoodie_image = models.CharField(max_length=300, null=True, blank=True)
+    shirt = models.BooleanField(default=False)
+    shirt_image = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
@@ -71,7 +76,6 @@ class Codes(models.Model):
 
 
 class RiderProfile(models.Model):
-
     FEMALE = 'Female'
     MALE = 'Male'
 
@@ -100,7 +104,6 @@ class RiderProfile(models.Model):
     WO = 'Women'
     JR = 'Jr.'
     OEX = 'Open Expert'
-
 
     RIDER_CLASS = [
         (EXO16, [
@@ -151,7 +154,7 @@ class RiderProfile(models.Model):
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     rider_cat = models.CharField('Rider Category', max_length=1000, null=True, blank=True)
-    rider_class = models.CharField('Rider Class (required)',max_length=1000, choices=RIDER_CLASS)
+    rider_class = models.CharField('Rider Class (required)', max_length=1000, choices=RIDER_CLASS)
     first_name = models.CharField('First Name (required)', max_length=300)
     last_name = models.CharField('Last Name (required)', max_length=300)
     email = models.EmailField('Email (required)', max_length=300)
@@ -166,12 +169,14 @@ class RiderProfile(models.Model):
     zip_code = models.CharField('Zip Code', max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField('Emergency Contact Name', max_length=300, null=True, blank=True)
     emergency_contact_phone = models.CharField('Emergency Contact Phone', max_length=10, null=True, blank=True)
-    bike_make = models.CharField('Bike Manufacturer',max_length=20, choices=MAKES)
+    bike_make = models.CharField('Bike Manufacturer', max_length=20, choices=MAKES)
     bike_displacement = models.IntegerField('Bike Displacement', null=True, blank=True)
-    escort_name = models.CharField('Your Escort’s Name: (Must register only in the Escort class) Add another rider, below (required)', max_length=300)
+    escort_name = models.CharField(
+        'Your Escort’s Name: (Must register only in the Escort class) Add another rider, below (required)',
+        max_length=300)
     group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
                                   null=True, blank=True)
-    merchandise = models.TextField(max_length=1000, null=True, blank=True)
+    merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)
 
     # These items will not be in the form and must not be visible
     # confirmation will be generated, age on event day will be calculated
