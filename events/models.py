@@ -33,10 +33,20 @@ class Event(models.Model):
     open_registration = models.BooleanField(default=False)
     hat = models.BooleanField('Check the box if there is hat merchandise', default=False)
     hat_image_file_name = models.CharField(max_length=300, null=True, blank=True)
+    hat_main_description = models.CharField(max_length=300, null=True, blank=True)
+    hat_sub_description = models.CharField(max_length=300, null=True, blank=True)
+    hat_cost = models.IntegerField(null=True, blank=True)
     hoodie = models.BooleanField('Check the box if there is hoodie merchandise', default=False)
     hoodie_image_file_name = models.CharField(max_length=300, null=True, blank=True)
+    hoodie_main_description = models.CharField(max_length=300, null=True, blank=True)
+    hoodie_sub_description = models.CharField(max_length=300, null=True, blank=True)
+    hoodie_cost = models.IntegerField(null=True, blank=True)
     shirt = models.BooleanField('Check the box if there is shirt merchandise', default=False)
     shirt_image_file_name = models.CharField(max_length=300, null=True, blank=True)
+    shirt_main_description = models.CharField(max_length=300, null=True, blank=True)
+    shirt_sub_description = models.CharField(max_length=300, null=True, blank=True)
+    shirt_cost = models.IntegerField(null=True, blank=True)
+
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
