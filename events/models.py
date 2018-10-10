@@ -31,7 +31,7 @@ class Event(models.Model):
     class_60_and_class_70_cost = models.IntegerField()
     escort_rider_cost = models.IntegerField()
     open_registration = models.BooleanField(default=False)
-    hat = models.BooleanField(default=False)
+    hat = models.BooleanField('Check if there is i',default=False)
     hat_image = models.CharField(max_length=300, null=True, blank=True)
     hoodie = models.BooleanField(default=False)
     hoodie_image = models.CharField(max_length=300, null=True, blank=True)
