@@ -31,12 +31,12 @@ class Event(models.Model):
     class_60_and_class_70_cost = models.IntegerField()
     escort_rider_cost = models.IntegerField()
     open_registration = models.BooleanField(default=False)
-    hat = models.BooleanField('Check if there is i',default=False)
-    hat_image = models.CharField(max_length=300, null=True, blank=True)
-    hoodie = models.BooleanField(default=False)
-    hoodie_image = models.CharField(max_length=300, null=True, blank=True)
-    shirt = models.BooleanField(default=False)
-    shirt_image = models.CharField(max_length=300, null=True, blank=True)
+    hat = models.BooleanField('Check the box if there is hat merchandise', default=False)
+    hat_image_file_name = models.CharField(max_length=300, null=True, blank=True)
+    hoodie = models.BooleanField('Check the box if there is hoodie merchandise', default=False)
+    hoodie_image_file_name = models.CharField(max_length=300, null=True, blank=True)
+    shirt = models.BooleanField('Check the box if there is shirt merchandise', default=False)
+    shirt_image_file_name = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
