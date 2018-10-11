@@ -340,6 +340,7 @@
                     this.$refs.submitButton.click();
                 },
 
+
                 regTotal() {
                     this.app = this
                     let tot = 0.00
@@ -350,17 +351,8 @@
                     console.log(app.amountStr)
                 },
 
-                merchQTY() {
-                    this.app = this
-                    let tot = 0.00
-                    let merchtot = 0.00
-                    merchtot = Number(app.merchCost) * Number(app.merchQTY)
-                    app.merchTotal = merchtot.toFixed(2)
-                    app.overallTotal = Number(app.merchTotal) + Number(app.regTotal)
-                    app.amountStr = app.overallTotal
-                    tot = app.overallTotal
-                    app.amountStr = tot.toFixed(2)
-                    console.log(app.amountStr)
+                xsmlqty() {
+                   this.qtychange()
                 },
 
                 formSuccess() {
@@ -373,6 +365,19 @@
             },
             methods:
                 {
+                    qtychange: function () {
+                        this.app = this
+                        let tot = 0.00
+                        let merchtot = 0.00
+                        merchtot = Number(app.merchCost) * Number(app.merchQTY)
+                        app.merchTotal = merchtot.toFixed(2)
+                        app.overallTotal = Number(app.merchTotal) + Number(app.regTotal)
+                        app.amountStr = app.overallTotal
+                        tot = app.overallTotal
+                        app.amountStr = tot.toFixed(2)
+                        console.log(app.amountStr)
+                    },
+
                     the3DayMethod: function () {
                         let app = this
                         app.formSuccess = ''
