@@ -88,13 +88,15 @@
                 {#                <h1 style="color: whitesmoke;">You are registering:</h1>#}
                 {#                <h3 v-for="item in allRiderTypes" style="color: whitesmoke;">[[item]]</h3>#}
                 {#                <br>#}
-                {% if event.hat or event.hoodie or event.shirt %} }
+
+
+                                {# start of the merch table#}
+                                {# start of the merch table#}
+                {% if event.hat or event.hoodie or event.shirt %}
                     <h3 style="color: whitesmoke;">Don't be left out!</h3>
                     <br>
-                    {# start of the merch table#}
                     <div class="row">
-                        <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}"
-                                                   style="width: 99%; height: 99%">
+                        <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}" style="width: 99%; height: 99%">
                             <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
                             <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
                         </div>
@@ -124,7 +126,7 @@
                                         <td v-else="xsml">
                                             <div style="text-align: center; max-width: 40px"></div>
                                         </td>
-                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>
+                                        <td><h4 style="color: whitesmoke;">$[[hoodieCost]]</h4></td>
                                     </tr>
                                     {#                                    <tr>#}
                                     {#                                        <td>#}
@@ -236,8 +238,8 @@
                     <div style="text-align: center;">
                         <div style="background-color: #ffe673; height: 5px;"></div>
                         <h3 style="color: whitesmoke;">Registration: [[regTotal]]</h3>
-                        <h3 style="color: whitesmoke;">Merch: [[merchTotal]]</h3>
-                        <h3 style="color: whitesmoke;">Total: [[amountStr]]</h3>
+                        <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>
+                        <h3 style="color: whitesmoke;">Grand Total: [[amountStr]]</h3>
                     </div>
 
                 {% else %}
@@ -246,7 +248,6 @@
                         <h3 style="color: whitesmoke;">$[[regTotal]]</h3>
                     </div>
                 {% endif %}
-
 
                 <br>
                 <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]
@@ -312,12 +313,17 @@
                     closeModal: "Cancel",
                     showPayPal: true,
                     discountCode: '',
-                    merchTotal: "0.00",
-                    merchQTY: 0,
-                    merchCost: {{ event.hoodie_cost }},
                     allRiderTypes: "None",
                     regTotal: 0.00,
                     overallTotal: 0.00,
+
+
+                    merchTotal: "0.00",
+
+                    hoodieCost: {{ event.hoodie_cost }},
+                    shirtCost: {{ event.shirt_cost }},
+                    hatCost: {{ event.hat_cost }},
+
                     xsmlqty: 0,
                     smlqty: 0,
                     medqty: 0,
