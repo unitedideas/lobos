@@ -317,7 +317,6 @@
                     regTotal: 0.00,
                     overallTotal: 0.00,
 
-
                     merchTotal: "0.00",
 
                     hoodieCost: {{ event.hoodie_cost }},
@@ -347,7 +346,8 @@
                 },
 
 
-                regTotal() {
+                {# need to calc the tottal value of the merch #}
+                smlqty() {
                     this.app = this
                     let tot = 0.00
                     app.overallTotal = Number(app.merchTotal) + Number(app.regTotal)
@@ -357,6 +357,8 @@
                     console.log(app.amountStr)
                 },
 
+
+                {# need to calc the tottal value of the merch #}
                 xsmlqty() {
                     this.qtychange()
                 },
@@ -375,7 +377,7 @@
                         this.app = this
                         let tot = 0.00
                         let merchtot = 0.00
-                        merchtot = Number(app.merchCost) * Number(app.merchQTY)
+                        merchtot = Number(app.merchCost) * Number(app.xsmlqty)
                         app.merchTotal = merchtot.toFixed(2)
                         app.overallTotal = Number(app.merchTotal) + Number(app.regTotal)
                         app.amountStr = app.overallTotal
