@@ -90,13 +90,14 @@
                 {#                <br>#}
 
 
-                                {# start of the merch table#}
-                                {# start of the merch table#}
+                {# start of the merch table#}
+                {# start of the merch table#}
                 {% if event.hat or event.hoodie or event.shirt %}
                     <h3 style="color: whitesmoke;">Don't be left out!</h3>
                     <br>
                     <div class="row">
-                        <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}" style="width: 99%; height: 99%">
+                        <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}"
+                                                   style="width: 99%; height: 99%">
                             <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
                             <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
                         </div>
