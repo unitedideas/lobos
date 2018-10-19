@@ -116,10 +116,11 @@
                                         <td>
                                             <label>X-Small</label>
                                         </td>
-                                        <td v-if="hoodiexsml" style="vertical-align: center"><input v-model='hoodiexsmlqty'
-                                                                                              style="text-align: center; max-width: 40px"
-                                                                                              type="number" min="0"
-                                                                                              step="1" value="0">
+                                        <td v-if="hoodiexsml" style="vertical-align: center"><input
+                                                v-model='hoodiexsmlqty'
+                                                style="text-align: center; max-width: 40px"
+                                                type="number" min="0"
+                                                step="1" value="0">
                                         </td>
                                         <td v-else="hoodiexsml">
                                             <div style="text-align: center; max-width: 40px"></div>
@@ -250,24 +251,25 @@
                     this.$refs.submitButton.click();
                 },
 
-                hoodiexsml(){
+                hoodiexsml() {
                     let app = this
-                    if(app.hoodiexsml === false){
+                    if (app.hoodiexsml === false) {
                         app.hoodiexsmlqty = 0
                         console.log('hoodiexsml qty set to 0')
                     }
 
-                    else if(app.hoodiexsml === true){
+                    else if (app.hoodiexsml === true) {
                         app.hoodiexsmlqty = 1
-                        }
+                    }
                 },
 
-                hoodiexsmlqty(){
+                hoodiexsmlqty() {
                     let app = this
                     let tot = 0
                     tot = app.hoodiexsmlqty * app.hoodieCost
                     app.hoodiexsmltot = tot
                     console.log('some hoodiexsmlqty changed ' + tot)
+                    app.merchtotal()
                 },
 
 
@@ -298,12 +300,12 @@
 
             methods:
                 {
-                    qtychange: function (newtot) {
+                    merchtotal: function () {
                         this.app = this
                         let tot = 0.00
-                        let merchtot = 0.00
-                        merchtot = Number(app.merchCost) * Number(app.hoodiexsmlqty)
-                        app.merchTotal = merchtot.toFixed(2)
+                        let merchtot = 0
+                        merchtot = app.hoodieCost * app.hoodiexsmlqty
+                        app.merchTotal = Number(merchtot).toFixed(2)
                         app.overallTotal = Number(app.merchTotal) + Number(app.regTotal)
                         app.amountStr = app.overallTotal
                         tot = app.overallTotal
