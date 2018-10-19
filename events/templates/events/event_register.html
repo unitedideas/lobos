@@ -82,7 +82,7 @@
         </div>
         <br>
 
-        <transition style="display: none" id="modal" v-if="showModal" name="appear">
+        <transition id="modal" v-if="showModal" name="appear">
             <div class="simple-modal" v-if="formSuccess">
                 <h1 style="color: whitesmoke;">Registering for {{ event }}</h1>
                 {#                <h1 style="color: whitesmoke;">You are registering:</h1>#}
@@ -111,124 +111,21 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input style="width: 40px;" type="checkbox" v-model="xsml">
+                                            <input style="width: 40px;" type="checkbox" v-model="hoodiexsml">
                                         </td>
                                         <td>
                                             <label>X-Small</label>
                                         </td>
-                                        <td v-if="xsml" style="vertical-align: center"><input v-model='xsmlqty'
+                                        <td v-if="hoodiexsml" style="vertical-align: center"><input v-model='hoodiexsmlqty'
                                                                                               style="text-align: center; max-width: 40px"
                                                                                               type="number" min="0"
                                                                                               step="1" value="0">
                                         </td>
-                                        <td v-else="xsml">
+                                        <td v-else="hoodiexsml">
                                             <div style="text-align: center; max-width: 40px"></div>
                                         </td>
                                         <td><h4 style="color: whitesmoke;">$[[hoodieCost]]</h4></td>
                                     </tr>
-                                    {#                                    <tr>#}
-                                    {#                                        <td>#}
-                                    {#                                            <input style="width: 40px;" type="checkbox" v-model="sml">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td>#}
-                                    {#                                            <label>Small</label>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-if="sml" style="vertical-align: center"><input v-model='smlqty'#}
-                                    {#                                                                                             style="text-align: center; max-width: 40px"#}
-                                    {#                                                                                             type="number" min="0"#}
-                                    {#                                                                                             step="1" value="0">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-else="sml">#}
-                                    {#                                            <div style="text-align: center; max-width: 40px"></div>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>#}
-                                    {#                                    </tr>#}
-                                    {#                                    <tr>#}
-                                    {#                                        <td>#}
-                                    {#                                            <input style="width: 40px;" type="checkbox" v-model="med">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td>#}
-                                    {#                                            <label>Medium</label>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-if="med" style="vertical-align: center"><input v-model='medqty'#}
-                                    {#                                                                                             style="text-align: center; max-width: 40px"#}
-                                    {#                                                                                             type="number" min="0"#}
-                                    {#                                                                                             step="1" value="0">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-else="med">#}
-                                    {#                                            <div style="text-align: center; max-width: 40px"></div>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>#}
-                                    {#                                    </tr>#}
-                                    {#                                    <tr>#}
-                                    {#                                        <td>#}
-                                    {#                                            <input style="width: 40px;" type="checkbox" v-model="lrg">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td>#}
-                                    {#                                            <label>Large</label>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-if="lrg" style="vertical-align: center"><input v-model='lrgqty'#}
-                                    {#                                                                                             style="text-align: center; max-width: 40px"#}
-                                    {#                                                                                             type="number" min="0"#}
-                                    {#                                                                                             step="1" value="0">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-else="lrg">#}
-                                    {#                                            <div style="text-align: center; max-width: 40px"></div>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>#}
-                                    {#                                    </tr>#}
-                                    {#                                    <tr>#}
-                                    {#                                        <td>#}
-                                    {#                                            <input style="width: 40px;" type="checkbox" v-model="xlrg">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td>#}
-                                    {#                                            <label>X-Large</label>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-if="xlrg" style="vertical-align: center"><input v-model='xlrgqty'#}
-                                    {#                                                                                              style="text-align: center; max-width: 40px"#}
-                                    {#                                                                                              type="number" min="0"#}
-                                    {#                                                                                              step="1" value="0">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-else="xlrg">#}
-                                    {#                                            <div style="text-align: center; max-width: 40px"></div>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>#}
-                                    {#                                    </tr>#}
-                                    {#                                    <tr>#}
-                                    {#                                        <td>#}
-                                    {#                                            <input style="width: 40px;" type="checkbox" v-model="xxlrg">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td>#}
-                                    {#                                            <label>2X-Large</label>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-if="xxlrg" style="vertical-align: center"><input v-model='xxlrgqty'#}
-                                    {#                                                                                               style="text-align: center; max-width: 40px"#}
-                                    {#                                                                                               type="number" min="0"#}
-                                    {#                                                                                               step="1" value="0">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-else="xxlrg">#}
-                                    {#                                            <div style="text-align: center; max-width: 40px"></div>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>#}
-                                    {#                                    </tr>#}
-                                    {#                                    <tr>#}
-                                    {#                                        <td>#}
-                                    {#                                            <input style="width: 40px;" type="checkbox" v-model="xxxlrg">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td>#}
-                                    {#                                            <label>3X-Large</label>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-if="xxxlrg" style="vertical-align: center"><input v-model='xxxlrgqty'#}
-                                    {#                                                                                                style="text-align: center; max-width: 40px"#}
-                                    {#                                                                                                type="number" min="0"#}
-                                    {#                                                                                                step="1" value="0">#}
-                                    {#                                        </td>#}
-                                    {#                                        <td v-else="xxxlrg">#}
-                                    {#                                            <div style="text-align: center; max-width: 40px"></div>#}
-                                    {#                                        </td>#}
-                                    {#                                        <td><h4 style="color: whitesmoke;">$[[merchCost]]</h4></td>#}
-                                    {#                                    </tr>#}
-
                                 </table>
                             </div>
                         </div>
@@ -321,26 +218,56 @@
                     shirtCost: {{ event.shirt_cost }},
                     hatCost: {{ event.hat_cost }},
 
-                    xsmlqty: 0,
-                    smlqty: 0,
-                    medqty: 0,
-                    lrgqty: 0,
-                    xlrgqty: 0,
-                    xxlrgqty: 0,
-                    xxxlrgqty: 0,
+                    hoodiexsml: false,
+                    hoodiesml: false,
+                    hoodiemed: false,
+                    hoodielrg: false,
+                    hoodiexlrg: false,
+                    hoodiexxlrg: false,
+                    hoodiexxxlrg: false,
 
-                    xsml: false,
-                    sml: false,
-                    med: false,
-                    lrg: false,
-                    xlrg: false,
-                    xxlrg: false,
-                    xxxlrg: false,
+                    hoodiexsmlqty: 0,
+                    hoodiesmlqty: 0,
+                    hoodiemedqty: 0,
+                    hoodielrgqty: 0,
+                    hoodiexlrgqty: 0,
+                    hoodiexxlrgqty: 0,
+                    hoodiexxxlrgqty: 0,
+
+                    hoodiexsmltot: 0,
+                    hoodiesmltot: 0,
+                    hoodiemedtot: 0,
+                    hoodielrgtot: 0,
+                    hoodiexlrgtot: 0,
+                    hoodiexxlrgtot: 0,
+                    hoodiexxxlrgtot: 0,
                 }
             },
             watch: {
+
+
                 paymentComplete() {
                     this.$refs.submitButton.click();
+                },
+
+                hoodiexsml(){
+                    let app = this
+                    if(app.hoodiexsml === false){
+                        app.hoodiexsmlqty = 0
+                        console.log('hoodiexsml qty set to 0')
+                    }
+
+                    else if(app.hoodiexsml === true){
+                        app.hoodiexsmlqty = 1
+                        }
+                },
+
+                hoodiexsmlqty(){
+                    let app = this
+                    let tot = 0
+                    tot = app.hoodiexsmlqty * app.hoodieCost
+                    app.hoodiexsmltot = tot
+                    console.log('some hoodiexsmlqty changed ' + tot)
                 },
 
 
@@ -364,18 +291,18 @@
                 formSuccess() {
                     if (this.formSuccess === true) {
                         this.showModal = true
-                        document.getElementById('modal').style.display = ''
                     }
                 },
 
             },
+
             methods:
                 {
-                    qtychange: function () {
+                    qtychange: function (newtot) {
                         this.app = this
                         let tot = 0.00
                         let merchtot = 0.00
-                        merchtot = Number(app.merchCost) * Number(app.xsmlqty)
+                        merchtot = Number(app.merchCost) * Number(app.hoodiexsmlqty)
                         app.merchTotal = merchtot.toFixed(2)
                         app.overallTotal = Number(app.merchTotal) + Number(app.regTotal)
                         app.amountStr = app.overallTotal
@@ -408,7 +335,6 @@
                             .then(function (response) {
                                 app.formerrors = response.data.errors
                                 app.formSuccess = response.data.success
-                                console.log(app.formSuccess)
                             })
                     },
 
