@@ -92,45 +92,138 @@
                 {% if event.hat or event.hoodie or event.shirt %}
                     <h3 style="color: whitesmoke;">Don't be left out!</h3>
                     <br>
-                    <div class="row">
-                        <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}"
-                                                   style="width: 99%; height: 99%">
-                            <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
-                            <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
-                        </div>
-                        <div class="col-sm-5">
-                            <div>
-                                <table class="table text-center" style="padding-right: 20px;">
-                                    <tr>
-                                        <th style="color: #ffe673; text-align: center; width: 50px;">
-                                            <input style="width: 40px;" type="checkbox" checked disabled="true">
-                                        </th>
-                                        <th style="color: #ffe673; text-align: center;">SIZE</th>
-                                        <th style="color: #ffe673; text-align: center;">QUANTITY</th>
-                                        <th style="color: #ffe673; text-align: center;">COST</th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input style="width: 40px;" type="checkbox" v-model="hoodiexsml">
-                                        </td>
-                                        <td>
-                                            <label>X-Small</label>
-                                        </td>
-                                        <td v-if="hoodiexsml" style="vertical-align: center"><input
-                                                v-model='hoodiexsmlqty'
-                                                style="text-align: center; max-width: 40px"
-                                                type="number" min="0"
-                                                step="1" value="0">
-                                        </td>
-                                        <td v-else="hoodiexsml">
-                                            <div style="text-align: center; max-width: 40px"></div>
-                                        </td>
-                                        <td><h4 style="color: whitesmoke;">$[[hoodieCost]]</h4></td>
-                                    </tr>
-                                </table>
+                    {% if event.hoodie %}
+                        {# hoodie start #}
+                        <div class="row">
+                            <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}"
+                                                       style="width: 300px; height: 250px">
+                                <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
+                                <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
+                            </div>
+                            <div class="col-sm-5">
+                                <div>
+                                    <table class="table text-center" style="padding-right: 20px;">
+                                        <tr>
+                                            <th style="color: #ffe673; text-align: center; width: 50px;">
+                                                <input style="width: 40px;" type="checkbox" checked disabled="true">
+                                            </th>
+                                            <th style="color: #ffe673; text-align: center;">SIZE</th>
+                                            <th style="color: #ffe673; text-align: center;">QUANTITY</th>
+                                            <th style="color: #ffe673; text-align: center;">COST</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input style="width: 40px;" type="checkbox" v-model="hoodiesml">
+                                            </td>
+                                            <td>
+                                                <label>X-Small</label>
+                                            </td>
+                                            <td v-if="hoodiesml" style="vertical-align: center"><input
+                                                    v-model='hoodiesmlqty'
+                                                    style="text-align: center; max-width: 40px"
+                                                    type="number" min="0"
+                                                    step="1" value="0">
+                                            </td>
+                                            <td v-else="hoodiesml">
+                                                <div style="text-align: center; max-width: 40px"></div>
+                                            </td>
+                                            <td><h4 style="color: whitesmoke;">$[[hoodieCost]]</h4></td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        {# end hoodie #}
+                    {% endif %}
+                    <br>
+                    {% if event.shirt %}
+                        {# shirt start #}
+                        <div class="row">
+                            <div class="col-sm-7"><img src="{% static event.shirt_image_file_name %}"
+                                                       style="width: 300px; height: 250px">
+                                <h4 style="color: whitesmoke;" class="center">{{ event.shirt_main_description }}</h4>
+                                <h4 style="color: whitesmoke;" class="center">{{ event.shirt_sub_description }}</h4>
+                            </div>
+                            <div class="col-sm-5">
+                                <div>
+                                    <table class="table text-center" style="padding-right: 20px;">
+                                        <tr>
+                                            <th style="color: #ffe673; text-align: center; width: 50px;">
+                                                <input style="width: 40px;" type="checkbox" checked disabled="true">
+                                            </th>
+                                            <th style="color: #ffe673; text-align: center;">SIZE</th>
+                                            <th style="color: #ffe673; text-align: center;">QUANTITY</th>
+                                            <th style="color: #ffe673; text-align: center;">COST</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input style="width: 40px;" type="checkbox" v-model="shirtsml">
+                                            </td>
+                                            <td>
+                                                <label>X-Small</label>
+                                            </td>
+                                            <td v-if="shirtsml" style="vertical-align: center"><input
+                                                    v-model='shirtsmlqty'
+                                                    style="text-align: center; max-width: 40px"
+                                                    type="number" min="0"
+                                                    step="1" value="0">
+                                            </td>
+                                            <td v-else="shirtsml">
+                                                <div style="text-align: center; max-width: 40px"></div>
+                                            </td>
+                                            <td><h4 style="color: whitesmoke;">$[[shirtCost]]</h4></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        {# end shirt #}
+                    {% endif %}
+                    <br>
+                    {% if event.hoodie %}
+                        {# hat start #}
+                        <div class="row">
+                            <div class="col-sm-7"><img src="{% static event.hat_image_file_name %}"
+                                                       style="width: 300px; height: 250px">
+                                <h4 style="color: whitesmoke;" class="center">{{ event.hat_main_description }}</h4>
+                                <h4 style="color: whitesmoke;" class="center">{{ event.hat_sub_description }}</h4>
+                            </div>
+                            <div class="col-sm-5">
+                                <div>
+                                    <table class="table text-center" style="padding-right: 20px;">
+                                        <tr>
+                                            <th style="color: #ffe673; text-align: center; width: 50px;">
+                                                <input style="width: 40px;" type="checkbox" checked disabled="true">
+                                            </th>
+                                            <th style="color: #ffe673; text-align: center;">SIZE</th>
+                                            <th style="color: #ffe673; text-align: center;">QUANTITY</th>
+                                            <th style="color: #ffe673; text-align: center;">COST</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input style="width: 40px;" type="checkbox" v-model="hatsml">
+                                            </td>
+                                            <td>
+                                                <label>X-Small</label>
+                                            </td>
+                                            <td v-if="hatsml" style="vertical-align: center"><input
+                                                    v-model='hatsmlqty'
+                                                    style="text-align: center; max-width: 40px"
+                                                    type="number" min="0"
+                                                    step="1" value="0">
+                                            </td>
+                                            <td v-else="hatsml">
+                                                <div style="text-align: center; max-width: 40px"></div>
+                                            </td>
+                                            <td><h4 style="color: whitesmoke;">$[[hatCost]]</h4></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        {# end hat #}
+                    {% endif %}
+                    <br>
                     <div style="text-align: center;">
                         <div style="background-color: #ffe673; height: 5px;"></div>
                         <h3 style="color: whitesmoke;">Registration: [[regTotal]]</h3>
@@ -219,29 +312,59 @@
                     shirtCost: {{ event.shirt_cost }},
                     hatCost: {{ event.hat_cost }},
 
-                    hoodiexsml: false,
                     hoodiesml: false,
                     hoodiemed: false,
                     hoodielrg: false,
                     hoodiexlrg: false,
                     hoodiexxlrg: false,
-                    hoodiexxxlrg: false,
 
-                    hoodiexsmlqty: 0,
                     hoodiesmlqty: 0,
                     hoodiemedqty: 0,
                     hoodielrgqty: 0,
                     hoodiexlrgqty: 0,
                     hoodiexxlrgqty: 0,
-                    hoodiexxxlrgqty: 0,
 
-                    hoodiexsmltot: 0,
                     hoodiesmltot: 0,
                     hoodiemedtot: 0,
                     hoodielrgtot: 0,
                     hoodiexlrgtot: 0,
                     hoodiexxlrgtot: 0,
-                    hoodiexxxlrgtot: 0,
+
+                    shirtsml: false,
+                    shirtmed: false,
+                    shirtlrg: false,
+                    shirtxlrg: false,
+                    shirtxxlrg: false,
+
+                    shirtsmlqty: 0,
+                    shirtmedqty: 0,
+                    shirtlrgqty: 0,
+                    shirtxlrgqty: 0,
+                    shirtxxlrgqty: 0,
+
+                    shirtsmltot: 0,
+                    shirtmedtot: 0,
+                    shirtlrgtot: 0,
+                    shirtxlrgtot: 0,
+                    shirtxxlrgtot: 0,
+
+                    hatsml: false,
+                    hatmed: false,
+                    hatlrg: false,
+                    hatxlrg: false,
+                    hatxxlrg: false,
+
+                    hatsmlqty: 0,
+                    hatmedqty: 0,
+                    hatlrgqty: 0,
+                    hatxlrgqty: 0,
+                    hatxxlrgqty: 0,
+
+                    hatsmltot: 0,
+                    hatmedtot: 0,
+                    hatlrgtot: 0,
+                    hatxlrgtot: 0,
+                    hatxxlrgtot: 0,
                 }
             },
             watch: {
@@ -251,34 +374,54 @@
                     this.$refs.submitButton.click();
                 },
 
-                hoodiexsml() {
+                hoodiesml() {
                     let app = this
-                    if (app.hoodiexsml === false) {
-                        app.hoodiexsmlqty = 0
-                        console.log('hoodiexsml qty set to 0')
+                    if (app.hoodiesml === false) {
+                        app.hoodiesmlqty = 0
+                        console.log('hoodiesml qty set to 0')
                     }
 
-                    else if (app.hoodiexsml === true) {
-                        app.hoodiexsmlqty = 1
+                    else if (app.hoodiesml === true) {
+                        app.hoodiesmlqty = 1
                     }
                 },
 
-                hoodiexsmlqty() {
+                hoodiesmlqty() {
                     let app = this
                     let tot = 0
-                    tot = app.hoodiexsmlqty * app.hoodieCost
-                    app.hoodiexsmltot = tot
-                    console.log('some hoodiexsmlqty changed ' + tot)
+                    tot = app.hoodiesmlqty * app.hoodieCost
+                    app.hoodiesmltot = tot
+                    console.log('some hoodiesmlqty changed ' + tot)
                     app.merchtotal()
                 },
 
+
+                hatsml() {
+                    let app = this
+                    if (app.hatsml === false) {
+                        app.hatsmlqty = 0
+                        console.log('hatsml qty set to 0')
+                    }
+
+                    else if (app.hatsml === true) {
+                        app.hatsmlqty = 1
+                    }
+                },
+
+                hatsmlqty() {
+                    let app = this
+                    let tot = 0
+                    tot = app.hatsmlqty * app.hatCost
+                    app.hatsmltot = tot
+                    console.log('some hatsmlqty changed ' + tot)
+                    app.merchtotal()
+                },
 
                 formSuccess() {
                     if (this.formSuccess === true) {
                         this.showModal = true
                     }
                 },
-
             },
 
             methods:
@@ -287,7 +430,7 @@
                         this.app = this
                         let tot = 0.00
                         let merchtot = 0
-                        merchtot = app.hoodieCost * app.hoodiexsmlqty
+                        merchtot = app.hoodieCost * app.hoodiesmlqty
                         app.merchTotal = Number(merchtot).toFixed(2)
                         app.overallTotal = Number(app.merchTotal) + Number(app.regTotal)
                         app.amountStr = app.overallTotal
@@ -358,7 +501,6 @@
                             } else if (allRiderTypes[i].includes('Expert over')) {
                                 total +=
                                 {{ event.expert_over_16_cost }}
-
                             }
                         }
                         this.regTotal = total.toFixed(2)
@@ -421,8 +563,6 @@
                         this.payment_cancelled = false
                         this.payment_cancelled = true
                         this.showPayPal = true
-
-
                     },
 
                     select_change: function (e) {
@@ -430,10 +570,7 @@
                         document.getElementById(id).onchange = function (e) {
                             totalCost()
                         }
-
                     }
-
-
                 },
 
 
@@ -458,7 +595,6 @@
                             app.formList.push(app.vue_form)
                         })
                 },
-
         })
 
     </script>
@@ -468,7 +604,6 @@
             document.getElementById(id).onchange = function (e) {
                 app.totalCost()
             }
-
         }
 
     </script>
