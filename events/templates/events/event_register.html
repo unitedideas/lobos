@@ -417,6 +417,27 @@
                     app.merchtotal()
                 },
 
+                shirtsml() {
+                    let app = this
+                    if (app.shirtsml === false) {
+                        app.shirtsmlqty = 0
+                        console.log('shirtsml qty set to 0')
+                    }
+
+                    else if (app.shirtsml === true) {
+                        app.shirtsmlqty = 1
+                    }
+                },
+
+                shirtsmlqty() {
+                    let app = this
+                    let tot = 0
+                    tot = app.shirtsmlqty * app.shirtCost
+                    app.shirtsmltot = tot
+                    console.log('some shirtsmlqty changed ' + tot)
+                    app.merchtotal()
+                },
+
                 formSuccess() {
                     if (this.formSuccess === true) {
                         this.showModal = true
