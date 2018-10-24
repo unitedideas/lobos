@@ -23,7 +23,14 @@
                 <h1 style="text-align: center">{{ event }} Registration</h1>
             </div>
             <div id="jumbotron" class="jumbotron" style="padding: 20px">
-                <h1 style="text-align: center">[[]]</h1>
+                <input style="text-align: center">[[shirt.size]]</input>
+
+{#                      shirt:{#}
+{#                          price: {{ event.shirt_cost }},#}
+{#                          size: 'lrg',#}
+{#                          qty: 3#}
+{#                    },#}
+
             </div>
 
             <div>
@@ -172,7 +179,13 @@
                                                     step="1" value="0">
                                             </td>
                                             <td v-else="shirtsml">
-                                                <div style="text-align: center; max-width: 40px"></div>
+                                                <div style="text-align: center; max-width: 40px"></div>                    objhoodie:{
+                      shirt:{
+                          price: {{ event.shirt_cost }},
+                          size: ['sml', 'med', 'lrg'],
+                          qty: 3
+                      }
+                    },
                                             </td>
                                             <td><h4 style="color: whitesmoke;">$[[shirtCost]]</h4></td>
                                         </tr>
@@ -312,12 +325,10 @@
                     merchTotal: "0.00",
 
                     {#need to learn about abjiects#}
-                    objhoodie:{
                       shirt:{
                           price: {{ event.shirt_cost }},
                           size: ['sml', 'med', 'lrg'],
                           qty: 3
-                      }
                     },
 
 
