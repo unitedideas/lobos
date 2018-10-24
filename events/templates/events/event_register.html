@@ -22,6 +22,9 @@
             <div id="jumbotron" class="jumbotron" style="padding: 20px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
             </div>
+            <div id="jumbotron" class="jumbotron" style="padding: 20px">
+                <h1 style="text-align: center">[[]]</h1>
+            </div>
 
             <div>
                 <form method="POST" id="feedbackform" v-on:keydown.13.prevent="the3DayMethod">
@@ -311,7 +314,7 @@
                     {#need to learn about abjiects#}
                     objhoodie:{
                       shirt:{
-                          price: 30,
+                          price: {{ event.shirt_cost }},
                           size: ['sml', 'med', 'lrg'],
                           qty: 3
                       }
