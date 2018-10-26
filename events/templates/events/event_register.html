@@ -23,7 +23,8 @@
                 <h1 style="text-align: center">{{ event }} Registration</h1>
             </div>
             <div id="jumbotron" class="jumbotron" style="padding: 20px">
-                <input style="text-align: center">[[shirt.size]]</input>
+                <h1> {{ event.shirt_Xlarge }}</h1>
+                <h1> {{ event.shirt_small }}</h1>
             </div>
 
             <div>
@@ -318,10 +319,10 @@
 
                     merchTotal: "0.00",
 
-                    {#need to learn about abjiects#}
+                    {#need to learn about objects#}
                     shirt: {
                         price: {{ event.shirt_cost }},
-                        size: ['sml', 'med', 'lrg'],
+                        size: ['S':{{ event.shirt_small }}, 'M'{{ event.shirt_medium }}:, 'L':{{ event.shirt_large }}, 'XL':{{ event.shirt_Xlarge }}],
                         qty: 3
                     },
 
