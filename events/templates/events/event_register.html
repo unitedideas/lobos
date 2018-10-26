@@ -21,12 +21,62 @@
         <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
             <div id="jumbotron" class="jumbotron" style="padding: 20px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
-            </div>
-            <div id="jumbotron" class="jumbotron" style="padding: 20px">
-                <h1> {{ event.shirt_Xlarge }}</h1>
-                <h1> {{ event.shirt_small }}</h1>
-            </div>
 
+
+
+
+                {% if event.hoodie %}
+                    {# hoodie start #}
+                    <div class="row">
+                        <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}"
+                                                   style="width: 300px; height: 250px">
+                            <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
+                            <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
+                        </div>
+                        <div class="col-sm-5">
+                            <div>
+                                <table class="table text-center" style="padding-right: 20px;">
+                                    <tr>
+                                        <th style="color: black; text-align: center;">SIZE</th>
+                                        <th style="color: black; text-align: center;">QUANTITY</th>
+                                        <th style="color: black; text-align: center;">COST</th>
+                                        <th style="color: black; text-align: center;"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <select v-model="itemsize">
+                                                <option v-for='item in shirt.size' v-if="item.True">[[item.True]]
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input v-model='hoodieqty'
+                                                   style="text-align: center; max-width: 40px"
+                                                   type="number" min="0"
+                                                   step="1" value="0">
+                                        </td>
+                                        <td v-if="hoodiesml">
+                                            <div style="text-align: center; max-width: 40px"></div>
+                                        </td>
+                                        <td>
+                                            <h4 style="color: black;">$[[hoodieCost]]</h4>
+                                        </td>
+                                        <td>
+                                            <div type="button" class="btn btn-primary" v-on:click="add_to_cart">Add
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <h3 v-if="cartlist.length !== 0">[[cartlist]]</h3>
+                        </div>
+                    </div>
+                    {# end hoodie #}
+                {% endif %}
+
+
+            </div>
             <div>
                 <form method="POST" id="feedbackform" v-on:keydown.13.prevent="the3DayMethod">
                     {% csrf_token %}
@@ -316,20 +366,23 @@
                     {#need to learn about objects#}
                     shirt: {
                         price: {{ event.shirt_cost }},
-                        size: {
-                            'S':{{ event.shirt_small }},
-                            'M':{{ event.shirt_medium }},
-                            'L':{{ event.shirt_large }},
-                            'XL':{{ event.shirt_Xlarge }}
-                        },
+                        size:
+                            [
+                                {'{{event.shirt_Xsmall}}': "xsmall"},
+                                {'{{event.shirt_small}}': "small"},
+                                {'{{event.shirt_medium}}': 'medium'},
+                                {'{{event.shirt_large}}': 'large'},
+                                {'{{event.shirt_Xlarge}}': 'Xlarge'}
+                            ],
                         qty: 3
                     },
-
                     cartlist: [],
 
                     hoodieCost: {{ event.hoodie_cost }},
                     shirtCost: {{ event.shirt_cost }},
                     hatCost: {{ event.hat_cost }},
+
+                    itemsize: "",
 
                     hoodiesml: false,
                     hoodiemed: false,
@@ -337,7 +390,7 @@
                     hoodiexlrg: false,
                     hoodiexxlrg: false,
 
-                    hoodiesmlqty: 0,
+                    hoodieqty: 0,
                     hoodiemedqty: 0,
                     hoodielrgqty: 0,
                     hoodiexlrgqty: 0,
@@ -466,6 +519,13 @@
 
             methods:
                 {
+                    add_to_cart: function () {
+                        let size = this.itemsize
+                        if (this.hoodieqty > 0) {
+                            this.cartlist.push({[size]: this.hoodieqty})
+                            console.log('Made it to the method call')
+                        }
+                    },
                     merchtotal: function () {
                         let app = this
                         let tot = 0.00
