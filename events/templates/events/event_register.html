@@ -46,7 +46,8 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input v-model="hoodieqty" style="text-align: center; max-width: 40px" type="number" min="0"
+                                            <input v-model="hoodieqty" style="text-align: center; max-width: 40px"
+                                                   type="number" min="0"
                                                    step="1" value="0">
                                         </td>
                                         <td>
@@ -382,11 +383,12 @@
                     add_to_cart: function () {
                         let size = this.itemsize
                         console.log('Called the add to cart function')
-                        if (size != ""){
+                        if (size != "") {
                             if (this.hoodieqty > 0) {
                                 this.cartlist.push({[size]: this.hoodieqty})
                                 console.log('Should have added to the cart')
-                        }}
+                            }
+                        }
                     },
 
                     remove_from_cart: function () {
