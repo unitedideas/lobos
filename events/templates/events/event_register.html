@@ -41,7 +41,7 @@
                                     <tr>
                                         <td>
                                             <select v-model="itemsize">
-                                                <option v-for='item in shirt.size' v-if="item.True">[[item.True]]
+                                                <option v-for='item in hoodie.size' v-if="item.True">[[item.True]]
                                                 </option>
                                             </select>
                                         </td>
@@ -138,55 +138,16 @@
         <transition id="modal" v-if="showModal" name="appear">
             <div class="simple-modal" v-if="formSuccess">
                 <h1 style="color: whitesmoke;">Registering for {{ event }}</h1>
-                {#                <h1 style="color: whitesmoke;">You are registering:</h1>#}
-                {#                <h3 v-for="item in allRiderTypes" style="color: whitesmoke;">[[item]]</h3>#}
-                {#                <br>#}
-                {# start of the merch table#}
                 {% if event.hat or event.hoodie or event.shirt %}
                     <h3 style="color: whitesmoke;">Don't be left out!</h3>
                     <br>
                     {% if event.hoodie %}
                         {# hoodie start #}
-                        {#                        <div class="row">#}
                         <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}"
                                                    style="width: 300px; height: 250px">
                             <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
                             <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
                         </div>
-                        {#                            <div class="col-sm-5">#}
-                        {#                                <div>#}
-                        {#                                    <table class="table text-center" style="padding-right: 20px;">#}
-                        {#                                        <tr>#}
-                        {#                                            <th style="color: #ffe673; text-align: center; width: 50px;">#}
-                        {#                                                <input style="width: 40px;" type="checkbox" checked disabled="true">#}
-                        {#                                            </th>#}
-                        {#                                            <th style="color: #ffe673; text-align: center;">SIZE</th>#}
-                        {#                                            <th style="color: #ffe673; text-align: center;">QUANTITY</th>#}
-                        {#                                            <th style="color: #ffe673; text-align: center;">COST</th>#}
-                        {#                                        </tr>#}
-                        {#                                        <tr>#}
-                        {#                                            <td>#}
-                        {#                                                <input style="width: 40px;" type="checkbox" v-model="hoodiesml">#}
-                        {#                                            </td>#}
-                        {#                                            <td>#}
-                        {#                                                <label style=" color: white">Small</label>#}
-                        {#                                            </td>#}
-                        {#                                            <td v-if="hoodiesml" style="vertical-align: center">#}
-                        {#                                                <input v-model='hoodiesmlqty'#}
-                        {#                                                       style="text-align: center; max-width: 40px"#}
-                        {#                                                       type="number" min="0"#}
-                        {#                                                       step="1" value="0">#}
-                        {#                                            </td>#}
-                        {#                                            <td v-else="hoodiesml">#}
-                        {#                                                <div style="text-align: center; max-width: 40px"></div>#}
-                        {#                                            </td>#}
-                        {#                                            <td><h4 style="color: whitesmoke;">$[[hoodieCost]]</h4></td>#}
-                        {#                                        </tr>#}
-                        {#                                    </table>#}
-                        {#                                </div>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
-                        {# end hoodie #}
                     {% endif %}
                     <br>
                     <div style="text-align: center;">
@@ -274,14 +235,14 @@
 
                     {#need to learn about objects#}
                     hoodie: {
-                        price: {{ event.shirt_cost }},
+                        price: {{ event.hoodie_cost }},
                         size:
                             [
-                                {'{{event.shirt_Xsmall}}': "X-Small"},
-                                {'{{event.shirt_small}}': "Small"},
-                                {'{{event.shirt_medium}}': 'Medium'},
-                                {'{{event.shirt_large}}': 'Large'},
-                                {'{{event.shirt_Xlarge}}': 'X-Large'}
+                                {'{{event.hoodie_Xsmall}}': "X-Small"},
+                                {'{{event.hoodie_small}}': "Small"},
+                                {'{{event.hoodie_medium}}': 'Medium'},
+                                {'{{event.hoodie_large}}': 'Large'},
+                                {'{{event.hoodie_Xlarge}}': 'X-Large'}
                             ]
                     },
 
