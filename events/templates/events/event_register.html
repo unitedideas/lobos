@@ -21,7 +21,6 @@
         <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
             <div id="jumbotron" class="jumbotron" style="padding: 20px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
-
                 {% if event.hoodie %}
                     {# hoodie start #}
                     <div class="row">
@@ -47,9 +46,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input
-                                                   style="text-align: center; max-width: 40px"
-                                                   type="number" min="0"
+                                            <input style="text-align: center; max-width: 40px" type="number" min="0"
                                                    step="1" value="0">
                                         </td>
                                         <td>
@@ -142,45 +139,45 @@
                     <br>
                     {% if event.hoodie %}
                         {# hoodie start #}
-{#                        <div class="row">#}
-                            <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}"
-                                                       style="width: 300px; height: 250px">
-                                <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
-                                <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
-                            </div>
-{#                            <div class="col-sm-5">#}
-{#                                <div>#}
-{#                                    <table class="table text-center" style="padding-right: 20px;">#}
-{#                                        <tr>#}
-{#                                            <th style="color: #ffe673; text-align: center; width: 50px;">#}
-{#                                                <input style="width: 40px;" type="checkbox" checked disabled="true">#}
-{#                                            </th>#}
-{#                                            <th style="color: #ffe673; text-align: center;">SIZE</th>#}
-{#                                            <th style="color: #ffe673; text-align: center;">QUANTITY</th>#}
-{#                                            <th style="color: #ffe673; text-align: center;">COST</th>#}
-{#                                        </tr>#}
-{#                                        <tr>#}
-{#                                            <td>#}
-{#                                                <input style="width: 40px;" type="checkbox" v-model="hoodiesml">#}
-{#                                            </td>#}
-{#                                            <td>#}
-{#                                                <label style=" color: white">Small</label>#}
-{#                                            </td>#}
-{#                                            <td v-if="hoodiesml" style="vertical-align: center">#}
-{#                                                <input v-model='hoodiesmlqty'#}
-{#                                                       style="text-align: center; max-width: 40px"#}
-{#                                                       type="number" min="0"#}
-{#                                                       step="1" value="0">#}
-{#                                            </td>#}
-{#                                            <td v-else="hoodiesml">#}
-{#                                                <div style="text-align: center; max-width: 40px"></div>#}
-{#                                            </td>#}
-{#                                            <td><h4 style="color: whitesmoke;">$[[hoodieCost]]</h4></td>#}
-{#                                        </tr>#}
-{#                                    </table>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
+                        {#                        <div class="row">#}
+                        <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}"
+                                                   style="width: 300px; height: 250px">
+                            <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
+                            <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
+                        </div>
+                        {#                            <div class="col-sm-5">#}
+                        {#                                <div>#}
+                        {#                                    <table class="table text-center" style="padding-right: 20px;">#}
+                        {#                                        <tr>#}
+                        {#                                            <th style="color: #ffe673; text-align: center; width: 50px;">#}
+                        {#                                                <input style="width: 40px;" type="checkbox" checked disabled="true">#}
+                        {#                                            </th>#}
+                        {#                                            <th style="color: #ffe673; text-align: center;">SIZE</th>#}
+                        {#                                            <th style="color: #ffe673; text-align: center;">QUANTITY</th>#}
+                        {#                                            <th style="color: #ffe673; text-align: center;">COST</th>#}
+                        {#                                        </tr>#}
+                        {#                                        <tr>#}
+                        {#                                            <td>#}
+                        {#                                                <input style="width: 40px;" type="checkbox" v-model="hoodiesml">#}
+                        {#                                            </td>#}
+                        {#                                            <td>#}
+                        {#                                                <label style=" color: white">Small</label>#}
+                        {#                                            </td>#}
+                        {#                                            <td v-if="hoodiesml" style="vertical-align: center">#}
+                        {#                                                <input v-model='hoodiesmlqty'#}
+                        {#                                                       style="text-align: center; max-width: 40px"#}
+                        {#                                                       type="number" min="0"#}
+                        {#                                                       step="1" value="0">#}
+                        {#                                            </td>#}
+                        {#                                            <td v-else="hoodiesml">#}
+                        {#                                                <div style="text-align: center; max-width: 40px"></div>#}
+                        {#                                            </td>#}
+                        {#                                            <td><h4 style="color: whitesmoke;">$[[hoodieCost]]</h4></td>#}
+                        {#                                        </tr>#}
+                        {#                                    </table>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
                         {# end hoodie #}
                     {% endif %}
                     <br>
@@ -293,12 +290,12 @@
                 }
             },
             watch: {
-                cartlist(){
+                cartlist() {
                     let count = 0
-                  for(item in cartlist){
-                      count++
-                      console.log(count)
-                  }
+                    for (item in cartlist) {
+                        count++
+                        console.log(count)
+                    }
                 },
 
                 paymentComplete() {
@@ -380,9 +377,12 @@
                 {
                     add_to_cart: function () {
                         let size = this.itemsize
-                        if (this.hoodieqty > 0) {
-                            this.cartlist.push({[size]: this.hoodieqty})
-                            console.log('Made it to the method call')
+
+                        if (this.hoodieqty != 0) {
+                            if (this.hoodieqty > 0) {
+                                this.cartlist.push({[size]: this.hoodieqty})
+                                console.log('Made it to the method call')
+                            }
                         }
                     },
                     merchtotal: function () {
