@@ -46,7 +46,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input style="text-align: center; max-width: 40px" type="number" min="0"
+                                            <input v-bind="hoodieqty" style="text-align: center; max-width: 40px" type="number" min="0"
                                                    step="1" value="0">
                                         </td>
                                         <td>
@@ -60,7 +60,7 @@
                                 </table>
 
                             </div>
-                            <h3 v-if="cartlist.length !== 0">[[cartlist]]</h3>
+                            <h2 [[cartlist]]</h2>
                         </div>
                     </div>
                     {# end hoodie #}
@@ -225,7 +225,6 @@
             </div>
         </transition>
     </div>
-    </div>
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
     <script>
 
@@ -279,7 +278,7 @@
                         qty: 3
                     },
 
-                    hoodiieqty: 0,
+                    hoodieqty: 0,
                     cartlist: [],
 
                     hoodieCost: {{ event.hoodie_cost }},
@@ -377,11 +376,11 @@
                 {
                     add_to_cart: function () {
                         let size = this.itemsize
-
-                        if (this.hoodieqty != 0) {
+                        console.log('Called the add to cart function')
+                        if (this.hoodieqty > 0) {
                             if (this.hoodieqty > 0) {
                                 this.cartlist.push({[size]: this.hoodieqty})
-                                console.log('Made it to the method call')
+                                console.log('Should have added to the cart')
                             }
                         }
                     },
