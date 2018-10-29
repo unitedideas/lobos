@@ -24,19 +24,19 @@
                 {% if event.hoodie %}
                     {# hoodie start #}
                     <div class="row">
-                        <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}"
+                        <div class="col-sm-5"><img src="{% static event.hoodie_image_file_name %}"
                                                    style="width: 300px; height: 250px">
                             <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
                             <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-7">
                             <div>
                                 <table class="table text-center" style="padding-right: 20px;">
                                     <tr>
                                         <th style="color: black; text-align: center;">SIZE</th>
                                         <th style="color: black; text-align: center;">QUANTITY</th>
                                         <th style="color: black; text-align: center;">COST</th>
-                                        <th style="color: black; text-align: center;"></th>
+                                        <th style="color: black; text-align: center;">ADD</th>
                                     </tr>
                                     <tr>
                                         <td>
@@ -54,21 +54,23 @@
                                             <h4 style="color: black;">$[[hoodieCost]]</h4>
                                         </td>
                                         <td>
-                                            <div type="button" class="btn btn-primary" v-on:click="add_to_cart('Hoodie')">Add
+                                            <div type="button" class="btn btn-primary"
+                                                 v-on:click="add_to_cart('Hoodie')">Add
                                             </div>
                                         </td>
                                     </tr>
                                 </table>
+                                                        <div class="row" v-for="(item, index) in cartlist">
+                            <div class="col-sm-7">
+                                <button class="btn btn-primary col-sm-3 center-block" type="button"
+                                        v-on:click='remove_from_cart(index)'>Remove
+                                </button>
+                                <h4 class="col-sm-9" style="text-align: center">[[item.qty]] [[item.size]]
+                                    [[item.item]]</h4>
+                            </div>
+                        </div>
 
                             </div>
-                            <div v-for="(item, index) in cartlist">
-                                    <button class="btn btn-primary" type="button"
-                                            v-on:click='remove_from_cart(index)'>
-                                        Remove</button>
-                                    <h3>[[index]]</h3>
-                                    <h3>[[item.qty]] [[item.size]] [[item.item]]</h3>
-                            </div>
-
                         </div>
                     </div>
                     {# end hoodie #}
@@ -253,7 +255,7 @@
                     shirtCost: {{ event.shirt_cost }},
                     hatCost: {{ event.hat_cost }},
 
-                    itemsize: "Small",
+                    itemsize: "",
                 }
             },
             watch: {
@@ -284,7 +286,7 @@
                         console.log('Called the add to cart function')
                         if (size != "") {
                             if (this.hoodieqty > 0) {
-                                this.cartlist.push({'item': item_type, 'size':size, 'qty':this.hoodieqty})
+                                this.cartlist.push({'item': item_type, 'size': size, 'qty': this.hoodieqty})
                                 console.log('Should have added to the cart')
                             }
                         }
