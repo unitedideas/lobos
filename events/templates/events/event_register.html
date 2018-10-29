@@ -54,18 +54,20 @@
                                             <h4 style="color: black;">$[[hoodieCost]]</h4>
                                         </td>
                                         <td>
-                                            <div type="button" class="btn btn-primary" v-on:click="add_to_cart">Add
+                                            <div type="button" class="btn btn-primary" v-on:click="add_to_cart('Hoodie')">Add
                                             </div>
                                         </td>
                                     </tr>
                                 </table>
 
                             </div>
-                            <ul v-for="item in cartlist">
-                                <li type="button" v-on:click="remove_from_cart">
-                                    [[item]]
-                                </li>
-                            </ul>
+                            <div v-for="(item, index) in cartlist">
+                                    <button class="btn btn-primary" type="button"
+                                            v-on:click='remove_from_cart(index)'>
+                                        Remove</button>
+                                    <h3>[[index]]</h3>
+                                    <h3>[[item.qty]] [[item.size]] [[item.item]]</h3>
+                            </div>
 
                         </div>
                     </div>
@@ -275,11 +277,11 @@
                         price: {{ event.shirt_cost }},
                         size:
                             [
-                                {'{{event.shirt_Xsmall}}': "xsmall"},
-                                {'{{event.shirt_small}}': "small"},
-                                {'{{event.shirt_medium}}': 'medium'},
-                                {'{{event.shirt_large}}': 'large'},
-                                {'{{event.shirt_Xlarge}}': 'Xlarge'}
+                                {'{{event.shirt_Xsmall}}': "X-Small"},
+                                {'{{event.shirt_small}}': "Small"},
+                                {'{{event.shirt_medium}}': 'Medium'},
+                                {'{{event.shirt_large}}': 'Large'},
+                                {'{{event.shirt_Xlarge}}': 'X-Large'}
                             ],
                         qty: 3
                     },
@@ -291,7 +293,7 @@
                     shirtCost: {{ event.shirt_cost }},
                     hatCost: {{ event.hat_cost }},
 
-                    itemsize: "",
+                    itemsize: "Small",
                 }
             },
             watch: {
@@ -380,19 +382,33 @@
 
             methods:
                 {
-                    add_to_cart: function () {
+                    add_to_cart: function (item_type) {
                         let size = this.itemsize
                         console.log('Called the add to cart function')
                         if (size != "") {
                             if (this.hoodieqty > 0) {
-                                this.cartlist.push({[size]: this.hoodieqty})
+                                this.cartlist.push({'item': item_type, 'size':size, 'qty':this.hoodieqty})
                                 console.log('Should have added to the cart')
                             }
                         }
                     },
 
-                    remove_from_cart: function () {
-                        console.log('Called remove form cart')
+                    remove_from_cart: function (index) {
+                        this.cartlist.splice(index, 1)
+
+
+                        {#let pos = this.cartlist.map(function(e) { return e.hello; }).indexOf(s_item);#}
+                        {#console.log('Called remove form cart')#}
+                        {#console.log(item)#}
+                        {#let string_item = String(item)#}
+                        {#console.log(indexOf(item))#}
+                        {#for (var i = 0; i < this.cartlist.length - 1; i++) {#}
+                        {#    if (this.cartlist[i] === indexOf(item)){#}
+                        {#        arr.splice(i, 1);#}
+                        {#        console.log('removed '+ String(item))#}
+                        {#    }#}
+                        {# }#}
+
                     },
                     merchtotal: function () {
                         let app = this
