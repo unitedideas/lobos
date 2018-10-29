@@ -273,7 +273,7 @@
                     merchTotal: "0.00",
 
                     {#need to learn about objects#}
-                    shirt: {
+                    hoodie: {
                         price: {{ event.shirt_cost }},
                         size:
                             [
@@ -282,8 +282,7 @@
                                 {'{{event.shirt_medium}}': 'Medium'},
                                 {'{{event.shirt_large}}': 'Large'},
                                 {'{{event.shirt_Xlarge}}': 'X-Large'}
-                            ],
-                        qty: 3
+                            ]
                     },
 
                     hoodieqty: 1,
@@ -309,69 +308,6 @@
                     this.$refs.submitButton.click();
                 },
 
-                hoodiesml() {
-                    let app = this
-                    if (app.hoodiesml === false) {
-                        app.hoodiesmlqty = 0
-                        console.log('hoodiesml qty set to 0')
-                    }
-
-                    else if (app.hoodiesml === true) {
-                        app.hoodiesmlqty = 1
-                    }
-                },
-
-                hoodiesmlqty() {
-                    let app = this
-                    let tot = 0
-                    tot = app.hoodiesmlqty * app.hoodieCost
-                    app.hoodiesmltot = tot
-                    console.log('some hoodiesmlqty changed ' + tot)
-                    app.merchtotal()
-                },
-
-
-                hatsml() {
-                    let app = this
-                    if (app.hatsml === false) {
-                        app.hatsmlqty = 0
-                        console.log('hatsml qty set to 0')
-                    }
-
-                    else if (app.hatsml === true) {
-                        app.hatsmlqty = 1
-                    }
-                },
-
-                hatsmlqty() {
-                    let app = this
-                    let tot = 0
-                    tot = app.hatsmlqty * app.hatCost
-                    app.hatsmltot = tot
-                    console.log('some hatsmlqty changed ' + tot)
-                    app.merchtotal()
-                },
-
-                shirtsml() {
-                    let app = this
-                    if (app.shirtsml === false) {
-                        app.shirtsmlqty = 0
-                        console.log('shirtsml qty set to 0')
-                    }
-
-                    else if (app.shirtsml === true) {
-                        app.shirtsmlqty = 1
-                    }
-                },
-
-                shirtsmlqty() {
-                    let app = this
-                    let tot = 0
-                    tot = app.shirtsmlqty * app.shirtCost
-                    app.shirtsmltot = tot
-                    console.log('some shirtsmlqty changed ' + tot)
-                    app.merchtotal()
-                },
 
                 formSuccess() {
                     if (this.formSuccess === true) {
