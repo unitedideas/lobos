@@ -46,7 +46,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input v-bind="hoodieqty" style="text-align: center; max-width: 40px" type="number" min="0"
+                                            <input v-model="hoodieqty" style="text-align: center; max-width: 40px" type="number" min="0"
                                                    step="1" value="0">
                                         </td>
                                         <td>
@@ -60,7 +60,12 @@
                                 </table>
 
                             </div>
-                            <h2 [[cartlist]]</h2>
+                            <ul v-for="item in cartlist">
+                                <li type="button" v-on:click="remove_from_cart">
+                                    [[item]]
+                                </li>
+                            </ul>
+
                         </div>
                     </div>
                     {# end hoodie #}
@@ -278,7 +283,7 @@
                         qty: 3
                     },
 
-                    hoodieqty: 0,
+                    hoodieqty: 1,
                     cartlist: [],
 
                     hoodieCost: {{ event.hoodie_cost }},
@@ -291,7 +296,7 @@
             watch: {
                 cartlist() {
                     let count = 0
-                    for (item in cartlist) {
+                    for (item in this.cartlist) {
                         count++
                         console.log(count)
                     }
@@ -377,12 +382,15 @@
                     add_to_cart: function () {
                         let size = this.itemsize
                         console.log('Called the add to cart function')
-                        if (this.hoodieqty > 0) {
+                        if (size != ""){
                             if (this.hoodieqty > 0) {
                                 this.cartlist.push({[size]: this.hoodieqty})
                                 console.log('Should have added to the cart')
-                            }
-                        }
+                        }}
+                    },
+
+                    remove_from_cart: function () {
+                        console.log('Called remove form cart')
                     },
                     merchtotal: function () {
                         let app = this
