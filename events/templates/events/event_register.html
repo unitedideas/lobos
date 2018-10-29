@@ -187,95 +187,6 @@
                         {# end hoodie #}
                     {% endif %}
                     <br>
-                    {% if event.shirt %}
-                        {# shirt start #}
-                        <div class="row">
-                            <div class="col-sm-7"><img src="{% static event.shirt_image_file_name %}"
-                                                       style="width: 300px; height: 250px">
-                                <h4 style="color: whitesmoke;" class="center">{{ event.shirt_main_description }}</h4>
-                                <h4 style="color: whitesmoke;" class="center">{{ event.shirt_sub_description }}</h4>
-                            </div>
-                            <div class="col-sm-5">
-                                <div>
-                                    <table class="table text-center" style="padding-right: 20px;">
-                                        <tr>
-                                            <th style="color: #ffe673; text-align: center; width: 50px;">
-                                                <input style="width: 40px;" type="checkbox" checked disabled="true">
-                                            </th>
-                                            <th style="color: #ffe673; text-align: center;">SIZE</th>
-                                            <th style="color: #ffe673; text-align: center;">QUANTITY</th>
-                                            <th style="color: #ffe673; text-align: center;">COST</th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input style="width: 40px;" type="checkbox" v-model="shirtsml">
-                                            </td>
-                                            <td>
-                                                <label style=" color: white">Small</label>
-                                            </td>
-                                            <td v-if="shirtsml" style="vertical-align: center"><input
-                                                    v-model='shirtsmlqty'
-                                                    style="text-align: center; max-width: 40px"
-                                                    type="number" min="0"
-                                                    step="1" value="0">
-                                            </td>
-                                            <td v-else="shirtsml">
-                                                <div style="text-align: center; max-width: 40px"></div>
-
-                                            </td>
-                                            <td><h4 style="color: whitesmoke;">$[[shirtCost]]</h4></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        {# end shirt #}
-                    {% endif %}
-                    <br>
-                    {% if event.hoodie %}
-                        {# hat start #}
-                        <div class="row">
-                            <div class="col-sm-7"><img src="{% static event.hat_image_file_name %}"
-                                                       style="width: 300px; height: 250px">
-                                <h4 style="color: whitesmoke;" class="center">{{ event.hat_main_description }}</h4>
-                                <h4 style="color: whitesmoke;" class="center">{{ event.hat_sub_description }}</h4>
-                            </div>
-                            <div class="col-sm-5">
-                                <div>
-                                    <table class="table text-center" style="padding-right: 20px;">
-                                        <tr>
-                                            <th style="color: #ffe673; text-align: center; width: 50px;">
-                                                <input style="width: 40px;" type="checkbox" checked disabled="true">
-                                            </th>
-                                            <th style="color: #ffe673; text-align: center;">SIZE</th>
-                                            <th style="color: #ffe673; text-align: center;">QUANTITY</th>
-                                            <th style="color: #ffe673; text-align: center;">COST</th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input style="width: 40px;" type="checkbox" v-model="hatsml">
-                                            </td>
-                                            <td>
-                                                <label style=" color: white">Small</label>
-                                            </td>
-                                            <td v-if="hatsml" style="vertical-align: center"><input
-                                                    v-model='hatsmlqty'
-                                                    style="text-align: center; max-width: 40px"
-                                                    type="number" min="0"
-                                                    step="1" value="0">
-                                            </td>
-                                            <td v-else="hatsml">
-                                                <div style="text-align: center; max-width: 40px"></div>
-                                            </td>
-                                            <td><h4 style="color: whitesmoke;">$[[hatCost]]</h4></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        {# end hat #}
-                    {% endif %}
-                    <br>
                     <div style="text-align: center;">
                         <div style="background-color: #ffe673; height: 5px;"></div>
                         <h3 style="color: whitesmoke;">Registration: [[regTotal]]</h3>
@@ -373,7 +284,7 @@
                             ],
                         qty: 3
                     },
-                    
+
                     cartlist: [],
 
                     hoodieCost: {{ event.hoodie_cost }},
