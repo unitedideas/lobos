@@ -19,9 +19,78 @@
 {% block body %}
     <div id="app">
         <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-            <div id="jumbotron" class="jumbotron" style="padding: 20px">
+            <div id="jumbotron" class="jumbotron" style="padding: 0px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
-                {% if event.hoodie %}
+            </div>
+            <div>
+                <form method="POST" id="feedbackform" v-on:keydown.13.prevent="the3DayMethod">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    <div style="margin-right: 15px;" class="row">
+                        <div v-for="form in formList">
+                            <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
+                            <div style="background-color: #ffe673; padding: 20px; border-radius:5px; margin: 0px 15px 0px 15px"
+                                 v-html="form">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="container" style="padding: 0px 30px 0px 30px">
+                            <div class="row">
+                                <div class="col-sm-6" style="text-align: center">
+                                    <div v-on:click="addForm" class="btn btn-primary btn-lg">Add Another Rider
+                                    </div>
+                                </div>
+                                <div class="col-sm-6" style="text-align: center">
+                                    <div v-on:click="formID" class="btn btn-primary btn-lg">
+                                        Remove Last Rider
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <button v-on ref="submitButton" style='display: none'></button>
+                </form>
+            </div>
+            <br>
+        </div>
+        <div class="sk-rotating-plane"></div>
+        <br>
+        <div class="container"
+             style="background-color: #ffe673; padding: 0px 0px 15px 0px; border-radius: 5px; text-align: center; margin-top: 10px;">
+            <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
+                <h3>Please correct these errors:</h3>
+                <div id="v-for-formerrors">
+                    <div v-for="(value, index, key) in formerrors">
+                        <h4>Rider Form:[[ ++index ]] - [[value]]</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div v-show="showcheckout" class="container">
+                <h3>**You'll need an AMA Membership to ride the event. Save waiting in line at the event and join
+                    <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online!</a>
+                </h3>
+                <div>
+                    <h3>Raincheck:
+                        <input style="width: 25%" v-model="discountCode" type="text" name="discount_code"
+                               placeholder="Raincheck Code">
+                    </h3>
+                </div>
+            </div>
+
+            <h3>Total: $[[regTotal]]</h3>
+            <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
+        </div>
+        <br>
+
+        <transition id="modal" style="display: none" v-if="showModal" name="appear">
+            <div class="simple-modal" v-if="formSuccess">
+                <h1 style="color: whitesmoke;">Registering for {{ event }}</h1>
+                {% if event.hat or event.hoodie or event.shirt %}
+                    <h3 style="color: whitesmoke;">Don't be left out!</h3>
+                    <br>
+                   {% if event.hoodie %}
                     {# hoodie start #}
                     <div class="row" style="text-align: center">
                         <div class="col-sm-5"><img src="{% static event.hoodie_image_file_name %}"
@@ -80,86 +149,6 @@
                     </div>
                     {# end hoodie #}
                 {% endif %}
-
-
-            </div>
-            <div>
-                <form method="POST" id="feedbackform" v-on:keydown.13.prevent="the3DayMethod">
-                    {% csrf_token %}
-                    {{ formset.management_form }}
-                    <div style="margin-right: 15px;" class="row">
-                        <div v-for="form in formList">
-                            <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
-                            <div style="background-color: #ffe673; padding: 20px; border-radius:5px; margin: 0px 15px 0px 15px"
-                                 v-html="form">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="container" style="padding: 0px 30px 0px 30px">
-                            <div class="row">
-                                <div class="col-sm-6" style="text-align: center">
-                                    <div v-on:click="addForm" class="btn btn-primary btn-lg">Add Another Rider
-                                    </div>
-                                </div>
-                                <div class="col-sm-6" style="text-align: center">
-                                    <div v-on:click="formID" class="btn btn-primary btn-lg">
-                                        Remove Last Rider
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                    <button v-on ref="submitButton" style='display: none'></button>
-                </form>
-            </div>
-            <br>
-        </div>
-        <div class="sk-rotating-plane"></div>
-        <br>
-        <div class="container"
-             style="background-color: #ffe673; padding: 0px 0px 15px 0px; border-radius: 5px; text-align: center; margin-top: 10px;">
-            <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
-                <h3>Please correct these errors:</h3>
-                <div id="v-for-formerrors">
-                    <div v-for="(value, index, key) in formerrors">
-                        <h4>Rider Form:[[ ++index ]] - [[value]]</h4>
-                    </div>
-                </div>
-            </div>
-
-            <div v-show="showcheckout" class="container">
-                <h3>**You'll need an AMA Membership to ride the event. Save waiting in line at the event and join
-                    <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online!</a>
-                </h3>
-                <br>
-                <div>
-                    <h3>Raincheck:
-                        <input style="width: 25%" v-model="discountCode" type="text" name="discount_code"
-                               placeholder="Raincheck Code">
-                    </h3>
-                </div>
-            </div>
-            <br>
-            <h3>Total: $[[regTotal]]</h3>
-            <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
-        </div>
-        <br>
-
-        <transition id="modal" v-if="showModal" name="appear">
-            <div class="simple-modal" v-if="formSuccess">
-                <h1 style="color: whitesmoke;">Registering for {{ event }}</h1>
-                {% if event.hat or event.hoodie or event.shirt %}
-                    <h3 style="color: whitesmoke;">Don't be left out!</h3>
-                    <br>
-                    {% if event.hoodie %}
-                        {# hoodie start #}
-                        <div class="col-sm-7"><img src="{% static event.hoodie_image_file_name %}"
-                                                   style="width: 300px; height: 250px">
-                            <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
-                            <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
-                        </div>
-                    {% endif %}
                     <br>
                     <div style="text-align: center;">
                         <div style="background-color: #ffe673; height: 5px;"></div>
