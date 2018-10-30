@@ -90,65 +90,66 @@
                 {% if event.hat or event.hoodie or event.shirt %}
                     <h3 style="color: whitesmoke;">Don't be left out!</h3>
                     <br>
-                   {% if event.hoodie %}
-                    {# hoodie start #}
-                    <div class="row" style="text-align: center">
-                        <div class="col-sm-5"><img src="{% static event.hoodie_image_file_name %}"
-                                                   style="width: 100%">
-                            <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
-                            <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
-                        </div>
-                        <div class="col-sm-7">
-                            <div>
-                                <table class="table text-center" style="padding-right: 20px;">
-                                    <tr>
-                                        <th style="color: black; text-align: center;">SIZE</th>
-                                        <th style="color: black; text-align: center;">QUANTITY</th>
-                                        <th style="color: black; text-align: center;">COST</th>
-                                        <th style="color: black; text-align: center;">ADD</th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <select v-model="itemsize" style="margin-top: 10px">
-                                                <option v-for='item in hoodie.size' v-if="item.True">[[item.True]]
-                                                </option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input v-model="hoodieqty" style="text-align: center; max-width: 40px; margin-top: 5px"
-                                                   type="number" min="0"
-                                                   step="1" value="0">
-                                        </td>
-                                        <td>
-                                            <h4 style="color: black">$[[hoodieCost]]</h4>
-                                        </td>
-                                        <td>
-                                            <div type="button" class="btn btn-primary"
-                                                 v-on:click="add_to_cart('Hoodie')">Add
-                                            </div>
-                                        </td>
-                                    </tr>
+                    {% if event.hoodie %}
+                        {# hoodie start #}
+                        <div class="row" style="text-align: center">
+                            <div class="col-sm-5"><img src="{% static event.hoodie_image_file_name %}"
+                                                       style="width: 100%">
+                                <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
+                                <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
+                            </div>
+                            <div class="col-sm-7">
+                                <div>
+                                    <table class="table text-center" style="padding-right: 20px;">
+                                        <tr>
+                                            <th style="color: black; text-align: center;">SIZE</th>
+                                            <th style="color: black; text-align: center;">QUANTITY</th>
+                                            <th style="color: black; text-align: center;">COST</th>
+                                            <th style="color: black; text-align: center;">ADD</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select v-model="itemsize" style="margin-top: 10px">
+                                                    <option v-for='item in hoodie.size' v-if="item.True">[[item.True]]
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input v-model="hoodieqty"
+                                                       style="text-align: center; max-width: 40px; margin-top: 5px"
+                                                       type="number" min="0"
+                                                       step="1" value="0">
+                                            </td>
+                                            <td>
+                                                <h4 style="color: black">$[[hoodieCost]]</h4>
+                                            </td>
+                                            <td>
+                                                <div type="button" class="btn btn-primary"
+                                                     v-on:click="add_to_cart('Hoodie')">Add
+                                                </div>
+                                            </td>
+                                        </tr>
 
 
-                                </table>
-                                <div class="col" v-for="(item, index) in cartlist" style="text-align: center">
-                                    <div class="col-sm-6" style="text-align: center">
-                                        <button class="btn btn-primary" style="width: 100px"
-                                                v-on:click='remove_from_cart(index)'>Remove
-                                        </button>
+                                    </table>
+                                    <div class="col" v-for="(item, index) in cartlist" style="text-align: center">
+                                        <div class="col-sm-6" style="text-align: center">
+                                            <button class="btn btn-primary" style="width: 100px"
+                                                    v-on:click='remove_from_cart(index)'>Remove
+                                            </button>
+                                        </div>
+                                        <div class="col-sm-6" style="text-align: center">
+                                            <h4 style="text-align: center">[[item.qty]] [[item.size]]
+                                                [[item.item]]</h4>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6" style="text-align: center">
-                                        <h4 style="text-align: center">[[item.qty]] [[item.size]]
-                                            [[item.item]]</h4>
-                                    </div>
+
+
                                 </div>
-
-
                             </div>
                         </div>
-                    </div>
-                    {# end hoodie #}
-                {% endif %}
+                        {# end hoodie #}
+                    {% endif %}
                     <br>
                     <div style="text-align: center;">
                         <div style="background-color: #ffe673; height: 5px;"></div>
