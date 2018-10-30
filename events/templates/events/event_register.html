@@ -59,16 +59,17 @@
                                             </div>
                                         </td>
                                     </tr>
+
+
                                 </table>
-                                                        <div class="row" v-for="(item, index) in cartlist">
-                            <div class="col-sm-7">
-                                <button class="btn btn-primary col-sm-3 center-block" type="button"
-                                        v-on:click='remove_from_cart(index)'>Remove
-                                </button>
-                                <h4 class="col-sm-9" style="text-align: center">[[item.qty]] [[item.size]]
-                                    [[item.item]]</h4>
-                            </div>
-                        </div>
+                                <div class="" v-for="(item, index) in cartlist">
+                                    <button class="btn btn-primary col-sm-3" type="button"
+                                            v-on:click='remove_from_cart(index)'>Remove
+                                    </button>
+                                    <h4 class="col-sm-9" style="text-align: center">[[item.qty]] [[item.size]]
+                                        [[item.item]]</h4>
+                                </div>
+
 
                             </div>
                         </div>
