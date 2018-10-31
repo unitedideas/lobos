@@ -94,7 +94,7 @@
                     {% if event.hoodie %}
                         <div class="row" style="text-align: center">
                             <div class="col-sm-5"><img src="{% static event.hoodie_image_file_name %}"
-                                                       style="width: 100%">
+                                                       style="width: 70%">
                                 <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_main_description }}</h4>
                                 <h4 style="color: whitesmoke;" class="center">{{ event.hoodie_sub_description }}</h4>
                             </div>
@@ -109,7 +109,8 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <select v-model='hoodie_size_select' style="margin-top: 10px; text-align: center">
+                                                <select v-model='hoodie_size_select'
+                                                        style="margin-top: 10px; text-align: center">
                                                     <option v-for='item in hoodie.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -125,23 +126,12 @@
                                             </td>
                                             <td>
                                                 <div type="button" class="btn btn-primary"
-                                                     v-on:click="add_to_cart('Hoodie', hoodie_size_select, hoodieqty)">Add
+                                                     v-on:click="add_to_cart('Hoodie', hoodie_size_select, hoodieqty)">
+                                                    Add
                                                 </div>
                                             </td>
                                         </tr>
                                     </table>
-                                    <div v-for="(item, index) in cartlist"
-                                         style="text-align: center; background-color: red">
-                                        <div class="col-sm-5">
-                                            <div class="btn btn-primary" style="width: 100px"
-                                                 v-on:click='remove_from_cart(index)'>Remove
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <h4 style="text-align: center">[[item.qty]] [[item.size]]
-                                                [[item.item]]</h4>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +142,7 @@
                     {% if event.shirt %}
                         <div class="row" style="text-align: center">
                             <div class="col-sm-5"><img src="{% static event.shirt_image_file_name %}"
-                                                       style="width: 100%">
+                                                       style="width: 70%">
                                 <h4 style="color: whitesmoke;" class="center">{{ event.shirt_main_description }}</h4>
                                 <h4 style="color: whitesmoke;" class="center">{{ event.shirt_sub_description }}</h4>
                             </div>
@@ -167,7 +157,8 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <select v-model='shirt_size_select' style="margin-top: 10px; text-align: center">
+                                                <select v-model='shirt_size_select'
+                                                        style="margin-top: 10px; text-align: center">
                                                     <option v-for='item in shirt.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -183,23 +174,11 @@
                                             </td>
                                             <td>
                                                 <div type="button" class="btn btn-primary"
-                                                     v-on:click="add_to_cart('shirt', shirt_size_select, shirtqty)">Add
+                                                     v-on:click="add_to_cart('Shirt', shirt_size_select, shirtqty)">Add
                                                 </div>
                                             </td>
                                         </tr>
                                     </table>
-                                    <div v-for="(item, index) in cartlist"
-                                         style="text-align: center; background-color: red">
-                                        <div class="col-sm-5">
-                                            <div class="btn btn-primary" style="width: 100px"
-                                                 v-on:click='remove_from_cart(index)'>Remove
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <h4 style="text-align: center">[[item.qty]] [[item.size]]
-                                                [[item.item]]</h4>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +204,8 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <select v-model='hat_size_select' style="margin-top: 10px; text-align: center">
+                                                <select v-model='hat_size_select'
+                                                        style="margin-top: 10px; text-align: center">
                                                     <option v-for='item in hat.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -241,23 +221,11 @@
                                             </td>
                                             <td>
                                                 <div type="button" class="btn btn-primary"
-                                                     v-on:click="add_to_cart('hat', hat_size_select, hatqty)">Add
+                                                     v-on:click="add_to_cart('Hat', hat_size_select, hatqty)">Add
                                                 </div>
                                             </td>
                                         </tr>
                                     </table>
-                                    <div v-for="(item, index) in cartlist"
-                                         style="text-align: center; background-color: red">
-                                        <div class="col-sm-5">
-                                            <div class="btn btn-primary" style="width: 100px"
-                                                 v-on:click='remove_from_cart(index)'>Remove
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <h4 style="text-align: center">[[item.qty]] [[item.size]]
-                                                [[item.item]]</h4>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -266,8 +234,26 @@
                     <br>
                     <div style="text-align: center;">
                         <div style="background-color: #ffe673; height: 5px;"></div>
+                        <div style="background-color: #ffe673">
+                            <div v-if="cartlist.length > 0">
+                                <h3 style="color: whitesmoke;">Cart</h3>
+                                <div v-for="(item, index) in cartlist"
+                                     style="text-align: center; background-color: red">
+                                    <div class="col-sm-6">
+                                        <div class="btn btn-primary"
+                                             style="width: 100px; float: right; margin-right: 10px "
+                                             v-on:click='remove_from_cart(index)'>Remove
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4 style="text-align: center; color: whitesmoke;  float: left">[[item.qty]]
+                                            [[item.size]]
+                                            [[item.item]]</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>
-
                         <h3 style="color: whitesmoke;">Registration: [[regTotal]]</h3>
                         <h3 style="color: whitesmoke;">Grand Total: [[amountStr]]</h3>
                     </div>
