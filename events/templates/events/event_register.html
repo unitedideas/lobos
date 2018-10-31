@@ -125,7 +125,7 @@
                                             </td>
                                             <td>
                                                 <div type="button" class="btn btn-primary"
-                                                     v-on:click="add_to_cart('Hoodie', hoodie_size_select, hoodieqty)">
+                                                     v-on:click="add_to_cart('Hoodie', hoodie_size_select, hoodieqty, [[hoodieCost]])">
                                                     Add
                                                 </div>
                                             </td>
@@ -172,7 +172,8 @@
                                             </td>
                                             <td>
                                                 <div type="button" class="btn btn-primary"
-                                                     v-on:click="add_to_cart('Shirt', shirt_size_select, shirtqty)">Add
+                                                     v-on:click="add_to_cart('Shirt', shirt_size_select, shirtqty, [[shirtCost]])">
+                                                    Add
                                                 </div>
                                             </td>
                                         </tr>
@@ -218,7 +219,8 @@
                                             </td>
                                             <td>
                                                 <div type="button" class="btn btn-primary"
-                                                     v-on:click="add_to_cart('Hat', hat_size_select, hatqty)">Add
+                                                     v-on:click="add_to_cart('Hat', hat_size_select, hatqty, [[hatCost]])">
+                                                    Add
                                                 </div>
                                             </td>
                                         </tr>
@@ -232,7 +234,7 @@
                     <div style="text-align: center;">
                         <div style="background-color: #ffe673; height: 5px;"></div>
                         <div v-if="cartlist.length > 0">
-                            <h3 style="color: whitesmoke;">Cart</h3>
+                            <h3 style="color: whitesmoke;">Your {{ event.event_name }} Gear!</h3>
                             <div style="background-color: #ffe673; overflow: hidden; padding-top: 7px">
                                 <div v-for="(item, index) in cartlist"
                                      style="text-align: center; background-color: red">
@@ -243,14 +245,16 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <h4 style="text-align: center; color: whitesmoke;  float: left">[[item.qty]]
+                                        <h4 style="text-align: center; color: black;  float: left">[[item.qty]]
                                             [[item.size]]
                                             [[item.item]]</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>
+                        <div v-if="merchTotal != 0">
+                            <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>
+                        </div>
                         <h3 style="color: whitesmoke;">Registration: [[regTotal]]</h3>
                         <h3 style="color: whitesmoke;">Total: [[totalStr]]</h3>
                     </div>
@@ -266,8 +270,8 @@
                 <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]
                 </button>
                 <div class="row">
-                    <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was declined or
-                        canceled
+                    <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was canceled or
+                        declined
                     </div>
                 </div>
                 <div v-show="showPayPal">
@@ -332,7 +336,7 @@
                     hoodie_size_select: "",
                     hat_size_select: "",
                     shirt_size_select: "",
-                    merchTotal: "0.00",
+                    merchTotal: 0,
 
                     {#need to learn about objects#}
                     hoodie: {
@@ -389,10 +393,17 @@
             watch: {
                 cartlist() {
                     let count = 0
+                    let cost = 0
                     for (item in this.cartlist) {
-                        count++
-                        console.log(count)
+                        let itemcost = 0
+                        let merchtot = 0
+                        itemcost = this.cartlist[item].qty * this.cartlist[item].price
+                        cost += itemcost
                     }
+                    console.log()
+                    this.merchTotal = cost.toFixed(2)
+                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
+
                 },
 
                 paymentComplete() {
@@ -409,11 +420,11 @@
 
             methods:
                 {
-                    add_to_cart: function (item_type, size, qty) {
+                    add_to_cart: function (item_type, size, qty, price) {
                         console.log('Called the add to cart function')
                         if (size != "") {
                             if (qty > 0) {
-                                this.cartlist.push({'item': item_type, 'size': size, 'qty': qty})
+                                this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
                                 console.log('Should have added to the cart')
                             }
                         }
@@ -423,18 +434,18 @@
                         this.cartlist.splice(index, 1)
                     },
                     merchtotal: function () {
-                        let tot = 0.00
-                        let merchtot = 0
-                        merchtot = app.hoodieCost * app.hoodiesmlqty
-                        app.merchTotal = Number(merchtot).toFixed(2)
-                        app.overallTotal = Number(app.merchTotal) + Number(app.regTotal)
-                        app.totalStr = app.overallTotal
-                        tot = app.overallTotal
-                        app.totalStr = tot.toFixed(2)
-                        console.log(app.totalStr)
+                        return
+                        {##}
+                        {#this.merchTotal = Number(merchtot).toFixed(2)#}
+                        {#this.overallTotal = Number(this.merchTotal) + Number(this.regTotal)#}
+                        {#this.totalStr = this.overallTotal#}
+                        {#tot = this.overallTotal#}
+                        {#this.totalStr = tot.toFixed(2)#}
+                        {#console.log(this.totalStr)#}
                     },
 
                     the3DayMethod: function () {
+                        let app = this
                         app.formSuccess = ''
                         var object = {}
                         forms = document.getElementById('feedbackform')
@@ -571,6 +582,8 @@
             mounted:
 
                 function () {
+                    let app = this
+
                     axios.post("{% url 'event_formset' %}",
                         {processData: false, contentType: false, event: '{{event}}'},
                         {
