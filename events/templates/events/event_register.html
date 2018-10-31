@@ -58,15 +58,16 @@
         <br>
         <div class="container"
              style="background-color: #ffe673; padding: 0px 0px 15px 0px; border-radius: 5px; text-align: center; margin-top: 10px;">
-            <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
-                <h3>Please correct these errors:</h3>
-                <div id="v-for-formerrors">
-                    <div v-for="(value, index, key) in formerrors">
-                        <h4>Rider Form:[[ ++index ]] - [[value]]</h4>
+            <transition name="fade">
+                <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
+                    <h3>Please correct these errors:</h3>
+                    <div id="v-for-formerrors">
+                        <div v-for="(value, index, key) in formerrors">
+                            <h4>Rider Form:[[ ++index ]] - [[value]]</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            </transition>
             <div v-show="showcheckout" class="container">
                 <h3>**You'll need an AMA Membership to ride the event. Save waiting in line at the event and join
                     <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online!</a>
@@ -77,10 +78,10 @@
                                placeholder="Raincheck Code">
                     </h3>
                 </div>
-            </div>
+                <h3>Total: $[[regTotal]]</h3>
+                <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
 
-            <h3>Total: $[[regTotal]]</h3>
-            <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
+            </div>
         </div>
         <br>
 
@@ -343,6 +344,7 @@
                         price: {{ event.hoodie_cost }},
                         size:
                             [
+                                {'{{event.hoodie_osfa}}': "One Size Fits All"},
                                 {'{{event.hoodie_Xsmall}}': "X-Small"},
                                 {'{{event.hoodie_small}}': "Small"},
                                 {'{{event.hoodie_medium}}': 'Medium'},
@@ -356,6 +358,7 @@
                         price: {{ event.hat_cost }},
                         size:
                             [
+                                {'{{event.hat_osfa}}': "One Size Fits All"},
                                 {'{{event.hat_Xsmall}}': "X-Small"},
                                 {'{{event.hat_small}}': "Small"},
                                 {'{{event.hat_medium}}': 'Medium'},
@@ -369,6 +372,7 @@
                         price: {{ event.shirt_cost }},
                         size:
                             [
+                                {'{{event.shirt_osfa}}': "One Size Fits All"},
                                 {'{{event.shirt_Xsmall}}': "X-Small"},
                                 {'{{event.shirt_small}}': "Small"},
                                 {'{{event.shirt_medium}}': 'Medium'},
