@@ -129,22 +129,19 @@
                                                 </div>
                                             </td>
                                         </tr>
-
-
                                     </table>
-                                    <div class="col" v-for="(item, index) in cartlist" style="text-align: center">
-                                        <div class="col-sm-6" style="text-align: center">
-                                            <button class="btn btn-primary" style="width: 100px"
-                                                    v-on:click='remove_from_cart(index)'>Remove
-                                            </button>
+                                    <div v-for="(item, index) in cartlist"
+                                         style="text-align: center; background-color: red">
+                                        <div class="col-sm-5">
+                                            <div class="btn btn-primary" style="width: 100px"
+                                                 v-on:click='remove_from_cart(index)'>Remove
+                                            </div>
                                         </div>
-                                        <div class="col-sm-6" style="text-align: center">
+                                        <div class="col-sm-7">
                                             <h4 style="text-align: center">[[item.qty]] [[item.size]]
                                                 [[item.item]]</h4>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
