@@ -109,7 +109,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <select v-model="itemsize" style="margin-top: 10px">
+                                                <select v-model="itemsize" style="margin-top: 10px; text-align: center">
                                                     <option v-for='item in hoodie.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -167,7 +167,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <select v-model="itemsize" style="margin-top: 10px">
+                                                <select v-model="itemsize" style="margin-top: 10px; text-align: center">
                                                     <option v-for='item in shirt.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -225,7 +225,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <select v-model="itemsize" style="margin-top: 10px">
+                                                <select v-model="itemsize" style="margin-top: 10px; text-align: center">
                                                     <option v-for='item in hat.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -266,8 +266,9 @@
                     <br>
                     <div style="text-align: center;">
                         <div style="background-color: #ffe673; height: 5px;"></div>
-                        <h3 style="color: whitesmoke;">Registration: [[regTotal]]</h3>
                         <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>
+
+                        <h3 style="color: whitesmoke;">Registration: [[regTotal]]</h3>
                         <h3 style="color: whitesmoke;">Grand Total: [[amountStr]]</h3>
                     </div>
 
@@ -356,7 +357,9 @@
                                 {'{{event.hoodie_small}}': "Small"},
                                 {'{{event.hoodie_medium}}': 'Medium'},
                                 {'{{event.hoodie_large}}': 'Large'},
-                                {'{{event.hoodie_Xlarge}}': 'X-Large'}
+                                {'{{event.hoodie_Xlarge}}': 'X-Large'},
+                                {'{{event.hoodie_Xlarge}}': 'XX-Large'},
+                                {'{{event.hoodie_Xlarge}}': 'XXX-Large'},
                             ]
                     },
                     hat: {
@@ -367,7 +370,9 @@
                                 {'{{event.hat_small}}': "Small"},
                                 {'{{event.hat_medium}}': 'Medium'},
                                 {'{{event.hat_large}}': 'Large'},
-                                {'{{event.hat_Xlarge}}': 'X-Large'}
+                                {'{{event.hat_Xlarge}}': 'X-Large'},
+                                {'{{event.hat_Xlarge}}': 'XX-Large'},
+                                {'{{event.hat_Xlarge}}': 'XXX-Large'},
                             ]
                     },
                     shirt: {
@@ -378,7 +383,9 @@
                                 {'{{event.shirt_small}}': "Small"},
                                 {'{{event.shirt_medium}}': 'Medium'},
                                 {'{{event.shirt_large}}': 'Large'},
-                                {'{{event.shirt_Xlarge}}': 'X-Large'}
+                                {'{{event.shirt_Xlarge}}': 'X-Large'},
+                                {'{{event.shirt_Xlarge}}': 'XX-Large'},
+                                {'{{event.shirt_Xlarge}}': 'XXX-Large'},
                             ]
                     },
 
@@ -430,20 +437,6 @@
 
                     remove_from_cart: function (index) {
                         this.cartlist.splice(index, 1)
-
-
-                        {#let pos = this.cartlist.map(function(e) { return e.hello; }).indexOf(s_item);#}
-                        {#console.log('Called remove form cart')#}
-                        {#console.log(item)#}
-                        {#let string_item = String(item)#}
-                        {#console.log(indexOf(item))#}
-                        {#for (var i = 0; i < this.cartlist.length - 1; i++) {#}
-                        {#    if (this.cartlist[i] === indexOf(item)){#}
-                        {#        arr.splice(i, 1);#}
-                        {#        console.log('removed '+ String(item))#}
-                        {#    }#}
-                        {# }#}
-
                     },
                     merchtotal: function () {
                         let app = this
