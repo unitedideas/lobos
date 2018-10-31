@@ -89,9 +89,9 @@
                 <h1 style="color: whitesmoke;">Registering for {{ event }}</h1>
                 {% if event.hat or event.hoodie or event.shirt %}
                     <h3 style="color: whitesmoke;">Don't be left out!</h3>
+                    {# hoodie start #}
                     <br>
                     {% if event.hoodie %}
-                        {# hoodie start #}
                         <div class="row" style="text-align: center">
                             <div class="col-sm-5"><img src="{% static event.hoodie_image_file_name %}"
                                                        style="width: 100%">
@@ -145,8 +145,124 @@
                                 </div>
                             </div>
                         </div>
-                        {# end hoodie #}
                     {% endif %}
+                    {# end hoodie #}
+                    {# shirt start #}
+                    <br>
+                    {% if event.shirt %}
+                        <div class="row" style="text-align: center">
+                            <div class="col-sm-5"><img src="{% static event.shirt_image_file_name %}"
+                                                       style="width: 100%">
+                                <h4 style="color: whitesmoke;" class="center">{{ event.shirt_main_description }}</h4>
+                                <h4 style="color: whitesmoke;" class="center">{{ event.shirt_sub_description }}</h4>
+                            </div>
+                            <div class="col-sm-7">
+                                <div>
+                                    <table class="table text-center" style="padding-right: 20px;">
+                                        <tr>
+                                            <th style="color: whitesmoke; text-align: center;">SIZE</th>
+                                            <th style="color: whitesmoke; text-align: center;">QUANTITY</th>
+                                            <th style="color: whitesmoke; text-align: center;">COST</th>
+                                            <th style="color: whitesmoke; text-align: center;">ADD</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select v-model="itemsize" style="margin-top: 10px">
+                                                    <option v-for='item in shirt.size' v-if="item.True">[[item.True]]
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input v-model="shirtqty"
+                                                       style="text-align: center; max-width: 40px; margin-top: 5px"
+                                                       type="number" min="0"
+                                                       step="1" value="0">
+                                            </td>
+                                            <td>
+                                                <h4 style="color: whitesmoke">$[[shirtCost]]</h4>
+                                            </td>
+                                            <td>
+                                                <div type="button" class="btn btn-primary"
+                                                     v-on:click="add_to_cart('shirt')">Add
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div v-for="(item, index) in cartlist"
+                                         style="text-align: center; background-color: red">
+                                        <div class="col-sm-5">
+                                            <div class="btn btn-primary" style="width: 100px"
+                                                 v-on:click='remove_from_cart(index)'>Remove
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h4 style="text-align: center">[[item.qty]] [[item.size]]
+                                                [[item.item]]</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {# end shirt #}
+                    {# hat start #}
+                    <br>
+                    {% if event.hat %}
+                        <div class="row" style="text-align: center">
+                            <div class="col-sm-5"><img src="{% static event.hat_image_file_name %}"
+                                                       style="width: 100%">
+                                <h4 style="color: whitesmoke;" class="center">{{ event.hat_main_description }}</h4>
+                                <h4 style="color: whitesmoke;" class="center">{{ event.hat_sub_description }}</h4>
+                            </div>
+                            <div class="col-sm-7">
+                                <div>
+                                    <table class="table text-center" style="padding-right: 20px;">
+                                        <tr>
+                                            <th style="color: whitesmoke; text-align: center;">SIZE</th>
+                                            <th style="color: whitesmoke; text-align: center;">QUANTITY</th>
+                                            <th style="color: whitesmoke; text-align: center;">COST</th>
+                                            <th style="color: whitesmoke; text-align: center;">ADD</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select v-model="itemsize" style="margin-top: 10px">
+                                                    <option v-for='item in hat.size' v-if="item.True">[[item.True]]
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input v-model="hatqty"
+                                                       style="text-align: center; max-width: 40px; margin-top: 5px"
+                                                       type="number" min="0"
+                                                       step="1" value="0">
+                                            </td>
+                                            <td>
+                                                <h4 style="color: whitesmoke">$[[hatCost]]</h4>
+                                            </td>
+                                            <td>
+                                                <div type="button" class="btn btn-primary"
+                                                     v-on:click="add_to_cart('hat')">Add
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div v-for="(item, index) in cartlist"
+                                         style="text-align: center; background-color: red">
+                                        <div class="col-sm-5">
+                                            <div class="btn btn-primary" style="width: 100px"
+                                                 v-on:click='remove_from_cart(index)'>Remove
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h4 style="text-align: center">[[item.qty]] [[item.size]]
+                                                [[item.item]]</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {# end hat #}
                     <br>
                     <div style="text-align: center;">
                         <div style="background-color: #ffe673; height: 5px;"></div>
@@ -243,8 +359,32 @@
                                 {'{{event.hoodie_Xlarge}}': 'X-Large'}
                             ]
                     },
+                    hat: {
+                        price: {{ event.hat_cost }},
+                        size:
+                            [
+                                {'{{event.hat_Xsmall}}': "X-Small"},
+                                {'{{event.hat_small}}': "Small"},
+                                {'{{event.hat_medium}}': 'Medium'},
+                                {'{{event.hat_large}}': 'Large'},
+                                {'{{event.hat_Xlarge}}': 'X-Large'}
+                            ]
+                    },
+                    shirt: {
+                        price: {{ event.shirt_cost }},
+                        size:
+                            [
+                                {'{{event.shirt_Xsmall}}': "X-Small"},
+                                {'{{event.shirt_small}}': "Small"},
+                                {'{{event.shirt_medium}}': 'Medium'},
+                                {'{{event.shirt_large}}': 'Large'},
+                                {'{{event.shirt_Xlarge}}': 'X-Large'}
+                            ]
+                    },
 
                     hoodieqty: 1,
+                    hatqty: 1,
+                    shirtqty: 1,
                     cartlist: [],
 
                     hoodieCost: {{ event.hoodie_cost }},
