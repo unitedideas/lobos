@@ -109,7 +109,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <select v-model="itemsize" style="margin-top: 10px; text-align: center">
+                                                <select v-model='hoodie_size_select' style="margin-top: 10px; text-align: center">
                                                     <option v-for='item in hoodie.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -125,7 +125,7 @@
                                             </td>
                                             <td>
                                                 <div type="button" class="btn btn-primary"
-                                                     v-on:click="add_to_cart('Hoodie')">Add
+                                                     v-on:click="add_to_cart('Hoodie', hoodie_size_select, hoodieqty)">Add
                                                 </div>
                                             </td>
                                         </tr>
@@ -167,7 +167,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <select v-model="itemsize" style="margin-top: 10px; text-align: center">
+                                                <select v-model='shirt_size_select' style="margin-top: 10px; text-align: center">
                                                     <option v-for='item in shirt.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -183,7 +183,7 @@
                                             </td>
                                             <td>
                                                 <div type="button" class="btn btn-primary"
-                                                     v-on:click="add_to_cart('shirt')">Add
+                                                     v-on:click="add_to_cart('shirt', shirt_size_select, shirtqty)">Add
                                                 </div>
                                             </td>
                                         </tr>
@@ -225,7 +225,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <select v-model="itemsize" style="margin-top: 10px; text-align: center">
+                                                <select v-model='hat_size_select' style="margin-top: 10px; text-align: center">
                                                     <option v-for='item in hat.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -241,7 +241,7 @@
                                             </td>
                                             <td>
                                                 <div type="button" class="btn btn-primary"
-                                                     v-on:click="add_to_cart('hat')">Add
+                                                     v-on:click="add_to_cart('hat', hat_size_select, hatqty)">Add
                                                 </div>
                                             </td>
                                         </tr>
@@ -346,6 +346,9 @@
                     regTotal: 0.00,
                     overallTotal: 0.00,
 
+                    hoodie_size_select: "",
+                    hat_size_select: "",
+                    shirt_size_select: "",
                     merchTotal: "0.00",
 
                     {#need to learn about objects#}
@@ -398,7 +401,6 @@
                     shirtCost: {{ event.shirt_cost }},
                     hatCost: {{ event.hat_cost }},
 
-                    itemsize: "",
                 }
             },
             watch: {
@@ -424,12 +426,11 @@
 
             methods:
                 {
-                    add_to_cart: function (item_type) {
-                        let size = this.itemsize
+                    add_to_cart: function (item_type, size, qty) {
                         console.log('Called the add to cart function')
                         if (size != "") {
-                            if (this.hoodieqty > 0) {
-                                this.cartlist.push({'item': item_type, 'size': size, 'qty': this.hoodieqty})
+                            if (qty > 0) {
+                                this.cartlist.push({'item': item_type, 'size': size, 'qty': qty})
                                 console.log('Should have added to the cart')
                             }
                         }
