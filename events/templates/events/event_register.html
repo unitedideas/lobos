@@ -78,7 +78,7 @@
                                placeholder="Raincheck Code">
                     </h3>
                 </div>
-                <h3>Total: $[[regTotal]]</h3>
+                <h3>Registration Total: $[[regTotal]]</h3>
                 <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
 
             </div>
@@ -404,10 +404,13 @@
                         itemcost = this.cartlist[item].qty * this.cartlist[item].price
                         cost += itemcost
                     }
-                    console.log()
                     this.merchTotal = cost.toFixed(2)
                     this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
 
+                },
+
+                regTotal() {
+                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
                 },
 
                 paymentComplete() {
