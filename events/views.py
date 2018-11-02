@@ -305,6 +305,7 @@ def error_checking(request):
         return JsonResponse(content)
     else:
         print('NOT VALID')
+        print(forms) #need to get the birthdate here
         content = {'errors': formset.errors, 'success': False}
         return JsonResponse(content)
 

@@ -281,6 +281,7 @@
                             currency="USD"
                             :button-style="aStyle"
                             :client="paypal"
+                            :items = [[checkoutList]]
                             env="production"
                             v-on:payment-authorized="paymentAuthorized"
                             v-on:payment-completed="paymentCompleted"
@@ -333,7 +334,6 @@
                     allRiderTypes: "None",
                     regTotal: 0.00,
                     overallTotal: 0.00,
-
                     hoodie_size_select: "",
                     hat_size_select: "",
                     shirt_size_select: "",
@@ -425,6 +425,16 @@
                 },
             },
 
+            computed:{
+                checkoutList: function () {
+
+                    console.log('in the checkout list function')
+                    console.log([[cartlist]])
+                    console.log()
+
+                    return
+                }
+            },
             methods:
                 {
                     add_to_cart: function (item_type, size, qty, price) {
