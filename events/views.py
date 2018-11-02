@@ -234,6 +234,7 @@ def register(request):
                 send_mail_user_reg(email, first_name, last_name, username, password)
                 return redirect('/login/')
 
+
     else:
         form = RegistrationForm()
         args = {'form': form}
@@ -304,7 +305,6 @@ def error_checking(request):
         return JsonResponse(content)
     else:
         print('NOT VALID')
-        print(eventDate)
         for form in forms:
             if 'birth' in form:
                 print(forms[form]) #need to get the birthdate here
