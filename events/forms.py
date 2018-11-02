@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from .models import RiderProfile, Profile
 import os
 from django.forms import modelformset_factory
@@ -12,6 +12,11 @@ from django.core.exceptions import ValidationError
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
 STATES = load_choices(STATES_PATH, True)
+
+
+class MyAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(required=False, widget=forms.TextInput(attrs={'oninput': "this.value=this.value.toLowerCase()"}))
+
 
 
 class RegistrationForm(UserCreationForm):
@@ -104,6 +109,7 @@ class EditProfileForm(UserChangeForm):
 class BaseRiderProfileFormSet(BaseModelFormSet):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
 
 # https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
 
