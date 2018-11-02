@@ -58,8 +58,6 @@ class RegistrationForm(UserCreationForm):
             'zip_code',
             'emergency_contact_name',
             'emergency_contact_phone',
-            'password1',
-            'password2',
         )
         widgets = {
             'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),

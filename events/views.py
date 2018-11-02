@@ -234,7 +234,6 @@ def register(request):
                 send_mail_user_reg(email, first_name, last_name, username, password)
                 return redirect('/login/')
 
-
     else:
         form = RegistrationForm()
         args = {'form': form}
