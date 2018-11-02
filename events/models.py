@@ -192,7 +192,7 @@ class RiderProfile(models.Model):
     last_name = models.CharField('Last Name (required)', max_length=300)
     email = models.EmailField('Email (required)', max_length=300)
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
-    birth_date = models.DateField('Birth Date (required)')
+    birth_date = models.DateField('Birth Date - Example: 12/14/1980 (required)')
     phone_number = models.CharField('Phone Number', max_length=10, null=True, blank=True)
     country = models.CharField(max_length=300, null=True, blank=True)
     address = models.CharField(max_length=300, null=True, blank=True)
