@@ -7,11 +7,16 @@
         <h4>Username is your first name, last name and email:</h4>
         <h4>Example: johnsmithjsmith@mail.com </h4>
         <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
+            <input type="hidden" name="csrfmiddlewaretoken"
+                   value="z2aYZrx8ByeEcLehQLHmDplusScfUJI0MWSEnSNJWWpkZN2kieBIGFfQ4979QwXS">
+            <p><label for="id_username">Username:</label> <input oninput="this.value=this.value.toLowerCase()" type="text" name="username" autofocus="" required=""
+                                                                 id="id_username"></p>
+            <p><label for="id_password">Password:</label> <input type="password" name="password" required=""
+                                                                 id="id_password"></p>
             <h4>Forgot your password? <a href="/password-reset/">Reset it here.</a></h4>
             <button class="btn btn-primary btn-lg " type="submit">Login</button>
         </form>
     </div>
     <br>
+    <script>element.addEventListener('input',function(){this.value=this.value.toLowerCase()});​</script>
 {% endblock %}
