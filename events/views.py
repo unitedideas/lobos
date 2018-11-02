@@ -305,7 +305,10 @@ def error_checking(request):
         return JsonResponse(content)
     else:
         print('NOT VALID')
-        print(forms) #need to get the birthdate here
+        print(eventDate)
+        for form in forms:
+            if 'birth' in form:
+                print(forms[form]) #need to get the birthdate here
         content = {'errors': formset.errors, 'success': False}
         return JsonResponse(content)
 
@@ -352,7 +355,6 @@ def event_register(request):
             for form in formset:
                 print(form.rider_class)
                 count += 1
-                print('in the form loop')
                 created_username = form.first_name + form.last_name + form.email
                 created_username = created_username.replace(" ", "").lower()
 
