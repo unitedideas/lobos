@@ -427,7 +427,6 @@
 
             computed:{
                 checkoutList: function () {
-
                     console.log('in the checkout list function')
                     console.log([[cartlist]])
                     console.log()
@@ -472,17 +471,13 @@
                         for (var entry of formData.entries()) {
                             result[entry[0]] = entry[1];
                         }
-                        let event_date = '{{ event.event_date }}'
-                        let data = JSON.stringify(result)
-                        let daaate = '{{ event.event_date }}'
-
+                        data = JSON.stringify(result)
                         axios.post("{% url 'error_checking' %}",
                             data,
                             {
                                 headers:
                                     {
                                         'X-CSRFToken': '{{ csrf_token }}',
-                                        "eventDate": daaate,
                                     }
                             }
                         )
