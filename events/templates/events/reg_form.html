@@ -12,12 +12,28 @@
             <li>Last Name</li>
             <li>Password</li>
         </ul>
+        {% if uniqueNameErrors %}
+            <div class="alert alert-danger">{{ uniqueNameErrors|safe }}</div>
+        {% endif %}
         {% if errors %}
-            <div class="alert alert-danger">{{ errors|safe }}</div>
+            <h4 style="text-align: center" class="alert alert-danger"> Please correct the errors below</h4>
         {% endif %}
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {% for field in form %}
+                <div>{{ field.label_tag|title }}</div>
+
+                {% if errors %}
+                    {% for error in field.errors %}
+                        <h3 style="color: red">{{ error|escape }}</h3>
+                    {% endfor %}
+                {% endif %}
+                <div> {{ field }}</div>
+
+                {% if field.help_text %}
+                    <p>{{ field.help_text|safe }}</p>
+                {% endif %}
+            {% endfor %}
             <button class="btn btn-primary btn-lg" type="submit">Register</button>
         </form>
     </div>

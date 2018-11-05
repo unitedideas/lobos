@@ -63,10 +63,12 @@ class RegistrationForm(UserCreationForm):
             'zip_code',
             'emergency_contact_name',
             'emergency_contact_phone',
-
+            'password1',
+            'password2'
         )
-        widgets = {
-        }
+        widgets = {},
+        labels = {'password2': 'PASSWORD!!!!!!!!'},
+
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)

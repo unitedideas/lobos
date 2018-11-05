@@ -14,6 +14,7 @@ from events.forms import (
     EditProfileForm,
     RiderProfileFormSet,
 )
+from django.forms.utils import ErrorDict, ErrorList
 from django.template import loader
 from django.template import Context
 from anymail.message import attach_inline_image_file
@@ -224,10 +225,8 @@ def register(request):
             if User.objects.filter(username=username).exists():
                 print('username previously registered')
                 user_id = User.objects.get(username=username).id
-                args = {'form': form, 'errors': '<h4>A user with that username already exists.</h4>'
-                                                '<h4> If this is your email address, please '
-                                                '<a href="/password-reset/">reset your password.</a> '
-                                                '</h4>'}
+                args = {'form': form, 'uniqueNameErrors': '<h4>A user with this first and last name and email already exists. '
+                                                '<a href="/password-reset/">Reset your password here.</a></h4>'}
                 return render(request, 'events/reg_form.html', args)
 
             else:

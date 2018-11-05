@@ -100,6 +100,7 @@ class Profile(models.Model):
         return str(self.user.first_name) + " " + str(self.user.last_name) + " - " + str(self.user)
 
 
+
 class Codes(models.Model):
     discount_code = models.CharField(max_length=100, null=True, blank=True)
     discount_amount = models.FloatField(null=True, blank=True)
