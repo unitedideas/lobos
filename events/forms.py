@@ -66,8 +66,6 @@ class RegistrationForm(UserCreationForm):
             'password1',
             'password2'
         )
-        widgets = {},
-        labels = {'password2': 'PASSWORD!!!!!!!!'},
 
 
     def save(self, commit=True):
