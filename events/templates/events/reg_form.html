@@ -3,9 +3,9 @@
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
         <h1>Register</h1>
-        <h4>Your username will be you first and last name plus your email</h4>
-        <h4>Your new account information will be emailed to you</h4>
-        <h3>Required:</h3>
+        <h3>Your new username and password will be emailed to you.</h3>
+        <h3>Your username will be you first and last name plus your email.</h3>
+        <h3>Minimum Required Information:</h3>
         <ul>
             <li>Email</li>
             <li>First Name</li>
@@ -13,8 +13,7 @@
             <li>Password</li>
         </ul>
         {% if errors %}
-            <div class="alert alert-danger">{{ errors }}</div>
-            <div class="alert alert-danger">Your username will be you first and last name plus your email</div>
+            <div class="alert alert-danger">{{ errors|safe }}</div>
         {% endif %}
         <form method="post">
             {% csrf_token %}

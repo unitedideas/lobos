@@ -63,11 +63,16 @@ class RegistrationForm(UserCreationForm):
             'zip_code',
             'emergency_contact_name',
             'emergency_contact_phone',
+            'password1',
+            'password2'
+
         )
         widgets = {
-            'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
-            'emergency_contact_phone': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
-            'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
+            'phone_number': forms.NumberInput(attrs={'placeholder': 'Example: 222333444'}),
+            'emergency_contact_phone': forms.NumberInput(attrs={'placeholder': 'Example: 222333444'}),
+            'birth_date': forms.DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
+            'password2': forms.TextInput(attrs={'placeholder': 'Example: 12/14/1980'}),
+            'password1': forms.TextInput(attrs={'placeholder': 'Example: 12/14/1980'}),
         }
 
     def save(self, commit=True):

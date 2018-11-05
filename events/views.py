@@ -215,7 +215,6 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-
             email = request.POST['email'].replace(" ", "")
             first_name = request.POST['first_name'].replace(" ", "")
             last_name = request.POST['last_name'].replace(" ", "")
@@ -223,16 +222,22 @@ def register(request):
             password = request.POST['password1']
 
             if User.objects.filter(username=username).exists():
+                print('username previously registered')
                 user_id = User.objects.get(username=username).id
-                form = RegistrationForm()
-                args = {'form': form,
-                        'errors': 'A user with that username already exists. Please choose a different one.'}
+                args = {'form': form, 'errors': '<h4>A user with that username already exists.</h4>'
+                                                '<h4> If this is your email address, please '
+                                                '<a href="/password-reset/">reset your password.</a> '
+                                                '</h4>'}
                 return render(request, 'events/reg_form.html', args)
 
             else:
                 form.save()
                 send_mail_user_reg(email, first_name, last_name, username, password)
                 return redirect('/login/')
+
+        else:
+            args = {'form': form,'errors': form.errors}
+            return render(request, 'events/reg_form.html', args)
 
 
     else:
