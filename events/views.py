@@ -301,7 +301,11 @@ def change_password(request):
 
 def error_checking(request):
     print('in error checking')
+
+    esscort_required = []
     forms = json.load(request)  # The form as html string
+    print(forms["event_date"])
+
     formset = RiderProfileFormSet(forms)
     if formset.is_valid():
         print('VALID')
@@ -309,10 +313,12 @@ def error_checking(request):
         return JsonResponse(content)
     else:
         print('NOT VALID')
-        for form in forms:
-            if 'birth' in form:
-                print(forms[form]) #need to get the birthdate here
-        content = {'errors': formset.errors, 'success': False}
+        # for form in forms:
+        #     print(form)
+        #     if 'birth' in form:
+        #         print(forms[form]) #need to get the birthdate here
+
+        content = {'errors': formset.errors, 'success': False, 'esscort_required': esscort_required}
         return JsonResponse(content)
 
 
