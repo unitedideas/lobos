@@ -302,7 +302,7 @@
                             currency="USD"
                             :button-style="aStyle"
                             :client="paypal"
-                            :items=[[checkoutList]]
+{#                            :items=[[checkoutList]]#}
                             env="production"
                             v-on:payment-authorized="paymentAuthorized"
                             v-on:payment-completed="paymentCompleted"
@@ -450,10 +450,7 @@
             computed: {
                 checkoutList: function () {
                     console.log('in the checkout list function')
-                    console.log([[cartlist]])
-                    console.log()
-
-                    return
+                    console.log(this.cartlist)
                 }
             },
             methods:
