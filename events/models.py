@@ -112,10 +112,10 @@ class RiderProfile(models.Model):
     FEMALE = 'Female'
     MALE = 'Male'
 
-    EXO16 = 'Expert over 16 '
-    EXU16 = 'Expert 16 and under '
-    AMO16 = 'Amateur over 16 '
-    AMU16 = 'Amateur 16 and under '
+    EXO16 = 'Expert 16 and over '
+    EXU16 = 'Expert  under 16 '
+    AMO16 = 'Amateur 16 and over '
+    AMU16 = 'Amateur under 16 '
     C60_70 = 'Class 60 and 70 '
     ES = 'Escort Rider'
 
