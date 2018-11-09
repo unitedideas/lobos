@@ -46,7 +46,7 @@
 
                     {% endif %}
                 {% endif %}
-                <h3>{{ detail.6 }}</h3>
+                <h3>{{ detail.6 | safe }}</h3>
                 <p><b>Date: </b> {{ detail.2 }}</p>
                 <p><b>Pre-entry: </b> ${{ detail.7 }}</p>
                 <p><b>Post-entry: </b> ${{ detail.8 }}</p>

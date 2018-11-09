@@ -303,7 +303,7 @@
                             :button-style="aStyle"
                             :client="paypal"
 {#                            :items=[[checkoutList]]#}
-                            env="production"
+                            env="sandbox"
                             v-on:payment-authorized="paymentAuthorized"
                             v-on:payment-completed="paymentCompleted"
                             v-on:payment-cancelled="paymentCancelled">
