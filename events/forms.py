@@ -129,7 +129,7 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
                                                'emergency_contact_phone': NumberInput(
                                                    attrs={'placeholder': 'Example: 222333444'}),
-                                               'birth_date': DateInput(attrs={'placeholder': 'Example: 12/14/1980'}),
+                                               'birth_date': DateInput(attrs={'type':'date', 'placeholder': 'Example: 12/14/1980'}),
                                                'escort_name': forms.TextInput(attrs={
                                                    'placeholder': 'If you are under 15 on the day of the event, a registered escort rider is required. 15 and over type “none”.'}),
                                                'group_name': forms.TextInput(
