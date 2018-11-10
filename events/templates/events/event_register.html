@@ -22,7 +22,6 @@
             <div id="jumbotron" class="jumbotron" style="padding: 0px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
             </div>
-            <input v-model="birth_date">
 
             <div>
                 <form method="POST" id="feedbackform" v-on:keydown.13.prevent="the3DayMethod">
@@ -342,10 +341,9 @@
                     shirt_size_select: "",
                     merchTotal: 0,
                     esscort_required: {},
-                    birth_date: '12/4/1980',
+                    birth_date: '',
                     escort_needed: false,
-                    {#event_date: '{{ event.event_date }}',#}
-                    event_date: '12/4/2019',
+                    event_date: '{{ event.event_date }}',
 
                     {#need to learn about objects#}
                     hoodie: {
@@ -633,11 +631,12 @@
 
             created:
                 function () {
-                    var today = new Date(this.event_date)
+                    console.log(this.birth_date)
+                    var event_date = new Date(this.event_date)
                     var birthDate = new Date(this.birth_date)
-                    var age = today.getFullYear() - birthDate.getFullYear()
-                    var m = today.getMonth() - birthDate.getMonth()
-                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    var age = event_date.getFullYear() - birthDate.getFullYear()
+                    var m = event_date.getMonth() - birthDate.getMonth()
+                    if (m < 0 || (m === 0 && event_date.getDate() < birthDate.getDate())) {
                         age--
                     }
                     if (age < 16) {
