@@ -22,21 +22,38 @@
             <div id="jumbotron" class="jumbotron" style="padding: 0px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
             </div>
-            <div style="background-color: red; height: 20px">[[birth_date]]</div>
+            <input v-model="birth_date">
 
             <div>
                 <form method="POST" id="feedbackform" v-on:keydown.13.prevent="the3DayMethod">
                     {% csrf_token %}
-{#                    {{ formset.management_form }}#}
+                    {#                                        {{ formset.management_form }} #}
 
-{# the form is render from the django modelset form and modified so we can add multiple forms on one page#}
-{# the number of forms is dynamic, we don't know how many forms the person will need#}
+
+                    {#this is a field by field for loop#}
+                    {#May need to go to this for ease of access to individual fields. i.e. birth_date checking#}
+
+                    {#                    {% for field in formset.management_form %}#}
+                    {#                        <div>{{ field.label_tag|title }}</div>#}
+                    {##}
+                    {#                        {% if errors %}#}
+                    {#                            {% for error in field.errors %}#}
+                    {#                                <h3 style="color: red">{{ error|escape }}</h3>#}
+                    {#                            {% endfor %}#}
+                    {#                        {% endif %}#}
+                    {#                        <div> {{ field }}</div>#}
+                    {##}
+                    {#                        {% if field.help_text %}#}
+                    {#                            <p>{{ field.help_text|safe }}</p>#}
+                    {#                        {% endif %}#}
+                    {#                    {% endfor %}#}
+
+
                     <div style="margin-right: 15px;" class="row">
                         <div v-for="form in formList">
                             <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
                             <div style="background-color: #ffe673; padding: 20px; border-radius:5px; margin: 0px 15px 0px 15px"
                                  v-html="form">
-
                             </div>
                         </div>
                         <br>
@@ -345,7 +362,10 @@
                     shirt_size_select: "",
                     merchTotal: 0,
                     esscort_required: {},
-                    calculations: '',
+                    birth_date: '12/4/1980',
+                    escort_needed: false,
+                    {#event_date: '{{ event.event_date }}',#}
+                    event_date: '12/4/2019',
 
                     {#need to learn about objects#}
                     hoodie: {
@@ -429,6 +449,23 @@
                 formSuccess() {
                     if (this.formSuccess === true) {
                         this.showModal = true
+                    }
+                },
+
+                birth_date() {
+                    var today = new Date(this.event_date)
+                    var birthDate = new Date(this.birth_date)
+                    var age = today.getFullYear() - birthDate.getFullYear()
+                    var m = today.getMonth() - birthDate.getMonth()
+                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                        age--
+                    }
+                    if (age < 16) {
+                        this.esscort_required == true
+                        console.log('Esscort Required')
+                    }
+                    else {
+                        console.log('NO esscort required')
                     }
                 },
             },
@@ -535,8 +572,6 @@
 
                         let formID = 'id_form-' + this.count
                         incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
-                        incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
-                        incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
                         this.formList.push(incremented_form)
                         this.$nextTick(() => {
                             let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
@@ -597,7 +632,6 @@
 
 
             mounted:
-
                 function () {
                     let app = this
 
@@ -616,6 +650,29 @@
                             app.formList.push(app.vue_form)
                         })
                 },
+
+            created:
+                function () {
+                    var today = new Date(this.event_date)
+                    var birthDate = new Date(this.birth_date)
+                    var age = today.getFullYear() - birthDate.getFullYear()
+                    var m = today.getMonth() - birthDate.getMonth()
+                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                        age--
+                    }
+                    if (age < 16) {
+                        this.esscort_required == true
+                        console.log('Esscort Required')
+                    }
+                    else {
+                        console.log('NO esscort required')
+                    }
+                },
+
+            function() {
+
+            }
+
         })
 
     </script>
@@ -626,7 +683,6 @@
                 app.totalCost()
             }
         }
-
     </script>
 
 {% endblock %}
