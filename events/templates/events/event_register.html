@@ -29,26 +29,6 @@
                     {% csrf_token %}
                     {{ formset.management_form }}
 
-
-                    {#this is a field by field for loop#}
-                    {#May need to go to this for ease of access to individual fields. i.e. birth_date checking#}
-
-                    {#                    {% for field in formset.management_form %}#}
-                    {#                        <div>{{ field.label_tag|title }}</div>#}
-                    {##}
-                    {#                        {% if errors %}#}
-                    {#                            {% for error in field.errors %}#}
-                    {#                                <h3 style="color: red">{{ error|escape }}</h3>#}
-                    {#                            {% endfor %}#}
-                    {#                        {% endif %}#}
-                    {#                        <div> {{ field }}</div>#}
-                    {##}
-                    {#                        {% if field.help_text %}#}
-                    {#                            <p>{{ field.help_text|safe }}</p>#}
-                    {#                        {% endif %}#}
-                    {#                    {% endfor %}#}
-
-
                     <div style="margin-right: 15px;" class="row">
                         <div v-for="form in formList">
                             <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
