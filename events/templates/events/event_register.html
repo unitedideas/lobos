@@ -27,7 +27,7 @@
             <div>
                 <form method="POST" id="feedbackform" v-on:keydown.13.prevent="the3DayMethod">
                     {% csrf_token %}
-                    {#                                        {{ formset.management_form }} #}
+                    {{ formset.management_form }}
 
 
                     {#this is a field by field for loop#}
