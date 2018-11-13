@@ -340,7 +340,7 @@
                     hat_size_select: "",
                     shirt_size_select: "",
                     merchTotal: 0,
-                    esscort_required: {},
+                    escort_required: {},
                     birth_date: '',
                     escort_needed: false,
                     event_date: '{{ event.event_date }}',
@@ -439,11 +439,11 @@
                         age--
                     }
                     if (age < 16) {
-                        this.esscort_required == true
-                        console.log('Esscort Required')
+                        this.escort_required == true
+                        console.log('Escort Required')
                     }
                     else {
-                        console.log('NO esscort required')
+                        console.log('NO escort required')
                     }
                 },
             },
@@ -486,7 +486,6 @@
                         document.getElementById("id_form-0-merchandise_ordered").value = merch_order
                     },
 
-
                     merchtotal: function () {
                         return
                         {##}
@@ -515,7 +514,7 @@
                             .then(function (response) {
                                 app.formerrors = response.data.errors
                                 app.formSuccess = response.data.success
-                                app.esscort_required = response.data.esscort_required
+                                app.escort_required = response.data.escort_required
                             })
                     },
 
@@ -658,11 +657,11 @@
                         age--
                     }
                     if (age < 16) {
-                        this.esscort_required == true
-                        console.log('Esscort Required')
+                        this.escort_required == true
+                        console.log('Escort Required')
                     }
                     else {
-                        console.log('NO esscort required')
+                        console.log('NO escort required')
                     }
                 },
 
