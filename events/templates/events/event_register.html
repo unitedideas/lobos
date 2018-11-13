@@ -61,7 +61,7 @@
         <div class="container"
              style="background-color: #ffe673; padding: 0px 0px 15px 0px; border-radius: 5px; text-align: center; margin-top: 10px;">
             <transition name="fade">
-                <div v-if="formSuccess === false" class="p-3 mb-2 bg-danger text-white">
+                <div v-if="formSuccess === false && formerrors.length > 0" class="p-3 mb-2 bg-danger text-white">
                     <h3>Please correct these errors:</h3>
                     <div id="v-for-formerrors">
                         <div v-for="(value, index) in formerrors">
@@ -431,11 +431,11 @@
                 },
 
                 birth_date() {
-                    var today = new Date(this.event_date)
+                    var event = new Date(this.event_date)
                     var birthDate = new Date(this.birth_date)
-                    var age = today.getFullYear() - birthDate.getFullYear()
-                    var m = today.getMonth() - birthDate.getMonth()
-                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    var age = event.getFullYear() - birthDate.getFullYear()
+                    var m = event.getMonth() - birthDate.getMonth()
+                    if (m < 0 || (m === 0 && event.getDate() < birthDate.getDate())) {
                         age--
                     }
                     if (age < 16) {
@@ -486,17 +486,6 @@
                         document.getElementById("id_form-0-merchandise_ordered").value = merch_order
                     },
 
-                    merchtotal: function () {
-                        return
-                        {##}
-                        {#this.merchTotal = Number(merchtot).toFixed(2)#}
-                        {#this.overallTotal = Number(this.merchTotal) + Number(this.regTotal)#}
-                        {#this.totalStr = this.overallTotal#}
-                        {#tot = this.overallTotal#}
-                        {#this.totalStr = tot.toFixed(2)#}
-                        {#console.log(this.totalStr)#}
-                    },
-
                     the3DayMethod: function () {
                         let app = this
                         app.formSuccess = ''
@@ -514,7 +503,10 @@
                             .then(function (response) {
                                 app.formerrors = response.data.errors
                                 app.formSuccess = response.data.success
-                                app.escort_required = response.data.escort_required
+                                app.escort_required = response.data.escorts_signed_up - response.data.under_16
+                                console.log(response.data.escorts_signed_up)
+                                console.log(response.data.under_16)
+                                console.log(app.escort_required)
                             })
                     },
 

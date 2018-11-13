@@ -19,11 +19,8 @@ from django.template import loader
 from django.template import Context
 from anymail.message import attach_inline_image_file
 from django.template.loader import render_to_string
-import random
-import string
-import json
-import datetime
-from datetime import date
+import random, string, json
+from datetime import datetime
 
 
 @staff_member_required
@@ -49,7 +46,9 @@ def adminemail(request):
             event_year = recipients[-4:]
             # Event.objects.filter(event_name=event_name).filter(event_date__contains=event_year):
             #     print('in the for loop')
-            recipients = list(Event.objects.filter(event_name=event_name).filter(event_date__contains=event_year).values_list('riderprofile__email', flat=True))
+            recipients = list(
+                Event.objects.filter(event_name=event_name).filter(event_date__contains=event_year).values_list(
+                    'riderprofile__email', flat=True))
             print(recipients)
         else:
             recipients = list(recipients)
@@ -225,8 +224,9 @@ def register(request):
             if User.objects.filter(username=username).exists():
                 print('username previously registered')
                 user_id = User.objects.get(username=username).id
-                args = {'form': form, 'uniqueNameErrors': '<h4>A user with this first and last name and email already exists. '
-                                                '<a href="/password-reset/">Reset your password here.</a></h4>'}
+                args = {'form': form,
+                        'uniqueNameErrors': '<h4>A user with this first and last name and email already exists. '
+                                            '<a href="/password-reset/">Reset your password here.</a></h4>'}
                 return render(request, 'events/reg_form.html', args)
 
             else:
@@ -235,7 +235,7 @@ def register(request):
                 return redirect('/login/')
 
         else:
-            args = {'form': form,'errors': form.errors}
+            args = {'form': form, 'errors': form.errors}
             return render(request, 'events/reg_form.html', args)
 
 
@@ -300,26 +300,53 @@ def change_password(request):
 
 
 def error_checking(request):
-    print('in error checking')
-
-    escort_required = []
+    print('In error and escort checking')
+    under_16 = 0
+    escorts_signed_up = 0
+    over_16 = False
     forms = json.load(request)  # The form as html string
-    print(forms["event_date"])
+    event_date = forms["event_date"].replace(",", "")
+    event_date = datetime.strptime(event_date, '%B %d %Y')
+    event_date = datetime.date(event_date)
+
     formset = RiderProfileFormSet(forms)
+    if formset.is_valid():
+        for form in formset:
+            y = 0
+            m = 0
+            d = 0
+            birth_date = form.cleaned_data['birth_date']
+            print("==============================================================================")
+            print('event_date')
+            print(event_date)
+            print('birth_date')
+            print(birth_date)
 
+            y = event_date.year - birth_date.year
+            m = event_date.month - birth_date.month
+            d = event_date.day - birth_date.day
 
-    if formset.is_valid() and escort_required == True:
-        print('VALID')
+            if y < 16:
+                under_16 += 1
+            elif y == 16 and m < 0:
+                under_16 += 1
+            elif y == 16 and m < 0 and d < 0:
+                under_16 += 1
+            else:
+                over_16 = True
+
+            if form.cleaned_data['rider_class'] == "Escort Rider" and over_16 == True:
+                escorts_signed_up += 1
+
+    if formset.is_valid() and (under_16 - escorts_signed_up <= 0):
+        print('FORM VALID')
+        print('Checking Escort')
         content = {'success': True}
         return JsonResponse(content)
     else:
-        print('NOT VALID')
-        # for form in forms:
-        #     print(form)
-        #     if 'birth' in form:
-        #         print(forms[form]) #need to get the birthdate here
-
-        content = {'errors': formset.errors, 'success': False, 'escort_required': escort_required}
+        print('FORM NOT VALID')
+        content = {'errors': formset.errors, 'success': False, 'escorts_signed_up': escorts_signed_up,
+                   'under_16': under_16, }
         return JsonResponse(content)
 
 
@@ -367,16 +394,6 @@ def event_register(request):
                 count += 1
                 created_username = form.first_name + form.last_name + form.email
                 created_username = created_username.replace(" ", "").lower()
-
-                print('created_username')
-                print(created_username)
-                print('form.birth_date')
-                print(form.birth_date)
-
-                # need to calculate the age on the event date
-                # age_on_event_day = form.birth_date - Event.event_date
-                # print(age_on_event_day)
-
                 form.confirmation_number = confirmation_number
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
                 event = str(form.event)
