@@ -457,17 +457,26 @@
             methods:
                 {
                     add_to_cart: function (item_type, size, qty, price) {
+                        let count = 0
                         console.log('Called the add to cart function')
                         if (size != "") {
                             if (qty > 0) {
                                 this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
                                 console.log('Should have added to the cart')
+                                console.log(this.cartlist.length)
+                                for (i in this.cartlist){
+                                    console.log(Object.values(this.cartlist[count]))
+                                    count += 1
+                                }
+
                             }
                         }
+                        document.getElementById("id_form-0-merchandise_ordered").value = Array.from(this.cartlist)
                     },
 
                     remove_from_cart: function (index) {
                         this.cartlist.splice(index, 1)
+                        document.getElementById("id_form-0-merchandise_ordered").value = this.cartlist
                     },
                     merchtotal: function () {
                         return
@@ -488,7 +497,7 @@
 
 
                         var formData = new FormData(forms),
-                            result = {event_date: "{{event.event_date}}"}
+                            result = {event_date: this.event_date}
                         for (var entry of formData.entries()) {
                             result[entry[0]] = entry[1];
                         }
