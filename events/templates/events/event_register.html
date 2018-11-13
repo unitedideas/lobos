@@ -464,20 +464,26 @@
                             if (qty > 0) {
                                 this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
                                 console.log('Should have added to the cart')
-                                for (i in this.cartlist){
+                                for (i in this.cartlist) {
                                     merch_order += String(Object.values(this.cartlist[count])) + "\n"
                                     count += 1
                                     console.log(merch_order)
                                 }
-
+                                document.getElementById("id_form-0-merchandise_ordered").value = merch_order
                             }
                         }
-                        document.getElementById("id_form-0-merchandise_ordered").value = Array.from(this.cartlist)
                     },
 
                     remove_from_cart: function (index) {
+                        let count = 0
+                        let merch_order = "", end
                         this.cartlist.splice(index, 1)
-                        document.getElementById("id_form-0-merchandise_ordered").value = this.cartlist
+                        for (i in this.cartlist) {
+                            merch_order += String(Object.values(this.cartlist[count])) + "\n"
+                            count += 1
+                            console.log(merch_order)
+                        }
+                        document.getElementById("id_form-0-merchandise_ordered").value = merch_order
                     },
                     merchtotal: function () {
                         return
