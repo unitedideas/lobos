@@ -19,7 +19,7 @@ from django.template import loader
 from django.template import Context
 from anymail.message import attach_inline_image_file
 from django.template.loader import render_to_string
-import random, string, json
+import random, string, json, datetime
 from datetime import datetime
 
 
@@ -95,6 +95,7 @@ def general_email(subject, header, subheader, emailmessage, recipients):
 
 
 def home(request):
+    import datetime
     events = Event.objects.all().order_by('-event_date')[0:3]
     event_name = events.values_list('event_name', flat=True)
     event_dates = events.values_list('event_date', flat=True)
