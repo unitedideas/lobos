@@ -70,6 +70,16 @@
                     </div>
                 </div>
             </transition>
+            <transition name="fade">
+                <div v-if="formSuccess === false && escort_required > 0" class="p-3 mb-2 bg-danger text-white">
+                    <h3>Please correct these errors:</h3>
+                    <div id="v-for-formerrors">
+                        <div>
+                            <h4>[[escort_required]] additional Escort Rider Classes are required based on the birth dates provided.</h4>
+                        </div>
+                    </div>
+                </div>
+            </transition>
             <div v-show="showcheckout" class="container">
                 <h3>**You'll need an AMA Membership to ride the event. Save waiting in line at the event and join
                     <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online!</a>
@@ -340,7 +350,7 @@
                     hat_size_select: "",
                     shirt_size_select: "",
                     merchTotal: 0,
-                    escort_required: {},
+                    escort_required: "",
                     birth_date: '',
                     escort_needed: false,
                     event_date: '{{ event.event_date }}',
@@ -503,10 +513,8 @@
                             .then(function (response) {
                                 app.formerrors = response.data.errors
                                 app.formSuccess = response.data.success
-                                app.escort_required = response.data.escorts_signed_up - response.data.under_16
-                                console.log(response.data.escorts_signed_up)
-                                console.log(response.data.under_16)
-                                console.log(app.escort_required)
+                                app.escort_required = response.data.under_16 - response.data.escorts_signed_up
+                                console.log('Escorts needed ' + String(app.escort_required))
                             })
                     },
 

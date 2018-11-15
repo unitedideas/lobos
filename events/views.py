@@ -318,11 +318,6 @@ def error_checking(request):
             m = 0
             d = 0
             birth_date = form.cleaned_data['birth_date']
-            print("==============================================================================")
-            print('event_date')
-            print(event_date)
-            print('birth_date')
-            print(birth_date)
 
             y = event_date.year - birth_date.year
             m = event_date.month - birth_date.month
@@ -341,22 +336,21 @@ def error_checking(request):
                 escorts_signed_up += 1
 
         if (under_16 - escorts_signed_up > 0):
-            print('Not enough escorts')
-            error = ''
-            error = ' errors' if (under_16 - escorts_signed_up > 1) else ' error'
-            content = {'errors': 'Additional ' + str((under_16 - escorts_signed_up)) + error + ' required'}
+            print('ESCORT NOT GOOD')
+            error = 'escorts' if (under_16 - escorts_signed_up > 1) else 'escort'
+            # formset.errors.append({'Escort': str((under_16 - escorts_signed_up)) + ' additional ' + error + ' required'})
+            content = {'errors': "", 'success': False, 'escorts_signed_up': escorts_signed_up,'under_16': under_16,}
             return JsonResponse(content)
 
         else:
-            print('FORM VALID and ESCORTS GOOD')
+            print('FORM VALID & ESCORTS GOOD')
             content = {'success': True}
             return JsonResponse(content)
 
 
     else:
         print('FORM NOT VALID')
-        content = {'errors': formset.errors, 'success': False, 'escorts_signed_up': escorts_signed_up,
-                   'under_16': under_16, }
+        content = {'errors': formset.errors, 'success': False, 'escorts_signed_up': escorts_signed_up,'under_16': under_16, }
         return JsonResponse(content)
 
 
