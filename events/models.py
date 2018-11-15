@@ -206,7 +206,7 @@ class RiderProfile(models.Model):
     bike_displacement = models.IntegerField('Bike Displacement', null=True, blank=True)
     escort_name = models.CharField(
         'Your Escort’s Name: (Must register only in the Escort class) Add another rider, below (required)',
-        max_length=300)
+        max_length=300, null=True, blank=True)
     group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
                                   null=True, blank=True)
     merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)

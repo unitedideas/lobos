@@ -312,6 +312,7 @@ def error_checking(request):
 
     formset = RiderProfileFormSet(forms)
     if formset.is_valid():
+        # calc age
         for form in formset:
             y = 0
             m = 0
@@ -339,11 +340,19 @@ def error_checking(request):
             if form.cleaned_data['rider_class'] == "Escort Rider" and over_16 == True:
                 escorts_signed_up += 1
 
-    if formset.is_valid() and (under_16 - escorts_signed_up <= 0):
-        print('FORM VALID')
-        print('Checking Escort')
-        content = {'success': True}
-        return JsonResponse(content)
+        if (under_16 - escorts_signed_up > 0):
+            print('Not enough escorts')
+            error = ''
+            error = ' errors' if (under_16 - escorts_signed_up > 1) else ' error'
+            content = {'errors': 'Additional ' + str((under_16 - escorts_signed_up)) + error + ' required'}
+            return JsonResponse(content)
+
+        else:
+            print('FORM VALID and ESCORTS GOOD')
+            content = {'success': True}
+            return JsonResponse(content)
+
+
     else:
         print('FORM NOT VALID')
         content = {'errors': formset.errors, 'success': False, 'escorts_signed_up': escorts_signed_up,
