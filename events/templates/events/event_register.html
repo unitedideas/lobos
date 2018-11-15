@@ -71,11 +71,12 @@
                 </div>
             </transition>
             <transition name="fade">
-                <div v-if="formSuccess === false && escort_required > 0" class="p-3 mb-2 bg-danger text-white">
+                <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-white">
                     <h3>Please correct these errors:</h3>
                     <div id="v-for-formerrors">
                         <div>
-                            <h4>[[escort_required]] additional Escort Rider Classes are required based on the birth dates provided.</h4>
+                            <h4>[[escort_required]] additional Escort Rider Classes are required based on the birth
+                                dates provided.</h4>
                         </div>
                     </div>
                 </div>

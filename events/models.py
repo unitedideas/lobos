@@ -205,16 +205,11 @@ class RiderProfile(models.Model):
     bike_make = models.CharField('Bike Manufacturer', max_length=20, choices=MAKES)
     bike_displacement = models.IntegerField('Bike Displacement', null=True, blank=True)
     escort_name = models.CharField(
-        'Your Escort’s Name: (Must register only in the Escort class) Add another rider, below (required)',
+        'Escort’s Name: (Must register as Escort Rider) Required for riders under 16 on the day of the event',
         max_length=300, null=True, blank=True)
     group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
                                   null=True, blank=True)
     merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)
-
-    # These items will not be in the form and must not be visible
-    # confirmation will be generated, age on event day will be calculated
-    # rider number and start time will be assigned
-    # registration_date_time is not editable with auto_now_add = true
 
     registration_date_time = models.DateTimeField('Created Time', editable=True, auto_now_add=True)
     age_on_event_day = models.IntegerField(null=True, blank=True, )

@@ -184,7 +184,6 @@ def login(request):
 
 # Email
 
-
 def send_mail_user_reg(email, first_name, last_name, username, password):
     msg = EmailMultiAlternatives(
         subject="Welcome to Lobos",
@@ -338,8 +337,7 @@ def error_checking(request):
         if (under_16 - escorts_signed_up > 0):
             print('ESCORT NOT GOOD')
             error = 'escorts' if (under_16 - escorts_signed_up > 1) else 'escort'
-            # formset.errors.append({'Escort': str((under_16 - escorts_signed_up)) + ' additional ' + error + ' required'})
-            content = {'errors': "", 'success': False, 'escorts_signed_up': escorts_signed_up,'under_16': under_16,}
+            content = {'escorts_signed_up': escorts_signed_up, 'under_16': under_16, }
             return JsonResponse(content)
 
         else:
@@ -347,10 +345,10 @@ def error_checking(request):
             content = {'success': True}
             return JsonResponse(content)
 
-
     else:
         print('FORM NOT VALID')
-        content = {'errors': formset.errors, 'success': False, 'escorts_signed_up': escorts_signed_up,'under_16': under_16, }
+        content = {'errors': formset.errors, 'success': False, 'escorts_signed_up': escorts_signed_up,
+                   'under_16': under_16, }
         return JsonResponse(content)
 
 
