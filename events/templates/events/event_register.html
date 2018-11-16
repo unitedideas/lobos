@@ -515,7 +515,12 @@
                                 app.formerrors = response.data.errors
                                 app.formSuccess = response.data.success
                                 app.escort_required = response.data.under_16 - response.data.escorts_signed_up
-                                console.log('Escorts needed ' + String(app.escort_required))
+
+                                {#printing the vallue#}
+                                for(object in Object.keys(app.formerrors)){
+                                    for(thing in app.formerrors[object]){
+                                        console.log(app.formerrors[object], app.formerrors[object][thing])
+                                    }}
                             })
                     },
 
