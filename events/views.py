@@ -19,7 +19,7 @@ from django.template import loader
 from django.template import Context
 from anymail.message import attach_inline_image_file
 from django.template.loader import render_to_string
-import random, string, json, datetime
+import random, string, json
 import datetime as dt
 from datetime import datetime
 
