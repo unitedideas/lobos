@@ -27,11 +27,9 @@ from datetime import datetime
 def adminemail(request):
     events = list(Event.objects.all())
     allEmails = list(User.objects.values_list("email", flat=True))
-    print(allEmails)
     args = {'allEmails': allEmails, 'events': events}
     if request.method == 'POST':
         data = request.POST
-        print(request.POST)
         subject = request.POST.get("subject")
         header = request.POST.get("header")
         subheader = request.POST.get("subheader")
@@ -49,7 +47,6 @@ def adminemail(request):
             recipients = list(
                 Event.objects.filter(event_name=event_name).filter(event_date__contains=event_year).values_list(
                     'riderprofile__email', flat=True))
-            print(recipients)
         else:
             recipients = list(recipients)
         args = {'allEmails': allEmails, 'events': events,
@@ -222,7 +219,6 @@ def register(request):
             password = request.POST['password1']
 
             if User.objects.filter(username=username).exists():
-                print('username previously registered')
                 user_id = User.objects.get(username=username).id
                 args = {'form': form,
                         'uniqueNameErrors': '<h4>A user with this first and last name and email already exists. '
@@ -386,13 +382,11 @@ def event_register(request):
 
         formset_post = RiderProfileFormSet(request.POST)
         if formset_post.is_valid():
-            print('formset valid')
             formset = formset_post.save(commit=False)
             confirmation_number = id_generator()
             count = 0
             confirm = {}
             for form in formset:
-                print(form.rider_class)
                 count += 1
                 created_username = form.first_name + form.last_name + form.email
                 created_username = created_username.replace(" ", "").lower()
@@ -404,8 +398,6 @@ def event_register(request):
                     user_id = User.objects.get(username=created_username).id
 
                 if not User.objects.filter(username=created_username).exists():
-                    print('The user does not exist')
-                    print('Creating a new profile')
                     user = User.objects.create(username=created_username,
                                                email=form.email,
                                                first_name=form.first_name,
@@ -415,7 +407,6 @@ def event_register(request):
                     user.first_name = form.first_name
                     user.last_name = form.last_name
                     user.save()
-                    print('saved new user')
                     form.user = user
                     user = Profile.objects.filter(user=user)
                     user.update(address=form.address)
@@ -452,7 +443,6 @@ def event_register(request):
 
 
                 elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
-                    print('Already registered for this event')
                     form.user = User.objects.get(username=created_username)
                     username = created_username
                     first_name = form.first_name
@@ -484,8 +474,6 @@ def event_register(request):
 
 
                 else:
-                    print('The user already has a profile')
-                    print('Registering this user for the event')
                     form.user = User.objects.get(username=created_username)
                     username = created_username
                     first_name = form.first_name
@@ -510,8 +498,6 @@ def event_register(request):
             # email confirmation function here
             return render(request, 'events/event_confirmation.html', args)
         else:
-            print('formset not valid')
-            print(formset_post.errors)
             errors = formset_post.errors
             # can start with the current users filter queryset
             # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))

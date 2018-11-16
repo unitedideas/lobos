@@ -453,18 +453,14 @@
                     }
                     if (age < 16) {
                         this.escort_required == true
-                        console.log('Escort Required')
                     }
                     else {
-                        console.log('NO escort required')
                     }
                 },
             },
 
             computed: {
                 checkoutList: function () {
-                    console.log('in the checkout list function')
-                    console.log(this.cartlist)
                 }
             },
             methods:
@@ -472,15 +468,12 @@
                     add_to_cart: function (item_type, size, qty, price) {
                         let count = 0
                         let merch_order = "", end
-                        console.log('Called the add to cart function')
                         if (size != "") {
                             if (qty > 0) {
                                 this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
-                                console.log('Should have added to the cart')
                                 for (i in this.cartlist) {
                                     merch_order += String(Object.values(this.cartlist[count])) + "\n"
                                     count += 1
-                                    console.log(merch_order)
                                 }
                                 document.getElementById("id_form-0-merchandise_ordered").value = merch_order
                             }
@@ -494,7 +487,6 @@
                         for (i in this.cartlist) {
                             merch_order += String(Object.values(this.cartlist[count])) + "\n"
                             count += 1
-                            console.log(merch_order)
                         }
                         document.getElementById("id_form-0-merchandise_ordered").value = merch_order
                     },
@@ -521,7 +513,6 @@
                                 {#printing the vallue#}
                                 for (object in Object.keys(app.formerrors)) {
                                     for (thing in app.formerrors[object]) {
-                                        console.log(app.formerrors[object], app.formerrors[object][thing])
                                     }
                                 }
                             })
@@ -535,7 +526,6 @@
 
                         for (let i = 0; i < total_rider_classes.length; i++) {
                             allRiderTypes.push(total_rider_classes[i].value)
-                            console.log(allRiderTypes)
                         }
 
                         for (let i = 0; i < allRiderTypes.length; i++) {
@@ -675,7 +665,6 @@
 
             created:
                 function () {
-                    console.log(this.birth_date)
                     var event_date = new Date(this.event_date)
                     var birthDate = new Date(this.birth_date)
                     var age = event_date.getFullYear() - birthDate.getFullYear()
@@ -685,10 +674,8 @@
                     }
                     if (age < 16) {
                         this.escort_required == true
-                        console.log('Escort Required')
                     }
                     else {
-                        console.log('NO escort required')
                     }
                 },
 
