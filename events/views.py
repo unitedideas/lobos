@@ -20,8 +20,6 @@ from django.template import Context
 from anymail.message import attach_inline_image_file
 from django.template.loader import render_to_string
 import random, string, json
-import datetime as dt
-from datetime import datetime
 
 @staff_member_required
 def adminemail(request):
@@ -296,15 +294,15 @@ def change_password(request):
 
 
 def error_checking(request):
-    from datetime import datetime
+    from datetime import datetime as ddt
     print('In error and escort checking')
     under_16 = 0
     escorts_signed_up = 0
     over_16 = False
     forms = json.load(request)  # The form as html string
     event_date = forms["event_date"].replace(",", "")
-    event_date = datetime.strptime(event_date, '%B %d %Y')
-    event_date = datetime.date(event_date)
+    event_date = ddt.strptime(event_date, '%B %d %Y')
+    event_date = ddt.date(event_date)
 
     formset = RiderProfileFormSet(forms)
     if formset.is_valid():
