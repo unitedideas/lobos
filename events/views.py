@@ -23,8 +23,6 @@ import random, string, json
 import datetime as dt
 from datetime import datetime
 
-
-
 @staff_member_required
 def adminemail(request):
     events = list(Event.objects.all())
@@ -94,6 +92,7 @@ def general_email(subject, header, subheader, emailmessage, recipients):
 
 
 def home(request):
+    import datetime as dt
     events = Event.objects.all().order_by('-event_date')[0:3]
     event_name = events.values_list('event_name', flat=True)
     event_dates = events.values_list('event_date', flat=True)
@@ -297,6 +296,7 @@ def change_password(request):
 
 
 def error_checking(request):
+    from datetime import datetime
     print('In error and escort checking')
     under_16 = 0
     escorts_signed_up = 0
