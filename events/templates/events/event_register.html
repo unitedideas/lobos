@@ -66,7 +66,7 @@
                     <div id="v-for-formerrors" v-for="item, form in formerrors">
                         <div v-for="value, index in item">
                             <div v-for="error in value">
-                                <h4>Rider Form [[++form]]: The [[ index | capitalize ]] [[error | removeThis]]</h4>
+                                <h4>Rider Form [[form+1]]: The [[ index | capitalize ]] [[error | removeThis]]</h4>
                             </div>
                         </div>
                     </div>
