@@ -296,6 +296,7 @@ def change_password(request):
 
 
 def error_checking(request):
+    from datetime import datetime
     print('In error and escort checking')
     under_16 = 0
     escorts_signed_up = 0
