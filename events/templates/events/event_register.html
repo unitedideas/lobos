@@ -63,9 +63,11 @@
             <transition name="fade">
                 <div v-if="formSuccess === false && formerrors.length > 0" class="p-3 mb-2 bg-danger text-white">
                     <h3>Please correct these errors:</h3>
-                    <div id="v-for-formerrors">
-                        <div v-for="(value, index) in formerrors">
-                            <h4>Rider Form:[[ ++index ]] [[value]]</h4>
+                    <div id="v-for-formerrors" v-for="item, form in formerrors">
+                        <div v-for="value, index in item">
+                            <div v-for="error in value">
+                                <h4>Rider Form [[++form]]: The [[ index | capitalize ]] [[error | removeThis]]</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -517,10 +519,11 @@
                                 app.escort_required = response.data.under_16 - response.data.escorts_signed_up
 
                                 {#printing the vallue#}
-                                for(object in Object.keys(app.formerrors)){
-                                    for(thing in app.formerrors[object]){
+                                for (object in Object.keys(app.formerrors)) {
+                                    for (thing in app.formerrors[object]) {
                                         console.log(app.formerrors[object], app.formerrors[object][thing])
-                                    }}
+                                    }
+                                }
                             })
                     },
 
@@ -628,9 +631,27 @@
                         document.getElementById(id).onchange = function (e) {
                             totalCost()
                         }
-                    }
+                    },
                 },
 
+            filters: {
+                capitalize: function (value) {
+                    if (!value) return ''
+                    listOfWords = []
+                    sentence = value.toString().replace("_", " ").split(" ")
+                    for (word in sentence) {
+                        listOfWords.push(sentence[word].charAt(0).toUpperCase()+sentence[word].slice(1))
+                    }
+                    return listOfWords.join(" ")
+                },
+
+                removeThis: function (value) {
+                    listOfWords = []
+                    if (!value) return ''
+                    listOfWords = value.toString().replace("_", " ").replace("This", "").split(" ")
+                    return listOfWords.join(" ")
+                },
+            },
 
             mounted:
                 function () {
