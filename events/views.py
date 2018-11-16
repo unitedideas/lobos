@@ -21,6 +21,8 @@ from anymail.message import attach_inline_image_file
 from django.template.loader import render_to_string
 import random, string, json, datetime
 from datetime import datetime
+import datetime as dt
+
 
 
 @staff_member_required
@@ -92,7 +94,6 @@ def general_email(subject, header, subheader, emailmessage, recipients):
 
 
 def home(request):
-    import datetime
     events = Event.objects.all().order_by('-event_date')[0:3]
     event_name = events.values_list('event_name', flat=True)
     event_dates = events.values_list('event_date', flat=True)
@@ -118,7 +119,7 @@ def home(request):
 
     for date in event_dates:
 
-        tte = int((date - datetime.date.today()).days)
+        tte = int((date - dt.date.today()).days)
 
         try:
             if tte == 0:
@@ -296,7 +297,6 @@ def change_password(request):
 
 
 def error_checking(request):
-    from datetime import datetime
     print('In error and escort checking')
     under_16 = 0
     escorts_signed_up = 0
