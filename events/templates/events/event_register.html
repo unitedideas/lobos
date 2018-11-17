@@ -18,8 +18,8 @@
 </head>
 {% block body %}
     <div id="app">
-        <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-            <div id="jumbotron" class="jumbotron" style="padding: 0px">
+        <div class="container" style=" padding: 15px; border-radius: 5px">
+            <div id="jumbotron" class="jumbotron" style="padding: 0px 0px 3px 0px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
             </div>
 
@@ -28,10 +28,12 @@
                     {% csrf_token %}
                     {{ formset.management_form }}
 
-                    <div style="margin-right: 15px; padding-top: 30px" class="row">
-                        <div v-for="form in formList">
-                            <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
-                            <div style="background-color: #ffe673; padding: 20px; border-radius:5px; margin: 0px 15px 0px 15px"
+                    <div style="margin-right: 15px;" class="row">
+                        <div v-for="form in formList" class="container">
+                            <div style="background-color: #ffe673; padding: 5px; border-top-left-radius:5px; border-top-right-radius:5px; margin: 20px 15px 0px 15px">
+                                <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
+                            </div>
+                            <div style="background-color: #ffe673; padding: 0px 25px 25px 25px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
                                  v-html="form">
                             </div>
                         </div>
@@ -58,8 +60,8 @@
         </div>
         <div class="sk-rotating-plane"></div>
         <br>
-        <div class="container"
-             style="background-color: #ffe673; padding: 0px 0px 15px 0px; border-radius: 5px; text-align: center; margin-top: 10px;">
+        <div class="container" style="margin-top: 10px; text-align: center">
+             <div style="background-color: #ffe673; border-radius: 5px; text-align: center; margin: 0px 15px 0px 15px; padding-bottom: 10px">
             <transition name="fade">
                 <div v-if="formSuccess === false && formerrors.length > 0" class="p-3 mb-2 bg-danger text-white">
                     <h3>Please correct these errors:</h3>
@@ -83,7 +85,7 @@
                     </div>
                 </div>
             </transition>
-            <div v-show="showcheckout" class="container">
+            <div v-show="showcheckout" >
                 <h3>**You'll need an AMA Membership to ride the event. Save waiting in line at the event and join
                     <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online!</a>
                 </h3>
@@ -95,7 +97,7 @@
                 </div>
                 <h3>Registration Total: $[[regTotal]]</h3>
                 <div v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">Checkout</div>
-
+</div>
             </div>
         </div>
         <br>
@@ -630,7 +632,7 @@
                     listOfWords = []
                     sentence = value.toString().replace("_", " ").split(" ")
                     for (word in sentence) {
-                        listOfWords.push(sentence[word].charAt(0).toUpperCase()+sentence[word].slice(1))
+                        listOfWords.push(sentence[word].charAt(0).toUpperCase() + sentence[word].slice(1))
                     }
                     return listOfWords.join(" ")
                 },
