@@ -20,6 +20,9 @@ from django.template import Context
 from anymail.message import attach_inline_image_file
 from django.template.loader import render_to_string
 import random, string, json
+from datetime import datetime as ddt
+import datetime as dt
+
 
 @staff_member_required
 def adminemail(request):
@@ -90,7 +93,6 @@ def general_email(subject, header, subheader, emailmessage, recipients):
 
 
 def home(request):
-    import datetime as dt
     events = Event.objects.all().order_by('-event_date')[0:3]
     event_name = events.values_list('event_name', flat=True)
     event_dates = events.values_list('event_date', flat=True)
@@ -294,7 +296,6 @@ def change_password(request):
 
 
 def error_checking(request):
-    from datetime import datetime as ddt
     print('In error and escort checking')
     under_16 = 0
     escorts_signed_up = 0
