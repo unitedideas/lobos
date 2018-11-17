@@ -356,7 +356,7 @@
                     escort_required: "",
                     birth_date: '',
                     escort_needed: false,
-                    event_date: '{{ event.event_date }}',
+                    event_date: '{{ event.event_date | date:"F n, Y" }}',
 
                     {#need to learn about objects#}
                     hoodie: {
