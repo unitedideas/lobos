@@ -47,7 +47,7 @@
                     {% endif %}
                 {% endif %}
                 <p>{{ detail.6 | safe }}</p>
-                <p><b>Date: </b> {{ detail.2 }}</p>
+                <p><b>Date: </b> {{ detail.2 | date:"F n Y"  }}</p>
                 <p><b>Pre-entry: </b> ${{ detail.7 }}</p>
                 <p><b>Post-entry: </b> ${{ detail.8 }}</p>
                 <p><b>Escort Rider: </b> ${{ detail.10 }}</p>
