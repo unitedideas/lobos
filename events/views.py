@@ -514,7 +514,7 @@ def event_register(request):
 
             args = {'event': form.event, 'confirm': confirm}
             # email confirmation function here
-            return render(request, 'events/form_submit.html', args)
+            return render(request, 'events/event_confirmation.html', args)
         else:
             errors = formset_post.errors
             # can start with the current users filter queryset
@@ -537,8 +537,8 @@ def event_register(request):
         return render(request, 'events/event_register.html', args)
 
 
-def form_submit(args):
-    return render('events/event_confirmation.html/', args)
+# def form_submit(args):
+#     return render('events/event_confirmation.html/', args)
 
 def event_confirmation(request):
     args = {'request': request, 'user': request.user}
