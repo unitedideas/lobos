@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import send_mail, send_mass_mail, EmailMultiAlternatives, EmailMessage
 from .models import Event
-from django.http import JsonResponse, HttpResponsePermanentRedirect
+from django.http import JsonResponse, HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from events.forms import (
     RegistrationForm,
@@ -514,7 +514,7 @@ def event_register(request):
 
             args = {'event': form.event, 'confirm': confirm}
             # email confirmation function here
-            return render(request, 'events/event_confirmation.html', args)
+            return render(request, 'events/form_submit.html', args)
         else:
             errors = formset_post.errors
             # can start with the current users filter queryset
@@ -536,6 +536,9 @@ def event_register(request):
         args = {'formset': formset, 'event': event, 'codes': codes}
         return render(request, 'events/event_register.html', args)
 
+
+def form_submit(args):
+    return render('events/event_confirmation.html/', args)
 
 def event_confirmation(request):
     args = {'request': request, 'user': request.user}
