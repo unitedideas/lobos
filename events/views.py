@@ -536,12 +536,6 @@ def event_register(request):
         return render(request, 'events/event_register.html', args)
 
 
-def form_submit(request, args):
-    if request.GET:
-        return HttpResponseRedirect('events/event_confirmation.html/', args)
-    if request.POST:
-        return HttpResponseRedirect('events/event_confirmation.html/', args)
-
 def event_confirmation(request):
     args = {'request': request, 'user': request.user}
     return render(request, 'events/event_confirmation.html', args)
