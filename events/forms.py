@@ -32,7 +32,8 @@ class RegistrationForm(UserCreationForm):
     first_name = forms.CharField(widget=forms.TextInput())
     last_name = forms.CharField(widget=forms.TextInput())
     gender = forms.ChoiceField(choices=GENDER, initial='Male')
-    birth_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'placeholder': '12/14/1980'}))
+    birth_date = forms.DateField(required=False,
+                                 widget=forms.DateInput(attrs={"type": "date", 'placeholder': '12/14/1980'}))
     phone_number = forms.CharField(max_length=10, required=False,
                                    widget=forms.NumberInput(attrs={'placeholder': '2223334444'}))
     country = forms.CharField(required=False)
