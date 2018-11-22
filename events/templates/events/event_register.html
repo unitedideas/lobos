@@ -119,15 +119,15 @@
                                 <div>
                                     <table class="table text-center" style="padding-right: 20px;">
                                         <tr>
-                                            <th style="color: whitesmoke; text-align: center;">SIZE</th>
+                                            <th style="color: whitesmoke; text-align: center">SIZE</th>
                                             <th style="color: whitesmoke; text-align: center;">QUANTITY</th>
                                             <th style="color: whitesmoke; text-align: center;">COST</th>
                                             <th style="color: whitesmoke; text-align: center;">ADD</th>
                                         </tr>
                                         <tr>
-                                            <td>
+                                            <td style="max-width: 125px">
                                                 <select v-model='hoodie_size_select'
-                                                        style="margin-top: 10px; text-align: center">
+                                                        style="margin-top: 10px; text-align: center; max-width: 170px">
                                                     <option v-for='item in hoodie.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -166,15 +166,15 @@
                                 <div>
                                     <table class="table text-center" style="padding-right: 20px;">
                                         <tr>
-                                            <th style="color: whitesmoke; text-align: center;">SIZE</th>
+                                            <th style="color: whitesmoke; text-align: center">SIZE</th>
                                             <th style="color: whitesmoke; text-align: center;">QUANTITY</th>
                                             <th style="color: whitesmoke; text-align: center;">COST</th>
                                             <th style="color: whitesmoke; text-align: center;">ADD</th>
                                         </tr>
                                         <tr>
-                                            <td>
+                                            <td style="max-width: 125px">
                                                 <select v-model='shirt_size_select'
-                                                        style="margin-top: 10px; text-align: center">
+                                                        style="margin-top: 10px; text-align: center; max-width: 170px">
                                                     <option v-for='item in shirt.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
@@ -219,9 +219,9 @@
                                             <th style="color: whitesmoke; text-align: center;">ADD</th>
                                         </tr>
                                         <tr>
-                                            <td>
+                                            <td style="max-width: 125px">
                                                 <select v-model='hat_size_select'
-                                                        style="margin-top: 10px; text-align: center">
+                                                        style="margin-top: 10px; text-align: center; max-width: 170px">
                                                     <option v-for='item in hat.size' v-if="item.True">[[item.True]]
                                                     </option>
                                                 </select>
