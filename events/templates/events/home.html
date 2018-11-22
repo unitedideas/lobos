@@ -31,7 +31,8 @@
             </div>
         </div>
     </div>
-    <h1 style="text-align: center; background-color: #ffe673; padding: 15px; border-radius: 5px; margin: 15px 0px 30px 0px">Upcoming Events</h1>
+    <h1 style="text-align: center; background-color: #ffe673; padding: 15px; border-radius: 5px; margin: 15px 0px 30px 0px">
+        Upcoming Events</h1>
 
     {% for detail in events_details %}
         <div class="jumbotron row" id="jumbo" style="margin: 10px 0px 30px 0px">
@@ -47,7 +48,7 @@
                     {% endif %}
                 {% endif %}
                 <p>{{ detail.6 | safe }}</p>
-                <p><b>Date: </b> {{ detail.2 | date:"F n Y"  }}</p>
+                <p><b>Date: </b> {{ detail.2 | date:"F n Y" }}</p>
                 <p><b>Pre-entry: </b> ${{ detail.7 }}</p>
                 <p><b>Post-entry: </b> ${{ detail.8 }}</p>
                 <p><b>Escort Rider: </b> ${{ detail.10 }}</p>
@@ -66,7 +67,8 @@
                     {% elif detail.12 > 1 %}
                         <h2>{{ detail.12 }} Days Until Race Day!</h2>
                         <br>
-                        <a class="btn btn-md btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
+                        <a name="register_button" class="btn btn-md btn-primary"
+                           href="/event-registration/?event={{ detail.0 }}" role="button"
                            methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
                     {% elif detail.12 == 1 %}
                         <h2>{{ detail.12 }} Day Left!</h2>
@@ -83,7 +85,8 @@
                 <a class="fa fa-facebook" href="https://www.facebook.com/sharer/sharer.php?u=lobosevents.com"
                    target="_blank">
                 </a>
-                <a class="fa fa-twitter" href="https://twitter.com/home?status=Here%20are%20the%20next%20upcoming%20Lobos%20rides%20and%20races.%20www.LobosEvents.com"
+                <a class="fa fa-twitter"
+                   href="https://twitter.com/home?status=Here%20are%20the%20next%20upcoming%20Lobos%20rides%20and%20races.%20www.LobosEvents.com"
                    target="_blank">
                 </a>
                 <a class="fa fa-google" href="https://plus.google.com/share?url=www.lobosevents.com"
