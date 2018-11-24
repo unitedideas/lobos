@@ -132,7 +132,7 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'birth_date': DateInput(attrs={'v-model': 'birth_date', 'type': 'date',
                                                                               'placeholder': 'Example: 12/14/1980'}),
                                                'escort_name': forms.TextInput(attrs={
-                                                   'placeholder': 'If you are under 15 on the day of the event, a registered escort rider is required. 15 and over type “none”.'}),
+                                                   'placeholder': 'Escort Rider Required if under 16 on the day of the event.'}),
                                                'group_name': forms.TextInput(
                                                    attrs={'placeholder': 'John Smith, Jane Doe'}),
                                                'rider_class': forms.Select(attrs={'oninput': "select_change(this)"}),
