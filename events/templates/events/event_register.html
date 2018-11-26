@@ -90,10 +90,16 @@
                         <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online!</a>
                     </h3>
                     <div>
-                        <h3>Raincheck:
+                        <h3>Vue Raincheck:
                             <input style="width: 25%" v-model="discountCode" type="text" name="discount_code"
                                    placeholder="Raincheck Code">
                         </h3>
+                        <h3>Django Raincheck:
+                            <input style="width: 25%" type="text" name="discount_code"
+                                   placeholder="Type Code Here">
+                        </h3>
+
+                        <h3>{{ codes }}</h3>
                     </div>
                     <h3>Registration Total: $[[regTotal]]</h3>
                     <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
@@ -278,11 +284,10 @@
                         <h3 style="color: whitesmoke;">Registration: [[regTotal]]</h3>
                         <h3 style="color: whitesmoke;">Total: [[totalStr]]</h3>
                     </div>
-
                 {% else %}
                     <div style="text-align: center; ">
                         <h3 style="color: whitesmoke;">Registration Total:</h3>
-                        <h3 style="color: whitesmoke;">$[[regTotal]]</h3>
+                        <h3 style="color: whitesmoke;">$[[regTotal]] $ </h3>
                     </div>
                 {% endif %}
 
