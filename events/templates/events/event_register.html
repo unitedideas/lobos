@@ -18,7 +18,7 @@
 </head>
 {% block body %}
     <div id="app">
-        <div class="container" style=" padding: 15px; border-radius: 5px">
+        <div class="container" style=" padding: 15px 15px 0px 15px; border-radius: 5px">
             <div id="jumbotron" class="jumbotron" style="padding: 0px 0px 3px 0px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
             </div>
@@ -61,7 +61,8 @@
         <div class="sk-rotating-plane"></div>
         <br>
         <div class="container" style="margin-top: 10px; text-align: center">
-            <div style="background-color: #ffe673; border-radius: 5px; text-align: center; margin: 0px 15px 0px 15px; padding-bottom: 10px">
+            <div v-show="showcheckout"
+                 style="background-color: #ffe673; border-radius: 5px; text-align: center; margin: 0px 15px 0px 15px; padding-bottom: 10px">
                 <transition name="fade">
                     <div v-if="formSuccess === false && formerrors.length > 0" class="p-3 mb-2 bg-danger text-white">
                         <h3>Please correct these errors:</h3>
@@ -86,20 +87,16 @@
                     </div>
                 </transition>
                 <div v-show="showcheckout">
-                    <h3>**You'll need an AMA Membership to ride the event. Save waiting in line at the event and join
+                    <h3 style="margin-top: 0px">**You'll need an AMA Membership to ride the event. Save waiting in line
+                        at the event and join
                         <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online!</a>
                     </h3>
                     <div>
-                        <h3>Vue Raincheck:
-                            <input style="width: 25%" v-model="discountCode" type="text" name="discount_code"
-                                   placeholder="Raincheck Code">
-                        </h3>
-                        <h3>Django Raincheck:
+                        <h3>Raincheck:
                             <input style="width: 25%" type="text" name="discount_code"
                                    placeholder="Type Code Here">
                         </h3>
 
-                        <h3>{{ codes }}</h3>
                     </div>
                     <h3>Registration Total: $[[regTotal]]</h3>
                     <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
@@ -354,7 +351,7 @@
                     showModal: false,
                     closeModal: "Cancel",
                     showPayPal: true,
-                    discountCode: '',
+                    discountCode: {{ codes }},
                     allRiderTypes: "None",
                     regTotal: 0.00,
                     overallTotal: 0.00,
@@ -462,8 +459,7 @@
                     }
                     if (age < 16) {
                         this.escort_required == true
-                    }
-                    else {
+                    } else {
                     }
                 },
             },
@@ -600,8 +596,7 @@
                                     ele.value = form_count
                                 })
                             })
-                        }
-                        else return
+                        } else return
                     },
 
                     formID: function () {
@@ -685,8 +680,7 @@
                     }
                     if (age < 16) {
                         this.escort_required == true
-                    }
-                    else {
+                    } else {
                     }
                 },
 
