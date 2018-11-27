@@ -528,7 +528,11 @@ def event_register(request):
     else:
 
         event = Event.objects.get(event_name=request.GET.get('event'))
-        codes = list(Codes.objects.values("discount_code", "discount_amount"))
+        codes = dict(Codes.objects.values_list('discount_code', 'discount_amount'))
+        print(codes)
+        codes = json.dumps(codes)
+        print(codes)
+
 
         formset = prefill_form(request)
 

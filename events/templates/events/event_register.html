@@ -39,7 +39,8 @@
                         </div>
                         <br>
                         <div class="container" style="padding: 0px 30px 0px 30px">
-                            <div class="row" style="background-color: #ffe673; padding: 5px; border-radius: 5px">
+                            <div class="row"
+                                 style="background-color: #ffe673; padding: 5px; margin-top: 20px; border-radius: 5px">
                                 <div class="col-sm-6" style="text-align: center">
                                     <div v-on:click="addForm" class="btn btn-primary btn-lg">Add Another Rider
                                     </div>
@@ -59,8 +60,7 @@
             <br>
         </div>
         <div class="sk-rotating-plane"></div>
-        <br>
-        <div class="container" style="margin-top: 10px; text-align: center">
+        <div class="container" style="text-align: center">
             <div v-show="showcheckout"
                  style="background-color: #ffe673; border-radius: 5px; text-align: center; margin: 0px 15px 0px 15px; padding-bottom: 10px">
                 <transition name="fade">
@@ -87,14 +87,18 @@
                     </div>
                 </transition>
                 <div v-show="showcheckout">
-                    <h3 style="margin-top: 0px">**You'll need an AMA Membership to ride the event. Save waiting in line
-                        at the event and join
-                        <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online!</a>
-                    </h3>
+                    <h4 style="margin-top: 0px; padding-top: 5px">
+                        <p>**AMA Membership is <strong style="color: red">required</strong>
+                            to ride this event. Skip the line and join
+                            <a href="http://www.americanmotorcyclist.com/membership/join" target="_blank">online
+                                now!</a>
+                        </p>
+                        <p>Single day passes will be available at the event for $25.</p>
+                    </h4>
                     <div>
                         <h3>Raincheck:
                             <input style="width: 25%" type="text" name="discount_code"
-                                   placeholder="Type Code Here">
+                                   placeholder="Type Code Here" v-model="discountCode">
                         </h3>
 
                     </div>
@@ -302,7 +306,7 @@
                             currency="USD"
                             :button-style="aStyle"
                             :client="paypal"
-                            {#                            :items=[[checkoutList]]#}
+                            {# :items=[[checkoutList]] #}
                             env="sandbox"
                             v-on:payment-authorized="paymentAuthorized"
                             v-on:payment-completed="paymentCompleted"
@@ -351,7 +355,7 @@
                     showModal: false,
                     closeModal: "Cancel",
                     showPayPal: true,
-                    discountCode: {{ codes }},
+                    discountCode: "",
                     allRiderTypes: "None",
                     regTotal: 0.00,
                     overallTotal: 0.00,
@@ -420,6 +424,17 @@
                 }
             },
             watch: {
+
+                discountCode() {
+                    console.log('this is the discount code: ' + this.discountCode)
+                    if (this.discountCode in {{ codes|safe }}) {
+                        console.log({{ codes|safe }})
+                        console.log({{ codes|safe }}[this.discountCode])
+                        {#    insert discount total price here    #}
+
+                    }
+                },
+
                 cartlist() {
                     let count = 0
                     let cost = 0
@@ -669,6 +684,7 @@
                         })
                 },
 
+
             created:
                 function () {
                     var event_date = new Date(this.event_date)
@@ -679,15 +695,10 @@
                         age--
                     }
                     if (age < 16) {
-                        this.escort_required == true
+                        this.escort_required = true
                     } else {
                     }
                 },
-
-            function() {
-
-            }
-
         })
 
     </script>
