@@ -98,9 +98,12 @@
                     <div>
                         <h3>Registration Total: $[[regTotal]]</h3>
                         <h3>Rain Check Code:
-                            <input style="width: 30%" type="text" name="discount_code"
-                                   placeholder="Type Code Here" v-model="discountCode">
+                            <input style="width: 10%" type="text" name="discount_code"
+                                   placeholder="" v-model="discountCode">
                         </h3>
+                        <transition name="fade">
+                            <h3 v-show="discountCodeSuccess" style="color: green">Your discount was applied</h3>
+                        </transition>
                     </div>
                     <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
                         Checkout
@@ -366,7 +369,7 @@
                     birth_date: '',
                     escort_needed: false,
                     event_date: '{{ event.event_date | date:"F n, Y" }}',
-                    discountCodeUsed: false,
+                    discountCodeSuccess: false,
 
                     {#need to learn about objects#}
                     hoodie: {
@@ -425,12 +428,13 @@
             watch: {
                 discountCode() {
                     this.totalCost()
-
+                    this.discountCodeSuccess = false
                     if (this.discountCode in {{ codes|safe }}) {
                         console.log({{ codes|safe }}[this.discountCode])
                         let discount = 1 - {{ codes|safe }}[this.discountCode]
                         {#    insert discount total price here    #}
                         this.regTotal = (Number(this.regTotal) * discount).toFixed(2)
+                        this.discountCodeSuccess = true
                     }
                 },
 
@@ -449,7 +453,6 @@
                 },
 
                 regTotal() {
-                    {#this.discountCodeUsed = false#}
                     this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
                 },
 
