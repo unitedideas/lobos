@@ -96,13 +96,12 @@
                         <p>Single day passes will be available at the event for $25.</p>
                     </h4>
                     <div>
-                        <h3>Raincheck:
-                            <input style="width: 25%" type="text" name="discount_code"
+                        <h3>Registration Total: $[[regTotal]]</h3>
+                        <h3>Rain Check Code:
+                            <input style="width: 30%" type="text" name="discount_code"
                                    placeholder="Type Code Here" v-model="discountCode">
                         </h3>
-
                     </div>
-                    <h3>Registration Total: $[[regTotal]]</h3>
                     <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
                         Checkout
                     </div>
@@ -421,13 +420,11 @@
                     hoodieCost: {{ event.hoodie_cost }},
                     shirtCost: {{ event.shirt_cost }},
                     hatCost: {{ event.hat_cost }},
-
                 }
             },
             watch: {
                 discountCode() {
                     this.totalCost()
-                    console.log('this is the discount code: ' + this.discountCode)
 
                     if (this.discountCode in {{ codes|safe }}) {
                         console.log({{ codes|safe }}[this.discountCode])
@@ -534,12 +531,6 @@
                                 app.formerrors = response.data.errors
                                 app.formSuccess = response.data.success
                                 app.escort_required = response.data.under_16 - response.data.escorts_signed_up
-
-                                {#printing the vallue#}
-                                for (object in Object.keys(app.formerrors)) {
-                                    for (thing in app.formerrors[object]) {
-                                    }
-                                }
                             })
                     },
 
@@ -551,11 +542,9 @@
 
                         for (let i = 0; i < total_rider_classes.length; i++) {
                             allRiderTypes.push(total_rider_classes[i].value)
-                            console.log({{ EXU16 }})
                         }
 
                         for (let i = 0; i < allRiderTypes.length; i++) {
-                            console.log(allRiderTypes[i])
                             if (allRiderTypes[i].includes('Escort Rider')) {
                                 total +=
                                 {{ event.escort_rider_cost }}
@@ -583,6 +572,7 @@
                         }
                         this.regTotal = total.toFixed(2)
                         this.showcheckout = true
+                        {#this.discountCode = ''#}
 
                     },
 
