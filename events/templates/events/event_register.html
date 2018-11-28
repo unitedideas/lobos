@@ -367,6 +367,7 @@
                     birth_date: '',
                     escort_needed: false,
                     event_date: '{{ event.event_date | date:"F n, Y" }}',
+                    discountCodeUsed:false,
 
                     {#need to learn about objects#}
                     hoodie: {
@@ -424,14 +425,15 @@
                 }
             },
             watch: {
-
                 discountCode() {
+                    this.totalCost()
                     console.log('this is the discount code: ' + this.discountCode)
-                    if (this.discountCode in {{ codes|safe }}) {
-                        console.log({{ codes|safe }})
-                        console.log({{ codes|safe }}[this.discountCode])
-                        {#    insert discount total price here    #}
 
+                    if (this.discountCode in {{ codes|safe }}) {
+                        console.log({{ codes|safe }}[this.discountCode])
+                        let discount = 1 - {{ codes|safe }}[this.discountCode]
+                        {#    insert discount total price here    #}
+                        this.regTotal = (Number(this.regTotal) * discount).toFixed(2)
                     }
                 },
 
@@ -450,6 +452,7 @@
                 },
 
                 regTotal() {
+                    {#this.discountCodeUsed = false#}
                     this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
                 },
 
@@ -548,9 +551,11 @@
 
                         for (let i = 0; i < total_rider_classes.length; i++) {
                             allRiderTypes.push(total_rider_classes[i].value)
+                            console.log({{ EXU16 }})
                         }
 
                         for (let i = 0; i < allRiderTypes.length; i++) {
+                            console.log(allRiderTypes[i])
                             if (allRiderTypes[i].includes('Escort')) {
                                 total +=
                                 {{ event.escort_rider_cost }}
@@ -559,7 +564,7 @@
                                 total +=
                                 {{ event.class_60_and_class_70_cost }}
 
-                            } else if (allRiderTypes[i].includes('Amateur 16')) {
+                            } else if (allRiderTypes[i].includes('Amateur under')) {
                                 total +=
                                 {{ event.amateur_under_16_cost }}
 
@@ -567,7 +572,7 @@
                                 total +=
                                 {{ event.amateur_over_16_cost }}
 
-                            } else if (allRiderTypes[i].includes('Expert 16')) {
+                            } else if (allRiderTypes[i].includes('Expert under')) {
                                 total +=
                                 {{ event.expert_under_16_cost }}
 
