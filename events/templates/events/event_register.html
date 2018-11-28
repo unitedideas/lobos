@@ -367,7 +367,7 @@
                     birth_date: '',
                     escort_needed: false,
                     event_date: '{{ event.event_date | date:"F n, Y" }}',
-                    discountCodeUsed:false,
+                    discountCodeUsed: false,
 
                     {#need to learn about objects#}
                     hoodie: {
@@ -556,27 +556,27 @@
 
                         for (let i = 0; i < allRiderTypes.length; i++) {
                             console.log(allRiderTypes[i])
-                            if (allRiderTypes[i].includes('Escort')) {
+                            if (allRiderTypes[i].includes('Escort Rider')) {
                                 total +=
                                 {{ event.escort_rider_cost }}
 
-                            } else if (allRiderTypes[i].includes('Class')) {
+                            } else if (allRiderTypes[i].includes('Class 60 and 70')) {
                                 total +=
                                 {{ event.class_60_and_class_70_cost }}
 
-                            } else if (allRiderTypes[i].includes('Amateur under')) {
+                            } else if (allRiderTypes[i].includes('Amateur under 16')) {
                                 total +=
                                 {{ event.amateur_under_16_cost }}
 
-                            } else if (allRiderTypes[i].includes('Amateur over')) {
+                            } else if (allRiderTypes[i].includes('Amateur 16 and over')) {
                                 total +=
                                 {{ event.amateur_over_16_cost }}
 
-                            } else if (allRiderTypes[i].includes('Expert under')) {
+                            } else if (allRiderTypes[i].includes('Expert under 16')) {
                                 total +=
                                 {{ event.expert_under_16_cost }}
 
-                            } else if (allRiderTypes[i].includes('Expert over')) {
+                            } else if (allRiderTypes[i].includes('Expert 16 and over')) {
                                 total +=
                                 {{ event.expert_over_16_cost }}
                             }
