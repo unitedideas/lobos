@@ -210,7 +210,6 @@ class RiderProfile(models.Model):
     group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
                                   null=True, blank=True)
     merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)
-
     registration_date_time = models.DateTimeField('Created Time', editable=True, auto_now_add=True)
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     rider_number = models.IntegerField(null=True, blank=True)

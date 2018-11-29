@@ -294,24 +294,6 @@ def change_password(request):
         args = {'form': form}
         return render(request, 'events/password_change.html', args)
 
-# def age_check(event_date, birth_date):
-#     y = 0
-#     m = 0
-#     d = 0
-#
-#     y = event_date.year - birth_date.year
-#     m = event_date.month - birth_date.month
-#     d = event_date.day - birth_date.day
-#
-#     if y < 16:
-#         return False
-#     elif y == 16 and m < 0:
-#         return False
-#     elif y == 16 and m < 0 and d < 0:
-#         return False
-#     else:
-#         return True
-
 def error_checking(request):
     print('In error and escort checking')
     under_16 = 0
