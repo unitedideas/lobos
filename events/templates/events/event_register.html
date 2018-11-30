@@ -429,12 +429,16 @@
                 discountCode() {
                     this.totalCost()
                     this.discountCodeSuccess = false
+                    document.getElementById("id_form-0-discount_code").value = ""
                     if (this.discountCode in {{ codes|safe }}) {
                         console.log({{ codes|safe }}[this.discountCode])
                         let discount = 1 - {{ codes|safe }}[this.discountCode]
                         {#    insert discount total price here    #}
                         this.regTotal = (Number(this.regTotal) * discount).toFixed(2)
                         this.discountCodeSuccess = true
+                        document.getElementById("id_form-0-discount_code").value = this.discountCode
+
+
                     }
                 },
 

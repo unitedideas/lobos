@@ -137,6 +137,6 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                    attrs={'placeholder': 'John Smith, Jane Doe'}),
                                                'rider_class': forms.Select(attrs={'oninput': "select_change(this)"}),
                                                'merchandise_ordered': forms.HiddenInput(),
-                                               # 'age_on_event_day': forms.HiddenInput(),
+                                               'discount_code': forms.HiddenInput(),
 
                                            })

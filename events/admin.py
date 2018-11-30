@@ -7,19 +7,15 @@ from .models import RiderProfile, Event, Profile, Codes
 admin.site.site_header = 'Lobos Events/ User Database'
 admin.site.register(Codes)
 
-@admin.register(RiderProfile)
-class RiderProfileExportAdmin(ImportExportModelAdmin):
-    pass
 
- # attempt to add infor rows above the riderprofile  <, not working
-class RiderProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'email', 'event',)
-    readonly_fields = ('registration_date_time',)
-    search_fields = ("event__event_name", "event__event_date",)
+@admin.register(RiderProfile)
+# this is the example of how to setup the import/ export and the admin search
+class RiderProfileExportAdmin(ImportExportModelAdmin):
+    list_display = ('first_name', 'last_name', 'email', 'event', 'registration_date_time' ,'confirmation_number')
+    search_fields = ('event__event_name', 'confirmation_number', 'first_name', 'last_name', 'email')
 
     def user_info(self, obj):
         return obj.description
-
 
 
 admin.site.register(Event)
@@ -50,4 +46,3 @@ class RatingAdmin(admin.ModelAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
-
