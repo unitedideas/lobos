@@ -295,7 +295,8 @@
                 {% endif %}
 
                 <br>
-                <button class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[ closeModal ]]
+                <button id='modal_close_btn' class="btn btn-lg btn-primary" type="button" @click="showModal = false">[[
+                    closeModal ]]
                 </button>
                 <div class="row">
                     <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was canceled or
@@ -630,6 +631,7 @@
                     },
 
                     paymentCompleted: function (data) {
+                        document.getElementById('modal_close_btn').style.display = "none"
                         this.paymentComplete = true
                     },
 

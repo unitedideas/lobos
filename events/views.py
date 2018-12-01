@@ -393,7 +393,12 @@ def event_register(request):
                 form.confirmation_number = confirmation_number
                 form.event = Event.objects.get(event_name=request.GET.get('event'))
                 event = str(form.event)
-                print(form.discount_code)
+
+                if form.discount_code != None:
+                    usedCode = form.discount_code
+                    Codes.objects.filter(discount_code=usedCode).delete()
+
+
                 if User.objects.filter(username=created_username).exists():
                     user_id = User.objects.get(username=created_username).id
 
