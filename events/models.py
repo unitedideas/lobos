@@ -190,7 +190,7 @@ class RiderProfile(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     rider_cat = models.CharField('Rider Category', max_length=1000, null=True, blank=True)
     rider_class = models.CharField('Rider Class (required)', max_length=1000, choices=RIDER_CLASS)
-    first_name = models.CharField('First Name (required)',help_text="Please use the following format: <em>YYYY-MM-DD</em>.", max_length=300)
+    first_name = models.CharField('First Name (required)', max_length=300)
     last_name = models.CharField('Last Name (required)', max_length=300)
     email = models.EmailField('Email (required)', max_length=300)
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
