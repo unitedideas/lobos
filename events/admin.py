@@ -12,7 +12,7 @@ admin.site.register(Event)
 @admin.register(RiderProfile)
 # this is the example of how to setup the import/ export and the admin search
 class RiderProfileExportAdmin(ImportExportModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'event', 'registration_date_time', 'confirmation_number')
+    list_display = ('first_name', 'last_name', 'email', 'event', 'confirmation_number')
     search_fields = ('event__event_name', 'confirmation_number', 'first_name', 'last_name', 'email')
 
     def user_info(self, obj):
@@ -47,8 +47,8 @@ class ProfileExportAdmin(ImportExportModelAdmin):
 #         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
 
 
-# class RatingAdmin(admin.ModelAdmin):
-#     readonly_fields = ('date',)
+class RatingAdmin(admin.ModelAdmin):
+    readonly_fields = ('date',)
 
 
 # admin.site.unregister(User)
