@@ -294,6 +294,7 @@ def change_password(request):
         args = {'form': form}
         return render(request, 'events/password_change.html', args)
 
+
 def error_checking(request):
     print('In error and escort checking')
     under_16 = 0
@@ -325,7 +326,6 @@ def error_checking(request):
                 under_16 += 1
             else:
                 over_16 = True
-
 
             if form.cleaned_data['rider_class'] == "Escort Rider" and over_16 == True:
                 escorts_signed_up += 1
@@ -397,7 +397,6 @@ def event_register(request):
                 if form.discount_code != None:
                     usedCode = form.discount_code
                     Codes.objects.filter(discount_code=usedCode).delete()
-
 
                 if User.objects.filter(username=created_username).exists():
                     user_id = User.objects.get(username=created_username).id
@@ -519,7 +518,6 @@ def event_register(request):
         print(codes)
         codes = json.dumps(codes)
         print(codes)
-
 
         formset = prefill_form(request)
 

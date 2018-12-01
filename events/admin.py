@@ -28,6 +28,7 @@ class ProfileExportAdmin(ImportExportModelAdmin):
     def user_info(self, obj):
         return obj.description
 
+
 #
 # class ProfileInline(admin.StackedInline):
 #     model = Profile
@@ -49,7 +50,6 @@ class ProfileExportAdmin(ImportExportModelAdmin):
 
 class RatingAdmin(admin.ModelAdmin):
     readonly_fields = ('date',)
-
 
 # admin.site.unregister(User)
 # admin.site.register(User, CustomUserAdmin)
