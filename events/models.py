@@ -215,7 +215,7 @@ class RiderProfile(models.Model):
     registration_date_time = models.DateTimeField('Registered Date and Time', editable=True)
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     rider_number = models.IntegerField(null=True, blank=True)
-    discount_code = models.CharField('Discount code used', max_length=100, null=True, blank=True)
+    discount_code = models.CharField(max_length=100, null=True, blank=True)
     start_time = models.TimeField(max_length=30, null=True, blank=True)
 
     # if we want to allow user profile images

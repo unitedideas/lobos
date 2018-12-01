@@ -122,6 +122,10 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'id',
                                                'registration_date_time',
                                            ),
+                                           # fields=[
+                                           #     'discount_code'
+                                           #
+                                           # ],
                                            formset=BaseRiderProfileFormSet,
                                            widgets=
                                            {
