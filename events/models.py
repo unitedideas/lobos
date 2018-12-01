@@ -94,7 +94,7 @@ class Profile(models.Model):
     address_line_two = models.CharField(max_length=300, null=True, blank=True)
     city = models.CharField(max_length=300, null=True, blank=True)
     state = models.CharField(max_length=2, null=True, blank=True, choices=STATES)
-    zip_code = models.CharField(max_length=5, null=True, blank=True)
+    zip_code = models.CharField(help_text="Please use the following format: <em>YYYY-MM-DD</em>.",max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
     emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
 
