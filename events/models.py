@@ -94,7 +94,7 @@ class Profile(models.Model):
     address_line_two = models.CharField(max_length=300, null=True, blank=True)
     city = models.CharField(max_length=300, null=True, blank=True)
     state = models.CharField(max_length=2, null=True, blank=True, choices=STATES)
-    zip_code = models.CharField(help_text="Please use the following format: <em>YYYY-MM-DD</em>.",max_length=5, null=True, blank=True)
+    zip_code = models.CharField(max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField(max_length=300, null=True, blank=True)
     emergency_contact_phone = models.CharField(max_length=10, null=True, blank=True)
 
@@ -190,7 +190,7 @@ class RiderProfile(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     rider_cat = models.CharField('Rider Category', max_length=1000, null=True, blank=True)
     rider_class = models.CharField('Rider Class (required)', max_length=1000, choices=RIDER_CLASS)
-    first_name = models.CharField('First Name (required)', max_length=300)
+    first_name = models.CharField('First Name (required)',help_text="Please use the following format: <em>YYYY-MM-DD</em>.", max_length=300)
     last_name = models.CharField('Last Name (required)', max_length=300)
     email = models.EmailField('Email (required)', max_length=300)
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
