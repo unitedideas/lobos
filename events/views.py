@@ -376,7 +376,6 @@ def event_mail(email, first_name, last_name, username, rider_class, event, confi
     # Send it:
     msg.send()
 
-
 def event_register(request):
     if request.method == 'POST':
 
