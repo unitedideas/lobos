@@ -1,7 +1,5 @@
 .idea/workspace.xml
-lobos/bu_db
 secrets.py
-
 *.sql
 *.sqlite
 db.sqlite3
@@ -10,6 +8,7 @@ __pycache__
 *.pyc
 .idea
 migrations
+lobos/bu_db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
