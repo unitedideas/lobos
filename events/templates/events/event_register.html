@@ -102,7 +102,9 @@
                                    placeholder="" v-model="discountCode">
                         </h3>
                         <transition name="fade">
-                            <h3 v-show="discountCodeSuccess" style="color: green">Your discount was applied</h3>
+                            <h4 v-if="discountCodeSuccess" style="color: green">Your discount was applied</h4>
+                            <h4 v-else-if="discountCodeSuccess == false && discountCode != ''" style="color: red">This is not a valid code</h4>
+                            <h4 v-else></h4>
                         </transition>
                     </div>
                     <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
@@ -370,7 +372,7 @@
                     birth_date: '',
                     escort_needed: false,
                     event_date: '{{ event.event_date | date:"F n, Y" }}',
-                    discountCodeSuccess: false,
+                    discountCodeSuccess: "",
 
                     {#need to learn about objects#}
                     hoodie: {
