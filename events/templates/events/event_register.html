@@ -76,6 +76,21 @@
                     </div>
                 </transition>
                 <transition name="fade">
+                    <div v-if="age_error" class="p-3 mb-2 bg-danger text-white">
+                        <h3>Please correct these errors:</h3>
+                        <div>
+                            <h4>Age [[under_class_age]] signed up for older rider class</h4>
+                        </div>
+                    </div>
+                </transition><transition name="fade">
+                    <div v-if="gender_class" class="p-3 mb-2 bg-danger text-white">
+                        <h3>Please correct these errors:</h3>
+                        <div>
+                            <h4>[[gender_class]] - Male signed up for Female class</h4>
+                        </div>
+                    </div>
+                </transition>
+                <transition name="fade">
                     <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-white">
                         <h3>Please correct these errors:</h3>
                         <div id="v-for-formerrors">
@@ -103,7 +118,8 @@
                         </h3>
                         <transition name="fade">
                             <h4 v-if="discountCodeSuccess" style="color: green">Your discount was applied</h4>
-                            <h4 v-else-if="discountCodeSuccess == false && discountCode != ''" style="color: red">This is not a valid code</h4>
+                            <h4 v-else-if="discountCodeSuccess == false && discountCode != ''" style="color: red">This
+                                is not a valid code</h4>
                             <h4 v-else></h4>
                         </transition>
                     </div>
@@ -373,6 +389,9 @@
                     escort_needed: false,
                     event_date: '{{ event.event_date | date:"F n, Y" }}',
                     discountCodeSuccess: "",
+                    under_class_age: "",
+                    age_error: false,
+                    gender_class: false,
 
                     {#need to learn about objects#}
                     hoodie: {
@@ -541,6 +560,10 @@
                                 app.formerrors = response.data.errors
                                 app.formSuccess = response.data.success
                                 app.escort_required = response.data.under_16 - response.data.escorts_signed_up
+                                app.under_class_age = response.data.under_class_age
+                                app.age_error = response.data.age_error
+                                app.gender_class = response.data.gender_class
+
                             })
                     },
 

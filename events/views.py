@@ -312,28 +312,92 @@ def error_checking(request):
             y = 0
             m = 0
             d = 0
+            age_error = False
             birth_date = form.cleaned_data['birth_date']
-
+            rider_class = form.cleaned_data['rider_class']
+            gender = form.cleaned_data['gender']
+            print(gender)
             y = event_date.year - birth_date.year
+            print("Event Date")
+            print(event_date)
+            print("year")
+            print(y)
             m = event_date.month - birth_date.month
+            print('month')
+            print(m)
             d = event_date.day - birth_date.day
+            print('day')
+            print(d)
 
-            if y < 16:
-                under_16 += 1
-            elif y == 16 and m < 0:
-                under_16 += 1
-            elif y == 16 and m < 0 and d < 0:
+            #  under 16 rider classes
+
+            class_list_under_30 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
+                                   "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
+                                   "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
+                                   "Amateur under 16 Jr.",
+                                   "Expert 16 and over 30 EX", "Expert 16 and over 40 EX-EX",
+                                   "Amateur 16 and over 30 AM", "Amateur 16 and over 40 EX-AM",
+                                   "Amateur 16 and over 40 AM", "Amateur 16 and over 50 AM",
+                                   "Amateur 16 and over 50 EX", "60 Class",
+                                   "70 Class"]
+            class_list_under_40 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
+                                   "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
+                                   "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
+                                   "Amateur under 16 Jr."
+                , "Expert 16 and over 40 EX-EX", "Amateur 16 and over 40 EX-AM", "Amateur 16 and over 40 AM",
+                                   "Amateur 16 and over 50 AM", "Amateur 16 and over 50 EX", "60 Class",
+                                   "70 Class"]
+            class_list_under_50 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
+                                   "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
+                                   "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
+                                   "Amateur under 16 Jr."
+                , "Amateur 16 and over 50 AM", "Amateur 16 and over 50 EX", "60 Class",
+                                   "70 Class"]
+            class_list_under_60 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
+                                   "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
+                                   "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
+                                   "Amateur under 16 Jr."
+                , "60 Class", "70 Class"]
+            class_list_under_70 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
+                                   "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
+                                   "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
+                                   "Amateur under 16 Jr."
+                , "70 Class"]
+
+            rider_class_check = False
+            age_set = [30, 40, 50, 60, 70]
+
+            if (y < 16) or (y == 16 and m < 0) or (y == 16 and m == 0 and d < 0):
                 under_16 += 1
             else:
                 over_16 = True
 
-            if form.cleaned_data['rider_class'] == "Escort Rider" and over_16 == True:
+            if rider_class == "Escort Rider" and over_16 == True:
                 escorts_signed_up += 1
 
         if (under_16 - escorts_signed_up > 0):
             print('ESCORT NOT GOOD')
             error = 'escorts' if (under_16 - escorts_signed_up > 1) else 'escort'
             content = {'escorts_signed_up': escorts_signed_up, 'under_16': under_16, }
+            return JsonResponse(content)
+
+        # age vs rider_class check
+
+        for age in age_set:
+            if (y < age) or (y == age and m < 0) or (y == age and m == 0 and d < 0):
+                print(rider_class)
+                if (age == 30 and rider_class in class_list_under_30) or \
+                    (age == 40 and rider_class in class_list_under_40) or \
+                    (age == 50 and rider_class in class_list_under_50) or \
+                    (age == 60 and rider_class in class_list_under_60) or \
+                    (age == 70 and rider_class in class_list_under_70):
+                    print('RIDER CLASS NOT GOOD... less than age ' + str(age) + " rider in " + rider_class)
+                    content = {'under_class_age': age, 'age_error': True}
+                    return JsonResponse(content)
+
+        if gender == 'Male' and (rider_class == 'Amateur under 16 Women' or rider_class == "Amateur 16 and over Women"):
+            print('RIDER CLASS NOT GOOD... ' + gender + " in " +rider_class)
+            content = {'gender_class': True}
             return JsonResponse(content)
 
         else:
@@ -375,6 +439,7 @@ def event_mail(email, first_name, last_name, username, rider_class, event, confi
 
     # Send it:
     msg.send()
+
 
 def event_register(request):
     if request.method == 'POST':
