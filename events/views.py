@@ -337,6 +337,10 @@ def error_checking(request):
 
             #  under 16 rider classes
 
+            class_list_under_16 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
+                                   "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
+                                   "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
+                                   "Amateur under 16 Jr."]
             class_list_under_30 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
                                    "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
                                    "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
@@ -382,6 +386,11 @@ def error_checking(request):
 
             if (y < 16) or (y == 16 and m < 0) or (y == 16 and m == 0 and d < 0):
                 under_16 += 1
+                if rider_class not in class_list_under_16:
+                    content['under_class_age'] = {"rider_class": rider_class, 'form': form_count}
+                    content["age_error"] = True
+                else:
+                    pass
             else:
                 over_16 = True
 
@@ -396,25 +405,23 @@ def error_checking(request):
             # return JsonResponse(content)
 
         # age vs rider_class check
+        # if ((y < 16) or (y == 16 and m < 0) or (y == age and m == 0 and d < 0)) and ( rider_class not in class_list_under_16):
+        #     print('RIDER CLASS NOT GOOD... less than age ' + str(age) + " rider in " + rider_class)
+        #     content['under_class_age'] = {"age": age, "rider_class": rider_class, 'form': form_count}
+        #     content["age_error"] = True
 
         for age in age_set:
-            if (y < age) or (y == age and m < 0) or (y == age and m == 0 and d < 0):
-                print(rider_class)
+            if (y < age and y >=16) or (y == age and m < 0) or (y == age and m == 0 and d < 0):
                 if (age == 30 and rider_class in class_list_under_30) or \
-                        (age == 40 and rider_class in class_list_under_40) or \
-                        (age == 50 and rider_class in class_list_under_50) or \
-                        (age == 60 and rider_class in class_list_under_60) or \
-                        (age == 70 and rider_class in class_list_under_70):
+                    (age == 40 and rider_class in class_list_under_40) or \
+                    (age == 50 and rider_class in class_list_under_50) or \
+                    (age == 60 and rider_class in class_list_under_60) or \
+                    (age == 70 and rider_class in class_list_under_70):
                     print('RIDER CLASS NOT GOOD... less than age ' + str(age) + " rider in " + rider_class)
                     content['under_class_age'] = {"age": age, "rider_class": rider_class, 'form': form_count}
                     content["age_error"] = True
                     # return JsonResponse(content)
 
-        if gender == 'Male':
-            print('gender is male')
-        print(rider_class)
-        if rider_class == 'Amateur under 16 Women':
-            print('rider_class is female only')
 
         if gender == 'Male' and (rider_class == 'Amateur under 16 Women' or rider_class == "Amateur 16 and over Women"):
             print('RIDER CLASS NOT GOOD... ' + gender + " in " + rider_class)
