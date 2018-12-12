@@ -76,38 +76,40 @@
                     </div>
                 </transition>
                 <transition name="fade">
+                    <div v-if="age_error || escort_required > 0 || gender_class || birthdate_wrong" class="p-3 mb-2 bg-danger text-white">
+                        <h2>Please correct these errors to continue:</h2>
+                    </div>
+
+                </transition>
+                <transition name="fade">
                     <div v-if="age_error" class="p-3 mb-2 bg-danger text-white">
-                        <h3>Please correct these errors to continue:</h3>
                         <div>
-                            <h4>Rider of under age [[under_class_age.age]] signed up for Rider Class
-                                [[under_class_age.rider_class]] on form [[under_class_age.form]] </h4>
+                            <h3>Rider over the age limit signed up for Rider Class
+                                [[under_class_age.rider_class]] on form [[under_class_age.form]] </h3>
                         </div>
                     </div>
                 </transition>
                 <transition name="fade">
                     <div v-if="gender_class" class="p-3 mb-2 bg-danger text-white">
-                        <h3>Please correct these errors to continue:</h3>
                         <div>
-                            <h4>You've signed up for Women's Class as a male on form [[gender_form]]</h4>
+                            <h3>You've signed up for Women's Class as a male on form [[gender_form]]</h3>
                         </div>
                     </div>
                 </transition>
                 </transition>
                 <transition name="fade">
                     <div v-if="birthdate_wrong" class="p-3 mb-2 bg-danger text-white">
-                        <h3>Please correct these errors to continue:</h3>
                         <div>
-                            <h4>The birth date entered on form [[birthdate_form]] is not correct</h4>
+                            <h3>The birth date entered on form [[birthdate_form]] is not correct</h3>
                         </div>
                     </div>
                 </transition>
                 <transition name="fade">
                     <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-white">
-                        <h3>Please correct these errors to continue:</h3>
                         <div id="v-for-formerrors">
                             <div>
-                                <h4>[[escort_required]] additional Escort Rider Classes are required based on the birth
-                                    dates provided.</h4>
+                                <h3>[[escort_required]] additional Escort Riders are required to register based on the birth
+                                    dates provided.</h3>
                             </div>
                         </div>
                     </div>

@@ -318,9 +318,11 @@ def error_checking(request):
             birth_date = form.cleaned_data['birth_date']
             print(birth_date)
             rider_class = form.cleaned_data['rider_class']
+
             gender = form.cleaned_data['gender']
             print(gender)
             y = event_date.year - birth_date.year
+            print(rider_class)
 
             print("Event Date")
             print(event_date)
@@ -370,11 +372,13 @@ def error_checking(request):
 
             rider_class_check = False
             age_set = [30, 40, 50, 60, 70]
+            content = {}
 
             if y > 150:
                 print('Birth Date is wrong format')
-                content = {'birthdate_wrong': True, "birthdate_form": form_count}
-                return JsonResponse(content)
+                content['birthdate_wrong'] = True
+                content["birthdate_form"] = form_count
+                # return JsonResponse(content)
 
             if (y < 16) or (y == 16 and m < 0) or (y == 16 and m == 0 and d < 0):
                 under_16 += 1
@@ -387,8 +391,9 @@ def error_checking(request):
         if (under_16 - escorts_signed_up > 0):
             print('ESCORT NOT GOOD')
             error = 'escorts' if (under_16 - escorts_signed_up > 1) else 'escort'
-            content = {'escorts_signed_up': escorts_signed_up, 'under_16': under_16, }
-            return JsonResponse(content)
+            content['escorts_signed_up'] = escorts_signed_up
+            content['under_16'] = under_16
+            # return JsonResponse(content)
 
         # age vs rider_class check
 
@@ -401,12 +406,22 @@ def error_checking(request):
                         (age == 60 and rider_class in class_list_under_60) or \
                         (age == 70 and rider_class in class_list_under_70):
                     print('RIDER CLASS NOT GOOD... less than age ' + str(age) + " rider in " + rider_class)
-                    content = {'under_class_age': {"age": age, "rider_class": rider_class, 'form':form_count}, "age_error": True}
-                    return JsonResponse(content)
+                    content['under_class_age'] = {"age": age, "rider_class": rider_class, 'form': form_count}
+                    content["age_error"] = True
+                    # return JsonResponse(content)
+
+        if gender == 'Male':
+            print('gender is male')
+        print(rider_class)
+        if rider_class == 'Amateur under 16 Women':
+            print('rider_class is female only')
 
         if gender == 'Male' and (rider_class == 'Amateur under 16 Women' or rider_class == "Amateur 16 and over Women"):
             print('RIDER CLASS NOT GOOD... ' + gender + " in " + rider_class)
-            content = {'gender_class': True, 'gender_form':form_count}
+            content['gender_class'] = True
+            content['gender_form'] = form_count
+            # return JsonResponse(content)
+        if content != {}:
             return JsonResponse(content)
 
         else:
