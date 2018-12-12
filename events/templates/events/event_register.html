@@ -77,22 +77,33 @@
                 </transition>
                 <transition name="fade">
                     <div v-if="age_error" class="p-3 mb-2 bg-danger text-white">
-                        <h3>Please correct these errors:</h3>
+                        <h3>Please correct these errors to continue:</h3>
                         <div>
-                            <h4>Age [[under_class_age]] signed up for older rider class</h4>
+                            <h4>Rider of under age [[under_class_age.age]] signed up for Rider Class
+                                [[under_class_age.rider_class]] on form [[under_class_age.form]] </h4>
                         </div>
                     </div>
-                </transition><transition name="fade">
+                </transition>
+                <transition name="fade">
                     <div v-if="gender_class" class="p-3 mb-2 bg-danger text-white">
-                        <h3>Please correct these errors:</h3>
+                        <h3>Please correct these errors to continue:</h3>
                         <div>
-                            <h4>[[gender_class]] - Male signed up for Female class</h4>
+                            <h4>You've signed up for Women's Class as a male on form [[gender_form]]</h4>
+                        </div>
+                    </div>
+                </transition>
+                </transition>
+                <transition name="fade">
+                    <div v-if="birthdate_wrong" class="p-3 mb-2 bg-danger text-white">
+                        <h3>Please correct these errors to continue:</h3>
+                        <div>
+                            <h4>The birth date entered on form [[birthdate_form]] is not correct</h4>
                         </div>
                     </div>
                 </transition>
                 <transition name="fade">
                     <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-white">
-                        <h3>Please correct these errors:</h3>
+                        <h3>Please correct these errors to continue:</h3>
                         <div id="v-for-formerrors">
                             <div>
                                 <h4>[[escort_required]] additional Escort Rider Classes are required based on the birth
@@ -377,6 +388,7 @@
                     closeModal: "Cancel",
                     showPayPal: true,
                     discountCode: "",
+                    discountCodeSuccess: "",
                     allRiderTypes: "None",
                     regTotal: 0.00,
                     overallTotal: 0.00,
@@ -388,10 +400,12 @@
                     birth_date: '',
                     escort_needed: false,
                     event_date: '{{ event.event_date | date:"F n, Y" }}',
-                    discountCodeSuccess: "",
                     under_class_age: "",
                     age_error: false,
                     gender_class: false,
+                    gender_form: "",
+                    birthdate_wrong: false,
+                    birthdate_form: "",
 
                     {#need to learn about objects#}
                     hoodie: {
@@ -563,6 +577,9 @@
                                 app.under_class_age = response.data.under_class_age
                                 app.age_error = response.data.age_error
                                 app.gender_class = response.data.gender_class
+                                app.gender_form = response.data.gender_form
+                                app.birthdate_wrong = response.data.birthdate_wrong
+                                app.birthdate_form = response.data.birthdate_form
 
                             })
                     },
