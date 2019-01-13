@@ -5,9 +5,9 @@
     {# javascript #}
     <script type="text/javascript" src="{% static "events/JS.js" %}"></script>
     {# Vue.js CDN #}
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <!-- Axios -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <!-- jQuery for PayPal -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     {% block head %}
@@ -76,7 +76,8 @@
                     </div>
                 </transition>
                 <transition name="fade">
-                    <div v-if="age_error || escort_required > 0 || gender_class || birthdate_wrong" class="p-3 mb-2 bg-danger text-white">
+                    <div v-if="age_error || escort_required > 0 || gender_class || birthdate_wrong"
+                         class="p-3 mb-2 bg-danger text-white">
                         <h2>Please correct these errors to continue:</h2>
                     </div>
 
@@ -84,7 +85,8 @@
                 <transition name="fade">
                     <div v-if="age_error" class="p-3 mb-2 bg-danger text-white">
                         <div>
-                            <h3>Rider on form [[under_class_age.form]] is not the correct age to ride in [[under_class_age.rider_class]]</h3>
+                            <h3>Rider on form [[under_class_age.form]] is not the correct age to ride in
+                                [[under_class_age.rider_class]]</h3>
                         </div>
                     </div>
                 </transition>
@@ -107,7 +109,8 @@
                     <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-white">
                         <div id="v-for-formerrors">
                             <div>
-                                <h3>[[escort_required]] additional Escort Riders are required to register based on the birth
+                                <h3>[[escort_required]] additional Escort Riders are required to register based on the
+                                    birth
                                     dates provided.</h3>
                             </div>
                         </div>
