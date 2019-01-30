@@ -188,6 +188,7 @@ class RiderProfile(models.Model):
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    rider_number = models.IntegerField('OMRA Member Number', null=True, blank=True)
     rider_cat = models.CharField('Rider Category', max_length=1000, null=True, blank=True)
     rider_class = models.CharField('Rider Class (required)', max_length=1000, choices=RIDER_CLASS)
     first_name = models.CharField('First Name (required)', max_length=300)
@@ -214,7 +215,6 @@ class RiderProfile(models.Model):
     merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)
     registration_date_time = models.DateTimeField('Created Time', editable=True, auto_now_add=True, )
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
-    rider_number = models.IntegerField(null=True, blank=True)
     discount_code = models.CharField(max_length=100, null=True, blank=True)
     start_time = models.TimeField(max_length=30, null=True, blank=True)
 
