@@ -471,7 +471,7 @@
                     document.getElementById("id_form-0-discount_code").value = ""
                     if (this.discountCode in {{ codes|safe }}) {
                         console.log({{ codes|safe }}[this.discountCode])
-                        let discount = 1 - {{ codes|safe }}[this.discountCode]
+                        var discount = 1 - {{ codes|safe }}[this.discountCode]
                         {#    insert discount total price here    #}
                         this.regTotal = (Number(this.regTotal) * discount).toFixed(2)
                         this.discountCodeSuccess = true
@@ -482,11 +482,11 @@
                 },
 
                 cartlist: function() {
-                    let count = 0
-                    let cost = 0
+                    var count = 0
+                    var cost = 0
                     for (item in this.cartlist) {
-                        let itemcost = 0
-                        let merchtot = 0
+                        var itemcost = 0
+                        var merchtot = 0
                         itemcost = this.cartlist[item].qty * this.cartlist[item].price
                         cost += itemcost
                     }
@@ -534,8 +534,8 @@
             methods:
                 {
                     add_to_cart: function (item_type, size, qty, price) {
-                        let count = 0
-                        let merch_order = "", end
+                        var count = 0
+                        var merch_order = "", end
                         if (size != "") {
                             if (qty > 0) {
                                 this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
@@ -549,8 +549,8 @@
                     },
 
                     remove_from_cart: function (index) {
-                        let count = 0
-                        let merch_order = "", end
+                        var count = 0
+                        var merch_order = "", end
                         this.cartlist.splice(index, 1)
                         for (i in this.cartlist) {
                             merch_order += String(Object.values(this.cartlist[count])) + "\n"
@@ -560,14 +560,14 @@
                     },
 
                     the3DayMethod: function () {
-                        let app = this
+                        var app = this
                         app.formSuccess = ''
                         var object = {}
                         forms = document.getElementById('feedbackform')
 
 
                         var formData = new FormData(forms),
-                            result = {event_date: this.event_date};
+                            result = {event_date: this.event_date}
                         for (var entry of formData.entries()) {
                             result[entry[0]] = entry[1];
                         }
@@ -588,16 +588,16 @@
                     },
 
                     totalCost: function () {
-                        let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
-                        let total = 0
-                        let allRiderTypes = []
+                        var total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
+                        var total = 0
+                        var allRiderTypes = []
                         this.allRiderTypes = allRiderTypes
 
-                        for (let i = 0; i < total_rider_classes.length; i++) {
+                        for (var i = 0; i < total_rider_classes.length; i++) {
                             allRiderTypes.push(total_rider_classes[i].value)
                         }
 
-                        for (let i = 0; i < allRiderTypes.length; i++) {
+                        for (var i = 0; i < allRiderTypes.length; i++) {
                             if (allRiderTypes[i].includes('Escort Rider')) {
                                 total +=
                                 {{ event.escort_rider_cost }}
@@ -631,14 +631,14 @@
 
                     addForm: function () {
                         this.count++
-                        let form_count = this.count
+                        var form_count = this.count
                         form_count++
 
-                        let formID = 'id_form-' + this.count
+                        var formID = 'id_form-' + this.count
                         incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
                         this.formList.push(incremented_form)
                         this.$nextTick(() => {
-                            let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
+                            var total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
                             (function (ele, idx) {
                                 ele.value = form_count
                             })
@@ -648,13 +648,13 @@
                     delForm: function () {
                         if (this.count != 0) {
                             this.count--
-                            let form_count = this.count
+                            var form_count = this.count
                             form_count++
 
-                            let formID = 'id_form-' + this.count
+                            var formID = 'id_form-' + this.count
                             this.formList.pop()
                             this.$nextTick(() => {
-                                let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
+                                var total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
                                 (function (ele, idx) {
                                     ele.value = form_count
                                 })
@@ -663,7 +663,7 @@
                     },
 
                     formID: function () {
-                        let formID = 'id_form-' + this.count
+                        var formID = 'id_form-' + this.count
                         this.delForm()
                     },
 
@@ -715,7 +715,7 @@
 
             mounted:
                 function () {
-                    let app = this
+                    var app = this
 
                     axios.post("{% url 'event_formset' %}",
                         {processData: false, contentType: false, event: '{{event}}'},
