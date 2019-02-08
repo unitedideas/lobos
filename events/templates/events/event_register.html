@@ -361,396 +361,6 @@
     </div>
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
     <script>
-        {##}
-        {#        var app = new Vue({#}
-        {#            delimiters: ['[[', ']]'],#}
-        {#            el: '#app',#}
-        {#            data: {#}
-        {#                paypal: {#}
-        {#                    sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',#}
-        {#                    production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'#}
-        {#                },#}
-        {#                aStyle: {#}
-        {#                    label: 'checkout',#}
-        {#                    size: 'large',#}
-        {#                    shape: 'rect',#}
-        {#                    color: 'blue',#}
-        {#                    tagline: 'false'#}
-        {#                },#}
-        {#                totalStr: "0.00",#}
-        {#                formList: [],#}
-        {#                count: 0,#}
-        {#                vue_form: "",#}
-        {#                formIsValid: false,#}
-        {#                paymentComplete: false,#}
-        {#                formerrors: {},#}
-        {#                formSuccess: '',#}
-        {#                payment_cancelled: false,#}
-        {#                showcheckout: true,#}
-        {#                showModal: false,#}
-        {#                closeModal: "Cancel",#}
-        {#                showPayPal: true,#}
-        {#                discountCode: "",#}
-        {#                discountCodeSuccess: "",#}
-        {#                allRiderTypes: "None",#}
-        {#                regTotal: 0.00,#}
-        {#                overallTotal: 0.00,#}
-        {#                hoodie_size_select: "",#}
-        {#                hat_size_select: "",#}
-        {#                shirt_size_select: "",#}
-        {#                merchTotal: 0,#}
-        {#                escort_required: "",#}
-        {#                birth_date: '',#}
-        {#                escort_needed: false,#}
-        {#                event_date: '{{ event.event_date | date:"F n, Y" }}',#}
-        {#                under_class_age: "",#}
-        {#                age_error: false,#}
-        {#                gender_class: false,#}
-        {#                gender_form: "",#}
-        {#                birthdate_wrong: false,#}
-        {#                birthdate_form: "",#}
-        {##}
-        {#need to learn about objects#}
-        {#                hoodie: {#}
-        {#                    price: {{ event.hoodie_cost }},#}
-        {#                    size:#}
-        {#                        [#}
-        {#                            {'{{event.hoodie_osfa}}': "One Size Fits All"},#}
-        {#                            {'{{event.hoodie_Xsmall}}': "X-Small"},#}
-        {#                            {'{{event.hoodie_small}}': "Small"},#}
-        {#                            {'{{event.hoodie_medium}}': 'Medium'},#}
-        {#                            {'{{event.hoodie_large}}': 'Large'},#}
-        {#                            {'{{event.hoodie_Xlarge}}': 'X-Large'},#}
-        {#                            {'{{event.hoodie_Xlarge}}': 'XX-Large'},#}
-        {#                            {'{{event.hoodie_Xlarge}}': 'XXX-Large'},#}
-        {#                        ]#}
-        {#                },#}
-        {#                hat: {#}
-        {#                    price: {{ event.hat_cost }},#}
-        {#                    size:#}
-        {#                        [#}
-        {#                            {'{{event.hat_osfa}}': "One Size Fits All"},#}
-        {#                            {'{{event.hat_Xsmall}}': "X-Small"},#}
-        {#                            {'{{event.hat_small}}': "Small"},#}
-        {#                            {'{{event.hat_medium}}': 'Medium'},#}
-        {#                            {'{{event.hat_large}}': 'Large'},#}
-        {#                            {'{{event.hat_Xlarge}}': 'X-Large'},#}
-        {#                            {'{{event.hat_Xlarge}}': 'XX-Large'},#}
-        {#                            {'{{event.hat_Xlarge}}': 'XXX-Large'},#}
-        {#                        ]#}
-        {#                },#}
-        {#                shirt: {#}
-        {#                    price: {{ event.shirt_cost }},#}
-        {#                    size:#}
-        {#                        [#}
-        {#                            {'{{event.shirt_osfa}}': "One Size Fits All"},#}
-        {#                            {'{{event.shirt_Xsmall}}': "X-Small"},#}
-        {#                            {'{{event.shirt_small}}': "Small"},#}
-        {#                            {'{{event.shirt_medium}}': 'Medium'},#}
-        {#                            {'{{event.shirt_large}}': 'Large'},#}
-        {#                            {'{{event.shirt_Xlarge}}': 'X-Large'},#}
-        {#                            {'{{event.shirt_Xlarge}}': 'XX-Large'},#}
-        {#                            {'{{event.shirt_Xlarge}}': 'XXX-Large'},#}
-        {#                        ]#}
-        {#                },#}
-        {##}
-        {#                hoodieqty: 1,#}
-        {#                hatqty: 1,#}
-        {#                shirtqty: 1,#}
-        {#                cartlist: [],#}
-        {##}
-        {#                hoodieCost: {{ event.hoodie_cost }},#}
-        {#                shirtCost: {{ event.shirt_cost }},#}
-        {#                hatCost: {{ event.hat_cost }},#}
-        {##}
-        {#            },#}
-        {#            watch: {#}
-        {#                discountCode() {#}
-        {#                    this.totalCost()#}
-        {#                    this.discountCodeSuccess = false#}
-        {#                    document.getElementById("id_form-0-discount_code").value = ""#}
-        {#                    if (this.discountCode in {{ codes|safe }}) {#}
-        {#                        console.log({{ codes|safe }}[this.discountCode])#}
-        {#                        let discount = 1 - {{ codes|safe }}[this.discountCode]#}
-        {#    insert discount total price here    #}
-        {#                        this.regTotal = (Number(this.regTotal) * discount).toFixed(2)#}
-        {#                        this.discountCodeSuccess = true#}
-        {#                        document.getElementById("id_form-0-discount_code").value = this.discountCode#}
-        {##}
-        {##}
-        {#                    }#}
-        {#                },#}
-        {##}
-        {#                cartlist() {#}
-        {#                    let count = 0#}
-        {#                    let cost = 0#}
-        {#                    for (item in this.cartlist) {#}
-        {#                        let itemcost = 0#}
-        {#                        let merchtot = 0#}
-        {#                        itemcost = this.cartlist[item].qty * this.cartlist[item].price#}
-        {#                        cost += itemcost#}
-        {#                    }#}
-        {#                    this.merchTotal = cost.toFixed(2)#}
-        {#                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))#}
-        {##}
-        {#                },#}
-        {##}
-        {#                regTotal() {#}
-        {#                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))#}
-        {#                },#}
-        {##}
-        {#                paymentComplete() {#}
-        {#                    this.$refs.submitButton.click();#}
-        {#                },#}
-        {##}
-        {##}
-        {#                formSuccess() {#}
-        {#                    if (this.formSuccess === true) {#}
-        {#                        this.showModal = true#}
-        {#                    }#}
-        {#                },#}
-        {##}
-        {#                birth_date() {#}
-        {#                    var event = new Date(this.event_date)#}
-        {#                    var birthDate = new Date(this.birth_date)#}
-        {#                    var age = event.getFullYear() - birthDate.getFullYear()#}
-        {#                    var m = event.getMonth() - birthDate.getMonth()#}
-        {#                    if (m < 0 || (m === 0 && event.getDate() < birthDate.getDate())) {#}
-        {#                        age--#}
-        {#                    }#}
-        {#                    if (age < 16) {#}
-        {#                        this.escort_required == true#}
-        {#                    } else {#}
-        {#                    }#}
-        {#                },#}
-        {#            },#}
-        {##}
-        {#            computed: {#}
-        {#                checkoutList() {#}
-        {#                }#}
-        {#            },#}
-        {##}
-        {##}
-        {#            methods:#}
-        {#                {#}
-        {#                    add_to_cart(item_type, size, qty, price) {#}
-        {#                        let count = 0#}
-        {#                        let merch_order = "", end#}
-        {#                        if (size != "") {#}
-        {#                            if (qty > 0) {#}
-        {#                                this.cartlist.push({item: item_type, size: size, qty: qty, price: price})#}
-        {#                                for (i in this.cartlist) {#}
-        {#                                    merch_order += String(Object.values(this.cartlist[count])) + "\n"#}
-        {#                                    count += 1#}
-        {#                                }#}
-        {#                                document.getElementById("id_form-0-merchandise_ordered").value = merch_order#}
-        {#                            }#}
-        {#                        }#}
-        {#                    },#}
-        {##}
-        {#                    remove_from_cart(index) {#}
-        {#                        let count = 0#}
-        {#                        let merch_order = "", end#}
-        {#                        this.cartlist.splice(index, 1)#}
-        {#                        for (i in this.cartlist) {#}
-        {#                            merch_order += String(Object.values(this.cartlist[count])) + "\n"#}
-        {#                            count += 1#}
-        {#                        }#}
-        {#                        document.getElementById("id_form-0-merchandise_ordered").value = merch_order#}
-        {#                    },#}
-        {##}
-        {#                    the3DayMethod() {#}
-        {#                        let app = this#}
-        {#                        app.formSuccess = ''#}
-        {#                        var object = {}#}
-        {#                        forms = document.getElementById('feedbackform')#}
-        {##}
-        {##}
-        {#                        var formData = new FormData(forms),#}
-        {#                            result = {event_date: this.event_date}#}
-        {#                        for (var entry of formData.entries()) {#}
-        {#                            result[entry[0]] = entry[1];#}
-        {#                        }#}
-        {#                        data = JSON.stringify(result)#}
-        {#                        axios.post("{% url 'error_checking' %}", data, {headers: {'X-CSRFToken': '{{ csrf_token }}',}})#}
-        {#                            .then(function (response) {#}
-        {#                                app.formerrors = response.data.errors#}
-        {#                                app.formSuccess = response.data.success#}
-        {#                                app.escort_required = response.data.under_16 - response.data.escorts_signed_up#}
-        {#                                app.under_class_age = response.data.under_class_age#}
-        {#                                app.age_error = response.data.age_error#}
-        {#                                app.gender_class = response.data.gender_class#}
-        {#                                app.gender_form = response.data.gender_form#}
-        {#                                app.birthdate_wrong = response.data.birthdate_wrong#}
-        {#                                app.birthdate_form = response.data.birthdate_form#}
-        {##}
-        {#                            })#}
-        {#                    },#}
-        {##}
-        {#                    totalCost() {#}
-        {#                        let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')#}
-        {#                        let total = 0#}
-        {#                        let allRiderTypes = []#}
-        {#                        this.allRiderTypes = allRiderTypes#}
-        {##}
-        {#                        for (let i = 0; i < total_rider_classes.length; i++) {#}
-        {#                            allRiderTypes.push(total_rider_classes[i].value)#}
-        {#                        }#}
-        {##}
-        {#                        for (let i = 0; i < allRiderTypes.length; i++) {#}
-        {#                            if (allRiderTypes[i].includes('Escort Rider')) {#}
-        {#                                total +=#}
-        {#                                {{ event.escort_rider_cost }}#}
-        {##}
-        {#                            } else if (allRiderTypes[i].includes('Class 60 and 70')) {#}
-        {#                                total +=#}
-        {#                                {{ event.class_60_and_class_70_cost }}#}
-        {##}
-        {#                            } else if (allRiderTypes[i].includes('Amateur under 16')) {#}
-        {#                                total +=#}
-        {#                                {{ event.amateur_under_16_cost }}#}
-        {##}
-        {#                            } else if (allRiderTypes[i].includes('Amateur 16 and over')) {#}
-        {#                                total +=#}
-        {#                                {{ event.amateur_over_16_cost }}#}
-        {##}
-        {#                            } else if (allRiderTypes[i].includes('Expert under 16')) {#}
-        {#                                total +=#}
-        {#                                {{ event.expert_under_16_cost }}#}
-        {##}
-        {#                            } else if (allRiderTypes[i].includes('Expert 16 and over')) {#}
-        {#                                total +=#}
-        {#                                {{ event.expert_over_16_cost }}#}
-        {#                            }#}
-        {#                        }#}
-        {#                        this.regTotal = total.toFixed(2)#}
-        {#                        this.showcheckout = true#}
-        {#this.discountCode = ''#}
-        {##}
-        {#                    },#}
-        {##}
-        {#                    addForm() {#}
-        {#                        this.count++#}
-        {#                        let form_count = this.count#}
-        {#                        form_count++#}
-        {##}
-        {#                        let formID = 'id_form-' + this.count#}
-        {#                        incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)#}
-        {#                        this.formList.push(incremented_form)#}
-        {#                        this.$nextTick(() => {#}
-        {#                            let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach#}
-        {#                            (function (ele, idx) {#}
-        {#                                ele.value = form_count#}
-        {#                            })#}
-        {#                        })#}
-        {#                    },#}
-        {##}
-        {#                    delForm() {#}
-        {#                        if (this.count != 0) {#}
-        {#                            this.count--#}
-        {#                            let form_count = this.count#}
-        {#                            form_count++#}
-        {##}
-        {#                            let formID = 'id_form-' + this.count#}
-        {#                            this.formList.pop()#}
-        {#                            this.$nextTick(() => {#}
-        {#                                let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach#}
-        {#                                (function (ele, idx) {#}
-        {#                                    ele.value = form_count#}
-        {#                                })#}
-        {#                            })#}
-        {#                        } else return#}
-        {#                    },#}
-        {##}
-        {#                    formID() {#}
-        {#                        let formID = 'id_form-' + this.count#}
-        {#                        this.delForm()#}
-        {#                    },#}
-        {##}
-        {#                    add_rider_type() {#}
-        {#                        this.paypalItems.push({"name": ""})#}
-        {#                    },#}
-        {##}
-        {#                    paymentAuthorized(data) {#}
-        {#                        this.showPayPal = false#}
-        {#                    },#}
-        {##}
-        {#                    paymentCompleted(data) {#}
-        {#                        document.getElementById('modal_close_btn').style.display = "none"#}
-        {#                        this.paymentComplete = true#}
-        {#                    },#}
-        {##}
-        {#                    paymentCancelled(data) {#}
-        {#                        this.payment_cancelled = false#}
-        {#                        this.payment_cancelled = true#}
-        {#                        this.showPayPal = true#}
-        {#                    },#}
-        {##}
-        {#                    select_change(e) {#}
-        {#                        var id = e.id#}
-        {#                        document.getElementById(id).onchange = function (e) {#}
-        {#                            totalCost()#}
-        {#                        }#}
-        {#                    },#}
-        {#                },#}
-        {##}
-        {#            filters: {#}
-        {#                capitalize(value) {#}
-        {#                    if (!value) return ''#}
-        {#                    listOfWords = []#}
-        {#                    sentence = value.toString().replace("_", " ").split(" ")#}
-        {#                    for (word in sentence) {#}
-        {#                        listOfWords.push(sentence[word].charAt(0).toUpperCase() + sentence[word].slice(1))#}
-        {#                    }#}
-        {#                    return listOfWords.join(" ")#}
-        {#                },#}
-        {##}
-        {#                removeThis(value) {#}
-        {#                    listOfWords = []#}
-        {#                    if (!value) return ''#}
-        {#                    listOfWords = value.toString().replace("_", " ").replace("This", "").split(" ")#}
-        {#                    return listOfWords.join(" ")#}
-        {#                },#}
-        {#            },#}
-        {##}
-        {#            mounted:#}
-        {#                function () {#}
-        {#                    let app = this#}
-        {##}
-        {#                    axios.post("{% url 'event_formset' %}",#}
-        {#                        {processData: false, contentType: false, event: '{{event}}'},#}
-        {#                        {#}
-        {#                            headers:#}
-        {#                                {#}
-        {#                                    'X-CSRFToken': '{{ csrf_token }}',#}
-        {#                                }#}
-        {#                        }#}
-        {#                    )#}
-        {##}
-        {#                        .then(function (response) {#}
-        {#                            app.vue_form = response.data.formset#}
-        {#                            app.formList.push(app.vue_form)#}
-        {#                        })#}
-        {#                },#}
-        {##}
-        {##}
-        {#            created:#}
-        {#                function () {#}
-        {#                    var event_date = new Date(this.event_date)#}
-        {#                    var birthDate = new Date(this.birth_date)#}
-        {#                    var age = event_date.getFullYear() - birthDate.getFullYear()#}
-        {#                    var m = event_date.getMonth() - birthDate.getMonth()#}
-        {#                    if (m < 0 || (m === 0 && event_date.getDate() < birthDate.getDate())) {#}
-        {#                        age--#}
-        {#                    }#}
-        {#                    if (age < 16) {#}
-        {#                        this.escort_required = true#}
-        {#                    } else {#}
-        {#                    }#}
-        {#                },#}
-        {#        })#}
-
-        "use strict";
 
         var app = new Vue({
             delimiters: ['[[', ']]'],
@@ -799,296 +409,347 @@
                 gender_form: "",
                 birthdate_wrong: false,
                 birthdate_form: "",
+
+                {#need to learn about objects#}
+                hoodie: {
+                    price: {{ event.hoodie_cost }},
+                    size:
+                        [
+                            {'{{event.hoodie_osfa}}': "One Size Fits All"},
+                            {'{{event.hoodie_Xsmall}}': "X-Small"},
+                            {'{{event.hoodie_small}}': "Small"},
+                            {'{{event.hoodie_medium}}': 'Medium'},
+                            {'{{event.hoodie_large}}': 'Large'},
+                            {'{{event.hoodie_Xlarge}}': 'X-Large'},
+                            {'{{event.hoodie_Xlarge}}': 'XX-Large'},
+                            {'{{event.hoodie_Xlarge}}': 'XXX-Large'},
+                        ]
+                },
+                hat: {
+                    price: {{ event.hat_cost }},
+                    size:
+                        [
+                            {'{{event.hat_osfa}}': "One Size Fits All"},
+                            {'{{event.hat_Xsmall}}': "X-Small"},
+                            {'{{event.hat_small}}': "Small"},
+                            {'{{event.hat_medium}}': 'Medium'},
+                            {'{{event.hat_large}}': 'Large'},
+                            {'{{event.hat_Xlarge}}': 'X-Large'},
+                            {'{{event.hat_Xlarge}}': 'XX-Large'},
+                            {'{{event.hat_Xlarge}}': 'XXX-Large'},
+                        ]
+                },
+                shirt: {
+                    price: {{ event.shirt_cost }},
+                    size:
+                        [
+                            {'{{event.shirt_osfa}}': "One Size Fits All"},
+                            {'{{event.shirt_Xsmall}}': "X-Small"},
+                            {'{{event.shirt_small}}': "Small"},
+                            {'{{event.shirt_medium}}': 'Medium'},
+                            {'{{event.shirt_large}}': 'Large'},
+                            {'{{event.shirt_Xlarge}}': 'X-Large'},
+                            {'{{event.shirt_Xlarge}}': 'XX-Large'},
+                            {'{{event.shirt_Xlarge}}': 'XXX-Large'},
+                        ]
+                },
+
                 hoodieqty: 1,
                 hatqty: 1,
                 shirtqty: 1,
                 cartlist: [],
+
                 hoodieCost: {{ event.hoodie_cost }},
                 shirtCost: {{ event.shirt_cost }},
                 hatCost: {{ event.hat_cost }},
 
             },
             watch: {
-                discountCode: function discountCode() {
-                    this.totalCost();
-                    this.discountCodeSuccess = false;
-                    document.getElementById("id_form-0-discount_code").value = "";
-
+                discountCode() {
+                    this.totalCost()
+                    this.discountCodeSuccess = false
+                    document.getElementById("id_form-0-discount_code").value = ""
                     if (this.discountCode in {{ codes|safe }}) {
-                        console.log({{ codes|safe }}[this.discountCode]);
-                        var discount = 1 - {{ codes|safe }}[this.discountCode];
-                        this.regTotal = (Number(this.regTotal) * discount).toFixed(2);
-                        this.discountCodeSuccess = true;
-                        document.getElementById("id_form-0-discount_code").value = this.discountCode;
+                        console.log({{ codes|safe }}[this.discountCode])
+                        let discount = 1 - {{ codes|safe }}[this.discountCode]
+                        {#    insert discount total price here    #}
+                        this.regTotal = (Number(this.regTotal) * discount).toFixed(2)
+                        this.discountCodeSuccess = true
+                        document.getElementById("id_form-0-discount_code").value = this.discountCode
+
+
                     }
                 },
-                cartlist: function cartlist() {
-                    var count = 0;
-                    var cost = 0;
 
+                cartlist() {
+                    let count = 0
+                    let cost = 0
                     for (item in this.cartlist) {
-                        var itemcost = 0;
-                        var merchtot = 0;
-                        itemcost = this.cartlist[item].qty * this.cartlist[item].price;
-                        cost += itemcost;
+                        let itemcost = 0
+                        let merchtot = 0
+                        itemcost = this.cartlist[item].qty * this.cartlist[item].price
+                        cost += itemcost
                     }
+                    this.merchTotal = cost.toFixed(2)
+                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
 
-                    this.merchTotal = cost.toFixed(2);
-                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2));
                 },
-                regTotal: function regTotal() {
-                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2));
+
+                regTotal() {
+                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
                 },
-                paymentComplete: function paymentComplete() {
+
+                paymentComplete() {
                     this.$refs.submitButton.click();
                 },
-                formSuccess: function formSuccess() {
+
+
+                formSuccess() {
                     if (this.formSuccess === true) {
-                        this.showModal = true;
+                        this.showModal = true
                     }
                 },
-                birth_date: function birth_date() {
-                    var event = new Date(this.event_date);
-                    var birthDate = new Date(this.birth_date);
-                    var age = event.getFullYear() - birthDate.getFullYear();
-                    var m = event.getMonth() - birthDate.getMonth();
 
-                    if (m < 0 || m === 0 && event.getDate() < birthDate.getDate()) {
-                        age--;
+                birth_date() {
+                    var event = new Date(this.event_date)
+                    var birthDate = new Date(this.birth_date)
+                    var age = event.getFullYear() - birthDate.getFullYear()
+                    var m = event.getMonth() - birthDate.getMonth()
+                    if (m < 0 || (m === 0 && event.getDate() < birthDate.getDate())) {
+                        age--
                     }
-
                     if (age < 16) {
-                        this.escort_required == true;
+                        this.escort_required == true
                     } else {
                     }
-                }
+                },
             },
+
             computed: {
-                checkoutList: function checkoutList() {
+                checkoutList() {
                 }
             },
-            methods: {
-                add_to_cart: function add_to_cart(item_type, size, qty, price) {
-                    var count = 0;
-                    var merch_order = "",
-                        end;
 
-                    if (size != "") {
-                        if (qty > 0) {
-                            this.cartlist.push({
-                                item: item_type,
-                                size: size,
-                                qty: qty,
-                                price: price
-                            });
 
-                            for (i in this.cartlist) {
-                                merch_order += String(Object.values(this.cartlist[count])) + "\n";
-                                count += 1;
+            methods:
+                {
+                    add_to_cart(item_type, size, qty, price) {
+                        let count = 0
+                        let merch_order = "", end
+                        if (size != "") {
+                            if (qty > 0) {
+                                this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
+                                for (i in this.cartlist) {
+                                    merch_order += String(Object.values(this.cartlist[count])) + "\n"
+                                    count += 1
+                                }
+                                document.getElementById("id_form-0-merchandise_ordered").value = merch_order
                             }
-
-                            document.getElementById("id_form-0-merchandise_ordered").value = merch_order;
                         }
-                    }
-                },
-                remove_from_cart: function remove_from_cart(index) {
-                    var count = 0;
-                    var merch_order = "",
-                        end;
-                    this.cartlist.splice(index, 1);
+                    },
 
-                    for (i in this.cartlist) {
-                        merch_order += String(Object.values(this.cartlist[count])) + "\n";
-                        count += 1;
-                    }
+                    remove_from_cart(index) {
+                        let count = 0
+                        let merch_order = "", end
+                        this.cartlist.splice(index, 1)
+                        for (i in this.cartlist) {
+                            merch_order += String(Object.values(this.cartlist[count])) + "\n"
+                            count += 1
+                        }
+                        document.getElementById("id_form-0-merchandise_ordered").value = merch_order
+                    },
 
-                    document.getElementById("id_form-0-merchandise_ordered").value = merch_order;
-                },
-                the3DayMethod: function the3DayMethod() {
-                    var app = this;
-                    app.formSuccess = '';
-                    var object = {};
-                    forms = document.getElementById('feedbackform');
-                    var formData = new FormData(forms),
-                        result = {
-                            event_date: this.event_date
-                        };
-                    var _iteratorNormalCompletion = true;
-                    var _didIteratorError = false;
-                    var _iteratorError = undefined;
+                    the3DayMethod() {
+                        let app = this
+                        app.formSuccess = ''
+                        var object = {}
+                        forms = document.getElementById('feedbackform')
 
-                    try {
-                        for (var _iterator = formData.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                            var entry = _step.value;
+
+                        var formData = new FormData(forms),
+                            result = {event_date: this.event_date}
+                        for (var entry of formData.entries()) {
                             result[entry[0]] = entry[1];
                         }
-                    } catch (err) {
-                        _didIteratorError = true;
-                        _iteratorError = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion && _iterator.return != null) {
-                                _iterator.return();
+                        data = JSON.stringify(result)
+                        axios.post("{% url 'error_checking' %}", data, {headers: {'X-CSRFToken': '{{ csrf_token }}',}})
+                            .then(function (response) {
+                                app.formerrors = response.data.errors
+                                app.formSuccess = response.data.success
+                                app.escort_required = response.data.under_16 - response.data.escorts_signed_up
+                                app.under_class_age = response.data.under_class_age
+                                app.age_error = response.data.age_error
+                                app.gender_class = response.data.gender_class
+                                app.gender_form = response.data.gender_form
+                                app.birthdate_wrong = response.data.birthdate_wrong
+                                app.birthdate_form = response.data.birthdate_form
+
+                            })
+                    },
+
+                    totalCost() {
+                        let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
+                        let total = 0
+                        let allRiderTypes = []
+                        this.allRiderTypes = allRiderTypes
+
+                        for (let i = 0; i < total_rider_classes.length; i++) {
+                            allRiderTypes.push(total_rider_classes[i].value)
+                        }
+
+                        for (let i = 0; i < allRiderTypes.length; i++) {
+                            if (allRiderTypes[i].includes('Escort Rider')) {
+                                total +=
+                                {{ event.escort_rider_cost }}
+
+                            } else if (allRiderTypes[i].includes('Class 60 and 70')) {
+                                total +=
+                                {{ event.class_60_and_class_70_cost }}
+
+                            } else if (allRiderTypes[i].includes('Amateur under 16')) {
+                                total +=
+                                {{ event.amateur_under_16_cost }}
+
+                            } else if (allRiderTypes[i].includes('Amateur 16 and over')) {
+                                total +=
+                                {{ event.amateur_over_16_cost }}
+
+                            } else if (allRiderTypes[i].includes('Expert under 16')) {
+                                total +=
+                                {{ event.expert_under_16_cost }}
+
+                            } else if (allRiderTypes[i].includes('Expert 16 and over')) {
+                                total +=
+                                {{ event.expert_over_16_cost }}
                             }
-                        } finally {
-                            if (_didIteratorError) {
-                                throw _iteratorError;
-                            }
                         }
-                    }
+                        this.regTotal = total.toFixed(2)
+                        this.showcheckout = true
+                        {#this.discountCode = ''#}
 
-                    data = JSON.stringify(result);
-                    axios.post("{% url 'error_checking' %}", data, {
-                        headers: {
-                            'X-CSRFToken': '{{ csrf_token }}'
+                    },
+
+                    addForm() {
+                        this.count++
+                        let form_count = this.count
+                        form_count++
+
+                        let formID = 'id_form-' + this.count
+                        incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
+                        this.formList.push(incremented_form)
+                        this.$nextTick(() => {
+                            let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
+                            (function (ele, idx) {
+                                ele.value = form_count
+                            })
+                        })
+                    },
+
+                    delForm() {
+                        if (this.count != 0) {
+                            this.count--
+                            let form_count = this.count
+                            form_count++
+
+                            let formID = 'id_form-' + this.count
+                            this.formList.pop()
+                            this.$nextTick(() => {
+                                let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
+                                (function (ele, idx) {
+                                    ele.value = form_count
+                                })
+                            })
+                        } else return
+                    },
+
+                    formID() {
+                        let formID = 'id_form-' + this.count
+                        this.delForm()
+                    },
+
+                    add_rider_type() {
+                        this.paypalItems.push({"name": ""})
+                    },
+
+                    paymentAuthorized(data) {
+                        this.showPayPal = false
+                    },
+
+                    paymentCompleted(data) {
+                        document.getElementById('modal_close_btn').style.display = "none"
+                        this.paymentComplete = true
+                    },
+
+                    paymentCancelled(data) {
+                        this.payment_cancelled = false
+                        this.payment_cancelled = true
+                        this.showPayPal = true
+                    },
+
+                    select_change(e) {
+                        var id = e.id
+                        document.getElementById(id).onchange = function (e) {
+                            totalCost()
                         }
-                    }).then(function (response) {
-                        app.formerrors = response.data.errors;
-                        app.formSuccess = response.data.success;
-                        app.escort_required = response.data.under_16 - response.data.escorts_signed_up;
-                        app.under_class_age = response.data.under_class_age;
-                        app.age_error = response.data.age_error;
-                        app.gender_class = response.data.gender_class;
-                        app.gender_form = response.data.gender_form;
-                        app.birthdate_wrong = response.data.birthdate_wrong;
-                        app.birthdate_form = response.data.birthdate_form;
-                    });
+                    },
                 },
-                totalCost: function totalCost() {
-                    var total_rider_classes = document.querySelectorAll('select[id*="rider_class"]');
-                    var total = 0;
-                    var allRiderTypes = [];
-                    this.allRiderTypes = allRiderTypes;
 
-                    for (var _i = 0; _i < total_rider_classes.length; _i++) {
-                        allRiderTypes.push(total_rider_classes[_i].value);
-                    }
-
-                    for (var _i2 = 0; _i2 < allRiderTypes.length; _i2++) {
-                        if (allRiderTypes[_i2].includes('Escort Rider')) {
-                            total +={{ event.escort_rider_cost }};
-                        } else if (allRiderTypes[_i2].includes('Class 60 and 70')) {
-                            total += {{ event.class_60_and_class_70_cost }};
-                        } else if (allRiderTypes[_i2].includes('Amateur under 16')) {
-                            total += {{ event.amateur_under_16_cost }};
-                        } else if (allRiderTypes[_i2].includes('Amateur 16 and over')) {
-                            total += {{ event.amateur_over_16_cost }};
-                        } else if (allRiderTypes[_i2].includes('Expert under 16')) {
-                            total +={{ event.expert_under_16_cost }};
-                        } else if (allRiderTypes[_i2].includes('Expert 16 and over')) {
-                            total +={{ event.expert_over_16_cost }};
-                        }
-                    }
-
-                    this.regTotal = total.toFixed(2);
-                    this.showcheckout = true;
-                },
-                addForm: function addForm() {
-                    this.count++;
-                    var form_count = this.count;
-                    form_count++;
-                    var formID = 'id_form-' + this.count;
-                    incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count);
-                    this.formList.push(incremented_form);
-                    this.$nextTick(function () {
-                        var total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach(function (ele, idx) {
-                            ele.value = form_count;
-                        });
-                    });
-                },
-                delForm: function delForm() {
-                    if (this.count != 0) {
-                        this.count--;
-                        var form_count = this.count;
-                        form_count++;
-                        var formID = 'id_form-' + this.count;
-                        this.formList.pop();
-                        this.$nextTick(function () {
-                            var total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach(function (ele, idx) {
-                                ele.value = form_count;
-                            });
-                        });
-                    } else return;
-                },
-                formID: function formID() {
-                    var formID = 'id_form-' + this.count;
-                    this.delForm();
-                },
-                add_rider_type: function add_rider_type() {
-                    this.paypalItems.push({
-                        "name": ""
-                    });
-                },
-                paymentAuthorized: function paymentAuthorized(data) {
-                    this.showPayPal = false;
-                },
-                paymentCompleted: function paymentCompleted(data) {
-                    document.getElementById('modal_close_btn').style.display = "none";
-                    this.paymentComplete = true;
-                },
-                paymentCancelled: function paymentCancelled(data) {
-                    this.payment_cancelled = false;
-                    this.payment_cancelled = true;
-                    this.showPayPal = true;
-                },
-                select_change: function select_change(e) {
-                    var id = e.id;
-
-                    document.getElementById(id).onchange = function (e) {
-                        totalCost();
-                    };
-                }
-            },
             filters: {
-                capitalize: function capitalize(value) {
-                    if (!value) return '';
-                    listOfWords = [];
-                    sentence = value.toString().replace("_", " ").split(" ");
-
+                capitalize(value) {
+                    if (!value) return ''
+                    listOfWords = []
+                    sentence = value.toString().replace("_", " ").split(" ")
                     for (word in sentence) {
-                        listOfWords.push(sentence[word].charAt(0).toUpperCase() + sentence[word].slice(1));
+                        listOfWords.push(sentence[word].charAt(0).toUpperCase() + sentence[word].slice(1))
                     }
-
-                    return listOfWords.join(" ");
+                    return listOfWords.join(" ")
                 },
-                removeThis: function removeThis(value) {
-                    listOfWords = [];
-                    if (!value) return '';
-                    listOfWords = value.toString().replace("_", " ").replace("This", "").split(" ");
-                    return listOfWords.join(" ");
-                }
+
+                removeThis(value) {
+                    listOfWords = []
+                    if (!value) return ''
+                    listOfWords = value.toString().replace("_", " ").replace("This", "").split(" ")
+                    return listOfWords.join(" ")
+                },
             },
-            mounted: function mounted() {
-                var app = this;
-                axios.post("{% url 'event_formset' %}", {
-                    processData: false,
-                    contentType: false,
-                    event: '{{event}}'
-                }, {
-                    headers: {
-                        'X-CSRFToken': '{{ csrf_token }}'
+
+            mounted:
+                function () {
+                    let app = this
+
+                    axios.post("{% url 'event_formset' %}",
+                        {processData: false, contentType: false, event: '{{event}}'},
+                        {
+                            headers:
+                                {
+                                    'X-CSRFToken': '{{ csrf_token }}',
+                                }
+                        }
+                    )
+
+                        .then(function (response) {
+                            app.vue_form = response.data.formset
+                            app.formList.push(app.vue_form)
+                        })
+                },
+
+
+            created:
+                function () {
+                    var event_date = new Date(this.event_date)
+                    var birthDate = new Date(this.birth_date)
+                    var age = event_date.getFullYear() - birthDate.getFullYear()
+                    var m = event_date.getMonth() - birthDate.getMonth()
+                    if (m < 0 || (m === 0 && event_date.getDate() < birthDate.getDate())) {
+                        age--
                     }
-                }).then(function (response) {
-                    app.vue_form = response.data.formset;
-                    app.formList.push(app.vue_form);
-                });
-            },
-            created: function created() {
-                var event_date = new Date(this.event_date);
-                var birthDate = new Date(this.birth_date);
-                var age = event_date.getFullYear() - birthDate.getFullYear();
-                var m = event_date.getMonth() - birthDate.getMonth();
+                    if (age < 16) {
+                        this.escort_required = true
+                    } else {
+                    }
+                },
+        })
 
-                if (m < 0 || m === 0 && event_date.getDate() < birthDate.getDate()) {
-                    age--;
-                }
-
-                if (age < 16) {
-                    this.escort_required = true;
-                } else {
-                }
-            }
-        });
     </script>
     <script>
         function select_change(e) {
