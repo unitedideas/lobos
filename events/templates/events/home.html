@@ -5,6 +5,23 @@
 
     {% block head %}
         <title>Lobos Events</title>
+        <script language="javascript" type="text/javascript">
+            function isIE() {
+                var ua = navigator.userAgent;
+                /* MSIE used to detect old browsers and Trident used to newer ones*/
+                var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+
+                return is_ie;
+            }
+
+            /* Create an alert to show if the browser is IE or not */
+            if (isIE()) {
+                alert('InternetExplorer is not supported for registration on this site.\nPlease use Chrome, Edge, Firefox or Safari.');
+            }
+
+            window.onload = isIE();
+        </script>
+
     {% endblock %}
 </head>
 <body>

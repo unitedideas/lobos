@@ -8,7 +8,7 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response)
                 if (response['success']) {
-                    $("#feedbackmessage").html("<div class='alert alert-success'>klasjflaksjf;lkajs;dflkajs;dkflj</div>")
+                    $("#feedbackmessage").html("<div class='alert alert-success'>success</div>")
                     $("#feedbackform").addClass("hidden")
                 }
                 if (response['error']) {
