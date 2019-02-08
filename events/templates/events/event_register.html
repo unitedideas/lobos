@@ -481,7 +481,7 @@
                     }
                 },
 
-                cartlist() {
+                cartlist: function() {
                     let count = 0
                     let cost = 0
                     for (item in this.cartlist) {
@@ -495,22 +495,22 @@
 
                 },
 
-                regTotal() {
+                regTotal(): function() {
                     this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
                 },
 
-                paymentComplete() {
+                paymentComplete(): function() {
                     this.$refs.submitButton.click();
                 },
 
 
-                formSuccess() {
+                formSuccess(): function() {
                     if (this.formSuccess === true) {
                         this.showModal = true
                     }
                 },
 
-                birth_date() {
+                birth_date(): function() {
                     var event = new Date(this.event_date)
                     var birthDate = new Date(this.birth_date)
                     var age = event.getFullYear() - birthDate.getFullYear()
