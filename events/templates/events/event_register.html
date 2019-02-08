@@ -342,7 +342,6 @@
                             currency="USD"
                             :button-style="aStyle"
                             :client="paypal"
-                            {# :items=[[checkoutList]] #}
                             env="sandbox"
                             v-on:payment-authorized="paymentAuthorized"
                             v-on:payment-completed="paymentCompleted"
@@ -387,7 +386,7 @@
                     formerrors: {},
                     formSuccess: '',
                     payment_cancelled: false,
-                    showcheckout: false,
+                    showcheckout: true,
                     showModal: false,
                     closeModal: "Cancel",
                     showPayPal: true,
