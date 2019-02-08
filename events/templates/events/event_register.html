@@ -465,7 +465,7 @@
 
             },
             watch: {
-                discountCode() {
+                discountCode: function() {
                     this.totalCost()
                     this.discountCodeSuccess = false
                     document.getElementById("id_form-0-discount_code").value = ""
