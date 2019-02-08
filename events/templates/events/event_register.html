@@ -510,7 +510,7 @@
                     }
                 },
 
-                birth_date() {
+                birth_date: function() {
                     var event = new Date(this.event_date)
                     var birthDate = new Date(this.birth_date)
                     var age = event.getFullYear() - birthDate.getFullYear()
