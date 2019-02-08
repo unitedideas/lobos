@@ -567,7 +567,7 @@
 
 
                         var formData = new FormData(forms),
-                            result = {event_date: this.event_date}
+                            result = {event_date: this.event_date};
                         for (var entry of formData.entries()) {
                             result[entry[0]] = entry[1];
                         }
