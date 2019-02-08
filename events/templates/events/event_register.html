@@ -365,105 +365,104 @@
         var app = new Vue({
             delimiters: ['[[', ']]'],
             el: '#app',
-            data() {
-                return {
-                    paypal: {
-                        sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
-                        production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
-                    },
-                    aStyle: {
-                        label: 'checkout',
-                        size: 'large',
-                        shape: 'rect',
-                        color: 'blue',
-                        tagline: 'false'
-                    },
-                    totalStr: "0.00",
-                    formList: [],
-                    count: 0,
-                    vue_form: "",
-                    formIsValid: false,
-                    paymentComplete: false,
-                    formerrors: {},
-                    formSuccess: '',
-                    payment_cancelled: false,
-                    showcheckout: true,
-                    showModal: false,
-                    closeModal: "Cancel",
-                    showPayPal: true,
-                    discountCode: "",
-                    discountCodeSuccess: "",
-                    allRiderTypes: "None",
-                    regTotal: 0.00,
-                    overallTotal: 0.00,
-                    hoodie_size_select: "",
-                    hat_size_select: "",
-                    shirt_size_select: "",
-                    merchTotal: 0,
-                    escort_required: "",
-                    birth_date: '',
-                    escort_needed: false,
-                    event_date: '{{ event.event_date | date:"F n, Y" }}',
-                    under_class_age: "",
-                    age_error: false,
-                    gender_class: false,
-                    gender_form: "",
-                    birthdate_wrong: false,
-                    birthdate_form: "",
+            data: {
+                paypal: {
+                    sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
+                    production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
+                },
+                aStyle: {
+                    label: 'checkout',
+                    size: 'large',
+                    shape: 'rect',
+                    color: 'blue',
+                    tagline: 'false'
+                },
+                totalStr: "0.00",
+                formList: [],
+                count: 0,
+                vue_form: "",
+                formIsValid: false,
+                paymentComplete: false,
+                formerrors: {},
+                formSuccess: '',
+                payment_cancelled: false,
+                showcheckout: true,
+                showModal: false,
+                closeModal: "Cancel",
+                showPayPal: true,
+                discountCode: "",
+                discountCodeSuccess: "",
+                allRiderTypes: "None",
+                regTotal: 0.00,
+                overallTotal: 0.00,
+                hoodie_size_select: "",
+                hat_size_select: "",
+                shirt_size_select: "",
+                merchTotal: 0,
+                escort_required: "",
+                birth_date: '',
+                escort_needed: false,
+                event_date: '{{ event.event_date | date:"F n, Y" }}',
+                under_class_age: "",
+                age_error: false,
+                gender_class: false,
+                gender_form: "",
+                birthdate_wrong: false,
+                birthdate_form: "",
 
-                    {#need to learn about objects#}
-                    hoodie: {
-                        price: {{ event.hoodie_cost }},
-                        size:
-                            [
-                                {'{{event.hoodie_osfa}}': "One Size Fits All"},
-                                {'{{event.hoodie_Xsmall}}': "X-Small"},
-                                {'{{event.hoodie_small}}': "Small"},
-                                {'{{event.hoodie_medium}}': 'Medium'},
-                                {'{{event.hoodie_large}}': 'Large'},
-                                {'{{event.hoodie_Xlarge}}': 'X-Large'},
-                                {'{{event.hoodie_Xlarge}}': 'XX-Large'},
-                                {'{{event.hoodie_Xlarge}}': 'XXX-Large'},
-                            ]
-                    },
-                    hat: {
-                        price: {{ event.hat_cost }},
-                        size:
-                            [
-                                {'{{event.hat_osfa}}': "One Size Fits All"},
-                                {'{{event.hat_Xsmall}}': "X-Small"},
-                                {'{{event.hat_small}}': "Small"},
-                                {'{{event.hat_medium}}': 'Medium'},
-                                {'{{event.hat_large}}': 'Large'},
-                                {'{{event.hat_Xlarge}}': 'X-Large'},
-                                {'{{event.hat_Xlarge}}': 'XX-Large'},
-                                {'{{event.hat_Xlarge}}': 'XXX-Large'},
-                            ]
-                    },
-                    shirt: {
-                        price: {{ event.shirt_cost }},
-                        size:
-                            [
-                                {'{{event.shirt_osfa}}': "One Size Fits All"},
-                                {'{{event.shirt_Xsmall}}': "X-Small"},
-                                {'{{event.shirt_small}}': "Small"},
-                                {'{{event.shirt_medium}}': 'Medium'},
-                                {'{{event.shirt_large}}': 'Large'},
-                                {'{{event.shirt_Xlarge}}': 'X-Large'},
-                                {'{{event.shirt_Xlarge}}': 'XX-Large'},
-                                {'{{event.shirt_Xlarge}}': 'XXX-Large'},
-                            ]
-                    },
+                {#need to learn about objects#}
+                hoodie: {
+                    price: {{ event.hoodie_cost }},
+                    size:
+                        [
+                            {'{{event.hoodie_osfa}}': "One Size Fits All"},
+                            {'{{event.hoodie_Xsmall}}': "X-Small"},
+                            {'{{event.hoodie_small}}': "Small"},
+                            {'{{event.hoodie_medium}}': 'Medium'},
+                            {'{{event.hoodie_large}}': 'Large'},
+                            {'{{event.hoodie_Xlarge}}': 'X-Large'},
+                            {'{{event.hoodie_Xlarge}}': 'XX-Large'},
+                            {'{{event.hoodie_Xlarge}}': 'XXX-Large'},
+                        ]
+                },
+                hat: {
+                    price: {{ event.hat_cost }},
+                    size:
+                        [
+                            {'{{event.hat_osfa}}': "One Size Fits All"},
+                            {'{{event.hat_Xsmall}}': "X-Small"},
+                            {'{{event.hat_small}}': "Small"},
+                            {'{{event.hat_medium}}': 'Medium'},
+                            {'{{event.hat_large}}': 'Large'},
+                            {'{{event.hat_Xlarge}}': 'X-Large'},
+                            {'{{event.hat_Xlarge}}': 'XX-Large'},
+                            {'{{event.hat_Xlarge}}': 'XXX-Large'},
+                        ]
+                },
+                shirt: {
+                    price: {{ event.shirt_cost }},
+                    size:
+                        [
+                            {'{{event.shirt_osfa}}': "One Size Fits All"},
+                            {'{{event.shirt_Xsmall}}': "X-Small"},
+                            {'{{event.shirt_small}}': "Small"},
+                            {'{{event.shirt_medium}}': 'Medium'},
+                            {'{{event.shirt_large}}': 'Large'},
+                            {'{{event.shirt_Xlarge}}': 'X-Large'},
+                            {'{{event.shirt_Xlarge}}': 'XX-Large'},
+                            {'{{event.shirt_Xlarge}}': 'XXX-Large'},
+                        ]
+                },
 
-                    hoodieqty: 1,
-                    hatqty: 1,
-                    shirtqty: 1,
-                    cartlist: [],
+                hoodieqty: 1,
+                hatqty: 1,
+                shirtqty: 1,
+                cartlist: [],
 
-                    hoodieCost: {{ event.hoodie_cost }},
-                    shirtCost: {{ event.shirt_cost }},
-                    hatCost: {{ event.hat_cost }},
-                }
+                hoodieCost: {{ event.hoodie_cost }},
+                shirtCost: {{ event.shirt_cost }},
+                hatCost: {{ event.hat_cost }},
+
             },
             watch: {
                 discountCode() {
