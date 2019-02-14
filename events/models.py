@@ -205,7 +205,7 @@ class RiderProfile(models.Model):
     zip_code = models.CharField('Zip Code', max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField('Emergency Contact Name', max_length=300, null=True, blank=True)
     emergency_contact_phone = models.CharField('Emergency Contact Phone', max_length=10, null=True, blank=True)
-    bike_make = models.CharField('Bike Manufacturer', max_length=20, choices=MAKES)
+    bike_make = models.CharField('Bike Manufacturer (required)', max_length=20, choices=MAKES)
     bike_displacement = models.IntegerField('Bike Displacement', null=True, blank=True)
     escort_name = models.CharField(
         'Escort’s Name: (Must register as Escort Rider) Required for riders under 16 on the day of the event',

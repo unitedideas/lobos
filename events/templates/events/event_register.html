@@ -31,12 +31,27 @@
 
                     <div style="margin-right: 15px;" class="row">
                         <div v-for="form in formList" class="container">
-                            <div style="background-color: #ffe673; padding: 5px; border-top-left-radius:5px; border-top-right-radius:5px; margin: 20px 15px 0px 15px">
+                            <div style="background-color: #ffe673; padding: 5px; border-radius:5px; margin: 20px 15px 0px 15px">
                                 <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
+                                <div style="background-color: #ffe673; padding: 0px 25px 25px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
+                                     v-html="form">
+                                </div>
+                                <div style="text-align: center ">
+                                    <h3>Discount Code:
+                                        <input style="width: 10%" type="text" name="discount_code"
+                                               placeholder="" v-model="discountCode">
+                                    </h3>
+                                    <transition name="fade">
+                                        <h4 v-if="discountCodeSuccess" style="color: green">Your discount was
+                                            applied</h4>
+                                        <h4 v-else-if="discountCodeSuccess == false && discountCode != ''"
+                                            style="color: red">
+                                            This is not a valid code</h4>
+                                        <h4 v-else></h4>
+                                    </transition>
+                                </div>
                             </div>
-                            <div style="background-color: #ffe673; padding: 0px 25px 25px 25px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
-                                 v-html="form">
-                            </div>
+
                         </div>
                         <br>
                         <div class="container" style="padding: 0px 30px 0px 30px">
@@ -71,6 +86,7 @@
                             <div v-for="value, index in item">
                                 <div v-for="error in value">
                                     <h4>Rider Form [[form+1]]: The [[ index | capitalize ]] [[error | removeThis]]</h4>
+
                                 </div>
                             </div>
                         </div>
@@ -128,16 +144,7 @@
                     </h4>
                     <div>
                         <h3>Registration Total: $[[regTotal]]</h3>
-                        <h3>Rain Check Code:
-                            <input style="width: 10%" type="text" name="discount_code"
-                                   placeholder="" v-model="discountCode">
-                        </h3>
-                        <transition name="fade">
-                            <h4 v-if="discountCodeSuccess" style="color: green">Your discount was applied</h4>
-                            <h4 v-else-if="discountCodeSuccess == false && discountCode != ''" style="color: red">This
-                                is not a valid code</h4>
-                            <h4 v-else></h4>
-                        </transition>
+
                     </div>
                     <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
                         Checkout
