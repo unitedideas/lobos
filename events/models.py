@@ -130,8 +130,7 @@ class RiderProfile(models.Model):
     AM30 = '30 AM'
     EX30 = '30 EX'
     AM40 = '40 AM'
-    EXAM40 = '40 EX-AM'
-    EXEX40 = '40 EX-EX'
+    EXEX40 = '40 EX'
     EX50 = '50 EX'
     AM50 = '50 AM'
     SSMN = 'Sportsman'
@@ -157,7 +156,6 @@ class RiderProfile(models.Model):
             (AMO16 + OAM, OAM),
             (AMO16 + AM250, AM250),
             (AMO16 + AM30, AM30),
-            (AMO16 + EXAM40, EXAM40),
             (AMO16 + AM40, AM40),
             (AMO16 + AM50, AM50),
             (AMO16 + EX50, EX50),

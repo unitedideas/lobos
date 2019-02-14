@@ -36,20 +36,7 @@
                                 <div style="background-color: #ffe673; padding: 0px 25px 25px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
                                      v-html="form">
                                 </div>
-                                <div style="text-align: center ">
-                                    <h3>Discount Code:
-                                        <input style="width: 10%" type="text" name="discount_code"
-                                               placeholder="" v-model="discountCode">
-                                    </h3>
-                                    <transition name="fade">
-                                        <h4 v-if="discountCodeSuccess" style="color: green">Your discount was
-                                            applied</h4>
-                                        <h4 v-else-if="discountCodeSuccess == false && discountCode != ''"
-                                            style="color: red">
-                                            This is not a valid code</h4>
-                                        <h4 v-else></h4>
-                                    </transition>
-                                </div>
+
                             </div>
 
                         </div>
@@ -144,7 +131,20 @@
                     </h4>
                     <div>
                         <h3>Registration Total: $[[regTotal]]</h3>
-
+<div style="text-align: center ">
+                                    <h3>Discount Code:
+                                        <input style="width: 10%" type="text" name="discount_code"
+                                               placeholder="" v-model="discountCode">
+                                    </h3>
+                                    <transition name="fade">
+                                        <h4 v-if="discountCodeSuccess" style="color: green">Your discount was
+                                            applied</h4>
+                                        <h4 v-else-if="discountCodeSuccess == false && discountCode != ''"
+                                            style="color: red">
+                                            This is not a valid code</h4>
+                                        <h4 v-else></h4>
+                                    </transition>
+                                </div>
                     </div>
                     <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
                         Checkout
@@ -397,7 +397,8 @@
                 showModal: false,
                 closeModal: "Cancel",
                 showPayPal: true,
-                discountCode: "",
+                {#discountCode: "",#}
+                discountCode: [],
                 discountCodeSuccess: "",
                 allRiderTypes: "None",
                 regTotal: 0.00,
@@ -477,7 +478,6 @@
                     this.discountCodeSuccess = false
                     document.getElementById("id_form-0-discount_code").value = ""
                     if (this.discountCode in {{ codes|safe }}) {
-                        console.log({{ codes|safe }}[this.discountCode])
                         let discount = 1 - {{ codes|safe }}[this.discountCode]
                         {#    insert discount total price here    #}
                         this.regTotal = (Number(this.regTotal) * discount).toFixed(2)
@@ -632,7 +632,6 @@
                         }
                         this.regTotal = total.toFixed(2)
                         this.showcheckout = true
-                        {#this.discountCode = ''#}
 
                     },
 
