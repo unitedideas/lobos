@@ -482,7 +482,6 @@
                         let discount = 50
                         {#    insert discount total price here    #}
                         {#this.regTotal = (Number(this.regTotal) * discount).toFixed(2)#}
-                        {# need to change the  -  to * #}
                         this.regTotal = (Number(this.regTotal) - discount).toFixed(2)
                         this.discountCodeSuccess = true
                         document.getElementById("id_form-0-discount_code").value = this.discountCode
