@@ -93,7 +93,7 @@ def general_email(subject, header, subheader, emailmessage, recipients):
 
 
 def home(request):
-    events = Event.objects.all().order_by('-event_date')[0:3]
+    events = Event.objects.all().order_by('-event_date')[0:2]
     event_name = events.values_list('event_name', flat=True)
     event_dates = events.values_list('event_date', flat=True)
     year_list = []
