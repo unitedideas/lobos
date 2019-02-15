@@ -112,10 +112,13 @@
                 <transition name="fade">
                     <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-white">
                         <div id="v-for-formerrors">
-                            <div>
-                                <h3>[[escort_required]] additional Escort Riders are required to register based on the
-                                    birth
-                                    dates provided.</h3>
+                            <div v-if='[[escort_required]] == 1'>
+                                <h3>At least [[escort_required]] Escort Rider is required to register based on the
+                                    birth dates provided.</h3>
+                            </div>
+                            <div v-if='[[escort_required]] > 1'>
+                                <h3>At least [[escort_required]] Escort Riders are required to register based on the
+                                    birth dates provided.</h3>
                             </div>
                         </div>
                     </div>
