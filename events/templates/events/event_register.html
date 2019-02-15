@@ -131,20 +131,20 @@
                     </h4>
                     <div>
                         <h3>Registration Total: $[[regTotal]]</h3>
-                        <div style="text-align: center ">
-                            <h3>Discount Code:
-                                <input style="width: 10%" type="text" name="discount_code"
-                                       placeholder="" v-model="discountCode">
-                            </h3>
-                            <transition name="fade">
-                                <h4 v-if="discountCodeSuccess" style="color: green">Your discount was
-                                    applied</h4>
-                                <h4 v-else-if="discountCodeSuccess == false && discountCode != ''"
-                                    style="color: red">
-                                    This is not a valid code</h4>
-                                <h4 v-else></h4>
-                            </transition>
-                        </div>
+{#                        <div style="text-align: center ">#}
+{#                            <h3>Discount Code:#}
+{#                                <input style="width: 10%" type="text" name="discount_code"#}
+{#                                       placeholder="" v-model="discountCode">#}
+{#                            </h3>#}
+{#                            <transition name="fade">#}
+{#                                <h4 v-if="discountCodeSuccess" style="color: green">Your discount was#}
+{#                                    applied</h4>#}
+{#                                <h4 v-else-if="discountCodeSuccess == false && discountCode != ''"#}
+{#                                    style="color: red">#}
+{#                                    This is not a valid code</h4>#}
+{#                                <h4 v-else></h4>#}
+{#                            </transition>#}
+{#                        </div>#}
                     </div>
                     <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
                         Checkout
@@ -485,8 +485,6 @@
                         this.regTotal = (Number(this.regTotal) - discount).toFixed(2)
                         this.discountCodeSuccess = true
                         document.getElementById("id_form-0-discount_code").value = this.discountCode
-
-
                     }
                 },
 
