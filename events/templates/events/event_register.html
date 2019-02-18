@@ -612,7 +612,11 @@
                                 total +=
                                 {{ event.escort_rider_cost }}
 
-                            } else if (allRiderTypes[i].includes('Class 60 and 70')) {
+                            } else if (allRiderTypes[i].includes('60')) {
+                                total +=
+                                {{ event.class_60_and_class_70_cost }}
+
+                            }else if (allRiderTypes[i].includes('70')) {
                                 total +=
                                 {{ event.class_60_and_class_70_cost }}
 
