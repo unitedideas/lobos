@@ -71,6 +71,29 @@
                 <p><b>Entry closes: </b> {{ detail.9 }}</p>
                 <p><b>Details:</b> {{ detail.3 | safe }}</p>
             </div>
+{#            <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">#}
+{#                {% if detail.13 == False %}#}
+{#                    <h2>{{ detail.0 }} {{ detail.1 }} </h2>#}
+{#                {% else %}#}
+{#                    {% if detail.11 <= 0 %}#}
+{#                        <h2>The race is sold out!</h2>#}
+{#                    {% elif detail.12 <= 0 %}#}
+{#                        <h2>Race results coming soon</h2>#}
+{#                    {% elif detail.12 > 1 %}#}
+{#                        <h2>{{ detail.12 }} Days Until Race Day!</h2>#}
+{#                        <br>#}
+{#                        <a name="register_button" class="btn btn-md btn-primary"#}
+{#                           href="/event-registration/?event={{ detail.0 }}" role="button"#}
+{#                           methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>#}
+{#                    {% elif detail.12 == 1 %}#}
+{#                        <h2>{{ detail.12 }} Day Left!</h2>#}
+{#                        <br>#}
+{#                        <a class="btn btn-md btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"#}
+{#                           methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>#}
+{#                    {% endif %}#}
+{#                {% endif %}#}
+{#            </div>#}
+            {# changed to active #}
             <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">
                 {% if detail.13 == False %}
                     <h2>{{ detail.0 }} {{ detail.1 }} </h2>
@@ -83,12 +106,12 @@
                         <h2>{{ detail.12 }} Days Until Race Day!</h2>
                         <br>
                         <a name="register_button" class="btn btn-md btn-primary"
-                           href="/event-registration/?event={{ detail.0 }}" role="button"
+                           href="https://endurancecui.active.com/new/error?e4p=b3295399-9b94-4dc1-b977-229bfb90dfa6&e4ts=1550474736&e4q=5fb50999-7388-4959-9229-4b7e9f198347&e4c=active&e4e=snawe00000000&e4h=ace2db57ffc42116fff8a7ba3e83cb2c&e4rt=Safetynet&_p=46141868736983405" role="button"
                            methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
                     {% elif detail.12 == 1 %}
                         <h2>{{ detail.12 }} Day Left!</h2>
                         <br>
-                        <a class="btn btn-md btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"
+                        <a class="btn btn-md btn-primary" href="https://endurancecui.active.com/new/error?e4p=b3295399-9b94-4dc1-b977-229bfb90dfa6&e4ts=1550474736&e4q=5fb50999-7388-4959-9229-4b7e9f198347&e4c=active&e4e=snawe00000000&e4h=ace2db57ffc42116fff8a7ba3e83cb2c&e4rt=Safetynet&_p=46141868736983405" role="button"
                            methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
                     {% endif %}
                 {% endif %}
