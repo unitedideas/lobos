@@ -54,15 +54,15 @@
     {% for detail in events_details %}
         <div class="jumbotron row" id="jumbo" style="margin: 10px 0px 30px 0px">
             <div class="col-md-6">
-{#                {% if detail.12 > 0 %}#}
-{#                    {% if detail.11 > 1 %}#}
-{#                        <h2>{{ detail.11 }} Spots Remaining!</h2>#}
-{#                    {% elif detail.11 == 1 %}#}
-{#                        <h2>{{ detail.11 }} Spot Remaining!</h2>#}
-{#                    {% else %}#}
-{##}
-{#                    {% endif %}#}
-{#                {% endif %}#}
+                {#                {% if detail.12 > 0 %}#}
+                {#                    {% if detail.11 > 1 %}#}
+                {#                        <h2>{{ detail.11 }} Spots Remaining!</h2>#}
+                {#                    {% elif detail.11 == 1 %}#}
+                {#                        <h2>{{ detail.11 }} Spot Remaining!</h2>#}
+                {#                    {% else %}#}
+                {##}
+                {#                    {% endif %}#}
+                {#                {% endif %}#}
                 <p>{{ detail.6 | safe }}</p>
                 <p><b>Date: </b> {{ detail.2 | date:"F d Y" }}</p>
                 <p><b>Escort Rider: </b> ${{ detail.10 }}</p>
@@ -71,28 +71,28 @@
                 <p><b>Entry closes: </b> {{ detail.9 }}</p>
                 <p><b>Details:</b> {{ detail.3 | safe }}</p>
             </div>
-{#            <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">#}
-{#                {% if detail.13 == False %}#}
-{#                    <h2>{{ detail.0 }} {{ detail.1 }} </h2>#}
-{#                {% else %}#}
-{#                    {% if detail.11 <= 0 %}#}
-{#                        <h2>The race is sold out!</h2>#}
-{#                    {% elif detail.12 <= 0 %}#}
-{#                        <h2>Race results coming soon</h2>#}
-{#                    {% elif detail.12 > 1 %}#}
-{#                        <h2>{{ detail.12 }} Days Until Race Day!</h2>#}
-{#                        <br>#}
-{#                        <a name="register_button" class="btn btn-md btn-primary"#}
-{#                           href="/event-registration/?event={{ detail.0 }}" role="button"#}
-{#                           methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>#}
-{#                    {% elif detail.12 == 1 %}#}
-{#                        <h2>{{ detail.12 }} Day Left!</h2>#}
-{#                        <br>#}
-{#                        <a class="btn btn-md btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"#}
-{#                           methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>#}
-{#                    {% endif %}#}
-{#                {% endif %}#}
-{#            </div>#}
+            {#            <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">#}
+            {#                {% if detail.13 == False %}#}
+            {#                    <h2>{{ detail.0 }} {{ detail.1 }} </h2>#}
+            {#                {% else %}#}
+            {#                    {% if detail.11 <= 0 %}#}
+            {#                        <h2>The race is sold out!</h2>#}
+            {#                    {% elif detail.12 <= 0 %}#}
+            {#                        <h2>Race results coming soon</h2>#}
+            {#                    {% elif detail.12 > 1 %}#}
+            {#                        <h2>{{ detail.12 }} Days Until Race Day!</h2>#}
+            {#                        <br>#}
+            {#                        <a name="register_button" class="btn btn-md btn-primary"#}
+            {#                           href="/event-registration/?event={{ detail.0 }}" role="button"#}
+            {#                           methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>#}
+            {#                    {% elif detail.12 == 1 %}#}
+            {#                        <h2>{{ detail.12 }} Day Left!</h2>#}
+            {#                        <br>#}
+            {#                        <a class="btn btn-md btn-primary" href="/event-registration/?event={{ detail.0 }}" role="button"#}
+            {#                           methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>#}
+            {#                    {% endif %}#}
+            {#                {% endif %}#}
+            {#            </div>#}
             {# changed to active #}
             <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">
                 {% if detail.13 == False %}
@@ -111,12 +111,15 @@
                     {% elif detail.12 == 1 %}
                         <h2>{{ detail.12 }} Day Left!</h2>
                         <br>
-                        <a class="btn btn-md btn-primary" href="https://endurancecui.active.com/event-reg/select-race?e=60346151" role="button"
+                        <a class="btn btn-md btn-primary"
+                           href="https://endurancecui.active.com/event-reg/select-race?e=60346151" role="button"
                            methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
                     {% endif %}
                 {% endif %}
             </div>
-        <h2 style="text-align: center">During Registration be sure to uncheck any free offer buttons</h2>
+            <div>
+                <h2 style="text-align: center">During Registration be sure to uncheck any free offer buttons</h2>
+            </div>
             <div style="float: right; margin-top: 30px; text-align: center" class="col-md-5">
                 <p><b>{{ detail.4 }}</b></p>
                 <p>{{ detail.5 | safe }}</p>
