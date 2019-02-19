@@ -54,15 +54,15 @@
     {% for detail in events_details %}
         <div class="jumbotron row" id="jumbo" style="margin: 10px 0px 30px 0px">
             <div class="col-md-6">
-                {% if detail.12 > 0 %}
-                    {% if detail.11 > 1 %}
-                        <h2>{{ detail.11 }} Spots Remaining!</h2>
-                    {% elif detail.11 == 1 %}
-                        <h2>{{ detail.11 }} Spot Remaining!</h2>
-                    {% else %}
-
-                    {% endif %}
-                {% endif %}
+{#                {% if detail.12 > 0 %}#}
+{#                    {% if detail.11 > 1 %}#}
+{#                        <h2>{{ detail.11 }} Spots Remaining!</h2>#}
+{#                    {% elif detail.11 == 1 %}#}
+{#                        <h2>{{ detail.11 }} Spot Remaining!</h2>#}
+{#                    {% else %}#}
+{##}
+{#                    {% endif %}#}
+{#                {% endif %}#}
                 <p>{{ detail.6 | safe }}</p>
                 <p><b>Date: </b> {{ detail.2 | date:"F d Y" }}</p>
                 <p><b>Escort Rider: </b> ${{ detail.10 }}</p>
