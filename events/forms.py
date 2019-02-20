@@ -125,9 +125,9 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            formset=BaseRiderProfileFormSet,
                                            widgets=
                                            {
-                                               'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
-                                               'emergency_contact_phone': NumberInput(
-                                                   attrs={'placeholder': 'Example: 222333444'}),
+                                               # 'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
+                                               # 'emergency_contact_phone': NumberInput(
+                                               #     attrs={'placeholder': 'Example: 222333444'}),
                                                'birth_date': DateInput(attrs={'v-model': 'birth_date', 'type': 'date',
                                                                               'placeholder': 'Example: 12/14/1980'}),
                                                'escort_name': forms.TextInput(attrs={
@@ -138,4 +138,5 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'merchandise_ordered': forms.HiddenInput(),
                                                'discount_code': forms.HiddenInput(),
 
-                                           })
+                                           }
+                                           )

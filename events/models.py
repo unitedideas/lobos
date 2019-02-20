@@ -204,14 +204,15 @@ class RiderProfile(models.Model):
     emergency_contact_name = models.CharField('Emergency Contact Name', max_length=300, null=True, blank=True)
     emergency_contact_phone = models.CharField('Emergency Contact Phone', max_length=10, null=True, blank=True)
     bike_make = models.CharField('Bike Manufacturer (required)', max_length=20, choices=MAKES)
-    bike_displacement = models.CharField('Bike Displacement',max_length=10, null=True, blank=True)
+    bike_displacement = models.CharField('Bike Displacement', max_length=10, null=True, blank=True)
     escort_name = models.CharField(
         'Escort’s Name: (Must register as Escort Rider) Required for riders under 16 on the day of the event',
         max_length=300, null=True, blank=True)
     group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
                                   null=True, blank=True)
     merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)
-    registration_date_time = models.DateTimeField('Created Time', editable=True, null=True, blank=True,auto_now_add=True)
+    registration_date_time = models.DateTimeField('Created Time', editable=True, null=True, blank=True,
+                                                  auto_now_add=True)
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     discount_code = models.CharField(max_length=100, null=True, blank=True)
     start_time = models.TimeField(max_length=30, null=True, blank=True)
