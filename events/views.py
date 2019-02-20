@@ -306,7 +306,6 @@ def error_checking(request):
     event_date = ddt.date(event_date)
     form_count = 0
     formset = RiderProfileFormSet(forms)
-
     if formset.is_valid():
         # calc age
         for form in formset:
@@ -642,20 +641,23 @@ def event_formset(request):
 
 
 def prefill_form(request):
-    form_fill_dict = {}
-    profile_field_names = []
-    prof = request.user.profile
+    # form_fill_dict = {}
+    # profile_field_names = []
+    # prof = request.user.profile
 
-    for field in Profile._meta.get_fields():
-        if field.name is not 'id':
-            profile_field_names.append(field.name)
-            field = str(field.name)
-            form_fill_dict[field] = getattr(prof, field)
+    # for field in Profile._meta.get_fields():
+    #     if field.name is not 'id':
+    #         profile_field_names.append(field.name)
+    #         field = str(field.name)
+    #         form_fill_dict[field] = getattr(prof, field)
 
-    user_field_names = ['first_name', 'last_name', 'email']
-    user_prof = request.user
-    for field in User._meta.get_fields():
-        field = str(field.name)
-        if field in user_field_names:
-            form_fill_dict[field] = getattr(user_prof, field)
-    return RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[form_fill_dict])
+    # user_field_names = ['first_name', 'last_name', 'email']
+    # user_prof = request.user
+    # for field in User._meta.get_fields():
+    #     field = str(field.name)
+    #     if field in user_field_names:
+    #         form_fill_dict[field] = getattr(user_prof, field)
+    # print(form_fill_dict)
+    # print(RiderProfileFormSet(queryset=RiderProfile.objects.none()))
+    # return RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[form_fill_dict])
+    return RiderProfileFormSet(queryset=RiderProfile.objects.none())
