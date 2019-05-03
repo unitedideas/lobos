@@ -246,6 +246,13 @@ def profile(request):
     return render(request, 'events/profile.html', args)
 
 
+def merchandise(request):
+    args = {'xsShirtQtyRemaining': request.user, 'sShirtQtyRemaining': request.user, 'mShirtQtyRemaining': request.user, 'lShirtQtyRemaining': request.user, 'xlShirtQtyRemaining': request.user,
+            'xxlShirtQtyRemaining': request.user,  'xxxlShirtQtyRemaining': request.user, 'xsHoodieQtyRemaining': request.user, 'sHoodieQtyRemaining': request.user, 'mHoodieQtyRemaining': request.user,
+            'lHoodieQtyRemaining': request.user, 'xlHoodieQtyRemaining': request.user, 'xxlHoodieQtyRemaining': request.user,'xxxlHoodieQtyRemaining': request.user}
+    return render(request, 'events/merchandise.html', args)
+
+
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
@@ -410,17 +417,16 @@ def error_checking(request):
         #     content["age_error"] = True
 
         for age in age_set:
-            if (y < age and y >=16) or (y == age and m < 0) or (y == age and m == 0 and d < 0):
+            if (y < age and y >= 16) or (y == age and m < 0) or (y == age and m == 0 and d < 0):
                 if (age == 30 and rider_class in class_list_under_30) or \
-                    (age == 40 and rider_class in class_list_under_40) or \
-                    (age == 50 and rider_class in class_list_under_50) or \
-                    (age == 60 and rider_class in class_list_under_60) or \
-                    (age == 70 and rider_class in class_list_under_70):
+                        (age == 40 and rider_class in class_list_under_40) or \
+                        (age == 50 and rider_class in class_list_under_50) or \
+                        (age == 60 and rider_class in class_list_under_60) or \
+                        (age == 70 and rider_class in class_list_under_70):
                     print('RIDER CLASS NOT GOOD... less than age ' + str(age) + " rider in " + rider_class)
                     content['under_class_age'] = {"age": age, "rider_class": rider_class, 'form': form_count}
                     content["age_error"] = True
                     # return JsonResponse(content)
-
 
         if gender == 'Male' and (rider_class == 'Amateur under 16 Women' or rider_class == "Amateur 16 and over Women"):
             print('RIDER CLASS NOT GOOD... ' + gender + " in " + rider_class)
