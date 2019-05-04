@@ -35,41 +35,90 @@ class Event(models.Model):
     hoodie = models.BooleanField('Check the box if there is hoodie merchandise', default=False)
     hoodie_image_file_name = models.CharField(max_length=300, null=True, blank=True)
     hoodie_main_description = models.CharField(max_length=300, null=True, blank=True)
-    hoodie_cost = models.IntegerField(default=False)
+    hoodie_cost = models.IntegerField(null=True, blank=True, default=0)
     hoodie_osfa = models.BooleanField(default=False)
-    hoodie_Xsmall = models.BooleanField(default=False)
-    hoodie_small = models.BooleanField(default=False)
-    hoodie_medium = models.BooleanField(default=False)
-    hoodie_large = models.BooleanField(default=False)
-    hoodie_Xlarge = models.BooleanField(default=False)
-    hoodie_XXlarge = models.BooleanField(default=False)
-    hoodie_XXXlarge = models.BooleanField(default=False)
+    hoodie_Osfa_Qty = models.IntegerField(default=0)
 
+    hoodie_Xsmall = models.BooleanField(default=False)
+    hoodie_Xsmall_Qty = models.IntegerField(default=0)
+
+    hoodie_small = models.BooleanField(default=False)
+    hoodie_small_Qty = models.IntegerField(default=0)
+
+    hoodie_medium = models.BooleanField(default=False)
+    hoodie_medium_Qty = models.IntegerField(default=0)
+
+    hoodie_large = models.BooleanField(default=False)
+    hoodie_large_Qty = models.IntegerField(default=0)
+
+    hoodie_Xlarge = models.BooleanField(default=False)
+    hoodie_Xlarge_Qty = models.IntegerField(default=0)
+
+    hoodie_XXlarge = models.BooleanField(default=False)
+    hoodie_XXlarge_Qty = models.IntegerField(default=0)
+
+    hoodie_XXXlarge = models.BooleanField(default=False)
+    hoodie_XXXlarge_Qty = models.IntegerField(default=0)
+    
+    
     hat = models.BooleanField('Check the box if there is hat merchandise', default=False)
     hat_image_file_name = models.CharField(max_length=300, null=True, blank=True)
     hat_main_description = models.CharField(max_length=300, null=True, blank=True)
-    hat_cost = models.IntegerField(null=True, blank=True)
+    hat_cost = models.IntegerField(null=True, blank=True, default=0)
     hat_osfa = models.BooleanField(default=False)
+    hat_Osfa_Qty = models.IntegerField(default=0)
+
+    
     hat_Xsmall = models.BooleanField(default=False)
+    hat_Xsmall_Qty = models.IntegerField(default=0)
+    
     hat_small = models.BooleanField(default=False)
+    hat_small_Qty = models.IntegerField(default=0)
+
     hat_medium = models.BooleanField(default=False)
+    hat_medium_Qty = models.IntegerField(default=0)
+
     hat_large = models.BooleanField(default=False)
+    hat_large_Qty = models.IntegerField(default=0)
+
     hat_Xlarge = models.BooleanField(default=False)
+    hat_Xlarge_Qty = models.IntegerField(default=0)
+
     hat_XXlarge = models.BooleanField(default=False)
+    hat_XXlarge_Qty = models.IntegerField(default=0)
+
     hat_XXXlarge = models.BooleanField(default=False)
+    hat_XXXlarge_Qty = models.IntegerField(default=0)
+
 
     shirt = models.BooleanField('Check the box if there is shirt merchandise', default=False)
     shirt_image_file_name = models.CharField(max_length=300, null=True, blank=True)
     shirt_main_description = models.CharField(max_length=300, null=True, blank=True)
-    shirt_cost = models.IntegerField(default=False)
+    shirt_cost = models.IntegerField(null=True, blank=True, default=0)
+    
     shirt_osfa = models.BooleanField(default=False)
+    shirt_Osfa_Qty = models.IntegerField(default=0)
+
     shirt_Xsmall = models.BooleanField(default=False)
+    shirt_Xsmall_Qty = models.IntegerField(default=0)
+
     shirt_small = models.BooleanField(default=False)
+    shirt_small_Qty = models.IntegerField(default=0)
+
     shirt_medium = models.BooleanField(default=False)
+    shirt_medium_Qty = models.IntegerField(default=0)
+
     shirt_large = models.BooleanField(default=False)
+    shirt_large_Qty = models.IntegerField(default=0)
+
     shirt_Xlarge = models.BooleanField(default=False)
+    shirt_Xlarge_Qty = models.IntegerField(default=0)
+
     shirt_XXlarge = models.BooleanField(default=False)
+    shirt_XXlarge_Qty = models.IntegerField(default=0)
+
     shirt_XXXlarge = models.BooleanField(default=False)
+    shirt_XXXlarge_Qty = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]

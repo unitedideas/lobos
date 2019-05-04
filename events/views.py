@@ -247,7 +247,7 @@ def profile(request):
 
 
 def merchandise(request):
-    args = {'xsShirtQtyRemaining': request.user, 'sShirtQtyRemaining': request.user, 'mShirtQtyRemaining': request.user, 'lShirtQtyRemaining': request.user, 'xlShirtQtyRemaining': request.user,
+    args = {'xsShirtQtyRemaining': request, 'sShirtQtyRemaining': request.user, 'mShirtQtyRemaining': request.user, 'lShirtQtyRemaining': request.user, 'xlShirtQtyRemaining': request.user,
             'xxlShirtQtyRemaining': request.user,  'xxxlShirtQtyRemaining': request.user, 'xsHoodieQtyRemaining': request.user, 'sHoodieQtyRemaining': request.user, 'mHoodieQtyRemaining': request.user,
             'lHoodieQtyRemaining': request.user, 'xlHoodieQtyRemaining': request.user, 'xxlHoodieQtyRemaining': request.user,'xxxlHoodieQtyRemaining': request.user}
     return render(request, 'events/merchandise.html', args)
