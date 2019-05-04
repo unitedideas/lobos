@@ -59,8 +59,7 @@ class Event(models.Model):
 
     hoodie_XXXlarge = models.BooleanField(default=False)
     hoodie_XXXlarge_Qty = models.IntegerField(default=0)
-    
-    
+
     hat = models.BooleanField('Check the box if there is hat merchandise', default=False)
     hat_image_file_name = models.CharField(max_length=300, null=True, blank=True)
     hat_main_description = models.CharField(max_length=300, null=True, blank=True)
@@ -68,10 +67,9 @@ class Event(models.Model):
     hat_osfa = models.BooleanField(default=False)
     hat_Osfa_Qty = models.IntegerField(default=0)
 
-    
     hat_Xsmall = models.BooleanField(default=False)
     hat_Xsmall_Qty = models.IntegerField(default=0)
-    
+
     hat_small = models.BooleanField(default=False)
     hat_small_Qty = models.IntegerField(default=0)
 
@@ -90,12 +88,11 @@ class Event(models.Model):
     hat_XXXlarge = models.BooleanField(default=False)
     hat_XXXlarge_Qty = models.IntegerField(default=0)
 
-
     shirt = models.BooleanField('Check the box if there is shirt merchandise', default=False)
     shirt_image_file_name = models.CharField(max_length=300, null=True, blank=True)
     shirt_main_description = models.CharField(max_length=300, null=True, blank=True)
     shirt_cost = models.IntegerField(null=True, blank=True, default=0)
-    
+
     shirt_osfa = models.BooleanField(default=False)
     shirt_Osfa_Qty = models.IntegerField(default=0)
 
