@@ -21,9 +21,16 @@
 {% endblock %}
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-        {% for key,value in shirts.items %}
-            <p>{{ key }}</p>
-            <p>{{ value }}</p>
+        {% for key, value in args.items %}
+            <div>
+                {{ key }}
+                <select name="{{ key }}" id="{{ key }}">
+                    {% for k,v in value.items %}
+                        <option value="{{ k }}">{{ k }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
         {% endfor %}
     </div>
 {% endblock %}

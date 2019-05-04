@@ -249,7 +249,7 @@ def profile(request):
 def merchandise(request):
     # print(Event.objects.all().values_list('shirt_Xsmall_Qty',flat=True)[0])
     shirts = {
-        'shirt_Xsmall_Qty': Event.objects.all().values_list('shirt_Xsmall_Qty', flat=True)[0],
+        'XS Shirt': Event.objects.all().values_list('shirt_Xsmall_Qty', flat=True)[0],
         'shirt_small_Qty': Event.objects.all().values_list('shirt_small_Qty', flat=True)[0],
         'shirt_medium_Qty': Event.objects.all().values_list('shirt_medium_Qty', flat=True)[0],
         'shirt_large_Qty': Event.objects.all().values_list('shirt_large_Qty', flat=True)[0],
@@ -257,7 +257,8 @@ def merchandise(request):
         'shirt_XXlarge_Qty': Event.objects.all().values_list('shirt_XXlarge_Qty', flat=True)[0],
         'shirt_XXXlarge_Qty': Event.objects.all().values_list('shirt_XXXlarge_Qty', flat=True)[0],
     }
-    hoodies = {   'hoodie_Xsmall_Qty': Event.objects.all().values_list('hoodie_Xsmall_Qty', flat=True)[0],
+    hoodies = {
+        'hoodie_Xsmall_Qty': Event.objects.all().values_list('hoodie_Xsmall_Qty', flat=True)[0],
         'hoodie_small_Qty': Event.objects.all().values_list('hoodie_small_Qty', flat=True)[0],
         'hoodie_medium_Qty': Event.objects.all().values_list('hoodie_medium_Qty', flat=True)[0],
         'hoodie_large_Qty': Event.objects.all().values_list('hoodie_large_Qty', flat=True)[0],
@@ -265,7 +266,9 @@ def merchandise(request):
         'hoodie_XXlarge_Qty': Event.objects.all().values_list('hoodie_XXlarge_Qty', flat=True)[0],
         'hoodie_XXXlarge_Qty': Event.objects.all().values_list('hoodie_XXXlarge_Qty', flat=True)[0],
     }
-    hats = {   'hat_Xsmall_Qty': Event.objects.all().values_list('hat_Xsmall_Qty', flat=True)[0],
+    hats = {
+        'hat_Osfa_Qty': Event.objects.all().values_list('hat_Xsmall_Qty', flat=True)[0],
+        'hat_Xsmall_Qty': Event.objects.all().values_list('hat_Xsmall_Qty', flat=True)[0],
         'hat_small_Qty': Event.objects.all().values_list('hat_small_Qty', flat=True)[0],
         'hat_medium_Qty': Event.objects.all().values_list('hat_medium_Qty', flat=True)[0],
         'hat_large_Qty': Event.objects.all().values_list('hat_large_Qty', flat=True)[0],
@@ -273,7 +276,9 @@ def merchandise(request):
         'hat_XXlarge_Qty': Event.objects.all().values_list('hat_XXlarge_Qty', flat=True)[0],
         'hat_XXXlarge_Qty': Event.objects.all().values_list('hat_XXXlarge_Qty', flat=True)[0]
     }
-    return render(request, 'events/merchandise.html', {'shirts': shirts,'hoodies': hoodies, 'hats':hats})
+    args = {'shirts': shirts, 'hoodies': hoodies, 'hats': hats}
+
+    return render(request, 'events/merchandise.html', {'args': args})
 
 
 def edit_profile(request):
