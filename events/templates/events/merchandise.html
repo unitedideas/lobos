@@ -1,34 +1,43 @@
 {% extends 'base.html' %}
-{% block head %}
-    <title>Lobos Merch</title>
-    <script language="javascript" type="text/javascript">
-        function isIE() {
-            const ua = navigator.userAgent;
-            /* MSIE used to detect old browsers and Trident used to newer ones*/
-            const is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+<head>
+    <!-- jQuery for PayPal -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-            return is_ie;
-        }
+    {% block head %}
+        <title>Lobos Merch</title>
+        <script language="javascript" type="text/javascript">
+            function isIE() {
+                const ua = navigator.userAgent;
+                /* MSIE used to detect old browsers and Trident used to newer ones*/
+                const is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
 
-        /* Create an alert to show if the browser is IE or not */
-        if (isIE()) {
-            alert('InternetExplorer is not supported for registration on this site.\nPlease use Chrome, Edge, Firefox or Safari.');
-        }
+                return is_ie;
+            }
 
-        window.onload = isIE();
-    </script>
+            /* Create an alert to show if the browser is IE or not */
+            if (isIE()) {
+                alert('InternetExplorer is not supported for registration on this site.\nPlease use Chrome, Edge, Firefox or Safari.');
+            }
 
-{% endblock %}
+            window.onload = isIE();
+        </script>
+
+    {% endblock %}
+</head>
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
         {% for key, value in args.items %}
-            <div>
-                {{ key }}
+            <div style="width: 70%; float: left; overflow: hidden; margin: 7px">
                 <select name="{{ key }}" id="{{ key }}">
                     {% for k,v in value.items %}
                         <option value="{{ k }}">{{ k }}</option>
                     {% endfor %}
                 </select>
+            </div>
+
+            <div style="overflow: hidden; margin: 5px">
+                <input v-model="hoodieqty" style="text-align: center; overflow: hidden" type="number" min="0" step="1"
+                       value="0">
             </div>
             <br>
         {% endfor %}
