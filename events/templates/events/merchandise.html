@@ -28,19 +28,24 @@
 
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-        {% for arg_key, arg_value in args.items %}
-            {% for merch_items_data in arg_value %}
-                {{merch_items_data}}
-                {% for key,value in merch_items_data.items %}
-                    <p>{{ key }}: {{ value }}</p>
-                    <br>
-                {% endfor %}
-            {% endfor %}
-        {% endfor %}
+        {#        {% for arg_key, arg_value in args.items %}#}
+        {#            {% for merch_items_data in arg_value %}#}
+        {#                {{ merch_items_data }}#}
+        {#                {% for key,value in merch_items_data.items %}#}
+        {#                    <p>{{ key }}: {{ value }}</p>#}
+        {#                    <br>#}
+        {#                {% endfor %}#}
+        {#            {% endfor %}#}
+        {#        {% endfor %}#}
 
+        {#        <form action="/merchandise/" method="post">#}
+        {#            <input type="text" value="input type text">#}
+        {#            <input type="submit" value="input type submit">#}
+        {#        </form>#}
         <form action="/merchandise/" method="post">
-            <input type="text" value="input type text">
-            <input type="submit" value="input type submit">
+            {% csrf_token %}
+            {{ args.form.as_ul }}
+            <input type="submit" value="Submit">
         </form>
     </div>
 {% endblock %}

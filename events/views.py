@@ -13,6 +13,7 @@ from events.forms import (
     RegistrationForm,
     EditProfileForm,
     RiderProfileFormSet,
+    MerchOrderForm
 )
 from django.forms.utils import ErrorDict, ErrorList
 from django.template import loader
@@ -22,6 +23,38 @@ from django.template.loader import render_to_string
 import random, string, json
 from datetime import datetime as ddt
 import datetime as dt
+
+
+def merchCheckout(request):
+    return render(request, 'events/merchCheckout.html')
+
+def merchandise(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = MerchOrderForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            print(form)
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/merchCheckout/')
+        else:
+            print(form.errors)
+            return render(request, 'events/merchandise.html')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = MerchOrderForm()
+        merchValues = Merchandise.objects.filter(available_on_merch_page=True).values()
+
+        args = {
+            'merchValues': merchValues,
+            'form': form
+        }
+
+        return render(request, 'events/merchandise.html', {'args': args})
 
 
 @staff_member_required
@@ -244,19 +277,6 @@ def register(request):
 def profile(request):
     args = {'user': request.user}
     return render(request, 'events/profile.html', args)
-
-
-def merchandise(request):
-    if request.method == 'POST':
-        print('Post')
-    else:
-        merchValues = Merchandise.objects.filter(available_on_merch_page = True).values()
-
-        args = {
-            'merchValues' : merchValues
-        }
-
-        return render(request, 'events/merchandise.html', {'args': args})
 
 
 def edit_profile(request):

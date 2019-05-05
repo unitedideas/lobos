@@ -19,7 +19,7 @@ class MyAuthenticationForm(AuthenticationForm):
                                widget=forms.TextInput(attrs={'oninput': "this.value=this.value.toLowerCase()"}))
 
 class MerchOrderForm(forms.Form):
-    pass
+    your_name = forms.CharField(label='Your name', max_length=100)
 
 class RegistrationForm(UserCreationForm):
     FEMALE = 'Female'
