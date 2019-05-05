@@ -1,4 +1,6 @@
 from .models import RiderProfile, Profile, Codes, Merchandise
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 from django.conf import settings
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -31,33 +33,47 @@ def merchCheckout(request):
 
 def merchandise(request):
     merchValues = Merchandise.objects.filter(available_on_merch_page=True).values()
+
+    count = 1
+    merch = {}
+    for dict in merchValues:
+        itemInfo = {}
+        sizeQty = {}
+        itemName = 'item_' + str(count)
+        for attr, value in dict.items():
+            if 'quantity_available' in attr:
+                sizeQty[attr] = value
+            else:
+                itemInfo[attr] = value
+        count += 1
+        merch[itemName] = [itemInfo,sizeQty]
+
+    print(merch['item_1'][0]['id'])
+    print(merch)
+
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = MerchOrderForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            print(form)
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
             return HttpResponseRedirect('/merchCheckout/')
         else:
             args = {
-                'merchValues': merchValues,
+                'merch': merch,
                 'form': form
             }
 
-            print(form.errors)
-            # args['form.errors'] = form.errors
             return render(request, 'events/merchandise.html', {'args': args})
 
-    # if a GET (or any other method) we'll create a blank form
     else:
         form = MerchOrderForm()
 
         args = {
-            'merchValues': merchValues,
+            'merch': merch,
             'form': form
         }
 

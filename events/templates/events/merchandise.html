@@ -28,37 +28,40 @@
 
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-        {{ args.values }}
+        {#        {{ args.merchValues }}#}
 
-<!--
-    add to cart:
-        2 xs shirt
-            click add to cart (must
-                check if xs shirt has qty of 2 available
-                 if yes:
-                    store the merch item id, size, quantity
-                 else:
-                    state the available qty
+        <!--
+            add to cart:
+                2 xs shirt
+                    click add to cart (must
+                        check if xs shirt has qty of 2 available
+                         if yes:
+                            store the merch item id, size, quantity
+                         else:
+                            state the available qty
 
-    remove from cart
--->
-
-
-
-
-
+            remove from cart
+        -->
         <form action="/merchandise/" method="post">
             {% csrf_token %}
-            {% for field in args.form %}
-                <div class="fieldWrapper">
-                    {{ field.label_tag }} {{ field }} {{ field.errors }}
-                    {% if field.help_text %}
-                        <p class="help">{{ field.help_text|safe }}</p>
-                    {% endif %}
-                </div>
+            {% for key, value in args.merch.items %}
+               <p>{{ value.0.id }}</p>
             {% endfor %}
-            <input type="submit" value="Submit">
         </form>
+
+
+        {#        <form action="/merchandise/" method="post">#}
+        {#            {% csrf_token %}#}
+        {#            {% for field in args.form %}#}
+        {#                <div class="fieldWrapper">#}
+        {#                    {{ field.label_tag }} {{ field }} {{ field.errors }}#}
+        {#                    {% if field.help_text %}#}
+        {#                        <p class="help">{{ field.help_text|safe }}</p>#}
+        {#                    {% endif %}#}
+        {#                </div>#}
+        {#            {% endfor %}#}
+        {#            <input type="submit" value="Submit">#}
+        {#        </form>#}
 
 
     </div>

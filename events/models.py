@@ -12,35 +12,26 @@ MAKES = load_choices(MAKES_PATH, True)
 
 
 class Merchandise(models.Model):
-    available_on_merch_page = models.BooleanField('On Merch Page',
-                                                  default=False)
-    merchandise_name = models.CharField(max_length=300, null=True, blank=True,default='Merchandise Name')
+    available_on_merch_page = models.BooleanField('On Merch Page', default=False)
+    merchandise_name = models.CharField(max_length=300, null=True, blank=True, default='Merchandise Name')
     description = models.TextField(max_length=1000, null=True, blank=True, default='Merchandise Description')
     sale_price = models.FloatField(default=60.00)
     item_image = models.CharField(max_length=300, null=True, blank=True)
 
-    one_size_fits_all = models.BooleanField(default=False)
     one_size_fits_all_quantity_available = models.IntegerField(default=0)
 
-    xsmall = models.BooleanField(default=False)
     xsmall_quantity_available = models.IntegerField(default=0)
 
-    small = models.BooleanField(default=False)
     small_quantity_available = models.IntegerField(default=0)
 
-    medium = models.BooleanField(default=False)
     medium_quantity_available = models.IntegerField(default=0)
 
-    large = models.BooleanField(default=False)
     large_quantity_available = models.IntegerField(default=0)
 
-    xlarge = models.BooleanField(default=False)
     xlarge_quantity_available = models.IntegerField(default=0)
 
-    xxlarge = models.BooleanField(default=False)
     xxlarge_quantity_available = models.IntegerField(default=0)
 
-    xxxlarge = models.BooleanField(default=False)
     xxxlarge_quantity_available = models.IntegerField(default=0)
 
     def __str__(self):
