@@ -1,4 +1,4 @@
-from .models import RiderProfile, Profile, Codes
+from .models import RiderProfile, Profile, Codes, Merchandise
 from django.conf import settings
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -247,38 +247,16 @@ def profile(request):
 
 
 def merchandise(request):
-    # print(Event.objects.all().values_list('shirt_Xsmall_Qty',flat=True)[0])
-    shirts = {
-        'XS Shirt': Event.objects.all().values_list('shirt_Xsmall_Qty', flat=True)[0],
-        'shirt_small_Qty': Event.objects.all().values_list('shirt_small_Qty', flat=True)[0],
-        'shirt_medium_Qty': Event.objects.all().values_list('shirt_medium_Qty', flat=True)[0],
-        'shirt_large_Qty': Event.objects.all().values_list('shirt_large_Qty', flat=True)[0],
-        'shirt_Xlarge_Qty': Event.objects.all().values_list('shirt_Xlarge_Qty', flat=True)[0],
-        'shirt_XXlarge_Qty': Event.objects.all().values_list('shirt_XXlarge_Qty', flat=True)[0],
-        'shirt_XXXlarge_Qty': Event.objects.all().values_list('shirt_XXXlarge_Qty', flat=True)[0],
-    }
-    hoodies = {
-        'hoodie_Xsmall_Qty': Event.objects.all().values_list('hoodie_Xsmall_Qty', flat=True)[0],
-        'hoodie_small_Qty': Event.objects.all().values_list('hoodie_small_Qty', flat=True)[0],
-        'hoodie_medium_Qty': Event.objects.all().values_list('hoodie_medium_Qty', flat=True)[0],
-        'hoodie_large_Qty': Event.objects.all().values_list('hoodie_large_Qty', flat=True)[0],
-        'hoodie_Xlarge_Qty': Event.objects.all().values_list('hoodie_Xlarge_Qty', flat=True)[0],
-        'hoodie_XXlarge_Qty': Event.objects.all().values_list('hoodie_XXlarge_Qty', flat=True)[0],
-        'hoodie_XXXlarge_Qty': Event.objects.all().values_list('hoodie_XXXlarge_Qty', flat=True)[0],
-    }
-    hats = {
-        'hat_Osfa_Qty': Event.objects.all().values_list('hat_Xsmall_Qty', flat=True)[0],
-        'hat_Xsmall_Qty': Event.objects.all().values_list('hat_Xsmall_Qty', flat=True)[0],
-        'hat_small_Qty': Event.objects.all().values_list('hat_small_Qty', flat=True)[0],
-        'hat_medium_Qty': Event.objects.all().values_list('hat_medium_Qty', flat=True)[0],
-        'hat_large_Qty': Event.objects.all().values_list('hat_large_Qty', flat=True)[0],
-        'hat_Xlarge_Qty': Event.objects.all().values_list('hat_Xlarge_Qty', flat=True)[0],
-        'hat_XXlarge_Qty': Event.objects.all().values_list('hat_XXlarge_Qty', flat=True)[0],
-        'hat_XXXlarge_Qty': Event.objects.all().values_list('hat_XXXlarge_Qty', flat=True)[0]
-    }
-    args = {'shirts': shirts, 'hoodies': hoodies, 'hats': hats}
+    if request.method == 'POST':
+        print('Post')
+    else:
+        merchValues = Merchandise.objects.filter(available_on_merch_page = True).values()
 
-    return render(request, 'events/merchandise.html', {'args': args})
+        args = {
+            'merchValues' : merchValues
+        }
+
+        return render(request, 'events/merchandise.html', {'args': args})
 
 
 def edit_profile(request):

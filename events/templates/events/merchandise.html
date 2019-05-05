@@ -24,22 +24,23 @@
 
     {% endblock %}
 </head>
+
+
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-        {% for key, value in args.items %}
-            <div style="width: 70%; float: left; overflow: hidden; margin: 7px">
-                <select name="{{ key }}" id="{{ key }}">
-                    {% for k,v in value.items %}
-                        <option value="{{ k }}">{{ k }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div style="overflow: hidden; margin: 5px">
-                <input v-model="hoodieqty" style="text-align: center; overflow: hidden" type="number" min="0" step="1"
-                       value="0">
-            </div>
-            <br>
+        {% for arg_key, arg_value in args.items %}
+            {% for merch_items_data in arg_value %}
+                {{merch_items_data}}
+                {% for key,value in merch_items_data.items %}
+                    <p>{{ key }}: {{ value }}</p>
+                    <br>
+                {% endfor %}
+            {% endfor %}
         {% endfor %}
+
+        <form action="/merchandise/" method="post">
+            <input type="text" value="input type text">
+            <input type="submit" value="input type submit">
+        </form>
     </div>
 {% endblock %}
