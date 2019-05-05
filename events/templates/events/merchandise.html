@@ -28,24 +28,38 @@
 
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-        {#        {% for arg_key, arg_value in args.items %}#}
-        {#            {% for merch_items_data in arg_value %}#}
-        {#                {{ merch_items_data }}#}
-        {#                {% for key,value in merch_items_data.items %}#}
-        {#                    <p>{{ key }}: {{ value }}</p>#}
-        {#                    <br>#}
-        {#                {% endfor %}#}
-        {#            {% endfor %}#}
-        {#        {% endfor %}#}
+        {{ args.values }}
 
-        {#        <form action="/merchandise/" method="post">#}
-        {#            <input type="text" value="input type text">#}
-        {#            <input type="submit" value="input type submit">#}
-        {#        </form>#}
+<!--
+    add to cart:
+        2 xs shirt
+            click add to cart (must
+                check if xs shirt has qty of 2 available
+                 if yes:
+                    store the merch item id, size, quantity
+                 else:
+                    state the available qty
+
+    remove from cart
+-->
+
+
+
+
+
         <form action="/merchandise/" method="post">
             {% csrf_token %}
-            {{ args.form.as_ul }}
+            {% for field in args.form %}
+                <div class="fieldWrapper">
+                    {{ field.label_tag }} {{ field }} {{ field.errors }}
+                    {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
             <input type="submit" value="Submit">
         </form>
+
+
     </div>
 {% endblock %}

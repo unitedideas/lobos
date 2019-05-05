@@ -28,7 +28,9 @@ import datetime as dt
 def merchCheckout(request):
     return render(request, 'events/merchCheckout.html')
 
+
 def merchandise(request):
+    merchValues = Merchandise.objects.filter(available_on_merch_page=True).values()
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -41,13 +43,18 @@ def merchandise(request):
             # redirect to a new URL:
             return HttpResponseRedirect('/merchCheckout/')
         else:
+            args = {
+                'merchValues': merchValues,
+                'form': form
+            }
+
             print(form.errors)
-            return render(request, 'events/merchandise.html')
+            # args['form.errors'] = form.errors
+            return render(request, 'events/merchandise.html', {'args': args})
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = MerchOrderForm()
-        merchValues = Merchandise.objects.filter(available_on_merch_page=True).values()
 
         args = {
             'merchValues': merchValues,

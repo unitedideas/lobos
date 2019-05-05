@@ -18,8 +18,18 @@ class MyAuthenticationForm(AuthenticationForm):
     username = forms.CharField(required=False,
                                widget=forms.TextInput(attrs={'oninput': "this.value=this.value.toLowerCase()"}))
 
+
 class MerchOrderForm(forms.Form):
-    your_name = forms.CharField(label='Your name', max_length=100)
+    XS = 'X-Small'
+    SMALL = 'Small'
+
+    SIZES = (
+        (XS, XS),
+        (SMALL, SMALL),
+    )
+    your_name = forms.ChoiceField(label='Select Size', choices=SIZES)
+    asdf = forms.ImageField(required=True)
+
 
 class RegistrationForm(UserCreationForm):
     FEMALE = 'Female'
