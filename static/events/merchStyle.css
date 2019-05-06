@@ -16,3 +16,7 @@ td, th {
     margin-right: auto;
     margin-left: auto;
 }
+.jumbotron{
+    padding: 10px;
+    text-align: center;
+}
