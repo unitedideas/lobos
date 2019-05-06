@@ -33,7 +33,7 @@ def merchCheckout(request):
 
 def merchandise(request):
     merchValues = Merchandise.objects.filter(available_on_merch_page=True).values()
-
+    print(merchValues)
     count = 1
     merch = {}
     for dict in merchValues:
@@ -48,8 +48,8 @@ def merchandise(request):
         count += 1
         merch[itemName] = [itemInfo,sizeQty]
 
-    print(merch['item_1'][0]['id'])
-    print(merch)
+    # print(merch['item_1'][0]['id'])
+    # print(merch)
 
     # if this is a POST request we need to process the form data
     if request.method == 'POST':

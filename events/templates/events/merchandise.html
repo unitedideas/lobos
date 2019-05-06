@@ -2,6 +2,8 @@
 <head>
     <!-- jQuery for PayPal -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    {# Vue.js CDN #}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 
     {% block head %}
         <title>Lobos Merch</title>
@@ -25,44 +27,146 @@
     {% endblock %}
 </head>
 
-
 {% block body %}
-    <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-        {#        {{ args.merchValues }}#}
-
-        <!--
-            add to cart:
-                2 xs shirt
-                    click add to cart (must
-                        check if xs shirt has qty of 2 available
-                         if yes:
-                            store the merch item id, size, quantity
-                         else:
-                            state the available qty
-
-            remove from cart
-        -->
-        <form action="/merchandise/" method="post">
-            {% csrf_token %}
-            {% for key, value in args.merch.items %}
-               <p>{{ value.0.id }}</p>
-            {% endfor %}
-        </form>
-
-
-        {#        <form action="/merchandise/" method="post">#}
-        {#            {% csrf_token %}#}
-        {#            {% for field in args.form %}#}
-        {#                <div class="fieldWrapper">#}
-        {#                    {{ field.label_tag }} {{ field }} {{ field.errors }}#}
-        {#                    {% if field.help_text %}#}
-        {#                        <p class="help">{{ field.help_text|safe }}</p>#}
-        {#                    {% endif %}#}
-        {#                </div>#}
-        {#            {% endfor %}#}
-        {#            <input type="submit" value="Submit">#}
-        {#        </form>#}
-
-
+    <div id="app">
+        <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
+            <form action="/merchandise/" method="post">
+                {% csrf_token %}
+                {% for key, value in args.merch.items %}
+                    {#               <p>{{ value.0.id }}</p>#}
+                    <select name="s" id="s">
+                        {% for size, qty in value.1.items %}
+                            {% if qty == 0 %}
+                                <option disabled value="{{ size }}">[[sizeTextChange('{{ size }}')]]</option>
+                            {% else %}
+                                <option value="{{ size }}">[[sizeTextChange('{{ size }}')]]</option>
+                            {% endif %}
+                            <p>{{ qty }}</p>
+                        {% endfor %}
+                    </select>
+                {% endfor %}
+                <div type="button" class="btn btn-primary" v-on:click="add_to_cart()">Add</div>
+            </form>
+        </div>
+        <div style="text-align: center;">
+            <div style="background-color: #ffe673; height: 5px;"></div>
+            <div v-if="cartlist.length > 0">
+                <h3 style="color: whitesmoke;">Your Cart:</h3>
+                <div style="background-color: #ffe673; overflow: hidden; padding-top: 7px">
+                    <div v-for="(item, index) in cartlist"
+                         style="text-align: center; background-color: red">
+                        <div class="col-sm-6">
+                            <div class="btn btn-primary"
+                                 style="width: 100px; float: right; margin-right: 10px "
+                                 v-on:click='remove_from_cart(index)'>Remove
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4 style="text-align: center; color: black;  float: left">[[item.qty]]
+                                [[item.size]]
+                                [[item.item]]</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="merchTotal != 0">
+                <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>
+            </div>
+            <h3 style="color: whitesmoke;">Total: [[totalStr]]</h3>
+        </div>
+        <div v-show="showPayPal">
+            <paypal-checkout
+                    :amount='totalStr'
+                    currency="USD"
+                    :button-style="aStyle"
+                    :client="paypal"
+                    env="production"
+                    v-on:payment-authorized="paymentAuthorized"
+                    v-on:payment-completed="paymentCompleted"
+                    v-on:payment-cancelled="paymentCancelled">
+            </paypal-checkout>
+        </div>
     </div>
+    <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
+
+    <script>
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#app',
+            data: {
+                paypal: {
+                    sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
+                    production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
+                },
+                aStyle: {
+                    label: 'checkout',
+                    size: 'large',
+                    shape: 'rect',
+                    color: 'blue',
+                    tagline: 'false'
+                },
+                cartlist: [],
+                merchTotal: 0,
+                regTotal: 0.00,
+                totalStr: "0.00",
+                showPayPal: true,
+
+            },
+            computed: {},
+            watch: {
+                cartlist() {
+                    let count = 0
+                    let cost = 0
+                    for (item in this.cartlist) {
+                        let itemcost = 0
+                        let merchtot = 0
+                        itemcost = this.cartlist[item].qty * this.cartlist[item].price
+                        cost += itemcost
+                    }
+                    this.merchTotal = cost.toFixed(2)
+                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
+
+                },
+                regTotal() {
+                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
+                },
+            },
+            methods: {
+                sizeTextChange(sizeString) {
+                    return sizeString.toLowerCase().split('_').map(function (word) {
+                        return word.replace(word[0], word[0].toUpperCase());
+                    }).join(' ').replace(/Quantity Available/,'');
+                },
+                add_to_cart() {
+                    console.log('Clicked Add Button')
+                },
+
+                remove_from_cart(index) {
+                    let count = 0
+                    let merch_order = "", end
+                    this.cartlist.splice(index, 1)
+                    for (i in this.cartlist) {
+                        merch_order += String(Object.values(this.cartlist[count])) + "\n"
+                        count += 1
+                    }
+                    document.getElementById("id_form-0-merchandise_ordered").value = merch_order
+                },
+                paymentAuthorized(data) {
+                    this.showPayPal = false
+                },
+
+                paymentCompleted(data) {
+                    document.getElementById('modal_close_btn').style.display = "none"
+                    this.paymentComplete = true
+                },
+
+                paymentCancelled(data) {
+                    this.payment_cancelled = false
+                    this.payment_cancelled = true
+                    this.showPayPal = true
+                },
+
+            }
+        })
+    </script>
 {% endblock %}
