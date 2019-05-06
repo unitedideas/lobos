@@ -1,7 +1,18 @@
-body {
-    background-color: #de7077;
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-table{
-    background-color: #00ADD8;
+td, th {
+  text-align: left;
+  padding: 8px;
+}
+
+.merchTable {
+    background-color: #ffe673;
+    padding: 15px;
+    border-radius: 5px;
+    margin-right: auto;
+    margin-left: auto;
 }

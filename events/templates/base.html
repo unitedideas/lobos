@@ -51,7 +51,6 @@
 <body>
 <br>
 <div class="container">
-
     <!-- Static navbar -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -60,16 +59,18 @@
                 {% with url_name=request.resolver_match.url_name %}
                     {% if user.is_authenticated %}
                         <ul class="nav navbar-nav nav-pills">
-{#                            <li><a href="/"><strong>Home</strong></a></li>#}
-                            <li class="nav-item {% if url_name == 'home' %}myactive{% endif %}"><a href="/">Home</a></li>
-                            <li class="nav-item {% if url_name == 'merchandise' %}myactive{% endif %}"><a href="/merchandise">Merchandise</a></li>
+                            {#                            <li><a href="/"><strong>Home</strong></a></li>#}
+                            <li class="nav-item {% if url_name == 'home' %}myactive{% endif %}"><a href="/">Home</a>
+                            </li>
+                            <li class="nav-item {% if url_name == 'merchandise' %}myactive{% endif %}"><a
+                                    href="/merchandise">Merchandise</a></li>
 
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-{#                            <li class="nav-item {% if url_name == 'profile' %}myactive{% endif %}"><a href="/profile">Profile</a>#}
-{#                            </li>#}
-{#                            <li class="nav-item {% if url_name == 'edit_profile' %}myactive{% endif %}"><a#}
-{#                                    href="/profile/edit">Edit Profile</a></li>#}
+                            {#                            <li class="nav-item {% if url_name == 'profile' %}myactive{% endif %}"><a href="/profile">Profile</a>#}
+                            {#                            </li>#}
+                            {#                            <li class="nav-item {% if url_name == 'edit_profile' %}myactive{% endif %}"><a#}
+                            {#                                    href="/profile/edit">Edit Profile</a></li>#}
                             <li class="nav-item {% if url_name == 'logout' %}myactive{% endif %}"><a href="/logout">Logout</a>
                             </li>
                             <li><a class="navbar-brand"><strong>Welcome {{ request.user.first_name }}!</strong></a></li>
@@ -78,18 +79,20 @@
                     {% else %}
 
                         <ul class="nav navbar-nav">
-{#                            <li><a href="/">Home</a></li>#}
-                            <li class="nav-item {% if url_name == 'home' %}myactive{% endif %}"><a href="/">Home</a></li>
-                            <li class="nav-item {% if url_name == 'merchandise' %}myactive{% endif %}"><a href="/merchandise">Merchandise</a></li>
+                            {#                            <li><a href="/">Home</a></li>#}
+                            <li class="nav-item {% if url_name == 'home' %}myactive{% endif %}"><a href="/">Home</a>
+                            </li>
+                            <li class="nav-item {% if url_name == 'merchandise' %}myactive{% endif %}"><a
+                                    href="/merchandise">Merchandise</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-{#                            <li class="nav-item {% if url_name == 'password_reset' %}myactive{% endif %}"><a#}
-{#                                    href="/password-reset">Reset Password</a></li>#}
-{#                                    href="/password-reset">Reset Password</a></li>#}
-{#                            <li class="nav-item {% if url_name == 'register' %}myactive{% endif %}"><a href="/register">Register</a>#}
-{#                            </li>#}
-{#                            <li class="nav-item {% if url_name == 'login' %}myactive{% endif %}"><a#}
-{#                                    href="/login">login</a></li>#}
+                            {#                            <li class="nav-item {% if url_name == 'password_reset' %}myactive{% endif %}"><a#}
+                            {#                                    href="/password-reset">Reset Password</a></li>#}
+                            {#                                    href="/password-reset">Reset Password</a></li>#}
+                            {#                            <li class="nav-item {% if url_name == 'register' %}myactive{% endif %}"><a href="/register">Register</a>#}
+                            {#                            </li>#}
+                            {#                            <li class="nav-item {% if url_name == 'login' %}myactive{% endif %}"><a#}
+                            {#                                    href="/login">login</a></li>#}
                         </ul>
                     {% endif %}
                 {% endwith %}
@@ -97,7 +100,7 @@
 
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-    <h3 style="text-align: center">If you have issues registering. Please email us at info@lobosmc.com</h3>
+        <h3 style="text-align: center">If you have issues registering. Please email us at info@lobosmc.com</h3>
 
     </nav>
 </div>

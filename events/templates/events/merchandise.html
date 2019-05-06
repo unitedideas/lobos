@@ -35,7 +35,8 @@
 {% block body %}
     <div id="app">
         {#        <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">#}
-        <div>
+        <br>
+        <div class="merchTable">
             <form action="/merchandise/" method="post">
                 {% csrf_token %}
 
@@ -59,8 +60,7 @@
                                 </select>
                             </td>
                             <td>
-                                <p>asdfasfasdfasdfasdfasd asdf asdf asfdasf </p>
-                                <p>{{ qty }}</p>
+                               <h3>60.00</h3>
                             </td>
                             <td>
                                 <div type="button" class="btn btn-primary" v-on:click="add_to_cart()">Add</div>
