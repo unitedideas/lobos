@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 <head>
     <!-- jQuery for PayPal -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -7,6 +9,9 @@
 
     {% block head %}
         <title>Lobos Merch</title>
+
+        <link rel="stylesheet" href='{% static "events/merchStyle.css" %}' type="text/css">
+
         <script language="javascript" type="text/javascript">
             function isIE() {
                 const ua = navigator.userAgent;
@@ -29,40 +34,62 @@
 
 {% block body %}
     <div id="app">
-        <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
+        {#        <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">#}
+        <div>
             <form action="/merchandise/" method="post">
                 {% csrf_token %}
+
                 {% for key, value in args.merch.items %}
-                    {#               <p>{{ value.0.id }}</p>#}
-                    <select name="s" id="s">
-                        {% for size, qty in value.1.items %}
-                            {% if qty == 0 %}
-                                <option disabled value="{{ size }}">[[sizeTextChange('{{ size }}')]]</option>
-                            {% else %}
-                                <option value="{{ size }}">[[sizeTextChange('{{ size }}')]]</option>
-                            {% endif %}
-                            <p>{{ qty }}</p>
-                        {% endfor %}
-                    </select>
+                    <img style='display: block; margin-left: auto; margin-right: auto;'
+                         src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Product Image">
+
+                    <table>
+                        <tr>
+                            <td>
+                                <select name="s" id="s">
+                                    {% for size, qty in value.1.items %}
+                                        {% if qty == 0 %}
+                                            <option disabled value="{{ size }}">[[sizeTextChange('{{ size }}')]] - Sold
+                                                Out
+                                            </option>
+                                        {% else %}
+                                            <option value="{{ size }}">[[sizeTextChange('{{ size }}')]]</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <p>asdfasfasdfasdfasdfasd asdf asdf asfdasf </p>
+                                <p>{{ qty }}</p>
+                            </td>
+                            <td>
+                                <div type="button" class="btn btn-primary" v-on:click="add_to_cart()">Add</div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
                 {% endfor %}
-                <div type="button" class="btn btn-primary" v-on:click="add_to_cart()">Add</div>
             </form>
         </div>
-        <div style="text-align: center;">
-            <div style="background-color: #ffe673; height: 5px;"></div>
+        {#        <div style="text-align: center;">#}
+        <div>
             <div v-if="cartlist.length > 0">
-                <h3 style="color: whitesmoke;">Your Cart:</h3>
-                <div style="background-color: #ffe673; overflow: hidden; padding-top: 7px">
-                    <div v-for="(item, index) in cartlist"
-                         style="text-align: center; background-color: red">
+                {#                <h3 style="color: whitesmoke;">Your Cart:</h3>#}
+                <h3>Your Cart:</h3>
+                <div>
+                    {#                <div style="background-color: #ffe673; overflow: hidden; padding-top: 7px">#}
+                    <div v-for="(item, index) in cartlist">
+                        {#                    <div v-for="(item, index) in cartlist" style="text-align: center; background-color: red">#}
                         <div class="col-sm-6">
-                            <div class="btn btn-primary"
-                                 style="width: 100px; float: right; margin-right: 10px "
-                                 v-on:click='remove_from_cart(index)'>Remove
-                            </div>
+                            <div class="btn btn-primary" v-on:click='remove_from_cart(index)'>Remove</div>
+                            {#                            <div class="btn btn-primary"#}
+                            {#                                 style="width: 100px; float: right; margin-right: 10px "#}
+                            {#                                 v-on:click='remove_from_cart(index)'>Remove#}
+                            {#                            </div>#}
                         </div>
                         <div class="col-sm-6">
-                            <h4 style="text-align: center; color: black;  float: left">[[item.qty]]
+                            <h4>[[item.qty]]
+                                {#                            <h4 style="text-align: center; color: black;  float: left">[[item.qty]]#}
                                 [[item.size]]
                                 [[item.item]]</h4>
                         </div>
@@ -70,11 +97,14 @@
                 </div>
             </div>
             <div v-if="merchTotal != 0">
-                <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>
+                <h3>Merchendise: [[merchTotal]]</h3>
+                {#                <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>#}
             </div>
-            <h3 style="color: whitesmoke;">Total: [[totalStr]]</h3>
+            <h3>Total: [[totalStr]]</h3>
+            {#            <h3 style="color: whitesmoke;">Total: [[totalStr]]</h3>#}
         </div>
         <div v-show="showPayPal">
+            {#        <div v-show="showPayPal" style="text-align: center">#}
             <paypal-checkout
                     :amount='totalStr'
                     currency="USD"
@@ -135,7 +165,7 @@
                 sizeTextChange(sizeString) {
                     return sizeString.toLowerCase().split('_').map(function (word) {
                         return word.replace(word[0], word[0].toUpperCase());
-                    }).join(' ').replace(/Quantity Available/,'');
+                    }).join(' ').replace(/Quantity Available/, '').replace(/x/g, 'X');
                 },
                 add_to_cart() {
                     console.log('Clicked Add Button')
@@ -167,6 +197,15 @@
                 },
 
             }
-        })
+        });
+
+        class Merch {
+            constructor(itemName, itemPrice, size) {
+                this.itemName = itemName
+                this.itemPrice = itemPrice
+                this.size = size
+            }
+        }
+
     </script>
 {% endblock %}

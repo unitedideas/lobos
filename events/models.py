@@ -20,7 +20,7 @@ class Merchandise(models.Model):
 
     one_size_fits_all_quantity_available = models.IntegerField(default=0)
 
-    xsmall_quantity_available = models.IntegerField(default=0)
+    x_small_quantity_available = models.IntegerField(default=0)
 
     small_quantity_available = models.IntegerField(default=0)
 
@@ -28,11 +28,11 @@ class Merchandise(models.Model):
 
     large_quantity_available = models.IntegerField(default=0)
 
-    xlarge_quantity_available = models.IntegerField(default=0)
+    x_large_quantity_available = models.IntegerField(default=0)
 
-    xxlarge_quantity_available = models.IntegerField(default=0)
+    xx_large_quantity_available = models.IntegerField(default=0)
 
-    xxxlarge_quantity_available = models.IntegerField(default=0)
+    xxx_large_quantity_available = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.merchandise_name) + " $" + str(self.sale_price)
