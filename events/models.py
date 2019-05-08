@@ -123,7 +123,8 @@ class Profile(models.Model):
         max_length=10, null=True, blank=True)
 
     def __str__(self):
-        return str(self.user.first_name) + " " + str(self.user.last_name) + " - " + str(self.user)
+        # return str(self.user.first_name) + " " + str(self.user.last_name) + " - " + str(self.user)
+        return (self.user)
 
 
 class Codes(models.Model):
