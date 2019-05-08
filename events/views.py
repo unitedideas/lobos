@@ -22,7 +22,9 @@ from django.template import loader
 from django.template import Context
 from anymail.message import attach_inline_image_file
 from django.template.loader import render_to_string
-import random, string, json
+import random
+import string
+import json
 from datetime import datetime as ddt
 import datetime as dt
 
@@ -32,7 +34,8 @@ def merchCheckout(request):
 
 
 def merchandise(request):
-    merchValues = Merchandise.objects.filter(available_on_merch_page=True).values()
+    merchValues = Merchandise.objects.filter(
+        available_on_merch_page=True).values()
     print(merchValues)
     count = 1
     merch = {}
@@ -46,7 +49,7 @@ def merchandise(request):
             else:
                 itemInfo[attr] = value
         count += 1
-        merch[itemName] = [itemInfo,sizeQty]
+        merch[itemName] = [itemInfo, sizeQty]
 
     # print(merch['item_1'][0]['id'])
     # print(merch)
@@ -271,7 +274,8 @@ def register(request):
             email = request.POST['email'].replace(" ", "")
             first_name = request.POST['first_name'].replace(" ", "")
             last_name = request.POST['last_name'].replace(" ", "")
-            username = first_name.lower() + last_name.lower() + email.lower().replace(" ", "")
+            username = first_name.lower() + last_name.lower() + \
+                email.lower().replace(" ", "")
             password = request.POST['password1']
 
             if User.objects.filter(username=username).exists():
@@ -289,7 +293,6 @@ def register(request):
         else:
             args = {'form': form, 'errors': form.errors}
             return render(request, 'events/reg_form.html', args)
-
 
     else:
         form = RegistrationForm()
@@ -311,7 +314,8 @@ def edit_profile(request):
             return redirect('/profile')
         else:
             form = EditProfileForm(instance=request.user)
-            args = {'form': form, 'errors': 'A user with that username already exists. Please choose a different one.'}
+            args = {
+                'form': form, 'errors': 'A user with that username already exists. Please choose a different one.'}
             return render(request, 'events/edit_profile.html', args)
     else:
         form = EditProfileForm(instance=request.user.profile)
@@ -338,7 +342,8 @@ def change_password(request):
             html_content = 'Hi ' + first_name.title() + '\nYou recently requested to reset your password at LobosEvents.com. \n' \
                                                         'Your username, in case you\'ve forgotten: ' + username
 
-            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg = EmailMultiAlternatives(
+                subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
             msg.send()
             return redirect('/profile/')
@@ -408,26 +413,22 @@ def error_checking(request):
             class_list_under_40 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
                                    "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
                                    "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
-                                   "Amateur under 16 Jr."
-                , "Expert 16 and over 40 EX-EX", "Amateur 16 and over 40 EX-AM", "Amateur 16 and over 40 AM",
+                                   "Amateur under 16 Jr.", "Expert 16 and over 40 EX-EX", "Amateur 16 and over 40 EX-AM", "Amateur 16 and over 40 AM",
                                    "Amateur 16 and over 50 AM", "Amateur 16 and over 50 EX", "60 Class",
                                    "70 Class"]
             class_list_under_50 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
                                    "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
                                    "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
-                                   "Amateur under 16 Jr."
-                , "Amateur 16 and over 50 AM", "Amateur 16 and over 50 EX", "60 Class",
+                                   "Amateur under 16 Jr.", "Amateur 16 and over 50 AM", "Amateur 16 and over 50 EX", "60 Class",
                                    "70 Class"]
             class_list_under_60 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
                                    "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
                                    "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
-                                   "Amateur under 16 Jr."
-                , "60 Class", "70 Class"]
+                                   "Amateur under 16 Jr.", "60 Class", "70 Class"]
             class_list_under_70 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
                                    "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
                                    "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
-                                   "Amateur under 16 Jr."
-                , "70 Class"]
+                                   "Amateur under 16 Jr.", "70 Class"]
 
             rider_class_check = False
             age_set = [30, 40, 50, 60, 70]
@@ -442,7 +443,8 @@ def error_checking(request):
             if (y < 16) or (y == 16 and m < 0) or (y == 16 and m == 0 and d < 0):
                 under_16 += 1
                 if rider_class not in class_list_under_16:
-                    content['under_class_age'] = {"rider_class": rider_class, 'form': form_count}
+                    content['under_class_age'] = {
+                        "rider_class": rider_class, 'form': form_count}
                     content["age_error"] = True
                 else:
                     pass
@@ -454,7 +456,8 @@ def error_checking(request):
 
         if (under_16 - escorts_signed_up > 0):
             print('ESCORT NOT GOOD')
-            error = 'escorts' if (under_16 - escorts_signed_up > 1) else 'escort'
+            error = 'escorts' if (
+                under_16 - escorts_signed_up > 1) else 'escort'
             content['escorts_signed_up'] = escorts_signed_up
             content['under_16'] = under_16
             # return JsonResponse(content)
@@ -472,8 +475,10 @@ def error_checking(request):
                         (age == 50 and rider_class in class_list_under_50) or \
                         (age == 60 and rider_class in class_list_under_60) or \
                         (age == 70 and rider_class in class_list_under_70):
-                    print('RIDER CLASS NOT GOOD... less than age ' + str(age) + " rider in " + rider_class)
-                    content['under_class_age'] = {"age": age, "rider_class": rider_class, 'form': form_count}
+                    print('RIDER CLASS NOT GOOD... less than age ' +
+                          str(age) + " rider in " + rider_class)
+                    content['under_class_age'] = {
+                        "age": age, "rider_class": rider_class, 'form': form_count}
                     content["age_error"] = True
                     # return JsonResponse(content)
 
@@ -540,7 +545,8 @@ def event_register(request):
                 created_username = form.first_name + form.last_name + form.email
                 created_username = created_username.replace(" ", "").lower()
                 form.confirmation_number = confirmation_number
-                form.event = Event.objects.get(event_name=request.GET.get('event'))
+                form.event = Event.objects.get(
+                    event_name=request.GET.get('event'))
                 event = str(form.event)
 
                 if form.discount_code != None:
@@ -571,8 +577,10 @@ def event_register(request):
                     user.update(city=form.city)
                     user.update(state=form.state)
                     user.update(zip_code=form.zip_code)
-                    user.update(emergency_contact_name=form.emergency_contact_name)
-                    user.update(emergency_contact_phone=form.emergency_contact_phone)
+                    user.update(
+                        emergency_contact_name=form.emergency_contact_name)
+                    user.update(
+                        emergency_contact_phone=form.emergency_contact_phone)
 
                     message = ''
                     username = created_username
@@ -593,7 +601,6 @@ def event_register(request):
                     # Email
                     event_mail(email, first_name, last_name, username, rider_class, event,
                                confirmation_number)
-
 
                 elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
                     form.user = User.objects.get(username=created_username)
@@ -623,8 +630,6 @@ def event_register(request):
                     # Email
                     event_mail(email, first_name, last_name, username, rider_class, event,
                                confirmation_number)
-
-
 
                 else:
                     form.user = User.objects.get(username=created_username)
@@ -663,7 +668,8 @@ def event_register(request):
     else:
 
         event = Event.objects.get(event_name=request.GET.get('event'))
-        codes = dict(Codes.objects.values_list('discount_code', 'discount_amount'))
+        codes = dict(Codes.objects.values_list(
+            'discount_code', 'discount_amount'))
         print(codes)
         codes = json.dumps(codes)
         print(codes)
@@ -688,10 +694,13 @@ def event_formset(request):
     formset = str(formset)
     event = json.loads(request.body)['event'][0:-5]
     event_date = json.loads(request.body)['event'][-4:]
-    escort_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).escort_rider_cost
-    reg_rider_cost = Event.objects.get(event_name=event, event_date__contains=event_date).pre_entry_cost
+    escort_rider_cost = Event.objects.get(
+        event_name=event, event_date__contains=event_date).escort_rider_cost
+    reg_rider_cost = Event.objects.get(
+        event_name=event, event_date__contains=event_date).pre_entry_cost
     # reg_rider_cost = Event.objects.get(event_name=request.GET.get('event')).pre_entry_cost
-    formset_to_vue = {'reg_rider_cost': reg_rider_cost, 'escort_rider_cost': escort_rider_cost, 'formset': formset}
+    formset_to_vue = {'reg_rider_cost': reg_rider_cost,
+                      'escort_rider_cost': escort_rider_cost, 'formset': formset}
     return JsonResponse(formset_to_vue)
 
 
