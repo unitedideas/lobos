@@ -47,8 +47,8 @@
                 {% csrf_token %}
 
                 {% for key, value in args.merch.items %}
-                <img style='display: block; margin-left: auto; margin-right: auto;'
-                    src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Product Image">
+                <img style='display: block; margin-left: auto; margin-right: auto; width: 300px'
+                    src="{% static "events/bgimages/china_hat_2019_hoodie.png" %}" alt="Product Image">
 
                 <table>
                     <tr>
