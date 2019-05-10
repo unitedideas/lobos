@@ -47,7 +47,7 @@
                     {% csrf_token %}
 
                     {% for key, value in args.merch.items %}
-                        merch_table_{{ value.0.id }}
+                                                {{ this.value.1 }}
                         <img style='display: block; margin-left: auto; margin-right: auto; width: 300px'
                              src="{% static "events/bgimages/china_hat_2019_hoodie.png" %}" alt="Product Image">
 
@@ -56,12 +56,12 @@
                                 <td>
                                     <select id="{{ value.0.id }}">
                                         {% for size, qty in value.1.items %}
-                                            {% if qty == 0 %}
+                                            {% if qty <= 0 %}
                                                 <option disabled value="{{ size }}">[[sizeTextChange('{{ size }}')]] -
                                                     Sold Out
                                                 </option>
                                             {% else %}
-                                                <option value="{{ size }}">[[sizeTextChange('{{ size }}')]]</option>
+                                                <option id="selected_size" value="id:{{ value.0.id }}, size:{{ size }}">[[sizeTextChange('{{ size }}')]]</option>
                                             {% endif %}
                                         {% endfor %}
                                     </select>
