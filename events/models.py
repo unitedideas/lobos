@@ -18,7 +18,7 @@ class Merchandise(models.Model):
         max_length=300, null=True, blank=True, default='Merchandise Name')
     description = models.TextField(
         max_length=1000, null=True, blank=True, default='Merchandise Description')
-    sale_price = models.FloatField(default=60.00)
+    sale_price = models.DecimalField(max_digits=6, decimal_places=2, default=60.00)
     item_image = models.CharField(max_length=300, null=True, blank=True)
     one_size_fits_all_quantity_available = models.IntegerField(default=0)
     x_small_quantity_available = models.IntegerField(default=0)

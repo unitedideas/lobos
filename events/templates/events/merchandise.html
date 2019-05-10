@@ -9,203 +9,213 @@
 
 
     {% block head %}
-    <title>Lobos Merch</title>
+        <title>Lobos Merch</title>
 
-    <link rel="stylesheet" href='{% static "events/merchStyle.css" %}' type="text/css">
+        <link rel="stylesheet" href='{% static "events/merchStyle.css" %}' type="text/css">
 
-    <script language="javascript" type="text/javascript">
-        function isIE() {
-            const ua = navigator.userAgent;
-            /* MSIE used to detect old browsers and Trident used to newer ones*/
-            const is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+        <script language="javascript" type="text/javascript">
+            function isIE() {
+                const ua = navigator.userAgent;
+                /* MSIE used to detect old browsers and Trident used to newer ones*/
+                const is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
 
-            return is_ie;
-        }
+                return is_ie;
+            }
 
-        /* Create an alert to show if the browser is IE or not */
-        if (isIE()) {
-            alert('InternetExplorer is not supported for registration on this site.\nPlease use Chrome, Edge, Firefox or Safari.');
-        }
+            /* Create an alert to show if the browser is IE or not */
+            if (isIE()) {
+                alert('InternetExplorer is not supported for registration on this site.\nPlease use Chrome, Edge, Firefox or Safari.');
+            }
 
-        window.onload = isIE();
-    </script>
+            window.onload = isIE();
+        </script>
 
     {% endblock %}
 </head>
 
 {% block body %}
-<div id="app">
-    {#        <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">#}
-    <br>
-    {#        <div class="container" style=" padding: 15px 15px 0px 15px; border-radius: 5px">#}
-    <div class="container">
-        <div class="jumbotron">
-            <h2>Lobos Events Merchandise</h2>
-            {#                <h1 style="text-align: center">{{ event }} Registration</h1>#}
+    <div id="app">
+        {#        <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">#}
+        <br>
+        {#        <div class="container" style=" padding: 15px 15px 0px 15px; border-radius: 5px">#}
+        <div class="container">
+            <div class="jumbotron">
+                <h2>Lobos Events Merchandise</h2>
+                {#                <h1 style="text-align: center">{{ event }} Registration</h1>#}
 
-            <form action="/merchandise/" method="post">
-                {% csrf_token %}
+                <form action="/merchandise/" method="post">
+                    {% csrf_token %}
 
-                {% for key, value in args.merch.items %}
-                <img style='display: block; margin-left: auto; margin-right: auto; width: 300px'
-                    src="{% static "events/bgimages/china_hat_2019_hoodie.png" %}" alt="Product Image">
+                    {% for key, value in args.merch.items %}
+                        merch_table_{{ value.0.id }}
+                        <img style='display: block; margin-left: auto; margin-right: auto; width: 300px'
+                             src="{% static "events/bgimages/china_hat_2019_hoodie.png" %}" alt="Product Image">
 
-                <table>
-                    <tr>
-                        <td>
-                            <select name="s" id="s">
-                                {% for size, qty in value.1.items %}
-                                {% if qty == 0 %}
-                                <option disabled value="{{ size }}">[[sizeTextChange('{{ size }}')]] - Sold Out </option>
-                                {% else %}
-                                <option value="{{ size }}">[[sizeTextChange('{{ size }}')]]</option>
-                                {% endif %}
-                                {% endfor %}
-                            </select>
-                        </td>
-                        <td>
-                            <h3>60.00</h3>
-                        </td>
-                        <td>
-                            <div type="button" class="btn btn-primary" v-on:click="add_to_cart()">Add</div>
-                        </td>
-                    </tr>
-                </table>
-                <br>
-                {% endfor %}
-            </form>
-            {#        <div style="text-align: center;">#}
-            <div>
-                <div v-if="cartlist.length > 0">
-                    {#                <h3 style="color: whitesmoke;">Your Cart:</h3>#}
-                    <h3>Your Cart:</h3>
-                    <div>
-                        {#                <div style="background-color: #ffe673; overflow: hidden; padding-top: 7px">#}
-                        <div v-for="(item, index) in cartlist">
-                            {#                    <div v-for="(item, index) in cartlist" style="text-align: center; background-color: red">#}
-                            <div class="col-sm-6">
-                                <div class="btn btn-primary" v-on:click='remove_from_cart(index)'>Remove</div>
-                                {#                            <div class="btn btn-primary"#}
-                                {#                                 style="width: 100px; float: right; margin-right: 10px "#}
-                                {#                                 v-on:click='remove_from_cart(index)'>Remove#}
-                                {#                            </div>#}
-                            </div>
-                            <div class="col-sm-6">
-                                <h4>[[item.qty]]
-                                    {#                            <h4 style="text-align: center; color: black;  float: left">[[item.qty]]#}
-                                    [[item.size]]
-                                    [[item.item]]</h4>
+                        <table id="merch_table_{{ value.0.id }}">
+                            <tr>
+                                <td>
+                                    <select id="{{ value.0.id }}">
+                                        {% for size, qty in value.1.items %}
+                                            {% if qty == 0 %}
+                                                <option disabled value="{{ size }}">[[sizeTextChange('{{ size }}')]] -
+                                                    Sold Out
+                                                </option>
+                                            {% else %}
+                                                <option value="{{ size }}">[[sizeTextChange('{{ size }}')]]</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td>
+                                    <h3>Price: {{ value.0.sale_price }}</h3>
+                                </td>
+                                <td>
+{#                                     todo: he max needs to watch for the select to be changed and ... #}
+{#                                    todo: ... then set the max to the value of the selected size_qty_available #}
+                                    <input type="number" placeholder="0" step="1" min="0" max="">
+                                </td>
+                                <td>
+                                    <div type="button" class="btn btn-primary" value="" v-on:click="add_to_cart()">Add
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                    {% endfor %}
+                </form>
+                {#        <div style="text-align: center;">#}
+                <div>
+                    <div v-if="cartlist.length > 0">
+                        {#                <h3 style="color: whitesmoke;">Your Cart:</h3>#}
+                        <h3>Your Cart:</h3>
+                        <div>
+                            {#                <div style="background-color: #ffe673; overflow: hidden; padding-top: 7px">#}
+                            <div v-for="(item, index) in cartlist">
+                                {#                    <div v-for="(item, index) in cartlist" style="text-align: center; background-color: red">#}
+                                <div class="col-sm-6">
+                                    <div class="btn btn-primary" v-on:click='remove_from_cart(index)'>Remove</div>
+                                    {#                            <div class="btn btn-primary"#}
+                                    {#                                 style="width: 100px; float: right; margin-right: 10px "#}
+                                    {#                                 v-on:click='remove_from_cart(index)'>Remove#}
+                                    {#                            </div>#}
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4>[[item.qty]]
+                                        {#                            <h4 style="text-align: center; color: black;  float: left">[[item.qty]]#}
+                                        [[item.size]]
+                                        [[item.item]]</h4>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div v-if="merchTotal != 0">
+                        <h3>Merchendise: [[merchTotal]]</h3>
+                        {#                <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>#}
+                    </div>
+                    <h3>Total: [[totalStr]]</h3>
+                    {#            <h3 style="color: whitesmoke;">Total: [[totalStr]]</h3>#}
                 </div>
-                <div v-if="merchTotal != 0">
-                    <h3>Merchendise: [[merchTotal]]</h3>
-                    {#                <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>#}
+                <div v-show="showPayPal">
+                    {#        <div v-show="showPayPal" style="text-align: center">#}
+                    <paypal-checkout :amount='totalStr' currency="USD" :button-style="aStyle" :client="paypal"
+                                     env="production" v-on:payment-authorized="paymentAuthorized"
+                                     v-on:payment-completed="paymentCompleted"
+                                     v-on:payment-cancelled="paymentCancelled">
+                    </paypal-checkout>
                 </div>
-                <h3>Total: [[totalStr]]</h3>
-                {#            <h3 style="color: whitesmoke;">Total: [[totalStr]]</h3>#}
-            </div>
-            <div v-show="showPayPal">
-                {#        <div v-show="showPayPal" style="text-align: center">#}
-                <paypal-checkout :amount='totalStr' currency="USD" :button-style="aStyle" :client="paypal"
-                    env="production" v-on:payment-authorized="paymentAuthorized"
-                    v-on:payment-completed="paymentCompleted" v-on:payment-cancelled="paymentCancelled">
-                </paypal-checkout>
             </div>
         </div>
     </div>
-</div>
 
-<script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
+    <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
 
-<script>
-    var app = new Vue({
-        delimiters: ['[[', ']]'],
-        el: '#app',
-        data: {
-            paypal: {
-                sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
-                production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
-            },
-            aStyle: {
-                label: 'checkout',
-                size: 'large',
-                shape: 'rect',
-                color: 'blue',
-                tagline: 'false'
-            },
-            cartlist: [],
-            merchTotal: 0,
-            regTotal: 0.00,
-            totalStr: "0.00",
-            showPayPal: true,
-
-        },
-        computed: {},
-        watch: {
-            cartlist() {
-                let count = 0
-                let cost = 0
-                for (item in this.cartlist) {
-                    let itemcost = 0
-                    let merchtot = 0
-                    itemcost = this.cartlist[item].qty * this.cartlist[item].price
-                    cost += itemcost
-                }
-                this.merchTotal = cost.toFixed(2)
-                this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
+    <script>
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#app',
+            data: {
+                paypal: {
+                    sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
+                    production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
+                },
+                aStyle: {
+                    label: 'checkout',
+                    size: 'large',
+                    shape: 'rect',
+                    color: 'blue',
+                    tagline: 'false'
+                },
+                cartlist: [],
+                merchTotal: 0,
+                regTotal: 0.00,
+                totalStr: "0.00",
+                showPayPal: true,
 
             },
-            regTotal() {
-                this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
-            },
-        },
-        methods: {
-            sizeTextChange(sizeString) {
-                return sizeString.toLowerCase().split('_').map(function (word) {
-                    return word.replace(word[0], word[0].toUpperCase());
-                }).join(' ').replace(/Quantity Available/, '').replace(/x/g, 'X');
-            },
-            add_to_cart() {
-                console.log('Clicked Add Button')
-            },
+            computed: {},
+            watch: {
+                cartlist() {
+                    let count = 0
+                    let cost = 0
+                    for (item in this.cartlist) {
+                        let itemcost = 0
+                        let merchtot = 0
+                        itemcost = this.cartlist[item].qty * this.cartlist[item].price
+                        cost += itemcost
+                    }
+                    this.merchTotal = cost.toFixed(2)
+                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
 
-            remove_from_cart(index) {
-                let count = 0
-                let merch_order = "", end
-                this.cartlist.splice(index, 1)
-                for (i in this.cartlist) {
-                    merch_order += String(Object.values(this.cartlist[count])) + "\n"
-                    count += 1
-                }
-                document.getElementById("id_form-0-merchandise_ordered").value = merch_order
+                },
+                regTotal() {
+                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
+                },
             },
-            paymentAuthorized(data) {
-                this.showPayPal = false
-            },
+            methods: {
+                sizeTextChange(sizeString) {
+                    return sizeString.toLowerCase().split('_').map(function (word) {
+                        return word.replace(word[0], word[0].toUpperCase());
+                    }).join(' ').replace(/Quantity Available/, '').replace(/x/g, 'X');
+                },
+                add_to_cart() {
+                    console.log('Clicked Add Button')
+                },
 
-            paymentCompleted(data) {
-                document.getElementById('modal_close_btn').style.display = "none"
-                this.paymentComplete = true
-            },
+                remove_from_cart(index) {
+                    let count = 0
+                    let merch_order = "", end
+                    this.cartlist.splice(index, 1)
+                    for (i in this.cartlist) {
+                        merch_order += String(Object.values(this.cartlist[count])) + "\n"
+                        count += 1
+                    }
+                    document.getElementById("id_form-0-merchandise_ordered").value = merch_order
+                },
+                paymentAuthorized(data) {
+                    this.showPayPal = false
+                },
 
-            paymentCancelled(data) {
-                this.payment_cancelled = false
-                this.payment_cancelled = true
-                this.showPayPal = true
-            },
+                paymentCompleted(data) {
+                    document.getElementById('modal_close_btn').style.display = "none"
+                    this.paymentComplete = true
+                },
 
+                paymentCancelled(data) {
+                    this.payment_cancelled = false
+                    this.payment_cancelled = true
+                    this.showPayPal = true
+                },
+
+            }
+        });
+
+        class Merch {
+            constructor(itemName, itemPrice, size) {
+                this.itemName = itemName
+                this.itemPrice = itemPrice
+                this.size = size
+            }
         }
-    });
 
-    class Merch {
-        constructor(itemName, itemPrice, size) {
-            this.itemName = itemName
-            this.itemPrice = itemPrice
-            this.size = size
-        }
-    }
-
-</script>
+    </script>
 {% endblock %}
