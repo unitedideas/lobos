@@ -45,23 +45,22 @@
 
                 <form action="/merchandise/" method="post">
                     {% csrf_token %}
-
                     {% for key, value in args.merch.items %}
-                                                {{ this.value.1 }}
                         <img style='display: block; margin-left: auto; margin-right: auto; width: 300px'
                              src="{% static "events/bgimages/china_hat_2019_hoodie.png" %}" alt="Product Image">
-
-                        <table id="merch_table_{{ value.0.id }}">
+                        <table>
                             <tr>
                                 <td>
-                                    <select id="{{ value.0.id }}">
+                                    <select class="{{ value.0.id }}">
                                         {% for size, qty in value.1.items %}
                                             {% if qty <= 0 %}
-                                                <option disabled value="{{ size }}">[[sizeTextChange('{{ size }}')]] -
+                                                <option disabled>[[sizeTextChange('{{ size }}')]] -
                                                     Sold Out
                                                 </option>
                                             {% else %}
-                                                <option id="selected_size" value="id:{{ value.0.id }}, size:{{ size }}">[[sizeTextChange('{{ size }}')]]</option>
+                                                <option value="{{ size }}">
+                                                    [[sizeTextChange('{{ size }}')]]
+                                                </option>
                                             {% endif %}
                                         {% endfor %}
                                     </select>
@@ -70,12 +69,13 @@
                                     <h3>Price: {{ value.0.sale_price }}</h3>
                                 </td>
                                 <td>
-{#                                     todo: he max needs to watch for the select to be changed and ... #}
-{#                                    todo: ... then set the max to the value of the selected size_qty_available #}
-                                    <input type="number" placeholder="0" step="1" min="0" max="">
+                                    {#                                     todo: he max needs to watch for the select to be changed and ... #}
+                                    {#                                    todo: ... then set the max to the value of the selected size_qty_available #}
+                                    <input class="{{ value.0.id }}" type="number" placeholder="0" step="1" min="0" max="">
                                 </td>
                                 <td>
-                                    <div type="button" class="btn btn-primary" value="" v-on:click="add_to_cart()">Add
+                                    <div type="button" class="btn btn-primary"
+                                         v-on:click="add_to_cart({{ value.0.id }})">Add
                                     </div>
                                 </td>
                             </tr>
@@ -83,40 +83,26 @@
                         <br>
                     {% endfor %}
                 </form>
-                {#        <div style="text-align: center;">#}
                 <div>
                     <div v-if="cartlist.length > 0">
-                        {#                <h3 style="color: whitesmoke;">Your Cart:</h3>#}
                         <h3>Your Cart:</h3>
                         <div>
-                            {#                <div style="background-color: #ffe673; overflow: hidden; padding-top: 7px">#}
                             <div v-for="(item, index) in cartlist">
-                                {#                    <div v-for="(item, index) in cartlist" style="text-align: center; background-color: red">#}
                                 <div class="col-sm-6">
                                     <div class="btn btn-primary" v-on:click='remove_from_cart(index)'>Remove</div>
-                                    {#                            <div class="btn btn-primary"#}
-                                    {#                                 style="width: 100px; float: right; margin-right: 10px "#}
-                                    {#                                 v-on:click='remove_from_cart(index)'>Remove#}
-                                    {#                            </div>#}
                                 </div>
                                 <div class="col-sm-6">
-                                    <h4>[[item.qty]]
-                                        {#                            <h4 style="text-align: center; color: black;  float: left">[[item.qty]]#}
-                                        [[item.size]]
-                                        [[item.item]]</h4>
+                                    <h4>[[item.qty]] [[item.size]] [[item.item]]</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div v-if="merchTotal != 0">
                         <h3>Merchendise: [[merchTotal]]</h3>
-                        {#                <h3 style="color: whitesmoke;">Merchendise: [[merchTotal]]</h3>#}
                     </div>
                     <h3>Total: [[totalStr]]</h3>
-                    {#            <h3 style="color: whitesmoke;">Total: [[totalStr]]</h3>#}
                 </div>
                 <div v-show="showPayPal">
-                    {#        <div v-show="showPayPal" style="text-align: center">#}
                     <paypal-checkout :amount='totalStr' currency="USD" :button-style="aStyle" :client="paypal"
                                      env="production" v-on:payment-authorized="paymentAuthorized"
                                      v-on:payment-completed="paymentCompleted"
@@ -145,7 +131,8 @@
                     color: 'blue',
                     tagline: 'false'
                 },
-                cartlist: [],
+                inCartList: {},
+                cartlist:[],
                 merchTotal: 0,
                 regTotal: 0.00,
                 totalStr: "0.00",
@@ -172,13 +159,18 @@
                 },
             },
             methods: {
+                add_to_cart(item_id) {
+                    this.inCartList.id = item_id
+                    let datas = document.getElementsByClassName(item_id)
+                    this.inCartList.size = datas[0].value
+                    this.inCartList.qty = Number(datas[1].value)
+                    console.log(this.inCartList)
+                },
+
                 sizeTextChange(sizeString) {
                     return sizeString.toLowerCase().split('_').map(function (word) {
                         return word.replace(word[0], word[0].toUpperCase());
                     }).join(' ').replace(/Quantity Available/, '').replace(/x/g, 'X');
-                },
-                add_to_cart() {
-                    console.log('Clicked Add Button')
                 },
 
                 remove_from_cart(index) {
