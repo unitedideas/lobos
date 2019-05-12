@@ -2,13 +2,8 @@
 {% load static %}
 
 <head>
-    {#    <!-- jQuery for PayPal -->#}
-    {#    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>#}
-    {# Vue.js CDN #}
-    {#    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>#}
-
-
     {% block head %}
+
         <title>Lobos Merch</title>
 
         <link rel="stylesheet" href='{% static "events/merchStyle.css" %}' type="text/css">
@@ -29,7 +24,9 @@
 
             window.onload = isIE();
         </script>
-
+        <script type='text/javascript'>
+            var json_args = {{ json_args|safe }};
+        </script>
     {% endblock %}
 </head>
 
@@ -38,6 +35,7 @@
         <br>
         <div class="container">
             <div class="jumbotron">
+                {{ args }}
                 <h1>Lobos Events Merchandise</h1>
                 <div class=barBreak></div>
                 {% csrf_token %}
@@ -59,14 +57,15 @@
                         <tbody>
                         <tr>
                             <td>
-                                <select class="{{ value.0.id }}">
+                                <select id="select_{{ value.0.id }}" class="{{ value.0.id }}"
+                                        @change="maxInput({{ value.0.id }})">
                                     {% for size, qty in value.1.items %}
                                         {% if qty <= 0 %}
                                             <option disabled>[[sizeTextChange('{{ size }}')]] -
                                                 Sold Out
                                             </option>
                                         {% else %}
-                                            <option>
+                                            <option value="{{ size }}">
                                                 [[sizeTextChange('{{ size }}')]]
                                             </option>
                                         {% endif %}
@@ -77,7 +76,8 @@
                                 <h3>Price: {{ value.0.sale_price }}</h3>
                             </td>
                             <td>
-                                <input class="{{ value.0.id }}" type="number" step="1" min="1" max="" value="1">
+                                <input id="input_{{ value.0.id }}" class="{{ value.0.id }}" type="number" step="1"
+                                       min="1" max="" value="1">
                             </td>
                             <td>
                                 <div type="button" class="btn btn-primary"
@@ -118,34 +118,35 @@
             </div>
         </div>
     </div>
-
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
 
     <script>
         var app = new Vue({
             delimiters: ['[[', ']]'],
             el: '#app',
-            data: {
-                paypal: {
-                    sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
-                    production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
-                },
-                aStyle: {
-                    label: 'checkout',
-                    size: 'large',
-                    shape: 'rect',
-                    color: 'blue',
-                    tagline: 'false'
-                },
-                inCartList: {},
-                cartlist: [],
-                merchTotal: 0,
-                regTotal: 0.00,
-                totalStr: "0.00",
-                showPayPal: true,
+            data: function () {
+                return {
+                    paypal: {
+                        sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
+                        production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
+                    },
+                    aStyle: {
+                        label: 'checkout',
+                        size: 'large',
+                        shape: 'rect',
+                        color: 'blue',
+                        tagline: 'false'
+                    },
+                    json_args:json_args,
+                    inCartList: {},
+                    cartlist: [],
+                    merchTotal: 0,
+                    regTotal: 0.00,
+                    totalStr: "0.00",
+                    showPayPal: true,
+                }
 
             },
-            computed: {},
             watch: {
                 cartlist() {
                     let count = 0
@@ -165,6 +166,16 @@
                 },
             },
             methods: {
+                maxInput(itemId) {
+                    const selectedSize = document.getElementById('select_' + itemId).value
+                    let item = 'item_'+itemId
+                    console.log(item)
+                    console.log(app.json_args.merch[item][1][selectedSize])
+                    const inputField = document.getElementById('input_' + itemId)
+                    inputField.max = app.json_args.merch[item][1][selectedSize]
+                    inputField.value = 1
+                },
+
                 add_to_cart(item_id) {
                     this.inCartList.id = item_id
                     let datas = document.getElementsByClassName(item_id)
@@ -204,7 +215,8 @@
                     this.showPayPal = true
                 },
 
-            }
+            },
+
         });
 
         class Merch {

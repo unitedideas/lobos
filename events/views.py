@@ -42,7 +42,7 @@ def merchandise(request):
     for dict in merchValues:
         itemInfo = {}
         sizeQty = {}
-        itemName = 'item_' + str(count)
+        itemName = "item_" + str(count)
         for attr, value in dict.items():
             if 'quantity_available' in attr:
                 sizeQty[attr] = value
@@ -63,21 +63,25 @@ def merchandise(request):
             return HttpResponseRedirect('/merchCheckout/')
         else:
             args = {
-                'merch': merch,
-                'form': form
+                "merch": merch,
+                # "form": form
             }
 
-            return render(request, 'events/merchandise.html', {'args': args})
+            json_args = json.dumps(args)
+
+            return render(request, "events/merchandise.html", {"args": args, "json_args": json_args})
 
     else:
         form = MerchOrderForm()
 
         args = {
-            'merch': merch,
-            'form': form
+            "merch": merch,
+            # "form": form
         }
 
-        return render(request, 'events/merchandise.html', {'args': args})
+        json_args = json.dumps(args)
+
+        return render(request, "events/merchandise.html", {"args": args, "json_args": json_args})
 
 
 @staff_member_required
