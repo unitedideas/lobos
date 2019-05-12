@@ -137,7 +137,7 @@
                         color: 'blue',
                         tagline: 'false'
                     },
-                    json_args:json_args,
+                    json_args: json_args,
                     inCartList: {},
                     cartlist: [],
                     merchTotal: 0,
@@ -168,7 +168,7 @@
             methods: {
                 maxInput(itemId) {
                     const selectedSize = document.getElementById('select_' + itemId).value
-                    let item = 'item_'+itemId
+                    let item = 'item_' + itemId
                     console.log(item)
                     console.log(app.json_args.merch[item][1][selectedSize])
                     const inputField = document.getElementById('input_' + itemId)
