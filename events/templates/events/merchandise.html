@@ -35,63 +35,60 @@
 
 {% block body %}
     <div id="app">
-        {#        <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">#}
         <br>
-        {#        <div class="container" style=" padding: 15px 15px 0px 15px; border-radius: 5px">#}
         <div class="container">
             <div class="jumbotron">
                 <h1>Lobos Events Merchandise</h1>
                 <div class=barBreak></div>
-                <form action="/merchandise/" method="post">
-                    {% csrf_token %}
-                    {% for key, value in args.merch.items %}
-                        <div class="merchSection">
-                            <div class="merchImage">
-                                <h2>{{ value.0.merchandise_name }}</h2>
-                                {% if value.0.item_image %}
-                                    <img class="productImage" src="{% static value.0.item_image %}">
-                                {% else %}
-                                    <h3>No product image available</h3>
-                                {% endif %}
-                            </div>
-                            <div class="description">
-                                {{ value.0.description }}
-                            </div>
+                {% csrf_token %}
+                {% for key, value in args.merch.items %}
+                    <div class="merchSection">
+                        <div class="merchImage">
+                            <h2>{{ value.0.merchandise_name }}</h2>
+                            {% if value.0.item_image %}
+                                <img class="productImage" src="{% static value.0.item_image %}">
+                            {% else %}
+                                <h3>No product image available</h3>
+                            {% endif %}
                         </div>
-                        <table>
-                            <tr>
-                                <td>
-                                    <select class="{{ value.0.id }}">
-                                        {% for size, qty in value.1.items %}
-                                            {% if qty <= 0 %}
-                                                <option disabled>[[sizeTextChange('{{ size }}')]] -
-                                                    Sold Out
-                                                </option>
-                                            {% else %}
-                                                <option>
-                                                    [[sizeTextChange('{{ size }}')]]
-                                                </option>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </select>
-                                </td>
-                                <td>
-                                    <h3>Price: {{ value.0.sale_price }}</h3>
-                                </td>
-                                <td>
-                                    <input class="{{ value.0.id }}" type="number" step="1" min="1" max="" value="1">
-                                </td>
-                                <td>
-                                    <div type="button" class="btn btn-primary"
-                                         v-on:click="add_to_cart({{ value.0.id }})">Add
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class=barBreak></div>
-                        <br>
-                    {% endfor %}
-                </form>
+                        <div class="description">
+                            <h3>{{ value.0.description }}</h3>
+                        </div>
+                    </div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <select class="{{ value.0.id }}">
+                                    {% for size, qty in value.1.items %}
+                                        {% if qty <= 0 %}
+                                            <option disabled>[[sizeTextChange('{{ size }}')]] -
+                                                Sold Out
+                                            </option>
+                                        {% else %}
+                                            <option>
+                                                [[sizeTextChange('{{ size }}')]]
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <h3>Price: {{ value.0.sale_price }}</h3>
+                            </td>
+                            <td>
+                                <input class="{{ value.0.id }}" type="number" step="1" min="1" max="" value="1">
+                            </td>
+                            <td>
+                                <div type="button" class="btn btn-primary"
+                                     v-on:click="add_to_cart({{ value.0.id }})">Add Item
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class=barBreak></div>
+                {% endfor %}
                 <div>
                     <div v-if="cartlist.length > 0">
                         <h3>Your Cart:</h3>
@@ -141,7 +138,7 @@
                     tagline: 'false'
                 },
                 inCartList: {},
-                cartlist:[],
+                cartlist: [],
                 merchTotal: 0,
                 regTotal: 0.00,
                 totalStr: "0.00",
