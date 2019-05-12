@@ -59,7 +59,7 @@
                             <td>
                                 <select id="select_{{ value.0.id }}" class="{{ value.0.id }}"
                                         @change="maxInput({{ value.0.id }})">
-                                  <option value="" selected disabled hidden>Choose here</option>
+                                    <option value="" selected disabled hidden>Choose Size</option>
                                     {% for size, qty in value.1.items %}
                                         {% if qty <= 0 %}
                                             <option disabled>[[sizeTextChange('{{ size }}')]] -
@@ -81,7 +81,9 @@
                                        min="1" max="" value="1">
                             </td>
                             <td>
-{#                                todo: if select value is "" disable button else enable #}
+
+                                {#todo: if select value is "" disable button else enable #}
+
                                 <div type="button" class="btn btn-primary"
                                      v-on:click="add_to_cart({{ value.0.id }})">Add Item
                                 </div>
