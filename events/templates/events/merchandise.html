@@ -40,14 +40,24 @@
         {#        <div class="container" style=" padding: 15px 15px 0px 15px; border-radius: 5px">#}
         <div class="container">
             <div class="jumbotron">
-                <h2>Lobos Events Merchandise</h2>
-                {#                <h1 style="text-align: center">{{ event }} Registration</h1>#}
-
+                <h1>Lobos Events Merchandise</h1>
+                <div class=barBreak></div>
                 <form action="/merchandise/" method="post">
                     {% csrf_token %}
                     {% for key, value in args.merch.items %}
-                        <img style='display: block; margin-left: auto; margin-right: auto; width: 300px'
-                             src="{% static "events/bgimages/china_hat_2019_hoodie.png" %}" alt="Product Image">
+                        <div class="merchSection">
+                            <div class="merchImage">
+                                <h2>{{ value.0.merchandise_name }}</h2>
+                                {% if value.0.item_image %}
+                                    <img class="productImage" src="{% static value.0.item_image %}">
+                                {% else %}
+                                    <h3>No product image available</h3>
+                                {% endif %}
+                            </div>
+                            <div class="description">
+                                {{ value.0.description }}
+                            </div>
+                        </div>
                         <table>
                             <tr>
                                 <td>
@@ -69,9 +79,7 @@
                                     <h3>Price: {{ value.0.sale_price }}</h3>
                                 </td>
                                 <td>
-                                    {#                                     todo: he max needs to watch for the select to be changed and ... #}
-                                    {#                                    todo: ... then set the max to the value of the selected size_qty_available #}
-                                    <input class="{{ value.0.id }}" type="number" placeholder="0" step="1" min="0" max="">
+                                    <input class="{{ value.0.id }}" type="number" step="1" min="1" max="" value="1">
                                 </td>
                                 <td>
                                     <div type="button" class="btn btn-primary"
@@ -80,6 +88,7 @@
                                 </td>
                             </tr>
                         </table>
+                        <div class=barBreak></div>
                         <br>
                     {% endfor %}
                 </form>
