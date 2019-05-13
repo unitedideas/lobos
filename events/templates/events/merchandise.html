@@ -120,10 +120,16 @@
                         <h3>Total: [[totalStr]]</h3>
                     </div>
                     <div v-show="showPayPal">
-                        <paypal-checkout :amount='totalStr' currency="USD" :button-style="aStyle" :client="paypal"
-                                         env="production" v-on:payment-authorized="paymentAuthorized"
-                                         v-on:payment-completed="paymentCompleted"
-                                         v-on:payment-cancelled="paymentCancelled">
+                        <paypal-checkout
+                                :amount='totalStr'
+                                currency="USD"
+                                :button-style="aStyle"
+                                :client="paypal"
+                                :items="cartlist"
+                                env="sandbox"
+                                v-on:payment-authorized="paymentAuthorized"
+                                v-on:payment-completed="paymentCompleted"
+                                v-on:payment-cancelled="paymentCancelled">
                         </paypal-checkout>
                     </div>
                 </form>
@@ -140,7 +146,7 @@
                 return {
                     paypal: {
                         sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
-                        production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
+                        {#production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'#}
                     },
                     aStyle: {
                         label: 'checkout',
@@ -151,21 +157,39 @@
                     },
                     json_args: json_args,
                     inCartList: {},
-                    cartlist: [],
+                    cartlist: [
+                        {# { #}
+                        {#    "name": "hat",#}
+                        {#    "description": "Brown hat.",#}
+                        {#    "quantity": "2",#}
+                        {#    "price": "20.01",#}
+                        {#    "currency": "USD",#}
+                        {# }, #}
+                       ],
                     merchTotal: 0,
                     regTotal: 0.00,
-                    totalStr: "0.00",
+                    totalStr: "60.03",
                     showPayPal: true,
                 }
 
             },
             methods: {
                 add_to_cart(item_id) {
-                    this.inCartList.id = item_id
+                    let addToCartObj = {}
+                    addToCartObj.name = 'Yes'
+                    addToCartObj.description = 'Yes'
+                    addToCartObj.quantity = '2'
+                    addToCartObj.price = '20.01'
+                    addToCartObj.currency = 'USD'
                     let datas = document.getElementsByClassName(item_id)
+                    this.inCartList.id = item_id
                     this.inCartList.size = datas[0].value
                     this.inCartList.qty = Number(datas[1].value)
                     console.log(this.inCartList)
+                    console.log(addToCartObj)
+                    this.cartlist.push(addToCartObj)
+                    console.log(this.cartlist)
+
                 },
 
                 maxInput(itemId) {
