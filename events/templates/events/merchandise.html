@@ -210,18 +210,17 @@
                     let item_size = this.sizeTextChange(datas[0].value)
                     let item_qty = datas[1].value
                     let item_price_preshipping = (this.merch_json.merch[item][0]['sale_price']).toFixed(2)
-                    let item_shipping = (Number(item_price_preshipping * .08).toFixed(2))
-                    let item_price = item_price_preshipping + item_shipping
+                    let item_price = Number(item_price_preshipping * 1.08)
+                    let item_shipping = item_price - item_price_preshipping
 
 
                     addToCartObj.name = item_size + ' ' + item_name
                     addToCartObj.description = item_size //size
                     addToCartObj.quantity = String(item_qty)
-                    addToCartObj.price = String(item_price)
-                    addToCartObj.item_price_preshipping = String((item_price_preshipping))
+                    addToCartObj.price = item_price.toFixed(2)
                     addToCartObj.currency = 'USD'
                     addToCartObj.sku = 'sku' + String(itemId)
-                    addToCartObj.shipping = String(item_shipping)
+                    addToCartObj.shipping = item_shipping.toFixed(2)
                     this.cartlist.push(addToCartObj)
 
                 },
@@ -229,7 +228,6 @@
                 maxInput(itemId) {
                     const selectedSize = document.getElementById('select_' + itemId).value
                     let item = 'item_' + itemId
-                    console.log(app.merch_json.merch[item][1][selectedSize])
                     const inputField = document.getElementById('input_' + itemId)
                     inputField.max = app.merch_json.merch[item][1][selectedSize]
                     inputField.value = 1
@@ -268,26 +266,22 @@
                 },
 
                 cartlist() {
-                    console.log(this.cartlist)
+                    let total = 0
                     let shipping = 0
-                    let itemPreShipping = 0
                     for (let item in this.cartlist) {
-                        let price = Number(this.cartlist[item].item_price_preshipping)
-                        let qty = Number(this.cartlist[item].quantity)
-                        let item_shipping = Number(this.cartlist[item].shipping)
+                        let price = this.cartlist[item].price
+                        let qty = this.cartlist[item].quantity
+                        let shipping_cost = this.cartlist[item].shipping
 
-                        itemPreShipping += price * qty
-                        shipping += item_shipping
+                        shipping += Number(shipping_cost)
+                        total += Number(price) * Number(qty)
 
                     }
-                    let total = shipping + itemPreShipping
-                    console.log(itemPreShipping)
-                    console.log(shipping)
-                    console.log(total)
 
-                    this.totalStr = String((total).toFixed(2))
-                    this.itemPreShipping = String(itemPreShipping.toFixed(2))
-                    this.shipping = String(shipping.toFixed(2))
+                    this.shipping = shipping.toFixed(2)
+                    this.totalStr = total.toFixed(2)
+                    this.itemPreShipping = (Number(this.totalStr) - Number(this.shipping)).toFixed(2)
+
                 },
             },
         });
