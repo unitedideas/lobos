@@ -25,7 +25,7 @@
             window.onload = isIE();
         </script>
         <script type='text/javascript'>
-            var json_args = {{ json_args|safe }};
+            var merch_json = {{ json_args|safe }};
         </script>
     {% endblock %}
 </head>
@@ -35,109 +35,116 @@
         <br>
         <div class="container">
             <div class="jumbotron">
-                {{ args }}
                 <h1>Lobos Merchandise</h1>
                 <div class=barBreak></div>
-                <form v-on:submit.prevent action="">
-                    {% csrf_token %}
-                    {% for key, value in args.merch.items %}
-                        <div class="merchSection">
-                            <div class="merchImage">
-                                <h2>{{ value.0.merchandise_name }}</h2>
-                                {% if value.0.item_image %}
-                                    <img class="productImage" src="{% static value.0.item_image %}">
-                                {% else %}
-                                    <h3>No product image available</h3>
-                                {% endif %}
-                            </div>
-                            <div class="description">
-                                <h3>{{ value.0.description }}</h3>
-                            </div>
+                {% csrf_token %}
+                {% for key, value in args.merch.items %}
+                    <div class="merchSection">
+                        <div class="merchImage">
+                            <h2>{{ value.0.merchandise_name }}</h2>
+                            {% if value.0.item_image %}
+                                <img class="productImage" src="{% static value.0.item_image %}">
+                            {% else %}
+                                <h3>No product image available</h3>
+                            {% endif %}
                         </div>
-                        <table>
-                            <tbody>
-                            <tr>
+                        <div class="description">
+                            <h3>{{ value.0.description }}</h3>
+                        </div>
+                    </div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            {# Selector item size #}
+                            <td>
+                                <select id="select_{{ value.0.id }}" class="{{ value.0.id }}"
+                                        @change="maxInput({{ value.0.id }})">
+                                    <option value="none" selected disabled hidden>Choose Size</option>
+                                    {% for size, qty in value.1.items %}
+                                        {% if qty <= 0 %}
+                                            <option disabled>[[sizeTextChange('{{ size }}')]] -
+                                                Sold Out
+                                            </option>
+                                        {% else %}
+                                            <option value="{{ size }}">
+                                                [[sizeTextChange('{{ size }}')]]
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
 
-                                {# Selector item size #}
-                                <td>
-                                    <select id="select_{{ value.0.id }}" class="{{ value.0.id }}"
-                                            @change="maxInput({{ value.0.id }})">
-                                        <option value="none" selected disabled hidden>Choose Size</option>
-                                        {% for size, qty in value.1.items %}
-                                            {% if qty <= 0 %}
-                                                <option disabled>[[sizeTextChange('{{ size }}')]] -
-                                                    Sold Out
-                                                </option>
-                                            {% else %}
-                                                <option value="{{ size }}">
-                                                    [[sizeTextChange('{{ size }}')]]
-                                                </option>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </select>
-                                </td>
+                            {# Price of item #}
+                            <td>
+                                <h3>Price: {{ value.0.sale_price }}</h3>
+                            </td>
 
-                                {# Price of item #}
-                                <td>
-                                    <h3>Price: {{ value.0.sale_price }}</h3>
-                                </td>
+                            {# Add to Cart Quantity #}
+                            <td>
+                                <input id="input_{{ value.0.id }}" class="{{ value.0.id }}" type="number" step="1"
+                                       min="1" max="" value="1">
+                            </td>
 
-                                {# Add to Cart Quantity #}
-                                <td>
-                                    <input id="input_{{ value.0.id }}" class="{{ value.0.id }}" type="number" step="1"
-                                           min="1" max="" value="1">
-                                </td>
-
-                                {# Add to Cart Button #}
-                                <td>
-                                    {#todo: if select value is "" disable button else enable #}
-                                    <button id="addButton_{{ value.0.id }}" disabled class="btn btn-primary"
-                                            v-on:click="add_to_cart({{ value.0.id }})">Add Item
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class=barBreak></div>
-                    {% endfor %}
-                    <div>
-                        <div v-if="cartlist.length > 0">
-                            <h3>Your Cart:</h3>
-                            <div>
-                                <div v-for="(item, index) in cartlist">
-                                    <div class="col-sm-6">
-                                        <div class="btn btn-primary" v-on:click='remove_from_cart(index)'>Remove</div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <h4>[[item.qty]] [[item.size]] [[item.item]]</h4>
-                                    </div>
+                            {# Add to Cart Button #}
+                            <td>
+                                <button id="addButton_{{ value.0.id }}" disabled class="btn btn-primary"
+                                        v-on:click="add_to_cart({{ value.0.id }})">Add Item
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class=barBreak></div>
+                {% endfor %}
+                <div>
+                    <div v-if="cartlist.length > 0">
+                        <h3>Items in your cart:</h3>
+                        <div v-for="(item, index) in cartlist">
+                            <div class="flex-container">
+                                <div class="btn btn-primary" v-on:click='remove_from_cart(index)'>
+                                    Remove Item
+                                </div>
+                                <div>
+                                    <h4>[[item.quantity]] - [[item.description]] - [[item.name]]</h4>
                                 </div>
                             </div>
                         </div>
-                        <div v-if="merchTotal != 0">
-                            <h3>Merchendise: [[merchTotal]]</h3>
-                        </div>
+                    </div>
+                    <div v-if="totalStr != '0.00'">
                         <h3>Total: [[totalStr]]</h3>
                     </div>
-                    <div v-show="showPayPal">
-                        <paypal-checkout
-                                :amount='totalStr'
-                                currency="USD"
-                                :button-style="aStyle"
-                                :client="paypal"
-                                :items="cartlist"
-                                env="sandbox"
-                                v-on:payment-authorized="paymentAuthorized"
-                                v-on:payment-completed="paymentCompleted"
-                                v-on:payment-cancelled="paymentCancelled">
-                        </paypal-checkout>
+                    <div v-else>
+                        <h3>Your Cart is Empty</h3>
                     </div>
-                </form>
+                </div>
+                <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was canceled or
+                    declined
+                </div>
+
+                <div v-show="showPayPal">
+                    <paypal-checkout
+                            :amount='totalStr'
+                            currency="USD"
+                            :button-style="aStyle"
+                            :client="paypal"
+                            :items="cartlist"
+                            env="sandbox"
+                            v-on:payment-authorized="paymentAuthorized"
+                            v-on:payment-completed="paymentCompleted"
+                            v-on:payment-cancelled="paymentCancelled">
+                    </paypal-checkout>
+                </div>
+                <div class="whirlpool" v-show="!showPayPal">
+                    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33"
+                                r="30"></circle>
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
-
     <script>
         var app = new Vue({
             delimiters: ['[[', ']]'],
@@ -145,8 +152,8 @@
             data: function () {
                 return {
                     paypal: {
-                        sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
-                        {#production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'#}
+                        sandbox: 'Ab1Sz1kGg_pToL-VqcaNqUh1C4obLl11btkrD3nShf8FadP5sDn47sNiLVA7mHeWQKN9Fn14tMorYSag',
+                        production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
                     },
                     aStyle: {
                         label: 'checkout',
@@ -155,57 +162,50 @@
                         color: 'blue',
                         tagline: 'false'
                     },
-                    json_args: json_args,
-                    inCartList: {},
-                    cartlist: [
-                        {# { #}
-                        {#    "name": "hat",#}
-                        {#    "description": "Brown hat.",#}
-                        {#    "quantity": "2",#}
-                        {#    "price": "20.01",#}
-                        {#    "currency": "USD",#}
-                        {# }, #}
-                       ],
-                    merchTotal: 0,
+                    merch_json: merch_json,
+                    cartlist: [],
                     regTotal: 0.00,
-                    totalStr: "60.03",
+                    totalStr: '0.00',
                     showPayPal: true,
+                    payment_cancelled: false,
+                    paymentComplete: false,
                 }
 
             },
             methods: {
-                add_to_cart(item_id) {
+                sizeTextChange(sizeString) {
+                    return sizeString.toLowerCase().split('_').map(function (word) {
+                        return word.replace(word[0], word[0].toUpperCase());
+                    }).join(' ').replace(/Quantity Available/, '').replace(/x/g, 'X');
+                },
+
+                add_to_cart(itemId) {
                     let addToCartObj = {}
-                    addToCartObj.name = 'Yes'
-                    addToCartObj.description = 'Yes'
-                    addToCartObj.quantity = '2'
-                    addToCartObj.price = '20.01'
+                    let item = 'item_' + itemId
+                    let datas = document.getElementsByClassName(itemId)
+                    let item_name = this.merch_json.merch[item][0]['merchandise_name']
+                    let item_size = this.sizeTextChange(datas[0].value)
+                    let item_price = String((this.merch_json.merch[item][0]['sale_price']).toFixed(2))
+                    let item_qty = String(datas[1].value)
+
+                    addToCartObj.name = item_name
+                    addToCartObj.description = item_size //size
+                    addToCartObj.quantity = item_qty
+                    addToCartObj.price = item_price
                     addToCartObj.currency = 'USD'
-                    let datas = document.getElementsByClassName(item_id)
-                    this.inCartList.id = item_id
-                    this.inCartList.size = datas[0].value
-                    this.inCartList.qty = Number(datas[1].value)
-                    console.log(this.inCartList)
-                    console.log(addToCartObj)
+                    addToCartObj.sku = 'sku'+ String(itemId)
                     this.cartlist.push(addToCartObj)
-                    console.log(this.cartlist)
 
                 },
 
                 maxInput(itemId) {
                     const selectedSize = document.getElementById('select_' + itemId).value
                     let item = 'item_' + itemId
-                    console.log(app.json_args.merch[item][1][selectedSize])
+                    console.log(app.merch_json.merch[item][1][selectedSize])
                     const inputField = document.getElementById('input_' + itemId)
-                    inputField.max = app.json_args.merch[item][1][selectedSize]
+                    inputField.max = app.merch_json.merch[item][1][selectedSize]
                     inputField.value = 1
                     document.getElementById('addButton_' + itemId).disabled = false
-                },
-
-                sizeTextChange(sizeString) {
-                    return sizeString.toLowerCase().split('_').map(function (word) {
-                        return word.replace(word[0], word[0].toUpperCase());
-                    }).join(' ').replace(/Quantity Available/, '').replace(/x/g, 'X');
                 },
 
                 remove_from_cart(index) {
@@ -217,6 +217,7 @@
                         count += 1
                     }
                     document.getElementById("id_form-0-merchandise_ordered").value = merch_order
+                    console.log(this.totalStr)
                 },
                 paymentAuthorized(data) {
                     this.showPayPal = false
@@ -236,33 +237,23 @@
             },
             watch: {
                 cartlist() {
-                    let count = 0
-                    let cost = 0
-                    for (item in this.cartlist) {
-                        let itemcost = 0
-                        let merchtot = 0
-                        itemcost = this.cartlist[item].qty * this.cartlist[item].price
-                        cost += itemcost
-                    }
-                    this.merchTotal = cost.toFixed(2)
-                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
+                    let cart_total = 0
+                    for (let item in this.cartlist) {
+                        let price = Number(this.cartlist[item].price)
 
-                },
-                regTotal() {
-                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
+                        let qty = Number(this.cartlist[item].quantity)
+
+                        let item_total = price * qty
+                        cart_total += item_total
+                    }
+                    this.totalStr = String(cart_total.toFixed(2))
+                    {#if(){#}
+                    {#    #}
+                    {# } #}
                 },
             },
-
-
         });
 
-        class Merch {
-            constructor(itemName, itemPrice, size) {
-                this.itemName = itemName
-                this.itemPrice = itemPrice
-                this.size = size
-            }
-        }
 
     </script>
 {% endblock %}
