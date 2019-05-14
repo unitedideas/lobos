@@ -128,6 +128,7 @@
                             :button-style="aStyle"
                             :client="paypal"
                             :items="cartlist"
+{#                            :shipping="5.00"#}
                             env="sandbox"
                             v-on:payment-authorized="paymentAuthorized"
                             v-on:payment-completed="paymentCompleted"
@@ -166,6 +167,18 @@
                     cartlist: [],
                     regTotal: 0.00,
                     totalStr: '0.00',
+                    {#    {#}
+                    {#    breakdown:{#}
+                    {#        item_total: "50.00",#}
+                    {#        tax_total: '10.00',#}
+                    {#        shipping: '13.00',#}
+                    {#        handling: '0.00',#}
+                    {#        insurance: '0.00',#}
+                    {#        shipping_discount: '0.00',#}
+                    {##}
+                    {#    }#}
+                    {##}
+                    {# }, #}
                     showPayPal: true,
                     payment_cancelled: false,
                     paymentComplete: false,
@@ -188,12 +201,13 @@
                     let item_price = String((this.merch_json.merch[item][0]['sale_price']).toFixed(2))
                     let item_qty = String(datas[1].value)
 
-                    addToCartObj.name = item_name
+                    addToCartObj.name = item_size + ' ' +item_name
                     addToCartObj.description = item_size //size
                     addToCartObj.quantity = item_qty
                     addToCartObj.price = item_price
                     addToCartObj.currency = 'USD'
                     addToCartObj.sku = 'sku'+ String(itemId)
+                    addToCartObj.shipping = '5.00'
                     this.cartlist.push(addToCartObj)
 
                 },
@@ -247,9 +261,6 @@
                         cart_total += item_total
                     }
                     this.totalStr = String(cart_total.toFixed(2))
-                    {#if(){#}
-                    {#    #}
-                    {# } #}
                 },
             },
         });
