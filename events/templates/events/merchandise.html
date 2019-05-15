@@ -189,11 +189,11 @@
             },
             methods: {
                 checkMaxinput(itemId) {
-                    qtyInput = document.getElementById('input_' + String(itemId))
+                    qtyInput = document.getElementById('input_' + String(itemId)).value
                     inputMax = document.getElementById('input_' + String(itemId)).max
                     inputValue = document.getElementById('input_' + String(itemId)).value
                     if (inputValue > inputMax) {
-                        qtyInput.value = inputMax
+                        qtyInput = inputMax
                     }
                 },
                 sizeTextChange(sizeString) {
