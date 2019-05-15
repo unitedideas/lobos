@@ -37,7 +37,7 @@
             <div class="jumbotron">
                 <h1>Lobos Merchandise</h1>
                 <div class=barBreak></div>
-                <form method="post" v-on:submit.prevent action="/merchCheckout.html">
+                <form method="POST" action="/merchCheckout/">
                     {% csrf_token %}
                     {% for key, value in args.merch.items %}
                         <div class="merchSection">
@@ -74,22 +74,19 @@
                                         {% endfor %}
                                     </select>
                                 </td>
-
                                 {# Price of item #}
                                 <td>
                                     <h3>Price: {{ value.0.sale_price }}</h3>
                                 </td>
-
                                 {# Add to Cart Quantity #}
                                 <td>
                                     <input id="input_{{ value.0.id }}" class="{{ value.0.id }}" type="number" step="1"
                                            min="1" max="" value="1" v-on:change="checkMaxinput({{ value.0.id }})">
                                 </td>
-
                                 {# Add to Cart Button #}
                                 <td>
                                     <button id="addButton_{{ value.0.id }}" disabled class="btn btn-primary"
-                                            v-on:click="add_to_cart({{ value.0.id }})">Add Item
+                                            v-on:click.prevent="add_to_cart({{ value.0.id }})">Add Item
                                     </button>
                                 </td>
                             </tr>
@@ -223,6 +220,7 @@
                     addToCartObj.shipping = item_shipping.toFixed(2)
                     this.cartlist.push(addToCartObj)
 
+                    console.log(addToCartObj)
                 },
 
                 maxInput(itemId) {
@@ -254,7 +252,6 @@
                 },
 
                 paymentCancelled(data) {
-                    this.payment_cancelled = false
                     this.payment_cancelled = true
                     this.showPayPal = true
                 },
@@ -262,7 +259,7 @@
             },
             watch: {
                 paymentComplete() {
-                    this.$refs.submitButton.click();
+                    document.getElementById('submitButton').click()
                 },
 
                 cartlist() {
@@ -272,12 +269,9 @@
                         let price = this.cartlist[item].price
                         let qty = this.cartlist[item].quantity
                         let shipping_cost = this.cartlist[item].shipping
-
                         shipping += Number(shipping_cost)
                         total += Number(price) * Number(qty)
-
                     }
-
                     this.shipping = shipping.toFixed(2)
                     this.totalStr = total.toFixed(2)
                     this.itemPreShipping = (Number(this.totalStr) - Number(this.shipping)).toFixed(2)
