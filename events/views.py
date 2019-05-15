@@ -15,7 +15,6 @@ from events.forms import (
     RegistrationForm,
     EditProfileForm,
     RiderProfileFormSet,
-    MerchOrderForm
 )
 from django.forms.utils import ErrorDict, ErrorList
 from django.template import loader
@@ -53,35 +52,14 @@ def merchandise(request):
 
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = MerchOrderForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/merchCheckout/')
-        else:
-            args = {
-                "merch": merch,
-                # "form": form
-            }
-
-            json_args = json.dumps(args)
-
-            return render(request, "events/merchandise.html", {"args": args, "json_args": json_args})
-
+        return HttpResponseRedirect('/merchCheckout/')
     else:
-        form = MerchOrderForm()
-
         args = {
             "merch": merch,
-            # "form": form
         }
+    json_args = json.dumps(args)
 
-        json_args = json.dumps(args)
-
-        return render(request, "events/merchandise.html", {"args": args, "json_args": json_args})
+    return render(request, "events/merchandise.html", {"args": args, "json_args": json_args})
 
 
 @staff_member_required
@@ -276,7 +254,7 @@ def register(request):
             first_name = request.POST['first_name'].replace(" ", "")
             last_name = request.POST['last_name'].replace(" ", "")
             username = first_name.lower() + last_name.lower() + \
-                email.lower().replace(" ", "")
+                       email.lower().replace(" ", "")
             password = request.POST['password1']
 
             if User.objects.filter(username=username).exists():
@@ -349,7 +327,9 @@ def change_password(request):
             msg.send()
             return redirect('/profile/')
         else:
-            errors = {'errors': formset.errors}
+            # changed this from formset.errors to form.errors
+            # errors = {'errors': formset.errors}
+            errors = {'errors': form.errors}
             return redirect('change_password', errors)
     else:
         form = PasswordChangeForm(user=request.user)
@@ -414,13 +394,15 @@ def error_checking(request):
             class_list_under_40 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
                                    "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
                                    "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
-                                   "Amateur under 16 Jr.", "Expert 16 and over 40 EX-EX", "Amateur 16 and over 40 EX-AM", "Amateur 16 and over 40 AM",
+                                   "Amateur under 16 Jr.", "Expert 16 and over 40 EX-EX",
+                                   "Amateur 16 and over 40 EX-AM", "Amateur 16 and over 40 AM",
                                    "Amateur 16 and over 50 AM", "Amateur 16 and over 50 EX", "60 Class",
                                    "70 Class"]
             class_list_under_50 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
                                    "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
                                    "Amateur under 16 Sportsman", "Amateur under 16 Beginner", "Amateur under 16 Women",
-                                   "Amateur under 16 Jr.", "Amateur 16 and over 50 AM", "Amateur 16 and over 50 EX", "60 Class",
+                                   "Amateur under 16 Jr.", "Amateur 16 and over 50 AM", "Amateur 16 and over 50 EX",
+                                   "60 Class",
                                    "70 Class"]
             class_list_under_60 = ["Expert under 16 AA", "Expert under 16 Open Expert", "Expert under 16 250 EX",
                                    "Amateur under 16 Open Amateur", "Amateur under 16 250 AM",
@@ -458,7 +440,7 @@ def error_checking(request):
         if (under_16 - escorts_signed_up > 0):
             print('ESCORT NOT GOOD')
             error = 'escorts' if (
-                under_16 - escorts_signed_up > 1) else 'escort'
+                    under_16 - escorts_signed_up > 1) else 'escort'
             content['escorts_signed_up'] = escorts_signed_up
             content['under_16'] = under_16
             # return JsonResponse(content)

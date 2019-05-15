@@ -37,7 +37,7 @@
             <div class="jumbotron">
                 <h1>Lobos Merchandise</h1>
                 <div class=barBreak></div>
-                <form method="POST" action="/merchCheckout/">
+                <form method="POST" action="/merchandise/">
                     {% csrf_token %}
                     {% for key, value in args.merch.items %}
                         <div class="merchSection">
