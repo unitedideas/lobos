@@ -51,7 +51,11 @@ def merchandise(request):
 
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        return HttpResponseRedirect('/merchCheckout/')
+        args = {
+            "thing_key": "things in the value",
+            'this': 'that'
+        }
+        return render(request, 'events/merchCheckout.html', {"args": args})
     else:
         args = {
             "merch": merch,

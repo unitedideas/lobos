@@ -3,5 +3,8 @@
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
         <h1>Thanks</h1>
+        {% for k,v in args.items %}
+    <p>{{ k }} {{ v }}</p>
+    {% endfor %}
     </div>
 {% endblock %}
