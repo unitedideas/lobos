@@ -113,7 +113,7 @@
                                         <h3>Items Total: [[itemPreShipping]]</h3>
                                     </div>
                                     <div>
-                                        <h3>Shipping: [[shipping]]</h3>
+                                        <h3>Shipping: [[total_shipping]]</h3>
                                     </div>
                                     <div>
                                         <h3>Total: [[totalStr]]</h3>
@@ -131,13 +131,13 @@
 
                     <div v-show="showPayPal">
                         <paypal-checkout
-                                :amount='totalStr'
+                                :amount="totalStr"
                                 currency="USD"
                                 :button-style="aStyle"
                                 :client="paypal"
                                 :items="cartlist"
                                 env="sandbox"
-
+                                :details="details"
                                 v-on:payment-authorized="paymentAuthorized"
                                 v-on:payment-completed="paymentCompleted"
                                 v-on:payment-cancelled="paymentCancelled">
@@ -150,7 +150,7 @@
                                     r="30"></circle>
                         </svg>
                     </div>
-                    <button ref="submitButton" style='display: none'></button>
+                    <button id="submitButton" style='display: none'></button>
                 </form>
             </div>
         </div>
@@ -176,11 +176,20 @@
                     merch_json: merch_json,
                     cartlist: [],
                     itemPreShipping: '',
-                    totalStr: '',
+                    totalStr: "",
+                    details:
+                        {
+                            subtotal: "",
+                            tax: "0.00",
+                            shipping: "",
+                            handling_fee: "0.00",
+                            shipping_discount: "0.00",
+                            insurance: "0.00"
+                        },
                     showPayPal: true,
                     payment_cancelled: false,
                     paymentComplete: false,
-                    shipping: '',
+                    total_shipping: '',
                 }
 
             },
@@ -206,15 +215,13 @@
                     let item_name = this.merch_json.merch[item][0]['merchandise_name']
                     let item_size = this.sizeTextChange(datas[0].value)
                     let item_qty = datas[1].value
-                    let item_price_preshipping = (this.merch_json.merch[item][0]['sale_price']).toFixed(2)
-                    let item_price = Number(item_price_preshipping * 1.08)
-                    let item_shipping = item_price - item_price_preshipping
-
+                    let price = Number(this.merch_json.merch[item][0]['sale_price'])
+                    let item_shipping = item_qty * price * .08
 
                     addToCartObj.name = item_size + ' ' + item_name
                     addToCartObj.description = item_size //size
                     addToCartObj.quantity = String(item_qty)
-                    addToCartObj.price = item_price.toFixed(2)
+                    addToCartObj.price = price.toFixed(2)
                     addToCartObj.currency = 'USD'
                     addToCartObj.sku = 'sku' + String(itemId)
                     addToCartObj.shipping = item_shipping.toFixed(2)
@@ -263,18 +270,25 @@
                 },
 
                 cartlist() {
-                    let total = 0
+                    let item_total = 0
                     let shipping = 0
+
                     for (let item in this.cartlist) {
                         let price = this.cartlist[item].price
                         let qty = this.cartlist[item].quantity
                         let shipping_cost = this.cartlist[item].shipping
                         shipping += Number(shipping_cost)
-                        total += Number(price) * Number(qty)
+                        item_total += Number(price) * Number(qty)
+                        console.log(shipping)
                     }
-                    this.shipping = shipping.toFixed(2)
-                    this.totalStr = total.toFixed(2)
-                    this.itemPreShipping = (Number(this.totalStr) - Number(this.shipping)).toFixed(2)
+                    final_total = shipping + item_total
+                    this.total_shipping = shipping.toFixed(2)
+                    this.details.shipping = shipping.toFixed(2)
+                    this.totalStr = (final_total).toFixed(2)
+                    this.details.subtotal = item_total.toFixed(2)
+
+                    this.itemPreShipping = (Number(this.totalStr) - Number(this.total_shipping)).toFixed(2)
+
 
                 },
             },
