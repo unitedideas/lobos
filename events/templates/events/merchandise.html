@@ -226,8 +226,6 @@
                     addToCartObj.sku = 'sku' + String(itemId)
                     addToCartObj.shipping = item_shipping.toFixed(2)
                     this.cartlist.push(addToCartObj)
-
-                    console.log(addToCartObj)
                 },
 
                 maxInput(itemId) {
@@ -279,7 +277,6 @@
                         let shipping_cost = this.cartlist[item].shipping
                         shipping += Number(shipping_cost)
                         item_total += Number(price) * Number(qty)
-                        console.log(shipping)
                     }
                     final_total = shipping + item_total
                     this.total_shipping = shipping.toFixed(2)
