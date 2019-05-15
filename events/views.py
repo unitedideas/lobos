@@ -35,7 +35,6 @@ def merchCheckout(request):
 def merchandise(request):
     merchValues = Merchandise.objects.filter(
         available_on_merch_page=True).values()
-    print(merchValues)
     count = 1
     merch = {}
     for dict in merchValues:
@@ -338,7 +337,6 @@ def change_password(request):
 
 
 def error_checking(request):
-    print('In error and escort checking')
     under_16 = 0
     escorts_signed_up = 0
     over_16 = False
@@ -357,24 +355,12 @@ def error_checking(request):
             d = 0
             age_error = False
             birth_date = form.cleaned_data['birth_date']
-            print(birth_date)
             rider_class = form.cleaned_data['rider_class']
 
             gender = form.cleaned_data['gender']
-            print(gender)
             y = event_date.year - birth_date.year
-            print(rider_class)
-
-            print("Event Date")
-            print(event_date)
-            print("year")
-            print(y)
             m = event_date.month - birth_date.month
-            print('month')
-            print(m)
             d = event_date.day - birth_date.day
-            print('day')
-            print(d)
 
             #  under 16 rider classes
 
@@ -418,7 +404,6 @@ def error_checking(request):
             content = {}
 
             if y > 150:
-                print('Birth Date is wrong format')
                 content['birthdate_wrong'] = True
                 content["birthdate_form"] = form_count
                 # return JsonResponse(content)
@@ -438,7 +423,6 @@ def error_checking(request):
                 escorts_signed_up += 1
 
         if (under_16 - escorts_signed_up > 0):
-            print('ESCORT NOT GOOD')
             error = 'escorts' if (
                     under_16 - escorts_signed_up > 1) else 'escort'
             content['escorts_signed_up'] = escorts_signed_up
@@ -458,15 +442,12 @@ def error_checking(request):
                         (age == 50 and rider_class in class_list_under_50) or \
                         (age == 60 and rider_class in class_list_under_60) or \
                         (age == 70 and rider_class in class_list_under_70):
-                    print('RIDER CLASS NOT GOOD... less than age ' +
-                          str(age) + " rider in " + rider_class)
                     content['under_class_age'] = {
                         "age": age, "rider_class": rider_class, 'form': form_count}
                     content["age_error"] = True
                     # return JsonResponse(content)
 
         if gender == 'Male' and (rider_class == 'Amateur under 16 Women' or rider_class == "Amateur 16 and over Women"):
-            print('RIDER CLASS NOT GOOD... ' + gender + " in " + rider_class)
             content['gender_class'] = True
             content['gender_form'] = form_count
             # return JsonResponse(content)
@@ -474,12 +455,10 @@ def error_checking(request):
             return JsonResponse(content)
 
         else:
-            print('FORM VALID & ESCORTS GOOD')
             content = {'success': True}
             return JsonResponse(content)
 
     else:
-        print('FORM NOT VALID')
         content = {'errors': formset.errors, 'success': False, 'escorts_signed_up': escorts_signed_up,
                    'under_16': under_16, }
         return JsonResponse(content)
@@ -653,9 +632,7 @@ def event_register(request):
         event = Event.objects.get(event_name=request.GET.get('event'))
         codes = dict(Codes.objects.values_list(
             'discount_code', 'discount_amount'))
-        print(codes)
         codes = json.dumps(codes)
-        print(codes)
 
         formset = prefill_form(request)
 
