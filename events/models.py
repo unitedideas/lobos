@@ -10,6 +10,7 @@ STATES = load_choices(STATES_PATH, True)
 MAKES_PATH = os.path.join(HERE, 'makes.txt')
 MAKES = load_choices(MAKES_PATH, True)
 
+
 class MerchandiseOrder(models.Model):
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
