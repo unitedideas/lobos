@@ -50,7 +50,7 @@ def merchandise(request):
 
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        json_order_data = request.POST.__getitem__('text_area')
+        json_order_data = request.POST.__getitem__('order_data')
         order_data = json.loads(json_order_data)
         print(order_data)
 

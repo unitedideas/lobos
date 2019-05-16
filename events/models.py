@@ -18,6 +18,7 @@ class MerchandiseOrder(models.Model):
     city = models.CharField(max_length=30, null=True, blank=True)
     state = models.CharField(max_length=30, null=True, blank=True)
     zip_code = models.CharField(max_length=30, null=True, blank=True)
+    email = models.CharField(max_length=30, null=True, blank=True)
     items_ordered = models.TextField(max_length=30, null=True, blank=True)
     date_ordered = models.CharField(max_length=30, null=True, blank=True)
     date_shipped = models.CharField(max_length=30, null=True, blank=True)

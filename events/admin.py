@@ -12,8 +12,8 @@ admin.site.register(Event)
 @admin.register(MerchandiseOrder)
 # this is the example of how to setup the import/ export and the admin search
 class MerchandiseOrderExportAdmin(ImportExportModelAdmin):
-    list_display = ('first_name', 'last_name', 'paypal_order_id', 'date_ordered', 'date_shipped', 'shipped')
-    search_fields = ('first_name', 'last_name', 'paypal_order_id', 'date_ordered', 'date_shipped', 'shipped',)
+    list_display = ('first_name', 'last_name', 'email', 'paypal_order_id', 'date_ordered', 'date_shipped', 'shipped')
+    search_fields = ('first_name', 'last_name', 'email', 'paypal_order_id', 'date_ordered', 'date_shipped', 'shipped',)
 
     def user_info(self, obj):
         return obj.description

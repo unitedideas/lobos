@@ -126,7 +126,14 @@
                 <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was canceled or
                     declined
                 </div>
-
+                <form method="POST" action="/merchandise/">
+                    {% csrf_token %}
+                    <input type="email" placeholder="Need to add a django form">
+                    <input type="tel">
+                    <input type="text" id="address line 1">
+                    <textarea id="text_area" name="order_data" value='textarea' hidden></textarea>
+                    <button id="submitButton">submit</button>
+                </form>
                 <div v-show="showPayPal">
                     <paypal-checkout
                             :amount="totalStr"
@@ -150,11 +157,7 @@
                 </div>
             </div>
         </div>
-        <form method="POST" action="/merchandise/" hidden>
-            {% csrf_token %}
-            <textarea id="text_area" name="text_area" value='textarea' ></textarea>
-            <button id="submitButton">submit</button>
-        </form>
+
     </div>
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
     <script>
@@ -254,7 +257,7 @@
 
                 paymentCompleted(data) {
                     const order_data = JSON.stringify(data)
-                    document.getElementById('text_area').value = order_data
+                    document.getElementById('order_data').value = order_data
                     this.paymentComplete = true
                 },
 
