@@ -150,11 +150,10 @@
                 </div>
             </div>
         </div>
-        <form method="POST" action="/merchandise/" display="none">
+        <form method="POST" action="/merchandise/" hidden>
             {% csrf_token %}
-            <button id="submitButton"></button>
-            <input type="text">
-
+            <textarea id="text_area" name="text_area" value='textarea' ></textarea>
+            <button id="submitButton">submit</button>
         </form>
     </div>
     <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
@@ -225,7 +224,7 @@
                     addToCartObj.quantity = String(item_qty)
                     addToCartObj.price = price.toFixed(2)
                     addToCartObj.currency = 'USD'
-                    addToCartObj.sku = 'sku' + String(itemId)
+                    addToCartObj.sku = String(itemId)
                     addToCartObj.shipping = item_shipping.toFixed(2)
                     this.cartlist.push(addToCartObj)
                 },
@@ -254,7 +253,8 @@
                 },
 
                 paymentCompleted(data) {
-                    console.log(data)
+                    const order_data = JSON.stringify(data)
+                    document.getElementById('text_area').value = order_data
                     this.paymentComplete = true
                 },
 
@@ -267,6 +267,7 @@
             watch: {
                 paymentComplete() {
                     document.getElementById('submitButton').click()
+
                 },
 
                 cartlist() {

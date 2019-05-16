@@ -1,4 +1,4 @@
-from .models import RiderProfile, Profile, Codes, Merchandise
+from .models import RiderProfile, Profile, Codes, Merchandise, MerchandiseOrder
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.conf import settings
@@ -33,8 +33,7 @@ def merchCheckout(request):
 
 
 def merchandise(request):
-    merchValues = Merchandise.objects.filter(
-        available_on_merch_page=True).values()
+    merchValues = Merchandise.objects.filter(available_on_merch_page=True).values()
     count = 1
     merch = {}
     for dict in merchValues:
@@ -51,6 +50,10 @@ def merchandise(request):
 
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
+        json_order_data = request.POST.__getitem__('text_area')
+        order_data = json.loads(json_order_data)
+        print(order_data)
+
         args = {
             "thing_key": "things in the value",
             'this': 'that'

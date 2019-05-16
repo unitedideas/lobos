@@ -10,6 +10,22 @@ STATES = load_choices(STATES_PATH, True)
 MAKES_PATH = os.path.join(HERE, 'makes.txt')
 MAKES = load_choices(MAKES_PATH, True)
 
+class MerchandiseOrder(models.Model):
+    first_name = models.CharField(max_length=30, null=True, blank=True)
+    last_name = models.CharField(max_length=30, null=True, blank=True)
+    paypal_order_id = models.CharField(max_length=30, null=True, blank=True)
+    address = models.CharField(max_length=30, null=True, blank=True)
+    city = models.CharField(max_length=30, null=True, blank=True)
+    state = models.CharField(max_length=30, null=True, blank=True)
+    zip_code = models.CharField(max_length=30, null=True, blank=True)
+    items_ordered = models.TextField(max_length=30, null=True, blank=True)
+    date_ordered = models.CharField(max_length=30, null=True, blank=True)
+    date_shipped = models.CharField(max_length=30, null=True, blank=True)
+    shipped = models.BooleanField(default=False, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.first_name) + str(self.last_name)
+
 
 class Merchandise(models.Model):
     available_on_merch_page = models.BooleanField(
