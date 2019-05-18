@@ -15,6 +15,7 @@ from events.forms import (
     RegistrationForm,
     EditProfileForm,
     RiderProfileFormSet,
+    MerchandiseOrderForm
 )
 from django.forms.utils import ErrorDict, ErrorList
 from django.template import loader
@@ -50,22 +51,38 @@ def merchandise(request):
 
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        json_order_data = request.POST.__getitem__('order_data')
-        order_data = json.loads(json_order_data)
-        print(order_data)
+        print('in the post request')
+        form = MerchandiseOrderForm(request.POST)
 
-        args = {
-            "thing_key": "things in the value",
-            'this': 'that'
-        }
-        return render(request, 'events/merchCheckout.html', {"args": args})
+        if form.is_valid():
+            postData = request.POST.dict()
+            print(postData
+                  )
+            # save the data to the database
+            # email to person to mail merch
+
+            args = {
+                "thing_key": "things in the value",
+                'this': 'that'
+            }
+            return render(request, 'events/merchCheckout.html', {"args": args})
+
+        else:
+            args = {
+                "merch": merch,
+            }
+            json_args = json.dumps(args)
+
+            return render(request, "events/merchandise.html", {"args": args, "json_args": json_args, "form": form})
+
     else:
+        form = MerchandiseOrderForm()
         args = {
             "merch": merch,
         }
-    json_args = json.dumps(args)
+        json_args = json.dumps(args)
 
-    return render(request, "events/merchandise.html", {"args": args, "json_args": json_args})
+        return render(request, "events/merchandise.html", {"args": args, "json_args": json_args, "form": form})
 
 
 @staff_member_required

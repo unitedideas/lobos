@@ -14,11 +14,20 @@ STATES_PATH = os.path.join(HERE, 'states.txt')
 STATES = load_choices(STATES_PATH, True)
 
 
+class MerchandiseOrderForm(forms.Form):
+    first_name = forms.CharField(max_length=30, label='First Name')
+    last_name = forms.CharField(max_length=30, label='Last Name')
+    address = forms.CharField(max_length=30, label='Address')
+    city = forms.CharField(max_length=30, label='City')
+    state = forms.CharField(max_length=30, label='State')
+    zip_code = forms.CharField(max_length=30, label='Zip Code')
+    email = forms.CharField(max_length=30, label='Email')
+    items_ordered = forms.CharField( widget=forms.HiddenInput(attrs={'id': "order_data"}))
+
+
 class MyAuthenticationForm(AuthenticationForm):
     username = forms.CharField(required=False,
                                widget=forms.TextInput(attrs={'oninput': "this.value=this.value.toLowerCase()"}))
-
-
 
 
 class RegistrationForm(UserCreationForm):
@@ -110,35 +119,19 @@ class BaseRiderProfileFormSet(BaseModelFormSet):
         super().__init__(*args, **kwargs)
 
 
-# https://docs.djangoproject.com/en/2.1/topics/forms/modelforms/
-
 RiderProfileFormSet = modelformset_factory(RiderProfile,
-                                           exclude=
-                                           (
-                                               'rider_cat',
-                                               'user',
-                                               'confirmation_number',
-                                               # 'rider_number',
-                                               'start_time',
-                                               'event',
-                                               'id',
-                                               'registration_date_time',
-                                           ),
+                                           exclude=(
+                                               'rider_cat', 'user', 'confirmation_number', 'start_time', 'event', 'id',
+                                               'registration_date_time',),
                                            formset=BaseRiderProfileFormSet,
-                                           widgets=
-                                           {
-                                               # 'phone_number': NumberInput(attrs={'placeholder': 'Example: 222333444'}),
-                                               # 'emergency_contact_phone': NumberInput(
-                                               #     attrs={'placeholder': 'Example: 222333444'}),
-                                               'birth_date': DateInput(attrs={'v-model': 'birth_date', 'type': 'date',
-                                                                              'placeholder': 'Example: 12/14/1980'}),
+                                           widgets={'birth_date': DateInput(
+                                               attrs={'v-model': 'birth_date', 'type': 'date',
+                                                      'placeholder': 'Example: 12/14/1980'}),
                                                'escort_name': forms.TextInput(attrs={
                                                    'placeholder': 'Escort Rider Required if under 16 on the day of the event.'}),
                                                'group_name': forms.TextInput(
                                                    attrs={'placeholder': 'John Smith, Jane Doe'}),
-                                               'rider_class': forms.Select(attrs={'oninput': "select_change(this)"}),
+                                               'rider_class': forms.Select(
+                                                   attrs={'oninput': "select_change(this)"}),
                                                'merchandise_ordered': forms.HiddenInput(),
-                                               'discount_code': forms.HiddenInput(),
-
-                                           }
-                                           )
+                                               'discount_code': forms.HiddenInput(), })

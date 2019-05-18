@@ -92,6 +92,12 @@
                     </table>
                     <div class=barBreak></div>
                 {% endfor %}
+                <form method="POST" action="/merchandise/">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button id="submitButton" style="display: none" >submit</button>
+                </form>
+
                 <div>
                     <h3>Items in your cart:</h3>
                     <div v-if="cartlist.length > 0">
@@ -126,14 +132,7 @@
                 <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was canceled or
                     declined
                 </div>
-                <form method="POST" action="/merchandise/">
-                    {% csrf_token %}
-                    <input type="email" placeholder="Need to add a django form">
-                    <input type="tel">
-                    <input type="text" id="address line 1">
-                    <textarea id="text_area" name="order_data" value='textarea' hidden></textarea>
-                    <button id="submitButton">submit</button>
-                </form>
+
                 <div v-show="showPayPal">
                     <paypal-checkout
                             :amount="totalStr"
