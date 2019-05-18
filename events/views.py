@@ -56,16 +56,47 @@ def merchandise(request):
 
         if form.is_valid():
             postData = request.POST.dict()
-            print(postData
-                  )
             # save the data to the database
-            # email to person to mail merch
+            # try:
+            itemsOrderedDict = json.loads(postData['items_ordered'])
+            item_ordered = itemsOrderedDict['transactions'][0]['item_list']['items']
+            print(item_ordered)
+            all_items = ''
+            paypal_order_id = itemsOrderedDict['transactions'][0]['related_resources'][0]['sale']['id']
+            for item in item_ordered:
+                print(item)
+                print(all_items)
+                for key in item:
+                    print(key)
+                    if key == 'name':
+                        all_items += 'Item: ' + str(item[key]) + ' - '
+                    if key == 'quantity':
+                        all_items += 'Quantity: ' + str(item[key]) + '\n'
 
-            args = {
-                "thing_key": "things in the value",
-                'this': 'that'
-            }
-            return render(request, 'events/merchCheckout.html', {"args": args})
+            if MerchandiseOrder.objects.filter(paypal_order_id=paypal_order_id).exists():
+                args = {
+                    "thing_key": "SAME PAYPAL ORDER ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+                    'this': 'that'
+                }
+                return render(request, 'events/merchCheckout.html', {"args": args})
+            else:
+                MerchandiseOrder.objects.create(
+                    first_name=postData['first_name'],
+                    last_name=postData['last_name'],
+                    address=postData['address'],
+                    city=postData['city'],
+                    state=postData['state'],
+                    zip_code=postData['zip_code'],
+                    email=postData['email'],
+                    date_ordered=itemsOrderedDict['create_time'],
+                    paypal_order_id=paypal_order_id,
+                    items_ordered=all_items)
+
+                args = {
+                    "thing_key": "things in the value",
+                    'this': 'that'
+                }
+                return render(request, 'events/merchCheckout.html', {"args": args})
 
         else:
             args = {
@@ -338,11 +369,13 @@ def change_password(request):
             first_name = request.user.first_name
             username = request.user.username
 
-            text_content = 'Hi ' + first_name.title() + '\nYou recently requested to reset your password at LobosEvents.com. \n' \
-                                                        'Your username, in case you\'ve forgotten: ' + username
+            text_content = 'Hi ' + first_name.title() + \
+                           '\nYou recently requested to reset your password at LobosEvents.com. \n' \
+                           'Your username, in case you\'ve forgotten: ' + username
 
-            html_content = 'Hi ' + first_name.title() + '\nYou recently requested to reset your password at LobosEvents.com. \n' \
-                                                        'Your username, in case you\'ve forgotten: ' + username
+            html_content = 'Hi ' + first_name.title() + \
+                           '\nYou recently requested to reset your password at LobosEvents.com. \n' \
+                           'Your username, in case you\'ve forgotten: ' + username
 
             msg = EmailMultiAlternatives(
                 subject, text_content, from_email, [to])
@@ -546,8 +579,7 @@ def event_register(request):
                     user = User.objects.create(username=created_username,
                                                email=form.email,
                                                first_name=form.first_name,
-                                               last_name=form.last_name,
-                                               )
+                                               last_name=form.last_name, )
 
                     user.first_name = form.first_name
                     user.last_name = form.last_name
