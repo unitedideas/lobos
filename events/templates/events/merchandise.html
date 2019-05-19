@@ -92,11 +92,6 @@
                     </table>
                     <div class=barBreak></div>
                 {% endfor %}
-                <form method="POST" action="/merchandise/">
-                    {% csrf_token %}
-                    {{form.as_p}}
-                    <button id="submitButton" style="display: none" >submit</button>
-                </form>
 
                 <div>
                     <h3>Items in your cart:</h3>
@@ -147,6 +142,11 @@
                             v-on:payment-cancelled="paymentCancelled">
                     </paypal-checkout>
                 </div>
+                <form method="POST" action="/merchandise/">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button id="submitButton" style="display: none">submit</button>
+                </form>
                 <div class="whirlpool" v-show="!showPayPal">
                     <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
                          xmlns="http://www.w3.org/2000/svg">
@@ -227,7 +227,7 @@
                     addToCartObj.quantity = String(item_qty)
                     addToCartObj.price = price.toFixed(2)
                     addToCartObj.currency = 'USD'
-                    addToCartObj.sku = String(itemId + ' '+ item_size_sku)
+                    addToCartObj.sku = String(itemId + ' ' + item_size_sku)
                     addToCartObj.shipping = item_shipping.toFixed(2)
                     this.cartlist.push(addToCartObj)
                     console.log(addToCartObj)

@@ -17,6 +17,7 @@ from events.forms import (
     RiderProfileFormSet,
     MerchandiseOrderForm
 )
+from django.db.models import F
 from django.forms.utils import ErrorDict, ErrorList
 from django.template import loader
 from django.template import Context
@@ -51,7 +52,6 @@ def merchandise(request):
 
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        print('in the post request')
         form = MerchandiseOrderForm(request.POST)
 
         if form.is_valid():
@@ -60,18 +60,24 @@ def merchandise(request):
             # try:
             itemsOrderedDict = json.loads(postData['items_ordered'])
             item_ordered = itemsOrderedDict['transactions'][0]['item_list']['items']
-            print(item_ordered)
             all_items = ''
             paypal_order_id = itemsOrderedDict['transactions'][0]['related_resources'][0]['sale']['id']
             for item in item_ordered:
-                print(item)
-                print(all_items)
                 for key in item:
-                    print(key)
                     if key == 'name':
                         all_items += 'Item: ' + str(item[key]) + ' - '
                     if key == 'quantity':
-                        all_items += 'Quantity: ' + str(item[key]) + '\n'
+                        quantity = item[key]
+                        all_items += 'Quantity: ' + str(quantity) + '\n'
+                    if key == 'sku':
+                        quantity = item['quantity']
+                        split_sku = item[key].split(' ')
+                        pk = split_sku[0]
+                        product = Merchandise.objects.get(pk=pk)
+                        print(product)
+                        current_quantity = getattr(product, split_sku[1])
+                        setattr(product, split_sku[1], current_quantity-quantity)
+                        product.save()
 
             if MerchandiseOrder.objects.filter(paypal_order_id=paypal_order_id).exists():
                 args = {
