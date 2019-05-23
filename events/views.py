@@ -15,7 +15,8 @@ from events.forms import (
     RegistrationForm,
     EditProfileForm,
     RiderProfileFormSet,
-    MerchandiseOrderForm
+    MerchandiseOrderForm,
+    RegistrationCheck
 )
 from django.db.models import F
 from django.forms.utils import ErrorDict, ErrorList
@@ -28,6 +29,22 @@ import string
 import json
 from datetime import datetime as ddt
 import datetime as dt
+
+
+def registration_check(request):
+    form = RegistrationCheck()
+
+    if request.POST:
+        print('POST request')
+        args = {
+            "thing_key": "things in the value",
+            'this': 'that'
+        }
+
+        return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+
+    else:
+        return render(request, 'events/registration_check.html', {'form': form})
 
 
 def merchCheckout(request):
@@ -184,7 +201,6 @@ def general_email(subject, header, subheader, emailmessage, recipients):
     # Optional Anymail extensions:
     msg.tags = ["general communication"]
     msg.track_clicks = True
-
     # Send it:
     msg.send()
 

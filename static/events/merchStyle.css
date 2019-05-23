@@ -88,3 +88,19 @@ select, input {
     margin: 10px;
 }
 
+.flex-check-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 10px
+}
+
+.flex-check-container > div {
+    margin: 2px;
+    width: 50%;
+}
+
+.flex-check-container > h1,h2,h3,h4,h5,h6 {
+    text-align: center;
+}
+

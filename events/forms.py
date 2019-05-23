@@ -24,6 +24,12 @@ class MerchandiseOrderForm(forms.Form):
     email = forms.CharField(max_length=30, label='Email')
     items_ordered = forms.CharField(widget=forms.HiddenInput(attrs={'id': "order_data"}))
 
+class RegistrationCheck(forms.Form):
+    first_name = forms.CharField(max_length=30, label='First Name', required=False)
+    last_name = forms.CharField(max_length=30, label='Last Name', required=False)
+    confirmationNumber = forms.CharField(max_length=30, label='Confirmation Number', required=False)
+
+
 
 class MyAuthenticationForm(AuthenticationForm):
     username = forms.CharField(required=False,

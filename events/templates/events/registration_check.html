@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    {% block head %}
+
+        <title>Registration Check</title>
+
+        <link rel="stylesheet" href='{% static "events/merchStyle.css" %}' type="text/css">
+    {% endblock %}
+</head>
+
+{% block body %}
+    <div class="container">
+        <div class="jumbotron" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
+            <h2>Check if you are registered for an upcoming event.</h2>
+            <div>
+                {{ args }}
+            </div>
+            <form method="POST" action="/registration_check/">
+                {% csrf_token %}
+                <div>
+                    <h3>Enter your {{ form.first_name.label.lower }} and {{ form.last_name.label.lower }}</h3>
+                    <div class="flex-check-container">
+                        <div>
+                            <h4>{{ form.first_name.label }}</h4>
+                            <div>{{ form.first_name }}</div>
+                        </div>
+
+                        <div>
+                            <h4>{{ form.last_name.label }}</h4>
+                            <div>{{ form.last_name }}</div>
+                        </div>
+                    </div>
+
+                </div>
+                <h2>OR</h2>
+                <div>
+                    <h3>Enter your {{ form.confirmationNumber.label.lower }}</h3>
+                    <div class="flex-check-container">
+                        <div>
+                            <h4>{{ form.confirmationNumber.label }}</h4>
+                            <div>{{ form.confirmationNumber }}</div>
+                        </div>
+                    </div>
+                </div>
+                <button>submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
