@@ -410,6 +410,7 @@ def error_checking(request):
     event_date = ddt.date(event_date)
     form_count = 0
     formset = RiderProfileFormSet(forms)
+
     if formset.is_valid():
         # calc age
         for form in formset:
@@ -418,6 +419,8 @@ def error_checking(request):
             m = 0
             d = 0
             age_error = False
+            email1 = form.cleaned_data['email']
+            email2 = form.cleaned_data['email2']
             birth_date = form.cleaned_data['birth_date']
             rider_class = form.cleaned_data['rider_class']
 
@@ -466,6 +469,9 @@ def error_checking(request):
             rider_class_check = False
             age_set = [30, 40, 50, 60, 70]
             content = {}
+            if email1 != email2:
+                content['email_not_the_same'] = True
+                content["email_not_the_same_form"] = form_count
 
             if y > 150:
                 content['birthdate_wrong'] = True
@@ -516,6 +522,7 @@ def error_checking(request):
             content['gender_form'] = form_count
             # return JsonResponse(content)
         if content != {}:
+            print(content)
             return JsonResponse(content)
 
         else:

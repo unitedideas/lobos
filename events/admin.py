@@ -32,6 +32,7 @@ class MerchandiseExportAdmin(ImportExportModelAdmin):
 @admin.register(RiderProfile)
 # this is the example of how to setup the import/ export and the admin search
 class RiderProfileExportAdmin(ImportExportModelAdmin):
+    exclude = ['email2']
     list_display = ('first_name', 'last_name', 'email', 'event', 'confirmation_number', 'registration_date_time')
     search_fields = ('event__event_name', 'confirmation_number', 'first_name', 'last_name', 'email',)
 
