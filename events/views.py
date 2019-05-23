@@ -177,7 +177,6 @@ def general_email(subject, header, subheader, emailmessage, recipients):
             'header': header,
             'subheader': subheader,
             'message': emailmessage,
-
         }
     )
     msg.attach_alternative(html, "text/html")
