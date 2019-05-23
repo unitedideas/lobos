@@ -360,6 +360,10 @@
                             :button-style="aStyle"
                             :client="paypal"
                             env="production"
+
+                            {#for adding more details#}
+                            {# :details="details" #}
+
                             v-on:payment-authorized="paymentAuthorized"
                             v-on:payment-completed="paymentCompleted"
                             v-on:payment-cancelled="paymentCancelled">
@@ -394,6 +398,16 @@
                     tagline: 'false'
                 },
                 totalStr: "0.00",
+                {#for adding more details#}
+                {#details:#}
+                {#    {#}
+                {#        subtotal: "",#}
+                {#        tax: "0.00",#}
+                {#        shipping: "",#}
+                {#        handling_fee: "0.00",#}
+                {#        shipping_discount: "0.00",#}
+                {#        insurance: "0.00"#}
+                {#    },#}
                 formList: [],
                 count: 0,
                 vue_form: "",
@@ -502,7 +516,7 @@
                 cartlist() {
                     let count = 0
                     let cost = 0
-                    for (item in this.cartlist) {
+                    for (let item in this.cartlist) {
                         let itemcost = 0
                         let merchtot = 0
                         itemcost = this.cartlist[item].qty * this.cartlist[item].price

@@ -261,9 +261,6 @@ class RiderProfile(models.Model):
     discount_code = models.CharField(max_length=100, null=True, blank=True)
     start_time = models.TimeField(max_length=30, null=True, blank=True)
 
-    # if we want to allow user profile images
-    # https://www.youtube.com/watch?v=tT2JOpfelSg&list=PLw02n0FEB3E3VSHjyYMcFadtQORvl1Ssj&index=36
-
     def __str__(self):
         return str(self.event) + ' ' + str(self.user)
 
