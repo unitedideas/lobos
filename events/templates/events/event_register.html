@@ -73,18 +73,24 @@
                             <div v-for="value, index in item">
                                 <div v-for="error in value">
                                     <h4>Rider Form [[form+1]]: The [[ index | capitalize ]] [[error | removeThis]]</h4>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </transition>
                 <transition name="fade">
-                    <div v-if="age_error || escort_required > 0 || gender_class || birthdate_wrong"
+                    <div v-if="age_error || escort_required > 0 || gender_class || birthdate_wrong || email_not_the_same"
                          class="p-3 mb-2 bg-danger text-white">
                         <h2>Please correct these errors to continue:</h2>
                     </div>
 
+                </transition>
+                <transition name="fade">
+                    <div v-if="email_not_the_same" class="p-3 mb-2 bg-danger text-white">
+                        <div>
+                            <h3>The emails on form [[email_not_the_same_form]] are not the same</h3>
+                        </div>
+                    </div>
                 </transition>
                 <transition name="fade">
                     <div v-if="age_error" class="p-3 mb-2 bg-danger text-white">
@@ -416,6 +422,7 @@
                 event_date: '{{ event.event_date | date:"F n, Y" }}',
                 under_class_age: "",
                 age_error: false,
+                email_not_the_same: false,
                 gender_class: false,
                 gender_form: "",
                 birthdate_wrong: false,
