@@ -712,6 +712,8 @@
 
                     paymentCompleted(data) {
                         document.getElementById('modal_close_btn').style.display = "none"
+                        const order_data = JSON.stringify(data)
+                        document.getElementById('order_data').value = order_data
                         this.paymentComplete = true
                     },
 

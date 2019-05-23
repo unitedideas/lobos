@@ -260,6 +260,7 @@ class RiderProfile(models.Model):
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     discount_code = models.CharField(max_length=100, null=True, blank=True)
     start_time = models.TimeField(max_length=30, null=True, blank=True)
+    items_ordered = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return str(self.event) + ' ' + str(self.user)

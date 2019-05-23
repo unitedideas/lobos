@@ -22,7 +22,7 @@ class MerchandiseOrderForm(forms.Form):
     state = forms.CharField(max_length=30, label='State')
     zip_code = forms.CharField(max_length=30, label='Zip Code')
     email = forms.CharField(max_length=30, label='Email')
-    items_ordered = forms.CharField( widget=forms.HiddenInput(attrs={'id': "order_data"}))
+    items_ordered = forms.CharField(widget=forms.HiddenInput(attrs={'id': "order_data"}))
 
 
 class MyAuthenticationForm(AuthenticationForm):
@@ -124,15 +124,36 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'rider_cat', 'user', 'confirmation_number', 'start_time', 'event', 'id',
                                                'registration_date_time',),
                                            formset=BaseRiderProfileFormSet,
-                                           widgets={'birth_date': DateInput(attrs={'v-model': 'birth_date', 'type': 'date', 'placeholder': 'Example: 12/14/1980'}),
-                                               'escort_name': forms.TextInput(attrs={'placeholder': 'Escort Rider Required if under 16 on the day of the event.'}),
-                                               'group_name': forms.TextInput(attrs={'placeholder': 'John Smith, Jane Doe'}),
-                                               'email': forms.EmailInput(attrs={'onpaste': 'return false', 'onCopy': 'return false',
-                                                          'onCut': 'return false', 'onDrag': 'return false',
-                                                          'onDrop': 'return false'}),
-                                               'email2': forms.EmailInput(attrs={'onpaste': 'return false', 'onCopy': 'return false',
-                                                          'onCut': 'return false', 'onDrag': 'return false',
-                                                          'onDrop': 'return false'}),
-                                               'rider_class': forms.Select(attrs={'oninput': "select_change(this)"}),
+                                           widgets={
+                                               'birth_date': DateInput(
+                                                   attrs={
+                                                       'v-model': 'birth_date', 'type': 'date',
+                                                       'placeholder': 'Example: 12/14/1980'
+                                                   }),
+                                               'escort_name': forms.TextInput(
+                                                   attrs={
+                                                       'placeholder': 'Escort Rider Required if under 16 on the day of the event.'
+                                                   }),
+                                               'group_name': forms.TextInput(
+                                                   attrs={
+                                                       'placeholder': 'John Smith, Jane Doe'}),
+                                               'email': forms.EmailInput(
+                                                   attrs={
+                                                       'onpaste': 'return false', 'onCopy': 'return false',
+                                                       'onCut': 'return false', 'onDrag': 'return false',
+                                                       'onDrop': 'return false'
+                                                   }),
+                                               'email2': forms.EmailInput(
+                                                   attrs={
+                                                       'onpaste': 'return false', 'onCopy': 'return false',
+                                                       'onCut': 'return false', 'onDrag': 'return false',
+                                                       'onDrop': 'return false'
+                                                   }),
+                                               'rider_class': forms.Select(
+                                                   attrs={
+                                                       'oninput': "select_change(this)"
+                                                   }),
                                                'merchandise_ordered': forms.HiddenInput(),
-                                               'discount_code': forms.HiddenInput(), })
+                                               'discount_code': forms.HiddenInput(),
+                                               'items_ordered': forms.HiddenInput(attrs={'id': "order_data"})
+                                           })

@@ -94,7 +94,6 @@ def merchandise(request):
                             split_sku = item[key].split(' ')
                             pk = split_sku[0]
                             product = Merchandise.objects.get(pk=pk)
-                            print(product)
                             current_quantity = getattr(product, split_sku[1])
                             setattr(product, split_sku[1], current_quantity - quantity)
                             product.save()
@@ -522,7 +521,6 @@ def error_checking(request):
             content['gender_form'] = form_count
             # return JsonResponse(content)
         if content != {}:
-            print(content)
             return JsonResponse(content)
 
         else:
