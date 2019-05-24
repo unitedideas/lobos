@@ -36,12 +36,33 @@ def registration_check(request):
 
     if request.POST:
         print('POST request')
-        args = {
-            "thing_key": "things in the value",
-            'this': 'that'
-        }
+        form = RegistrationCheck(request.POST)
 
-        return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+        if form.is_valid():
+            f = form.cleaned_data
+
+            print(f)
+            if f['confirmationNumber']:
+                event_id = RiderProfile.objects.filter(
+                    confirmation_number__icontains=f['confirmationNumber']).values_list('event', flat=True)
+
+                event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
+                event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
+                print(event_name[0], ' on ', event_date[0].strftime('%m/%d/%Y'))
+            elif f['first_name'] and f['last_name']:
+                event_id = RiderProfile.objects.filter(
+                    first_name__icontains=f['first_name'].lower()).filter(last_name__icontains=f['last_name'].lower()).values_list('event', flat=True).last()
+                print(event_id)
+
+                event_name = Event.objects.filter(id=event_id).values_list('event_name', flat=True)
+                event_date = Event.objects.filter(id=event_id).values_list('event_date', flat=True)
+                print(event_name[0], ' on ', event_date[0].strftime('%m/%d/%Y'))
+            args = {
+                "thing_key": "things in the value",
+                'this': 'that'
+            }
+
+            return render(request, 'events/registration_check.html', {"args": args, 'form': form})
 
     else:
         return render(request, 'events/registration_check.html', {'form': form})
