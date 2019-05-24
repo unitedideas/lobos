@@ -35,31 +35,32 @@ def registration_check(request):
     form = RegistrationCheck()
 
     if request.POST:
-        print('POST request')
         form = RegistrationCheck(request.POST)
 
         if form.is_valid():
             f = form.cleaned_data
 
-            print(f)
             if f['confirmationNumber']:
                 event_id = RiderProfile.objects.filter(
-                    confirmation_number__icontains=f['confirmationNumber']).values_list('event', flat=True)
-
+                    confirmation_number__icontains=f['confirmationNumber']).values_list('event_id', flat=True)
+                confirmation_names = RiderProfile.objects.filter(
+                    confirmation_number__icontains=f['confirmationNumber']).values_list('first_name', 'last_name')
+                confirmation_names = list(confirmation_names)
+                first_and_last_names = (' '.join(name) for name in confirmation_names)
                 event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
                 event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
-                print(event_name[0], ' on ', event_date[0].strftime('%m/%d/%Y'))
+                event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
             elif f['first_name'] and f['last_name']:
                 event_id = RiderProfile.objects.filter(
-                    first_name__icontains=f['first_name'].lower()).filter(last_name__icontains=f['last_name'].lower()).values_list('event', flat=True).last()
-                print(event_id)
+                    first_name__icontains=f['first_name'].lower()).filter(
+                    last_name__icontains=f['last_name'].lower()).values_list('event', flat=True).last()
 
                 event_name = Event.objects.filter(id=event_id).values_list('event_name', flat=True)
                 event_date = Event.objects.filter(id=event_id).values_list('event_date', flat=True)
                 print(event_name[0], ' on ', event_date[0].strftime('%m/%d/%Y'))
             args = {
-                "thing_key": "things in the value",
-                'this': 'that'
+                'name': first_and_last_names,
+                'event': event_data
             }
 
             return render(request, 'events/registration_check.html', {"args": args, 'form': form})

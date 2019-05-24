@@ -15,7 +15,13 @@
         <div class="jumbotron" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
             <h2>Check if you are registered for an upcoming event.</h2>
             <div>
-                {{ args }}
+                {% for name in args.name %}
+                    <p> {{ name }} </p>
+                {% endfor %}
+            </div>
+        <p>Are Registered For</p>
+            <div>
+                    <p> {{ args.event }} </p>
             </div>
             <form method="POST" action="/registration_check/">
                 {% csrf_token %}
