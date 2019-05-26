@@ -10,6 +10,62 @@ STATES = load_choices(STATES_PATH, True)
 MAKES_PATH = os.path.join(HERE, 'makes.txt')
 MAKES = load_choices(MAKES_PATH, True)
 
+AA = 'AA'
+openExpert = 'Open Ex'
+Ex250 = '250 Ex'
+Ex30 = '30 Ex'
+Ex40 = '40 Ex'
+OpenAm = 'Open Am'
+Open250 = '250 Am'
+Am30 = '30 Am'
+Am40 = '40 Am'
+
+LONGCOURSE = (
+    (openExpert, 'Open Ex'),
+    (Ex250, '250 Ex'),
+    (Ex30, '30 Ex'),
+    (Ex40, '40 Ex'),
+    (OpenAm, 'Open Am'),
+    (Open250, '250 Am'),
+    (Am30, '30 Am'),
+    (Am40, '40 Am')
+)
+
+Beginner = 'Beginner'
+Women = 'Women'
+Jr = 'Jr 12 - 15 yrs'
+Am50 = '50 Am'
+Ex50 = '50 Ex'
+Over60 = '60+'
+
+SHORTCOURSE = (
+    (Beginner, 'Beginner'),
+    (Women, 'Women'),
+    (Jr, 'Jr 12 - 15 yrs'),
+    (Am50, '50 Am'),
+    (Ex50, '50 Ex'),
+    (Over60, '60+')
+)
+
+
+class ClubEvent(models.Model):
+    name = models.CharField('First and Last Name', max_length=30, null=True, blank=True)
+    age = models.CharField(max_length=3, null=True, blank=True)
+    address = models.CharField(max_length=60, null=True, blank=True)
+    city = models.CharField(max_length=30, null=True, blank=True)
+    state = models.CharField(max_length=30, null=True, blank=True)
+    zip = models.CharField(max_length=5, null=True, blank=True)
+    phone = models.CharField(max_length=20, null=True, blank=True)
+    email = models.CharField(max_length=60, null=True, blank=True)
+    emergencyContact = models.CharField(max_length=60, null=True, blank=True)
+    bikeMakeAndCC = models.CharField('Bike Make and CC', max_length=60, null=True, blank=True)
+    longRiderClass = models.CharField('Long Course ($60)', max_length=60, null=True, blank=True, choices=LONGCOURSE)
+    ShortRiderClass = models.CharField('Long Course ($45)', max_length=60, null=True, blank=True, choices=SHORTCOURSE)
+    riderGroup = models.CharField('Group You would like to ride with (2 names)', max_length=60, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.name)
+
 
 class MerchandiseOrder(models.Model):
     first_name = models.CharField(max_length=30, null=True, blank=True)

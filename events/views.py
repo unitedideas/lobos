@@ -1,4 +1,4 @@
-from .models import RiderProfile, Profile, Codes, Merchandise, MerchandiseOrder
+from .models import RiderProfile, Profile, Codes, Merchandise, MerchandiseOrder, ClubEvent
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.conf import settings
@@ -16,7 +16,8 @@ from events.forms import (
     EditProfileForm,
     RiderProfileFormSet,
     MerchandiseOrderForm,
-    RegistrationCheck
+    RegistrationCheck,
+    LobosRace
 )
 from django.db.models import F
 from django.forms.utils import ErrorDict, ErrorList
@@ -29,6 +30,23 @@ import string
 import json
 from datetime import datetime as ddt
 import datetime as dt
+
+
+def thanks(request):
+    return render(request, 'events/thanks.html')
+
+
+def clubevents(request):
+    if request.POST:
+        form = LobosRace(request.POST)
+        if form.is_valid():
+            f = form.cleaned_data
+            return render(request, 'events/thanks.html')
+        else:
+            return render(request, 'events/clubevents.html', {'form': form})
+    else:
+        form = LobosRace()
+        return render(request, 'events/clubevents.html', {'form': form})
 
 
 def registration_check(request):

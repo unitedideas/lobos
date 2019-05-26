@@ -1,9 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
-from .models import RiderProfile, Profile
+from .models import RiderProfile, Profile, ClubEvent
 import os
-from django.forms import modelformset_factory
+from django.forms import modelformset_factory, formset_factory
 from django.forms import ModelForm, NumberInput, DateInput
 from events.util import load_choices
 from django.forms import BaseModelFormSet
@@ -24,11 +24,11 @@ class MerchandiseOrderForm(forms.Form):
     email = forms.CharField(max_length=30, label='Email')
     items_ordered = forms.CharField(widget=forms.HiddenInput(attrs={'id': "order_data"}))
 
+
 class RegistrationCheck(forms.Form):
     first_name = forms.CharField(max_length=30, label='First Name', required=False)
     last_name = forms.CharField(max_length=30, label='Last Name', required=False)
     confirmationNumber = forms.CharField(max_length=30, label='Confirmation Number', required=False)
-
 
 
 class MyAuthenticationForm(AuthenticationForm):
@@ -123,6 +123,12 @@ class EditProfileForm(UserChangeForm):
 class BaseRiderProfileFormSet(BaseModelFormSet):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+
+class LobosRace(ModelForm):
+    class Meta:
+        model = ClubEvent
+        fields = '__all__'
 
 
 RiderProfileFormSet = modelformset_factory(RiderProfile,
