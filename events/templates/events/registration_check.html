@@ -19,9 +19,9 @@
                     <p> {{ name }} </p>
                 {% endfor %}
             </div>
-        <p>Are Registered For</p>
+            <p>Are Registered For</p>
             <div>
-                    <p> {{ args.event }} </p>
+                <p> {{ args.event }} </p>
             </div>
             <form method="POST" action="/registration_check/">
                 {% csrf_token %}
