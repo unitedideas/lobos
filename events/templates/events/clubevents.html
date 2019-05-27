@@ -1,13 +1,40 @@
-{% extends 'base.html' %}
+{{% extends 'base.html' %}
 {% load static %}
-{% block head %}
-    <title>Lobos Merch</title>
-{% endblock %}
+
+<head>
+    {% block head %}
+
+        <title>Club Events Checkout</title>
+
+        <link rel="stylesheet" href='{% static "events/merchStyle.css" %}' type="text/css">
+
+        <script language="javascript" type="text/javascript">
+            function isIE() {
+                const ua = navigator.userAgent;
+                /* MSIE used to detect old browsers and Trident used to newer ones*/
+                const is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+
+                return is_ie;
+            }
+
+            /* Create an alert to show if the browser is IE or not */
+            if (isIE()) {
+                alert('InternetExplorer is not supported for registration on this site.\nPlease use Chrome, Edge, Firefox or Safari.');
+            }
+
+            window.onload = isIE();
+        </script>
+        <script type='text/javascript'>
+            var merch_json = {{ json_args|safe }};
+        </script>
+    {% endblock %}
+</head>
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
         <h1>Sign Up for Devils Head</h1>
         <form action="">
             {{ form.as_p }}
+            <button id="submitButton" style="display: none">submit</button>
         </form>
     </div>
 {% endblock %}

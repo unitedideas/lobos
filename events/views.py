@@ -32,16 +32,16 @@ from datetime import datetime as ddt
 import datetime as dt
 
 
-def thanks(request):
-    return render(request, 'events/thanks.html')
+def clubeventsCheckout(request):
+    return render(request, 'events/clubeventsCheckout.html')
 
-
+@staff_member_required
 def clubevents(request):
     if request.POST:
         form = LobosRace(request.POST)
         if form.is_valid():
             f = form.cleaned_data
-            return render(request, 'events/thanks.html')
+            return render(request, 'events/clubeventsCheckout.html')
         else:
             return render(request, 'events/clubevents.html', {'form': form})
     else:
