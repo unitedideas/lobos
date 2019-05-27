@@ -2,6 +2,7 @@
 {% load static %}
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-        <h1>You're Signed Up, Thanks!!!!</h1>
+        <h1></h1>
+        <h1>Hey {{ data.name | title }}!! You're Signed Up for {{ data.event }}!</h1>
     </div>
 {% endblock %}

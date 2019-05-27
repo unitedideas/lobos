@@ -2,11 +2,21 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from .models import RiderProfile, Event, Profile, Codes, Merchandise, MerchandiseOrder
+from .models import RiderProfile, Event, Profile, Codes, Merchandise, MerchandiseOrder, ClubEvent
 
 admin.site.site_header = 'Lobos Events/ User Database'
 admin.site.register(Codes)
 admin.site.register(Event)
+
+
+@admin.register(ClubEvent)
+# this is the example of how to setup the import/ export and the admin search
+class ClubEventExportAdmin(ImportExportModelAdmin):
+    list_display = ('name', 'riderClass')
+    search_fields = ('name', 'riderClass')
+
+    def user_info(self, obj):
+        return obj.description
 
 
 @admin.register(MerchandiseOrder)

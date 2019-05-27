@@ -35,17 +35,27 @@ import datetime as dt
 def clubeventsCheckout(request):
     return render(request, 'events/clubeventsCheckout.html')
 
+
 @staff_member_required
 def clubevents(request):
+    print(request.method)
     if request.POST:
         form = LobosRace(request.POST)
         if form.is_valid():
-            f = form.cleaned_data
-            return render(request, 'events/clubeventsCheckout.html')
+            data = {
+                'name': form.cleaned_data['name'],
+                'event': 'Devils Head'
+            }
+            f = form.save()
+            print('Valid form')
+            return render(request, 'events/clubeventsCheckout.html', {'data': data})
         else:
-            return render(request, 'events/clubevents.html', {'form': form})
+            errors = form.errors
+            print('Errors')
+            return render(request, 'events/clubevents.html', {'form': form, 'errors': errors})
     else:
         form = LobosRace()
+        print('Get Request')
         return render(request, 'events/clubevents.html', {'form': form})
 
 

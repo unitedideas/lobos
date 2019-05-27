@@ -24,17 +24,118 @@
 
             window.onload = isIE();
         </script>
-        <script type='text/javascript'>
-            var merch_json = {{ json_args|safe }};
-        </script>
     {% endblock %}
 </head>
 {% block body %}
-    <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-        <h1>Sign Up for Devils Head</h1>
-        <form action="">
-            {{ form.as_p }}
-            <button id="submitButton" style="display: none">submit</button>
-        </form>
+    <div id="app">
+        <br>
+        <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
+            <h1>Sign Up for Devils Head</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{ errors }}
+                {{ form.as_p }}
+                <button id="submitButton" style="display: none">submit</button>
+            </form>
+            <div>
+                <h3>Items in your cart:</h3>
+                <div v-if="cartlist.length > 0">
+                    <div>
+                        <div v-if="amount != '0.00'">
+                            <div>
+                                <h3>Total: [[amount]]</h3>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <h3>Your Cart is Empty</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was canceled or
+                declined
+            </div>
+            <div v-show="showPayPal" style="text-align: center">
+                <paypal-checkout
+                        :amount="amount"
+                        currency="USD"
+                        :button-style="aStyle"
+                        :client="paypal"
+                        env="sandbox"
+                        v-on:payment-authorized="paymentAuthorized"
+                        v-on:payment-completed="paymentCompleted"
+                        v-on:payment-cancelled="paymentCancelled">
+                </paypal-checkout>
+            </div>
+            <div class="whirlpool" v-show="!showPayPal">
+                <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33"
+                            r="30"></circle>
+                </svg>
+            </div>
+        </div>
     </div>
+
+    <script src="https://unpkg.com/vue-paypal-checkout/dist/vue-paypal-checkout.min.js"></script>
+    <script>
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#app',
+            data: function () {
+                return {
+                    paypal: {
+                        sandbox: 'Ab1Sz1kGg_pToL-VqcaNqUh1C4obLl11btkrD3nShf8FadP5sDn47sNiLVA7mHeWQKN9Fn14tMorYSag',
+                        production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
+                    },
+                    aStyle: {
+                        label: 'checkout',
+                        size: 'large',
+                        shape: 'rect',
+                        color: 'blue',
+                        tagline: 'false'
+                    },
+                    amount: '',
+                    cartlist: [],
+                    showPayPal: true,
+                    payment_cancelled: false,
+                    paymentComplete: false,
+                    shortlist: ['Beginner', 'Women', 'Jr 12 - 15 yrs', '50 Am', '50 Ex', '60+']
+                }
+
+            },
+            methods: {
+                select_change() {
+                    this.cartlist = []
+                    const selected = document.getElementById('id_riderClass').value
+                    if (this.shortlist.includes(selected)) {
+                        this.cartlist.push('Short Course - Class ' + selected)
+                        this.amount = '45.00'
+                    } else {
+                        this.cartlist.push('Long Course - Class ' + selected)
+                        this.amount = '60.00'
+                    }
+                    console.log(this.amount)
+                },
+                paymentAuthorized(data) {
+                    this.showPayPal = false
+                },
+
+                paymentCompleted(data) {
+                    this.paymentComplete = true
+                },
+
+                paymentCancelled(data) {
+                    this.payment_cancelled = true
+                    this.showPayPal = true
+                },
+
+            },
+            watch: {
+                paymentComplete() {
+                    document.getElementById('submitButton').click()
+                },
+            },
+        });
+    </script>
 {% endblock %}

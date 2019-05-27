@@ -129,6 +129,9 @@ class LobosRace(ModelForm):
     class Meta:
         model = ClubEvent
         fields = '__all__'
+        widgets = {'riderClass': forms.Select(attrs={
+            'v-on:change': 'select_change()'
+        })}
 
 
 RiderProfileFormSet = modelformset_factory(RiderProfile,
