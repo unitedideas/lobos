@@ -23,7 +23,6 @@
             <div id="jumbotron" class="jumbotron" style="padding: 0px 0px 3px 0px">
                 <h1 style="text-align: center">{{ event }} Registration</h1>
             </div>
-
             <div>
                 <form method="POST" id="feedbackform" v-on:keydown.13.prevent="the3DayMethod">
                     {% csrf_token %}
