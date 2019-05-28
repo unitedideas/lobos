@@ -60,40 +60,74 @@ def clubevents(request):
 
 
 def registration_check(request):
-    form = RegistrationCheck()
-
     if request.POST:
         form = RegistrationCheck(request.POST)
 
         if form.is_valid():
+            print('Form is valid')
             f = form.cleaned_data
-
-            if f['confirmationNumber']:
-                event_id = RiderProfile.objects.filter(
-                    confirmation_number__icontains=f['confirmationNumber']).values_list('event_id', flat=True)
-                confirmation_names = RiderProfile.objects.filter(
-                    confirmation_number__icontains=f['confirmationNumber']).values_list('first_name', 'last_name')
-                confirmation_names = list(confirmation_names)
-                first_and_last_names = (' '.join(name) for name in confirmation_names)
-                event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
-                event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
-                event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
-            elif f['first_name'] and f['last_name']:
-                event_id = RiderProfile.objects.filter(
-                    first_name__icontains=f['first_name'].lower()).filter(
-                    last_name__icontains=f['last_name'].lower()).values_list('event', flat=True).last()
-
-                event_name = Event.objects.filter(id=event_id).values_list('event_name', flat=True)
-                event_date = Event.objects.filter(id=event_id).values_list('event_date', flat=True)
-                print(event_name[0], ' on ', event_date[0].strftime('%m/%d/%Y'))
-            args = {
-                'name': first_and_last_names,
-                'event': event_data
+            print(f['confirmationNumber'], f['first_name'], f['last_name'])
+            return render(request, 'events/registration_check.html', {'form': form})
+        else:
+            errors = {
+                'errors': form.errors
             }
 
-            return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+            return render(request, 'events/registration_check.html', {'form': form, 'errors': errors})
+
+        #     if f['confirmationNumber']:
+        #         print(f['confirmationNumber'])
+        #         event_id = RiderProfile.objects.filter(
+        #             confirmation_number__icontains=f['confirmationNumber']).values_list('event_id', flat=True)
+        #         confirmation_names = RiderProfile.objects.filter(
+        #             confirmation_number__icontains=f['confirmationNumber']).values_list('first_name', 'last_name')
+        #         if event_id is not None:
+        #             confirmation_names = list(confirmation_names)
+        #             first_and_last_names = (' '.join(name) for name in confirmation_names)
+        #             event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
+        #             event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
+        #             event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
+        #             args = {
+        #                 'name': first_and_last_names,
+        #                 'event': event_data
+        #             }
+        #
+        #             return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+        #
+        #     elif f['first_name'] is not None and f['last_name'] is not None:
+        #
+        #         event_id = RiderProfile.objects.filter(
+        #             first_name__icontains=f['first_name'].lower()).filter(
+        #             last_name__icontains=f['last_name'].lower()).values_list('event', flat=True).last()
+        #
+        #         if event_id is not None:
+        #             first_and_last_names = f['first_name'] + " " + f['last_name']
+        #
+        #             event_name = Event.objects.filter(id=event_id).values_list('event_name', flat=True)
+        #             event_date = Event.objects.filter(id=event_id).values_list('event_date', flat=True)
+        #             event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
+        #
+        #             args = {
+        #                 'name': first_and_last_names,
+        #                 'event': event_data
+        #             }
+        #
+        #             return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+        #     else:
+        #         form = RegistrationCheck()
+        #
+        #         args = {
+        #             'name': f['first_name'] + " " + f['last_name'],
+        #             'event': 'is not registered for an upcoming event'
+        #         }
+        #         return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+        # else:
+        #     print('Invalid Form')
+        #     print(form.errors)
+        #     return render(request, 'events/registration_check.html', {'form': form.errors})
 
     else:
+        form = RegistrationCheck()
         return render(request, 'events/registration_check.html', {'form': form})
 
 

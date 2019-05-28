@@ -21,15 +21,14 @@ Am30 = '30 Am'
 Am40 = '40 Am'
 
 LONGCOURSE = ('Long Course - $60',
-     [(openExpert, 'Open Ex'),
-      (Ex250, '250 Ex'),
-      (Ex30, '30 Ex'),
-      (Ex40, '40 Ex'),
-      (OpenAm, 'Open Am'),
-      (Open250, '250 Am'),
-      (Am30, '30 Am'),
-      (Am40, '40 Am')])
-
+              [(openExpert, 'Open Ex'),
+               (Ex250, '250 Ex'),
+               (Ex30, '30 Ex'),
+               (Ex40, '40 Ex'),
+               (OpenAm, 'Open Am'),
+               (Open250, '250 Am'),
+               (Am30, '30 Am'),
+               (Am40, '40 Am')])
 
 Beginner = 'Beginner'
 Women = 'Women'
@@ -39,12 +38,12 @@ Ex50 = '50 Ex'
 Over60 = '60+'
 
 SHORTCOURSE = ('Short Course - $45',
-     [(Beginner, 'Beginner'),
-      (Women, 'Women'),
-      (Jr, 'Jr 12 - 15 yrs'),
-      (Am50, '50 Am'),
-      (Ex50, '50 Ex'),
-      (Over60, '60+')])
+               [(Beginner, 'Beginner'),
+                (Women, 'Women'),
+                (Jr, 'Jr 12 - 15 yrs'),
+                (Am50, '50 Am'),
+                (Ex50, '50 Ex'),
+                (Over60, '60+')])
 
 rider_classes = [SHORTCOURSE, LONGCOURSE]
 
@@ -58,9 +57,10 @@ class ClubEvent(models.Model):
     zip = models.CharField(max_length=5, null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
     email = models.CharField(max_length=60, null=True, blank=True)
-    emergencyContact = models.CharField('Emergency Contact',max_length=60, null=True, blank=True)
+    emergencyContact = models.CharField('Emergency Contact', max_length=60, null=True, blank=True)
     bikeMakeAndCC = models.CharField('Bike Make and CC', max_length=60, null=True, blank=True)
-    riderClass = models.CharField('Rider Class (Short Course - $45, Long Course - $60)', max_length=60, null=True, blank=True, choices=rider_classes)
+    riderClass = models.CharField('Rider Class (Short Course - $45, Long Course - $60)', max_length=60, null=True,
+                                  blank=True, choices=rider_classes)
     riderGroup = models.CharField('Group You would like to ride with (2 names)', max_length=60, null=True, blank=True)
 
     def __str__(self):
