@@ -37,122 +37,128 @@
             <div class="jumbotron">
                 <h1>Lobos Merchandise</h1>
                 <div class=barBreak></div>
-                {% for key, value in args.merch.items %}
-                    <div class="merchSection">
-                        <div class="merchImage">
-                            <h2>{{ value.0.merchandise_name }}</h2>
-                            {% if value.0.item_image %}
-                                <img class="productImage" src="{% static value.0.item_image %}">
-                            {% else %}
-                                <h3>No product image available</h3>
-                            {% endif %}
+                {% if args.merch.items %}
+                    {% for key, value in args.merch.items %}
+                        <div class="merchSection">
+                            <div class="merchImage">
+                                <h2>{{ value.0.merchandise_name }}</h2>
+                                {% if value.0.item_image %}
+                                    <img class="productImage" src="{% static value.0.item_image %}">
+                                {% else %}
+                                    <h3>No product image available</h3>
+                                {% endif %}
+                            </div>
+                            <div class="description">
+                                <h3>{{ value.0.description }}</h3>
+                            </div>
                         </div>
-                        <div class="description">
-                            <h3>{{ value.0.description }}</h3>
-                        </div>
-                    </div>
-                    <table>
-                        <tbody>
-                        <tr>
-                            {# Selector item size #}
-                            <td>
-                                <select id="select_{{ value.0.id }}" class="{{ value.0.id }}"
-                                        @change="maxInput({{ value.0.id }})">
-                                    <option value="none" selected disabled hidden>Choose Size</option>
-                                    {% for size, qty in value.1.items %}
-                                        {% if qty <= 0 %}
-                                            <option disabled>[[sizeTextChange('{{ size }}')]] -
-                                                Sold Out
-                                            </option>
-                                        {% else %}
-                                            <option value="{{ size }}">
-                                                [[sizeTextChange('{{ size }}')]] - {{ qty }} available
-                                            </option>
-                                        {% endif %}
-                                    {% endfor %}
-                                </select>
-                            </td>
-                            {# Price of item #}
-                            <td>
-                                <h3>Price: {{ value.0.sale_price }}</h3>
-                            </td>
-                            {# Add to Cart Quantity #}
-                            <td>
-                                <input id="input_{{ value.0.id }}" class="{{ value.0.id }}" type="number" step="1"
-                                       min="1" max="" value="1" v-on:change="checkMaxinput({{ value.0.id }})">
-                            </td>
-                            {# Add to Cart Button #}
-                            <td>
-                                <button id="addButton_{{ value.0.id }}" disabled class="btn btn-primary"
-                                        v-on:click.prevent="add_to_cart({{ value.0.id }})">Add Item
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class=barBreak></div>
-                {% endfor %}
+                        <table>
+                            <tbody>
+                            <tr>
+                                {# Selector item size #}
+                                <td>
+                                    <select id="select_{{ value.0.id }}" class="{{ value.0.id }}"
+                                            @change="maxInput({{ value.0.id }})">
+                                        <option value="none" selected disabled hidden>Choose Size</option>
+                                        {% for size, qty in value.1.items %}
+                                            {% if qty <= 0 %}
+                                                <option disabled>[[sizeTextChange('{{ size }}')]] -
+                                                    Sold Out
+                                                </option>
+                                            {% else %}
+                                                <option value="{{ size }}">
+                                                    [[sizeTextChange('{{ size }}')]] - {{ qty }} available
+                                                </option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                {# Price of item #}
+                                <td>
+                                    <h3>Price: {{ value.0.sale_price }}</h3>
+                                </td>
+                                {# Add to Cart Quantity #}
+                                <td>
+                                    <input id="input_{{ value.0.id }}" class="{{ value.0.id }}" type="number" step="1"
+                                           min="1" max="" value="1" v-on:change="checkMaxinput({{ value.0.id }})">
+                                </td>
+                                {# Add to Cart Button #}
+                                <td>
+                                    <button id="addButton_{{ value.0.id }}" disabled class="btn btn-primary"
+                                            v-on:click.prevent="add_to_cart({{ value.0.id }})">Add Item
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class=barBreak></div>
+                    {% endfor %}
 
-                <div>
-                    <h3>Items in your cart:</h3>
-                    <div v-if="cartlist.length > 0">
-                        <div v-for="(item, index) in cartlist">
-                            <div class="flex-container">
-                                <div class="btn btn-primary" v-on:click='remove_from_cart(index)'>
-                                    Remove Item
-                                </div>
-                                <div>
-                                    <h4>[[item.quantity]] - [[item.description]] - [[item.name]]</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div v-if="totalStr != '0.00'">
-                                <div>
-                                    <h3>Items Total: [[itemPreShipping]]</h3>
-                                </div>
-                                <div>
-                                    <h3>Shipping: [[total_shipping]]</h3>
-                                </div>
-                                <div>
-                                    <h3>Total: [[totalStr]]</h3>
+                    <div>
+                        <h3>Items in your cart:</h3>
+                        <div v-if="cartlist.length > 0">
+                            <div v-for="(item, index) in cartlist">
+                                <div class="flex-container">
+                                    <div class="btn btn-primary" v-on:click='remove_from_cart(index)'>
+                                        Remove Item
+                                    </div>
+                                    <div>
+                                        <h4>[[item.quantity]] - [[item.description]] - [[item.name]]</h4>
+                                    </div>
                                 </div>
                             </div>
-                            <div v-else>
-                                <h3>Your Cart is Empty</h3>
+                            <div>
+                                <div v-if="totalStr != '0.00'">
+                                    <div>
+                                        <h3>Items Total: [[itemPreShipping]]</h3>
+                                    </div>
+                                    <div>
+                                        <h3>Shipping: [[total_shipping]]</h3>
+                                    </div>
+                                    <div>
+                                        <h3>Total: [[totalStr]]</h3>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    <h3>Your Cart is Empty</h3>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was canceled or
-                    declined
-                </div>
-                <div v-show="showPayPal">
-                    <paypal-checkout
-                            :amount="totalStr"
-                            currency="USD"
-                            :button-style="aStyle"
-                            :client="paypal"
-                            :items="cartlist"
-                            env="sandbox"
-                            :details="details"
-                            v-on:payment-authorized="paymentAuthorized"
-                            v-on:payment-completed="paymentCompleted"
-                            v-on:payment-cancelled="paymentCancelled">
-                    </paypal-checkout>
-                </div>
-                <form method="POST" action="/merchandise/">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button id="submitButton" style="display: none">submit</button>
-                </form>
-                <div class="whirlpool" v-show="!showPayPal">
-                    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33"
-                                r="30"></circle>
-                    </svg>
-                </div>
+                    <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was canceled or
+                        declined
+                    </div>
+                    <div v-show="showPayPal">
+                        <paypal-checkout
+                                :amount="totalStr"
+                                currency="USD"
+                                :button-style="aStyle"
+                                :client="paypal"
+                                :items="cartlist"
+                                env="sandbox"
+                                :details="details"
+                                v-on:payment-authorized="paymentAuthorized"
+                                v-on:payment-completed="paymentCompleted"
+                                v-on:payment-cancelled="paymentCancelled">
+                        </paypal-checkout>
+                    </div>
+                    <form method="POST" action="/merchandise/">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button id="submitButton" style="display: none">submit</button>
+                    </form>
+                    <div class="whirlpool" v-show="!showPayPal">
+                        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33"
+                                    r="30"></circle>
+                        </svg>
+                    </div>
+                {% else %}
+                    <h2>Sorry, No Lobos Merch Available</h2>
+                    <h2>Check Back Later</h2>
+                {% endif %}
+
             </div>
         </div>
 
