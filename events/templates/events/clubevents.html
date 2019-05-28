@@ -61,7 +61,7 @@
                         currency="USD"
                         :button-style="aStyle"
                         :client="paypal"
-                        env="sandbox"
+                        env="production"
                         v-on:payment-authorized="paymentAuthorized"
                         v-on:payment-completed="paymentCompleted"
                         v-on:payment-cancelled="paymentCancelled">
