@@ -75,7 +75,7 @@
                                 </td>
                                 {# Price of item #}
                                 <td>
-                                    <h3>Price: {{ value.0.sale_price }}</h3>
+                                    <h3>Price: {{ value.0.sale_price | floatformat:2 }}</h3>
                                 </td>
                                 {# Add to Cart Quantity #}
                                 <td>
@@ -95,8 +95,8 @@
                     {% endfor %}
 
                     <div>
-                        <h3>Items in your cart:</h3>
                         <div v-if="cartlist.length > 0">
+                            <h3>Items in your cart:</h3>
                             <div v-for="(item, index) in cartlist">
                                 <div class="flex-container">
                                     <div class="btn btn-primary" v-on:click='remove_from_cart(index)'>
@@ -128,6 +128,12 @@
                     <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was canceled or
                         declined
                     </div>
+                    <h2>Shipping Information:</h2>
+                    <form method="POST" action="/merchandise/">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button id="submitButton" style="display: none">submit</button>
+                    </form>
                     <div v-show="showPayPal">
                         <paypal-checkout
                                 :amount="totalStr"
@@ -142,11 +148,7 @@
                                 v-on:payment-cancelled="paymentCancelled">
                         </paypal-checkout>
                     </div>
-                    <form method="POST" action="/merchandise/">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button id="submitButton" style="display: none">submit</button>
-                    </form>
+
                     <div class="whirlpool" v-show="!showPayPal">
                         <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
                              xmlns="http://www.w3.org/2000/svg">
@@ -225,9 +227,9 @@
                     let item_size = this.sizeTextChange(datas[0].value)
                     let item_qty = datas[1].value
                     let price = Number(this.merch_json.merch[item][0]['sale_price'])
-                    let item_shipping = item_qty * price * .08
+                    let item_shipping = item_qty * price * .02
 
-                    addToCartObj.name = item_size + ' ' + item_name
+                    addToCartObj.name = item_name
                     addToCartObj.description = item_size //size
                     addToCartObj.quantity = String(item_qty)
                     addToCartObj.price = price.toFixed(2)
