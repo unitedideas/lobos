@@ -30,7 +30,8 @@
     <div id="app">
         <br>
         <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-            <h1>Sign Up for Devils Head</h1>
+            <h1>Devils Head Sign-up</h1>
+            <h1>{{ signed_up }} Lobos members are already signed up!</h1>
             <form method="POST">
                 {% csrf_token %}
                 {{ errors }}

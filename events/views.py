@@ -38,25 +38,22 @@ def clubeventsCheckout(request):
 
 @staff_member_required
 def clubevents(request):
-    print(request.method)
     if request.POST:
         form = LobosRace(request.POST)
         if form.is_valid():
             data = {
                 'name': form.cleaned_data['name'],
-                'event': 'Devils Head'
+                'event': 'Devils Head',
             }
             f = form.save()
-            print('Valid form')
             return render(request, 'events/clubeventsCheckout.html', {'data': data})
         else:
             errors = form.errors
-            print('Errors')
             return render(request, 'events/clubevents.html', {'form': form, 'errors': errors})
     else:
         form = LobosRace()
-        print('Get Request')
-        return render(request, 'events/clubevents.html', {'form': form})
+        signed_up = len(ClubEvent.objects.all())
+        return render(request, 'events/clubevents.html', {'form': form, 'signed_up': signed_up})
 
 
 def registration_check(request):

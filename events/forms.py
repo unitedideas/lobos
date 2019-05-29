@@ -15,13 +15,13 @@ STATES = load_choices(STATES_PATH, True)
 
 
 class MerchandiseOrderForm(forms.Form):
-    first_name = forms.CharField(max_length=30, label='First Name')
-    last_name = forms.CharField(max_length=30, label='Last Name')
-    address = forms.CharField(max_length=30, label='Address')
-    city = forms.CharField(max_length=30, label='City')
-    state = forms.CharField(max_length=30, label='State')
-    zip_code = forms.CharField(max_length=30, label='Zip Code')
-    email = forms.CharField(max_length=30, label='Email')
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'v-model': 'form.first_name'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'v-model': 'form.last_name'}))
+    address = forms.CharField(widget=forms.TextInput(attrs={'v-model': 'form.address'}))
+    city = forms.CharField(widget=forms.TextInput(attrs={'v-model': 'form.city'}))
+    state = forms.CharField(widget=forms.TextInput(attrs={'v-model': 'form.state'}))
+    zip_code = forms.CharField(widget=forms.TextInput(attrs={'v-model': 'form.zip_code'}))
+    email = forms.CharField(widget=forms.TextInput(attrs={'v-model': 'form.email'}))
     items_ordered = forms.CharField(widget=forms.HiddenInput(attrs={'id': "order_data"}))
 
 

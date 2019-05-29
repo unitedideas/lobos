@@ -134,10 +134,11 @@
                         {{ form.as_p }}
                         <button id="submitButton" style="display: none">submit</button>
                     </form>
-                    <h3 v-show="!shippping_complete" style="color: orangered">
-                    Please fill out the shipping information form above
+                    <h3 v-show="!shipping_complete" style="color: orangered">
+                        Please fill out the shipping information form above
                     </h3>
-                    <div v-show="!shippping_complete">
+                    <div v-if="cartlist.length > 0">
+                    <div v-show="shipping_complete">
                         <div v-show="showPayPal">
                             <paypal-checkout
                                     :amount="totalStr"
@@ -152,6 +153,7 @@
                                     v-on:payment-cancelled="paymentCancelled">
                             </paypal-checkout>
                         </div>
+                    </div>
                     </div>
                     <div class="whirlpool" v-show="!showPayPal" style="text-align: center">
                         <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
@@ -204,9 +206,16 @@
                     payment_cancelled: false,
                     paymentComplete: false,
                     total_shipping: '',
-                    shippping_complete: false,
+                    shipping_complete: false,
+                    form: [{
+                        first_name: '',
+                        last_name: '',
+                        address: '',
+                        city: '',
+                        state: '',
+                        email: '',
+                    }],
                 }
-
             },
             methods: {
                 checkMaxinput(itemId) {
@@ -232,7 +241,7 @@
                     let item_size = this.sizeTextChange(datas[0].value)
                     let item_qty = datas[1].value
                     let price = Number(this.merch_json.merch[item][0]['sale_price'])
-                    let item_shipping = item_qty * price * .02
+                    let item_shipping = item_qty * price * .03
 
                     addToCartObj.name = item_name
                     addToCartObj.description = item_size //size
@@ -281,6 +290,11 @@
 
             },
             watch: {
+                form() {
+                    if (Object.keys(this.form).length === 8) {
+                        this.shipping_complete = true
+                    }
+                },
                 paymentComplete() {
                     document.getElementById('submitButton').click()
                 },
