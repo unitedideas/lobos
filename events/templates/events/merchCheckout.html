@@ -2,9 +2,10 @@
 
 {% block body %}
     <div class="container" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
-        <h1>Thanks</h1>
+        <h1>Thank you for your order!</h1>
+        <h2>We are processing your order now.</h2>
         {% for k,v in args.items %}
-    <p>{{ k }} {{ v }}</p>
-    {% endfor %}
+            <h3>You confirmation number for this order is {{ v }}</h3>
+        {% endfor %}
     </div>
 {% endblock %}

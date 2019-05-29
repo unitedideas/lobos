@@ -36,6 +36,25 @@ def clubeventsCheckout(request):
     return render(request, 'events/clubeventsCheckout.html')
 
 
+def change_names_to_lower():
+    all_names = RiderProfile.objects.all()
+    for name in all_names:
+        name.first_name = name.first_name.lower()
+        name.last_name = name.last_name.lower()
+        try:
+            name.email = name.email.lower()
+            name.email2 = name.email2.lower()
+        except:
+            print('no email')
+
+        try:
+            name.confirmation_number = name.confirmation_number.upper()
+        except:
+            print('no email')
+
+        name.save()
+
+
 @staff_member_required
 def clubevents(request):
     if request.POST:
@@ -57,71 +76,68 @@ def clubevents(request):
 
 
 def registration_check(request):
+
     if request.POST:
         form = RegistrationCheck(request.POST)
 
         if form.is_valid():
-            print('Form is valid')
             f = form.cleaned_data
             print(f['confirmationNumber'], f['first_name'], f['last_name'])
-            return render(request, 'events/registration_check.html', {'form': form})
+
+            if f['confirmationNumber']:
+                event_id = RiderProfile.objects.filter(
+                    confirmation_number=f['confirmationNumber']).values_list('event_id', flat=True)
+
+                confirmation_names = RiderProfile.objects.filter(
+                    confirmation_number=f['confirmationNumber']).values_list('first_name', 'last_name')
+
+                if event_id is not None:
+                    confirmation_names = list(confirmation_names)
+                    first_and_last_names = (' '.join(name) for name in confirmation_names)
+                    event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
+                    event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
+                    event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
+                    args = {
+                        'name': first_and_last_names,
+                        'event': event_data
+                    }
+
+                    return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+
+            elif f['first_name'] is not None and f['last_name'] is not None:
+
+                event_id = RiderProfile.objects.filter(
+                    first_name__icontains=f['first_name'].lower()).filter(
+                    last_name__icontains=f['last_name'].lower()).values_list('event', flat=True).last()
+
+                if event_id is not None:
+                    first_and_last_names = f['first_name'] + " " + f['last_name']
+
+                    event_name = Event.objects.filter(id=event_id).values_list('event_name', flat=True)
+                    event_date = Event.objects.filter(id=event_id).values_list('event_date', flat=True)
+                    event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
+
+                    args = {
+                        'name': first_and_last_names,
+                        'event': event_data
+                    }
+
+                    return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+            else:
+                form = RegistrationCheck()
+
+                args = {
+                    'name': f['first_name'] + " " + f['last_name'],
+                    'event': 'is not registered for an upcoming event'
+                }
+                return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+
         else:
             errors = {
                 'errors': form.errors
             }
 
             return render(request, 'events/registration_check.html', {'form': form, 'errors': errors})
-
-        #     if f['confirmationNumber']:
-        #         print(f['confirmationNumber'])
-        #         event_id = RiderProfile.objects.filter(
-        #             confirmation_number__icontains=f['confirmationNumber']).values_list('event_id', flat=True)
-        #         confirmation_names = RiderProfile.objects.filter(
-        #             confirmation_number__icontains=f['confirmationNumber']).values_list('first_name', 'last_name')
-        #         if event_id is not None:
-        #             confirmation_names = list(confirmation_names)
-        #             first_and_last_names = (' '.join(name) for name in confirmation_names)
-        #             event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
-        #             event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
-        #             event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
-        #             args = {
-        #                 'name': first_and_last_names,
-        #                 'event': event_data
-        #             }
-        #
-        #             return render(request, 'events/registration_check.html', {"args": args, 'form': form})
-        #
-        #     elif f['first_name'] is not None and f['last_name'] is not None:
-        #
-        #         event_id = RiderProfile.objects.filter(
-        #             first_name__icontains=f['first_name'].lower()).filter(
-        #             last_name__icontains=f['last_name'].lower()).values_list('event', flat=True).last()
-        #
-        #         if event_id is not None:
-        #             first_and_last_names = f['first_name'] + " " + f['last_name']
-        #
-        #             event_name = Event.objects.filter(id=event_id).values_list('event_name', flat=True)
-        #             event_date = Event.objects.filter(id=event_id).values_list('event_date', flat=True)
-        #             event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
-        #
-        #             args = {
-        #                 'name': first_and_last_names,
-        #                 'event': event_data
-        #             }
-        #
-        #             return render(request, 'events/registration_check.html', {"args": args, 'form': form})
-        #     else:
-        #         form = RegistrationCheck()
-        #
-        #         args = {
-        #             'name': f['first_name'] + " " + f['last_name'],
-        #             'event': 'is not registered for an upcoming event'
-        #         }
-        #         return render(request, 'events/registration_check.html', {"args": args, 'form': form})
-        # else:
-        #     print('Invalid Form')
-        #     print(form.errors)
-        #     return render(request, 'events/registration_check.html', {'form': form.errors})
 
     else:
         form = RegistrationCheck()
@@ -163,8 +179,7 @@ def merchandise(request):
 
             if MerchandiseOrder.objects.filter(paypal_order_id=paypal_order_id).exists():
                 args = {
-                    "thing_key": "SAME PAYPAL ORDER ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-                    'this': 'that'
+                    "thing_key": paypal_order_id,
                 }
                 return render(request, 'events/merchCheckout.html', {"args": args})
             else:
@@ -197,8 +212,7 @@ def merchandise(request):
                             product.save()
 
                 args = {
-                    "thing_key": "things in the value",
-                    'this': 'that'
+                    "thing_key": paypal_order_id,
                 }
                 return render(request, 'events/merchCheckout.html', {"args": args})
 
@@ -689,8 +703,8 @@ def event_register(request):
                                                first_name=form.first_name,
                                                last_name=form.last_name, )
 
-                    user.first_name = form.first_name
-                    user.last_name = form.last_name
+                    user.first_name = form.first_name.lower()
+                    user.last_name = form.last_name.lower()
                     user.save()
                     form.user = user
                     user = Profile.objects.filter(user=user)
@@ -710,15 +724,15 @@ def event_register(request):
 
                     message = ''
                     username = created_username
-                    first_name = form.first_name
-                    last_name = form.last_name
-                    email = form.email
+                    first_name = form.first_name.lower()
+                    last_name = form.last_name.lower()
+                    email = form.email.lower()
                     rider_class = form.rider_class
 
                     confirm[created_username] = {'message': message,
                                                  'username': username,
-                                                 'first_name': first_name,
-                                                 'last_name': last_name,
+                                                 'first_name': first_name.title(),
+                                                 'last_name': last_name.title(),
                                                  'email': email,
                                                  'confirmation': confirmation_number,
                                                  'rider_class': rider_class}
@@ -731,8 +745,8 @@ def event_register(request):
                 elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
                     form.user = User.objects.get(username=created_username)
                     username = created_username
-                    first_name = form.first_name
-                    last_name = form.last_name
+                    first_name = form.first_name.lower()
+                    last_name = form.last_name.lower()
                     email = form.email
                     rider_class = form.rider_class
 
@@ -746,8 +760,8 @@ def event_register(request):
 
                     confirm[created_username] = {'message': message,
                                                  'username': username,
-                                                 'first_name': first_name,
-                                                 'last_name': last_name,
+                                                 'first_name': first_name.title(),
+                                                 'last_name': last_name.title(),
                                                  'email': email,
                                                  'confirmation': confirmation_number,
                                                  'rider_class': rider_class}
@@ -760,14 +774,14 @@ def event_register(request):
                 else:
                     form.user = User.objects.get(username=created_username)
                     username = created_username
-                    first_name = form.first_name
-                    last_name = form.last_name
+                    first_name = form.first_name.lower()
+                    last_name = form.last_name.lower()
                     email = form.email
                     rider_class = form.rider_class
 
                     confirm[created_username] = {'username': username,
-                                                 'first_name': first_name,
-                                                 'last_name': last_name,
+                                                 'first_name': first_name.title(),
+                                                 'last_name': last_name.title(),
                                                  'email': email,
                                                  'confirmation': confirmation_number,
                                                  'rider_class': rider_class}
