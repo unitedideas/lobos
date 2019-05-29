@@ -137,7 +137,7 @@
                     <h3 v-show="!shippping_complete" style="color: orangered">
                     Please fill out the shipping information form above
                     </h3>
-                    <div v-show="shippping_complete">
+                    <div v-show="!shippping_complete">
                         <div v-show="showPayPal">
                             <paypal-checkout
                                     :amount="totalStr"
