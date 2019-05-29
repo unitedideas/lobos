@@ -488,7 +488,6 @@
                 hatqty: 1,
                 shirtqty: 1,
                 cartlist: [],
-
                 hoodieCost: {{ event.hoodie_cost }},
                 shirtCost: {{ event.shirt_cost }},
                 hatCost: {{ event.hat_cost }},
@@ -593,8 +592,6 @@
                         app.formSuccess = ''
                         var object = {}
                         forms = document.getElementById('feedbackform')
-
-
                         var formData = new FormData(forms),
                             result = {event_date: this.event_date}
                         for (var entry of formData.entries()) {

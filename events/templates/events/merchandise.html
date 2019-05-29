@@ -134,22 +134,26 @@
                         {{ form.as_p }}
                         <button id="submitButton" style="display: none">submit</button>
                     </form>
-                    <div v-show="showPayPal">
-                        <paypal-checkout
-                                :amount="totalStr"
-                                currency="USD"
-                                :button-style="aStyle"
-                                :client="paypal"
-                                :items="cartlist"
-                                env="sandbox"
-                                :details="details"
-                                v-on:payment-authorized="paymentAuthorized"
-                                v-on:payment-completed="paymentCompleted"
-                                v-on:payment-cancelled="paymentCancelled">
-                        </paypal-checkout>
+                    <h3 v-show="!shippping_complete" style="color: orangered">
+                    Please fill out the shipping information form above
+                    </h3>
+                    <div v-show="shippping_complete">
+                        <div v-show="showPayPal">
+                            <paypal-checkout
+                                    :amount="totalStr"
+                                    currency="USD"
+                                    :button-style="aStyle"
+                                    :client="paypal"
+                                    :items="cartlist"
+                                    env="sandbox"
+                                    :details="details"
+                                    v-on:payment-authorized="paymentAuthorized"
+                                    v-on:payment-completed="paymentCompleted"
+                                    v-on:payment-cancelled="paymentCancelled">
+                            </paypal-checkout>
+                        </div>
                     </div>
-
-                    <div class="whirlpool" v-show="!showPayPal">
+                    <div class="whirlpool" v-show="!showPayPal" style="text-align: center">
                         <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
                              xmlns="http://www.w3.org/2000/svg">
                             <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33"
@@ -200,6 +204,7 @@
                     payment_cancelled: false,
                     paymentComplete: false,
                     total_shipping: '',
+                    shippping_complete: false,
                 }
 
             },
@@ -278,7 +283,6 @@
             watch: {
                 paymentComplete() {
                     document.getElementById('submitButton').click()
-
                 },
 
                 cartlist() {
