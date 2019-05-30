@@ -7,6 +7,15 @@
         <title>Registration Check</title>
 
         <link rel="stylesheet" href='{% static "events/merchStyle.css" %}' type="text/css">
+        <script>
+            const check_fields = () => {
+                first_name = document.getElementById('id_first_name').value
+                last_name = document.getElementById('id_last_name').value
+                confirmationNumber = document.getElementById('id_confirmationNumber').value
+                console.log(first_name, last_name, confirmationNumber)
+            }
+        </script>
+
     {% endblock %}
 </head>
 
@@ -14,21 +23,12 @@
     <div class="container">
         <div class="jumbotron" style="background-color: #ffe673; padding: 15px; border-radius: 5px">
             <h2>Check if you are registered for an upcoming event.</h2>
-            <div>
-                {% for name in args.name %}
-                    <p> {{ name }} </p>
-                {% endfor %}
-            </div>
-        {% if args %}
-        <p>{{ args }}</p>
+            {% if args.name %}
+                <div>
+                    <p> {{ args.event }} </p>
+                </div>
             {% endif %}
-        {% if args.name %}
-            <p>Are Registered For</p>
-            <div>
-                <p> {{ args.event }} </p>
-            </div>
-        {% endif %}
-            <form method="POST" action="/registration_check/">
+            <form method="POST" onsubmit="check_fields()" action="/registration_check/">
                 {% csrf_token %}
                 <div>
                     <h3>Enter your {{ form.first_name.label.lower }} and {{ form.last_name.label.lower }}</h3>
@@ -55,8 +55,10 @@
                         </div>
                     </div>
                 </div>
-                <button>submit</button>
+                <button onsubmit="preventDefault">submit</button>
             </form>
         </div>
     </div>
 {% endblock %}
+
+
