@@ -85,6 +85,7 @@ def registration_check(request):
             first_name = f['first_name'].lower()
             last_name = f['last_name'].lower()
             print(confirmation_number, '&', first_name, '&', last_name)
+
             if confirmation_number == '' and first_name == '' and last_name == '':
                 form = RegistrationCheck()
 
@@ -96,31 +97,39 @@ def registration_check(request):
                 return render(request, 'events/registration_check.html', {"args": args, 'form': form})
 
             if confirmation_number:
-                event_id = RiderProfile.objects.filter(
-                    confirmation_number=confirmation_number).values_list('event_id', flat=True)
+                try:
+                    event_id = RiderProfile.objects.filter(
+                        confirmation_number=confirmation_number).values_list('event_id', flat=True)
 
-                confirmation_names = RiderProfile.objects.filter(
-                    confirmation_number=confirmation_number).values_list('first_name', 'last_name')
+                    confirmation_names = RiderProfile.objects.filter(
+                        confirmation_number=confirmation_number).values_list('first_name', 'last_name')
 
-                if event_id is not None:
-                    confirmation_names = list(confirmation_names)
-                    first_and_last_names = (' '.join(name) for name in confirmation_names)
-                    event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
-                    event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
-                    event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
+                    if event_id is not None:
+                        confirmation_names = list(confirmation_names)
+                        first_and_last_names = (' '.join(name) for name in confirmation_names)
+                        event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
+                        event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
+                        event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
+                        args = {
+                            'result': True,
+                            'name': first_and_last_names,
+                            'event': 'is registered for ' + event_data
+                        }
+
+                        return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+                except:
                     args = {
                         'result': True,
-                        'name': first_and_last_names,
-                        'event': event_data
+                        'name': ' ',
+                        'event': 'That confirmation number was not found.'
                     }
 
                     return render(request, 'events/registration_check.html', {"args": args, 'form': form})
 
             elif first_name != '' and last_name != '':
-
-                event_id = RiderProfile.objects.filter(first_name=first_name).filter(last_name=last_name).values_list(
+                event_id = RiderProfile.objects.filter(first_name=first_name).filter(
+                    last_name=last_name).values_list(
                     'event', flat=True).last()
-
                 if event_id is not None:
                     first_and_last_names = first_name + " " + last_name
 
@@ -131,8 +140,17 @@ def registration_check(request):
                     args = {
                         'result': True,
                         'name': first_and_last_names,
-                        'event': event_data
+                        'event': 'is registered for ' + event_data
                     }
+                    return render(request, 'events/registration_check.html', {"args": args, 'form': form})
+
+                else:
+                    args = {
+                        'result': True,
+                        'name': first_name + ' ' + last_name,
+                        'event': 'was not found.'
+                    }
+
                     return render(request, 'events/registration_check.html', {"args": args, 'form': form})
             else:
                 form = RegistrationCheck()

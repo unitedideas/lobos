@@ -25,7 +25,7 @@
             <h2>Check if you are registered for an upcoming event.</h2>
             {% if args.name %}
                 <div>
-                    <p> {{ args.event }} </p>
+                    <p> {{ args.name | title }} {{ args.event }} </p>
                 </div>
             {% endif %}
             <form method="POST" action="/registration_check/">
@@ -37,13 +37,11 @@
                             <h4>{{ form.first_name.label }}</h4>
                             <div>{{ form.first_name }}</div>
                         </div>
-
                         <div>
                             <h4>{{ form.last_name.label }}</h4>
                             <div>{{ form.last_name }}</div>
                         </div>
                     </div>
-
                 </div>
                 <h2>OR</h2>
                 <div>
