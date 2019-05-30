@@ -28,7 +28,7 @@
                     <p> {{ args.event }} </p>
                 </div>
             {% endif %}
-            <form method="POST" onsubmit="check_fields()" action="/registration_check/">
+            <form method="POST" action="/registration_check/">
                 {% csrf_token %}
                 <div>
                     <h3>Enter your {{ form.first_name.label.lower }} and {{ form.last_name.label.lower }}</h3>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-                <button onsubmit="preventDefault">submit</button>
+                <button>submit</button>
             </form>
         </div>
     </div>

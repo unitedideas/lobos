@@ -85,7 +85,7 @@ def registration_check(request):
             first_name = f['first_name'].lower()
             last_name = f['last_name'].lower()
             print(confirmation_number, '&', first_name, '&', last_name)
-            if confirmation_number == '' or first_name == '' and last_name == '':
+            if confirmation_number == '' and first_name == '' and last_name == '':
                 form = RegistrationCheck()
 
                 args = {
