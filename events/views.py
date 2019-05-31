@@ -132,7 +132,6 @@ def registration_check(request):
                     'event', flat=True).last()
                 if event_id is not None:
                     first_and_last_names = first_name + " " + last_name
-
                     event_name = Event.objects.filter(id=event_id).values_list('event_name', flat=True)
                     event_date = Event.objects.filter(id=event_id).values_list('event_date', flat=True)
                     event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
