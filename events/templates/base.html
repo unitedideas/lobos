@@ -4,7 +4,7 @@
 <head>
     <style type="text/css">
         body {
-            background: url('{% static "events/bgimages/6.jpg" %}') no-repeat center center fixed;
+            background: url('{% static "events/bgimages/6BW.png" %}') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -64,8 +64,6 @@
                             </li>
                             <li class="nav-item {% if url_name == 'merchandise' %}myactive{% endif %}"><a
                                     href="/merchandise">Merchandise</a></li>
-                            <li class="nav-item {% if url_name == 'clubevents' %}myactive{% endif %}"><a
-                                    href="/clubevents">Club Events</a></li>
                             <li class="nav-item {% if url_name == 'registration_check' %}myactive{% endif %}"><a
                                     href="/registration_check">Registration Check</a></li>
                         </ul>
@@ -74,6 +72,8 @@
                             {#                            </li>#}
                             {#                            <li class="nav-item {% if url_name == 'edit_profile' %}myactive{% endif %}"><a#}
                             {#                                    href="/profile/edit">Edit Profile</a></li>#}
+                            <li class="nav-item {% if url_name == 'clubevents' %}myactive{% endif %}"><a
+                                    href="/clubevents">Club Events</a></li>
                             <li class="nav-item {% if url_name == 'logout' %}myactive{% endif %}"><a href="/logout">Logout</a>
                             </li>
                             <li><a class="navbar-brand"><strong>Welcome {{ request.user.first_name }}!</strong></a></li>
@@ -87,12 +87,12 @@
                             </li>
                             <li class="nav-item {% if url_name == 'merchandise' %}myactive{% endif %}"><a
                                     href="/merchandise">Merchandise</a></li>
-                            <li class="nav-item {% if url_name == 'clubevents' %}myactive{% endif %}"><a
-                                    href="/clubevents">Club Events</a></li>
                             <li class="nav-item {% if url_name == 'registration_check' %}myactive{% endif %}"><a
                                     href="/registration_check">Registration Check</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item {% if url_name == 'clubevents' %}myactive{% endif %}"><a
+                                    href="/clubevents">Club Events</a></li>
                             {#                            <li class="nav-item {% if url_name == 'password_reset' %}myactive{% endif %}"><a#}
                             {#                                    href="/password-reset">Reset Password</a></li>#}
                             {#                                    href="/password-reset">Reset Password</a></li>#}
@@ -103,12 +103,8 @@
                         </ul>
                     {% endif %}
                 {% endwith %}
-
-
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-        <h3 style="text-align: center">If you have issues registering. Please email us at info@lobosmc.com</h3>
-
     </nav>
 </div>
 

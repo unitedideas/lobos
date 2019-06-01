@@ -383,7 +383,6 @@ def home(request):
         open_registration.append(event.open_registration)
 
     for limit, rider in zip(rider_limit, reg_riders):
-
         try:
             remaining_spots.append(limit - rider)
         except:

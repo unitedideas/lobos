@@ -28,7 +28,7 @@
 
 {% block body %}
 
-    <div class="container">
+    <div class="container transition_fade" >
     <div class="jumbotron" id="jumbo" style="margin-top: 10px">
         <div class="row">
             <div class="col-sm-5">
@@ -44,12 +44,16 @@
 
             </div>
             <div style="float: right" class="col-sm-5">
-                <img src="{% static "events/lobos logo.png" %}" style="width: 90%; height: 90%">
+                {#<img src="{% static "events/lobos logo.png" %}" style="width: 90%; height: 90%">#}
+                <img src="{% static "events/bgimages/loboslogowhite.png" %}" style="width: 90%; height: 90%">
+
             </div>
         </div>
     </div>
-    <h1 style="text-align: center; background-color: #ffe673; padding: 15px; border-radius: 5px; margin: 15px 0px 30px 0px">
-        Upcoming Events</h1>
+    {#<h1 style="text-align: center; background-color: #ffe673; padding: 15px; border-radius: 5px; margin: 15px 0px 30px 0px">#}
+    <h1 style="text-align: center">
+        Upcoming Events
+    </h1>
 
     {% for detail in events_details %}
         <div class="jumbotron row" id="jumbo" style="margin: 10px 0px 30px 0px">
@@ -82,7 +86,7 @@
                     {% elif detail.12 > 1 %}
                         <h2>{{ detail.12 }} Days Until Race Day!</h2>
                         <br>
-                        <a name="register_button" class="btn btn-md btn-primary"
+                        <a name="register_button" class="btn btn-lg btn-reg"
                            href="/event-registration/?event={{ detail.0 }}" role="button"
                            methods="GET">Register for {{ detail.0 }} {{ detail.1 }} now!</a>
                     {% elif detail.12 == 1 %}
@@ -130,9 +134,6 @@
                 </a>
                 <a class="fa fa-twitter"
                    href="https://twitter.com/home?status=Here%20are%20the%20next%20upcoming%20Lobos%20rides%20and%20races.%20www.LobosEvents.com"
-                   target="_blank">
-                </a>
-                <a class="fa fa-google" href="https://plus.google.com/share?url=www.lobosevents.com"
                    target="_blank">
                 </a>
 

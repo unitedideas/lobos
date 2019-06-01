@@ -40,9 +40,22 @@ select, input {
 }
 
 .barBreak {
-    background-color: #222222;
+    background-color: #ffe673;
     height: 5px;
     margin: 10px;
+}
+
+.transition_fade {
+    animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .productImage {
@@ -61,6 +74,9 @@ select, input {
     margin: 10px;
 }
 
+label {
+    color: #f1f1f1;
+}
 
 .merchImage {
     flex: 0 0 75%;
@@ -100,7 +116,7 @@ select, input {
     width: 50%;
 }
 
-.flex-check-container > h1,h2,h3,h4,h5,h6 {
+.flex-check-container > h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 

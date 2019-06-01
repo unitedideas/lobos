@@ -27,22 +27,19 @@
                 <form method="POST" id="feedbackform" v-on:keydown.13.prevent="the3DayMethod">
                     {% csrf_token %}
                     {{ formset.management_form }}
-
                     <div style="margin-right: 15px;" class="row">
                         <div v-for="form in formList" class="container">
-                            <div style="background-color: #ffe673; padding: 5px; border-radius:5px; margin: 20px 15px 0px 15px">
+                            <div style="padding: 5px; border-radius:5px; margin: 20px 15px 0px 15px">
                                 <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
-                                <div style="background-color: #ffe673; padding: 0px 25px 25px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
+                                <div style="padding: 0px 25px 25px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
                                      v-html="form">
                                 </div>
-
                             </div>
-
                         </div>
                         <br>
                         <div class="container" style="padding: 0px 30px 0px 30px">
                             <div class="row"
-                                 style="background-color: #ffe673; padding: 5px; margin-top: 20px; border-radius: 5px">
+                                 style="padding: 5px; margin-top: 20px; border-radius: 5px">
                                 <div class="col-sm-6" style="text-align: center">
                                     <div v-on:click="addForm" class="btn btn-primary btn-lg">Add Another Rider
                                     </div>
@@ -64,14 +61,14 @@
         <div class="sk-rotating-plane"></div>
         <div class="container" style="text-align: center">
             <div v-show="showcheckout"
-                 style="background-color: #ffe673; border-radius: 5px; text-align: center; margin: 0px 15px 0px 15px; padding-bottom: 10px">
+                 style="border-radius: 5px; text-align: center; margin: 0px 15px 0px 15px; padding-bottom: 10px">
                 <transition name="fade">
                     <div v-if="formSuccess === false && formerrors.length > 0" class="p-3 mb-2 bg-danger text-white">
-                        <h3>Please correct these errors:</h3>
+                        <h2 class="error_title">Please correct these errors:</h2>
                         <div id="v-for-formerrors" v-for="item, form in formerrors">
                             <div v-for="value, index in item">
                                 <div v-for="error in value">
-                                    <h4>Rider Form [[form+1]]: The [[ index | capitalize ]] [[error | removeThis]]</h4>
+                                    <h3 style="color: black">Rider Form [[form+1]]: The [[ index | capitalize ]] [[error | removeThis]]</h3>
                                 </div>
                             </div>
                         </div>
@@ -79,50 +76,50 @@
                 </transition>
                 <transition name="fade">
                     <div v-if="age_error || escort_required > 0 || gender_class || birthdate_wrong || email_not_the_same"
-                         class="p-3 mb-2 bg-danger text-white">
-                        <h2>Please correct these errors to continue:</h2>
+                         class="p-3 mb-2 bg-danger text-black">
+                        <h2 style="color: red">Please correct these errors to continue:</h2>
                     </div>
 
                 </transition>
                 <transition name="fade">
-                    <div v-if="email_not_the_same" class="p-3 mb-2 bg-danger text-white">
+                    <div v-if="email_not_the_same" class="p-3 mb-2 bg-danger text-black">
                         <div>
-                            <h3>The emails on form [[email_not_the_same_form]] are not the same</h3>
+                            <h3 class="error_cases">The emails on form [[email_not_the_same_form]] are not the same</h3>
                         </div>
                     </div>
                 </transition>
                 <transition name="fade">
-                    <div v-if="age_error" class="p-3 mb-2 bg-danger text-white">
+                    <div v-if="age_error" class="p-3 mb-2 bg-danger text-black">
                         <div>
-                            <h3>Rider on form [[under_class_age.form]] is not the correct age to ride in
+                            <h3 class="error_cases">Rider on form [[under_class_age.form]] is not the correct age to ride in
                                 [[under_class_age.rider_class]]</h3>
                         </div>
                     </div>
                 </transition>
                 <transition name="fade">
-                    <div v-if="gender_class" class="p-3 mb-2 bg-danger text-white">
+                    <div v-if="gender_class" class="p-3 mb-2 bg-danger text-black">
                         <div>
-                            <h3>You've signed up for Women's Class as a male on form [[gender_form]]</h3>
+                            <h3 class="error_cases">You've signed up for Women's Class as a male on form [[gender_form]]</h3>
                         </div>
                     </div>
                 </transition>
                 </transition>
                 <transition name="fade">
-                    <div v-if="birthdate_wrong" class="p-3 mb-2 bg-danger text-white">
+                    <div v-if="birthdate_wrong" class="p-3 mb-2 bg-danger text-black">
                         <div>
-                            <h3>The birth date entered on form [[birthdate_form]] is not correct</h3>
+                            <h3 class="error_cases">The birth date entered on form [[birthdate_form]] is not correct</h3>
                         </div>
                     </div>
                 </transition>
                 <transition name="fade">
-                    <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-white">
+                    <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-black">
                         <div id="v-for-formerrors">
                             <div v-if='[[escort_required]] == 1'>
-                                <h3>At least [[escort_required]] Escort Rider is required to register based on the
+                                <h3 class="error_cases">At least [[escort_required]] Escort Rider is required to register based on the
                                     birth dates provided.</h3>
                             </div>
                             <div v-if='[[escort_required]] > 1'>
-                                <h3>At least [[escort_required]] Escort Riders are required to register based on the
+                                <h3 class="error_cases">At least [[escort_required]] Escort Riders are required to register based on the
                                     birth dates provided.</h3>
                             </div>
                         </div>
@@ -310,10 +307,10 @@
                     {# end hat #}
                     <br>
                     <div style="text-align: center;">
-                        <div style="background-color: #ffe673; height: 5px;"></div>
+                        <div style="height: 5px;"></div>
                         <div v-if="cartlist.length > 0">
                             <h3 style="color: whitesmoke;">Your {{ event.event_name }} Gear!</h3>
-                            <div style="background-color: #ffe673; overflow: hidden; padding-top: 7px">
+                            <div style="overflow: hidden; padding-top: 7px">
                                 <div v-for="(item, index) in cartlist"
                                      style="text-align: center; background-color: red">
                                     <div class="col-sm-6">
@@ -323,7 +320,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <h4 style="text-align: center; color: black;  float: left">[[item.qty]]
+                                        <h4 style="text-align: center; float: left">[[item.qty]]
                                             [[item.size]]
                                             [[item.item]]</h4>
                                     </div>
