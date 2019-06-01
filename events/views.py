@@ -353,7 +353,6 @@ def home(request):
         reg_riders.append(RiderProfile.objects.filter(event=event_id).count())
 
     for date in event_dates:
-
         tte = int((date - dt.date.today()).days)
 
         try:
