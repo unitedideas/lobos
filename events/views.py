@@ -102,23 +102,25 @@ def registration_check(request):
 
                     confirmation_names = RiderProfile.objects.filter(
                         confirmation_number=confirmation_number).values_list('first_name', 'last_name')
+                    print(confirmation_names)
 
                     if event_id is not None:
                         confirmation_names = list(confirmation_names)
-                        first_and_last_names = (' '.join(name) for name in confirmation_names)
+                        first_and_last_names = list((' '.join(name) for name in confirmation_names))
+                        print(first_and_last_names)
                         event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
                         event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
-                        event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
+                        event_data = event_name[0] + ' scheduled for ' + event_date[0].strftime('%m/%d/%Y')
                         args = {
                             'result': True,
                             'name': first_and_last_names,
-                            'event': 'is registered for ' + event_data
+                            'event': event_data
                         }
 
                         return render(request, 'events/registration_check.html', {"args": args, 'form': form})
                 except:
                     args = {
-                        'result': True,
+                        'result': False,
                         'name': ' ',
                         'event': 'That confirmation number was not found.'
                     }
@@ -130,15 +132,15 @@ def registration_check(request):
                     last_name=last_name).values_list(
                     'event', flat=True).last()
                 if event_id is not None:
-                    first_and_last_names = first_name + " " + last_name
+                    first_and_last_names = [first_name + " " + last_name]
                     event_name = Event.objects.filter(id=event_id).values_list('event_name', flat=True)
                     event_date = Event.objects.filter(id=event_id).values_list('event_date', flat=True)
-                    event_data = event_name[0] + ' on ' + event_date[0].strftime('%m/%d/%Y')
+                    event_data = event_name[0] + ' scheduled for ' + event_date[0].strftime('%m/%d/%Y')
 
                     args = {
                         'result': True,
                         'name': first_and_last_names,
-                        'event': 'is registered for ' + event_data
+                        'event': event_data
                     }
                     return render(request, 'events/registration_check.html', {"args": args, 'form': form})
 
