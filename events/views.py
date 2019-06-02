@@ -57,6 +57,7 @@ def change_names_to_lower():
 
 @staff_member_required
 def clubevents(request):
+    change_names_to_lower()
     if request.POST:
         form = LobosRace(request.POST)
         if form.is_valid():
