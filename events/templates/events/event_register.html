@@ -515,6 +515,7 @@
                     }
                     this.merchTotal = cost.toFixed(2)
                     this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
+
                 },
 
                 regTotal() {
@@ -703,8 +704,7 @@
                     paymentCompleted(data) {
                         document.getElementById('modal_close_btn').style.display = "none"
                         const order_data = JSON.stringify(data)
-
-                        document.getElementById('order_data').value = order_data + '\n'
+                        document.getElementById('order_data').value = order_data
                         this.paymentComplete = true
                     },
 
