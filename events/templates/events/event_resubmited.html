@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="container" style="padding: 15px; border-radius: 5px">
+        <h1>You've been registered for this event.</h1>
+        <h1>Your confirmation number is {{ args.confirmation_number }}</h1>
+        <h3>You can check your confirmation number <a href="/registration_check">here</a> at anytime in the future.</h3>
+    </div>
+{% endblock %}

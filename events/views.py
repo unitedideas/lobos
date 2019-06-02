@@ -699,14 +699,25 @@ def event_mail(email, first_name, last_name, username, rider_class, event, confi
 
 def event_register(request):
     if request.method == 'POST':
-
         formset_post = RiderProfileFormSet(request.POST)
         if formset_post.is_valid():
             formset = formset_post.save(commit=False)
-            confirmation_number = id_generator()
+            postData = request.POST.dict()
+            itemsOrderedDict = json.loads(postData['form-0-items_ordered'])
+            confirmation_number = itemsOrderedDict['transactions'][0]['related_resources'][0]['sale']['id']
+            confirmation_number = confirmation_number.upper()
+            print(confirmation_number)
+
+            if RiderProfile.objects.filter(confirmation_number=confirmation_number).exists():
+                args = {
+                    "confirmation_number": confirmation_number,
+                }
+                return render(request, 'events/event_resubmited.html', {"args": args})
+
             count = 0
             confirm = {}
             for form in formset:
+                # print(form.items_ordered)
                 count += 1
                 created_username = form.first_name + form.last_name + form.email
                 created_username = created_username.replace(" ", "").lower()
@@ -822,8 +833,6 @@ def event_register(request):
             return render(request, 'events/event_confirmation.html', args)
         else:
             errors = formset_post.errors
-            # can start with the current users filter queryset
-            # AuthorFormSet(queryset=Author.objects.filter(name__startswith='O'))
             event = Event.objects.get(event_name=request.GET.get('event'))
             formset = prefill_form(request)
 
@@ -831,21 +840,25 @@ def event_register(request):
             return render(request, 'events/event_register.html', args)
 
     else:
-        formset = prefill_form(request)
+        # formset = prefill_form(request)
         event = Event.objects.get(event_name=request.GET.get('event'))
         rider_limit = event.rider_limit
         registered_riders = len(RiderProfile.objects.filter(event=event))
-        remaining_race_spots = rider_limit - registered_riders
+
         if rider_limit - registered_riders <= 0:
-            print('soldout')
             args = {'event': event}
             return render(request, 'events/sold_out.html', args)
+
+        if not event.open_registration:
+            args = {'event': event}
+            return render(request, 'events/unavailable_event.html', args)
 
         codes = dict(Codes.objects.values_list(
             'discount_code', 'discount_amount'))
         codes = json.dumps(codes)
 
-        args = {'formset': formset, 'event': event, 'codes': codes}
+        args = {'event': event, 'codes': codes}
+        # args = {'formset': formset, 'event': event, 'codes': codes}
         return render(request, 'events/event_register.html', args)
 
 
@@ -861,7 +874,7 @@ def id_generator(size=8, chars=string.ascii_uppercase + string.digits):
 def event_formset(request):
     formset = prefill_form(request)
     formset = str(formset)
-    event = json.loads(request.body)['event'][0:-5]
+    event = json.loads(request.body)['event']
     event_date = json.loads(request.body)['event'][-4:]
     escort_rider_cost = Event.objects.get(
         event_name=event, event_date__contains=event_date).escort_rider_cost

@@ -137,7 +137,7 @@ class LobosRace(ModelForm):
 RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            exclude=(
                                                'rider_cat', 'user', 'confirmation_number', 'start_time', 'event', 'id',
-                                               'registration_date_time',),
+                                               'registration_date_time'),
                                            formset=BaseRiderProfileFormSet,
                                            widgets={
                                                'birth_date': DateInput(

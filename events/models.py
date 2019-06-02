@@ -165,8 +165,7 @@ class Event(models.Model):
     shirt_XXXlarge = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.event_name) + ' ' + str(self.event_date)[0:4]
-        # return str(self.event_name)
+        return str(self.event_name)
 
 
 class Profile(models.Model):

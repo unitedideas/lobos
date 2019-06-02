@@ -6,11 +6,14 @@ body {
 }
 
 p {
-    color: #f1f1f1;
+    color: #FFFFFF;
 }
 
 h1, h2, h3 {
     color: #f7f457
+}
+h4, h5, h6{
+    color: #FFFFFF;
 }
 
 .btn-reg {
@@ -38,7 +41,7 @@ h1, h2, h3 {
 }
 
 .jumbotron {
-    color: #f1f1f1;
+    color: #FFFFFF;
     /*background-color: #ffe673;*/
     background-color: rgba(0, 0, 0, 0);
     margin: 0px;
@@ -113,12 +116,12 @@ tr {
 }
 
 label {
-    color: #f1f1f1;
+    color: #FFFFFF;
 }
 
 
 .label {
-    color: #f1f1f1;
+    color: #FFFFFF;
     font-size: 20px;
 }
 
@@ -182,13 +185,13 @@ a:hover {
 .navbar {
     /*background-color: #ffe673;*/
     background-color: rgba(0, 0, 0, 0);
-    color: #f1f1f1;
+    color: #FFFFFF;
     /*color: #333;*/
 }
 
 .nav.navbar-nav li a {
     /*color: #333;*/
-    color: #f1f1f1;
+    color: #FFFFFF;
 }
 
 .nav.navbar-nav li a:hover {
@@ -202,7 +205,7 @@ a:hover {
 
 .navbar-brand li a {
     /*color: #333;*/
-    color: #f1f1f1;
+    color: #FFFFFF;
 
 }
 
@@ -217,7 +220,7 @@ input, select {
 }
 
 .top-container {
-    background-color: #f1f1f1;
+    background-color: #FFFFFF;
     padding: 30px;
     text-align: center;
 }
@@ -225,7 +228,7 @@ input, select {
 .header {
     background: #dedede;
     /*color: #333;*/
-    color: #f1f1f1;
+    color: #FFFFFF;
     z-index: 1;
     border-radius: 5px;
     width: 100%;
