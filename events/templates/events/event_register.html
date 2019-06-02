@@ -356,10 +356,8 @@
                             :button-style="aStyle"
                             :client="paypal"
                             env="production"
-
                             {#for adding more details#}
                             {# :details="details" #}
-
                             v-on:payment-authorized="paymentAuthorized"
                             v-on:payment-completed="paymentCompleted"
                             v-on:payment-cancelled="paymentCancelled">
