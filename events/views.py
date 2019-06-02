@@ -102,12 +102,10 @@ def registration_check(request):
 
                     confirmation_names = RiderProfile.objects.filter(
                         confirmation_number=confirmation_number).values_list('first_name', 'last_name')
-                    print(confirmation_names)
 
                     if event_id is not None:
                         confirmation_names = list(confirmation_names)
                         first_and_last_names = list((' '.join(name) for name in confirmation_names))
-                        print(first_and_last_names)
                         event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
                         event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
                         event_data = event_name[0] + ' scheduled for ' + event_date[0].strftime('%m/%d/%Y')
@@ -708,7 +706,6 @@ def event_register(request):
             itemsOrderedDict = json.loads(postData['form-0-items_ordered'])
             confirmation_number = itemsOrderedDict['transactions'][0]['related_resources'][0]['sale']['id']
             confirmation_number = confirmation_number.upper()
-            print(confirmation_number)
 
             if RiderProfile.objects.filter(confirmation_number=confirmation_number).exists():
                 args = {
