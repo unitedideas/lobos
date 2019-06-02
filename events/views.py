@@ -84,7 +84,6 @@ def registration_check(request):
             confirmation_number = f['confirmationNumber'].upper()
             first_name = f['first_name'].lower()
             last_name = f['last_name'].lower()
-            print(confirmation_number, '&', first_name, '&', last_name)
 
             if confirmation_number == '' and first_name == '' and last_name == '':
                 form = RegistrationCheck()
@@ -802,7 +801,7 @@ def event_register(request):
                     username = created_username
                     first_name = form.first_name.lower()
                     last_name = form.last_name.lower()
-                    email = form.email
+                    email = form.email.lower()
                     rider_class = form.rider_class
 
                     confirm[created_username] = {'username': username,
@@ -832,13 +831,19 @@ def event_register(request):
             return render(request, 'events/event_register.html', args)
 
     else:
-
+        formset = prefill_form(request)
         event = Event.objects.get(event_name=request.GET.get('event'))
+        rider_limit = event.rider_limit
+        registered_riders = len(RiderProfile.objects.filter(event=event))
+        remaining_race_spots = rider_limit - registered_riders
+        if rider_limit - registered_riders <= 0:
+            print('soldout')
+            args = {'event': event}
+            return render(request, 'events/sold_out.html', args)
+
         codes = dict(Codes.objects.values_list(
             'discount_code', 'discount_amount'))
         codes = json.dumps(codes)
-
-        formset = prefill_form(request)
 
         args = {'formset': formset, 'event': event, 'codes': codes}
         return render(request, 'events/event_register.html', args)

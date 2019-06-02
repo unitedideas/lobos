@@ -166,6 +166,7 @@ class Event(models.Model):
 
     def __str__(self):
         return str(self.event_name) + ' ' + str(self.event_date)[0:4]
+        # return str(self.event_name)
 
 
 class Profile(models.Model):

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
+
 {% block body %}
     <div class="container" style="padding: 15px; border-radius: 5px">
-        <h1></h1>
-        <h1>Hey {{ data.name | title }}!! You're Signed Up for {{ data.event }}!</h1>
+        <h1>Sorry, This race has sold out.</h1>
+        {{ args.event }}
     </div>
 {% endblock %}
