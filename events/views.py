@@ -70,7 +70,6 @@ def clubevents(request):
             errors = form.errors
             return render(request, 'events/clubevents.html', {'form': form, 'errors': errors})
     else:
-        change_names_to_lower()
         form = LobosRace()
         signed_up = len(ClubEvent.objects.all())
         return render(request, 'events/clubevents.html', {'form': form, 'signed_up': signed_up})
