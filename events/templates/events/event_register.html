@@ -355,7 +355,7 @@
                             currency="USD"
                             :button-style="aStyle"
                             :client="paypal"
-                            env="production"
+                            env="sandbox"
                             {#for adding more details#}
                             {# :details="details" #}
                             v-on:payment-authorized="paymentAuthorized"
@@ -381,7 +381,7 @@
             el: '#app',
             data: {
                 paypal: {
-                    sandbox: 'AYgwz1PZCp41wgIFot5Yg4e8qtx3uVzxxIFOyul4r8GIvW87mymJ7_khNL_F3L3XlBEasHbjncJ7485W',
+                    sandbox: 'Ab1Sz1kGg_pToL-VqcaNqUh1C4obLl11btkrD3nShf8FadP5sDn47sNiLVA7mHeWQKN9Fn14tMorYSag',
                     production: 'AS_Jx2PoYa86AlHKjRhEff5F5jE_EEZquzJ_uaqxQHEuhU2MtUilTqbGuBxHwDpQ8O_giK9r-LQDdx_h'
                 },
                 aStyle: {
@@ -515,7 +515,6 @@
                     }
                     this.merchTotal = cost.toFixed(2)
                     this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
-
                 },
 
                 regTotal() {
@@ -558,11 +557,11 @@
                 {
                     add_to_cart(item_type, size, qty, price) {
                         let count = 0
-                        let merch_order = "", end
+                        let merch_order = ""
                         if (size != "") {
                             if (qty > 0) {
                                 this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
-                                for (i in this.cartlist) {
+                                for (let i in this.cartlist) {
                                     merch_order += String(Object.values(this.cartlist[count])) + "\n"
                                     count += 1
                                 }
@@ -704,7 +703,8 @@
                     paymentCompleted(data) {
                         document.getElementById('modal_close_btn').style.display = "none"
                         const order_data = JSON.stringify(data)
-                        document.getElementById('order_data').value = order_data
+
+                        document.getElementById('order_data').value = order_data + '\n'
                         this.paymentComplete = true
                     },
 

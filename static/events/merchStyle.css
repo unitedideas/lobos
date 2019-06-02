@@ -23,6 +23,8 @@ td {
 select, input {
     height: 35px;
     text-align: center;
+    color: #000;
+    font-weight: bold;
 }
 
 .merchTable {

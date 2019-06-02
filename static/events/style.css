@@ -12,7 +12,8 @@ p {
 h1, h2, h3 {
     color: #f7f457
 }
-h4, h5, h6{
+
+h4, h5, h6 {
     color: #FFFFFF;
 }
 
@@ -216,7 +217,8 @@ label {
 input, select {
     font-size: 15px;
     width: 100%;
-
+    color: #000;
+    font-weight: bold;
 }
 
 .top-container {
