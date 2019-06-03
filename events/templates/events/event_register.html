@@ -68,7 +68,8 @@
                         <div id="v-for-formerrors" v-for="item, form in formerrors">
                             <div v-for="value, index in item">
                                 <div v-for="error in value">
-                                    <h3 style="color: black">Rider Form [[form+1]]: The [[ index | capitalize ]] [[error | removeThis]]</h3>
+                                    <h3 style="color: black">Rider Form [[form+1]]: The [[ index | capitalize ]] [[error
+                                        | removeThis]]</h3>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +92,8 @@
                 <transition name="fade">
                     <div v-if="age_error" class="p-3 mb-2 bg-danger text-black">
                         <div>
-                            <h3 class="error_cases">Rider on form [[under_class_age.form]] is not the correct age to ride in
+                            <h3 class="error_cases">Rider on form [[under_class_age.form]] is not the correct age to
+                                ride in
                                 [[under_class_age.rider_class]]</h3>
                         </div>
                     </div>
@@ -99,7 +101,8 @@
                 <transition name="fade">
                     <div v-if="gender_class" class="p-3 mb-2 bg-danger text-black">
                         <div>
-                            <h3 class="error_cases">You've signed up for Women's Class as a male on form [[gender_form]]</h3>
+                            <h3 class="error_cases">You've signed up for Women's Class as a male on form
+                                [[gender_form]]</h3>
                         </div>
                     </div>
                 </transition>
@@ -107,7 +110,8 @@
                 <transition name="fade">
                     <div v-if="birthdate_wrong" class="p-3 mb-2 bg-danger text-black">
                         <div>
-                            <h3 class="error_cases">The birth date entered on form [[birthdate_form]] is not correct</h3>
+                            <h3 class="error_cases">The birth date entered on form [[birthdate_form]] is not
+                                correct</h3>
                         </div>
                     </div>
                 </transition>
@@ -115,11 +119,13 @@
                     <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-black">
                         <div id="v-for-formerrors">
                             <div v-if='[[escort_required]] == 1'>
-                                <h3 class="error_cases">At least [[escort_required]] Escort Rider is required to register based on the
+                                <h3 class="error_cases">At least [[escort_required]] Escort Rider is required to
+                                    register based on the
                                     birth dates provided.</h3>
                             </div>
                             <div v-if='[[escort_required]] > 1'>
-                                <h3 class="error_cases">At least [[escort_required]] Escort Riders are required to register based on the
+                                <h3 class="error_cases">At least [[escort_required]] Escort Riders are required to
+                                    register based on the
                                     birth dates provided.</h3>
                             </div>
                         </div>
