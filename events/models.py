@@ -199,9 +199,18 @@ class Profile(models.Model):
         return (self.user)
 
 
+
 class Codes(models.Model):
     discount_code = models.CharField(max_length=100, null=True, blank=True)
     discount_amount = models.FloatField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.discount_code) + " " + str(self.discount_amount)
+
+class special_item(models.Model):
+    item_name = models.CharField(max_length=100, null=True, blank=True)
+    item_description = models.CharField(max_length=100, null=True, blank=True)
+    item_quantity = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return str(self.discount_code) + " " + str(self.discount_amount)
