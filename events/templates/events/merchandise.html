@@ -241,7 +241,7 @@
                     let item_size = this.sizeTextChange(datas[0].value)
                     let item_qty = datas[1].value
                     let price = Number(this.merch_json.merch[item][0]['sale_price'])
-                    let item_shipping = item_qty * price * .03
+                    let item_shipping = 0.00
 
                     addToCartObj.name = item_name
                     addToCartObj.description = item_size //size

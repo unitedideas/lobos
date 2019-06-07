@@ -79,7 +79,7 @@ class MerchandiseOrder(models.Model):
     items_ordered = models.TextField(null=True, blank=True)
     date_ordered = models.CharField(max_length=30, null=True, blank=True)
     date_shipped = models.CharField(max_length=30, null=True, blank=True)
-    shipped = models.BooleanField(default=False, null=True, blank=True)
+    shipped = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.first_name) + str(self.last_name)
