@@ -28,7 +28,7 @@
 
 {% block body %}
 
-    <div class="container transition_fade" >
+    <div class="container transition_fade">
     <div class="jumbotron" id="jumbo" style="margin-top: 10px">
         <div class="row">
             <div class="col-sm-5">
@@ -76,6 +76,10 @@
                 <p><b>Details:</b> {{ detail.3 | safe }}</p>
             </div>
             <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">
+                {% if detail.15 > 0 %}
+                    <h3>{{ detail.14 }}</h3>
+                    <h3>There are only {{ detail.15 }} spots remaining!</h3>
+                {% endif %}
                 {% if detail.13 == False %}
                     <h2>{{ detail.0 }}</h2>
                 {% else %}

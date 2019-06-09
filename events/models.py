@@ -107,6 +107,15 @@ class Merchandise(models.Model):
         return str(self.merchandise_name) + " $" + str(self.sale_price)
 
 
+class SignupPromotion(models.Model):
+    promotion_item_name = models.CharField(default='Promo', max_length=200, null=True, blank=True)
+    promotion_limit = models.PositiveIntegerField()
+    promotion_classes = models.CharField(max_length=1000, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.promotion_item_name)
+
+
 class Event(models.Model):
     event_name = models.CharField(max_length=300, null=True, blank=True)
     description = models.TextField(max_length=1000, null=True, blank=True)
@@ -127,6 +136,10 @@ class Event(models.Model):
     class_60_and_class_70_cost = models.IntegerField()
     escort_rider_cost = models.IntegerField()
     open_registration = models.BooleanField(default=False)
+
+    promotion = models.ForeignKey(SignupPromotion, help_text='Leave blank if there is no promotion', null=True, blank=True, on_delete=models.CASCADE)
+    # promotion_limit = models.IntegerField(default=0, null=True, blank=True, )
+
     hoodie = models.BooleanField(
         'Check if up-selling hoodies after registration', default=False)
     hoodie_image_file_name = models.CharField(
@@ -207,15 +220,6 @@ class Codes(models.Model):
         return str(self.discount_code) + " " + str(self.discount_amount)
 
 
-class special_item(models.Model):
-    item_name = models.CharField(max_length=100, null=True, blank=True)
-    item_description = models.CharField(max_length=100, null=True, blank=True)
-    item_quantity = models.CharField(max_length=100, null=True, blank=True)
-
-    def __str__(self):
-        return str(self.discount_code) + " " + str(self.discount_amount)
-
-
 class RiderProfile(models.Model):
     FEMALE = 'Female'
     MALE = 'Male'
@@ -289,6 +293,11 @@ class RiderProfile(models.Model):
         (FEMALE, 'Female'),
         (MALE, 'Male'),
     )
+
+    YESNO = (
+        ('Yes', 'Yes'),
+        ('No', 'No'),
+    )
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
@@ -320,6 +329,9 @@ class RiderProfile(models.Model):
     merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)
     registration_date_time = models.DateTimeField('Created Time', editable=True, null=True, blank=True,
                                                   auto_now_add=True)
+    promotional_item = models.CharField('Promotion', max_length=3, default=YESNO[1][1], choices=YESNO)
+    promotion_name = models.CharField('Promotion Chosen', max_length=300, null=True, blank=True)
+
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     discount_code = models.CharField(max_length=100, null=True, blank=True)
     start_time = models.TimeField(max_length=30, null=True, blank=True)
