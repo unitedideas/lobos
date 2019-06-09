@@ -1,4 +1,4 @@
-from .models import RiderProfile, Profile, Codes, Merchandise, MerchandiseOrder, ClubEvent
+from .models import RiderProfile, Profile, Codes, Merchandise, MerchandiseOrder, ClubEvent, SignupPromotion
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.conf import settings
@@ -331,6 +331,8 @@ def home(request):
     events = Event.objects.all().order_by('-event_date')[0:2]
     event_name = events.values_list('event_name', flat=True)
     event_dates = events.values_list('event_date', flat=True)
+    promotion_id = events.values_list('promotion', flat=True)[0]
+    promotions = SignupPromotion.objects.get(pk=promotion_id)
     year_list = []
     event_date = []
     event_details = []
@@ -347,6 +349,7 @@ def home(request):
     remaining_time = []
     open_registration = []
     promotion = []
+    promotion_count = []
 
     for event in event_name:
         event_id = Event.objects.get(event_name=event).id
@@ -382,6 +385,7 @@ def home(request):
         rider_limit.append(event.rider_limit)
         open_registration.append(event.open_registration)
         promotion.append(event.promotion)
+        promotion_count.append(promotions.promotion_limit)
 
     for limit, rider in zip(rider_limit, reg_riders):
         try:
@@ -404,6 +408,7 @@ def home(request):
                          remaining_time,  # 12
                          open_registration,  # 13
                          promotion,  # 14
+                         promotion_count,  # 15
                          )
 
     context = {'events_details': events_details}
