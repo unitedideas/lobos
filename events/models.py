@@ -108,7 +108,8 @@ class Merchandise(models.Model):
 
 
 class SignupPromotion(models.Model):
-    promotion_item_name = models.CharField(default='Promo', max_length=200, null=True, blank=True)
+    promotion_item_name = models.CharField(default='Promo name', max_length=200, null=True, blank=True)
+    promotion_description = models.CharField(default='Promo details', max_length=800, null=True, blank=True)
     promotion_limit = models.PositiveIntegerField()
     promotion_classes = models.CharField(max_length=1000, null=True, blank=True)
 

@@ -31,8 +31,18 @@
                         <div v-for="form in formList" class="container">
                             <div style="padding: 5px; border-radius:5px; margin: 20px 15px 0px 15px">
                                 <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
-                                <div style="padding: 0px 25px 25px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
+                                <div style="padding: 0px 25px 0px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
                                      v-html="form">
+                                </div>
+
+                                <div v-if="promotion_limit > 0 && promotion_class_selected([[count]])"
+                                     style=" padding: 0 25px 0; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px">
+                                    <label>Would you like to participate in the promotion:</label>
+                                    <p>{{ promotion.promotion_item_name }}</p>
+                                    <select>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">no</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -442,6 +452,9 @@
                 gender_form: "",
                 birthdate_wrong: false,
                 birthdate_form: "",
+                promotion_classes: '{{ promotion.promotion_classes }}',
+                promotion_limit: '{{ promotion.promotion_limit }}',
+                promotion_name: '{{ promotion.promotion_item_name }}',
                 hoodie: {
                     price: {{ event.hoodie_cost }},
                     size:
@@ -565,7 +578,7 @@
                     add_to_cart(item_type, size, qty, price) {
                         let count = 0
                         let merch_order = ""
-                        if (size != "") {
+                        if (size !== "") {
                             if (qty > 0) {
                                 this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
                                 for (let i in this.cartlist) {
@@ -718,6 +731,26 @@
                         this.payment_cancelled = false
                         this.payment_cancelled = true
                         this.showPayPal = true
+                    },
+
+                    promotion_class_selected(id) {
+                        console.log(id[0][0])
+                        let form_id = id[0][0]
+                        console.log(this.promotion_classes)
+
+                        try {
+                            let selector = document.getElementById('id_form-' + form_id + '-rider_class').value
+                            console.log(selector)
+                            console.log(this.promotion_classes.includes(selector))
+                            return this.promotion_classes.includes(selector)
+
+                        } catch (error) {
+                            console.error(error);
+                            // expected output: ReferenceError: nonExistentFunction is not defined
+                            // Note - error messages will vary depending on browser
+                            return false
+                        }
+
                     },
 
                     select_change(e) {

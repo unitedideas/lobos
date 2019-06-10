@@ -347,6 +347,7 @@ def home(request):
     remaining_time = []
     open_registration = []
     promotion = []
+    promotion_description = []
     promotion_count = []
 
     for event in event_name:
@@ -385,8 +386,10 @@ def home(request):
         promotion.append(event.promotion)
         if event.promotion is not None:
             promotion_count.append(event.promotion.promotion_limit)
+            promotion_description.append(event.promotion.promotion_description)
         else:
             promotion_count.append(0)
+            promotion_description.append(0)
 
     for limit, rider in zip(rider_limit, reg_riders):
         try:
@@ -410,6 +413,7 @@ def home(request):
                          open_registration,  # 13
                          promotion,  # 14
                          promotion_count,  # 15
+                         promotion_description,  # 16
                          )
 
     context = {'events_details': events_details}
@@ -422,7 +426,6 @@ def login(request):
 
 
 # Email
-
 def send_mail_user_reg(email, first_name, last_name, username, password):
     msg = EmailMultiAlternatives(
         subject="Welcome to Lobos",
@@ -709,6 +712,7 @@ def event_mail(email, first_name, last_name, username, rider_class, event, confi
 def event_register(request):
     if request.method == 'POST':
         formset_post = RiderProfileFormSet(request.POST)
+
         if formset_post.is_valid():
             formset = formset_post.save(commit=False)
             postData = request.POST.dict()
@@ -865,7 +869,9 @@ def event_register(request):
             'discount_code', 'discount_amount'))
         codes = json.dumps(codes)
 
-        args = {'event': event, 'codes': codes}
+        promotion = event.promotion
+
+        args = {'event': event, 'codes': codes, 'promotion': promotion}
         # args = {'formset': formset, 'event': event, 'codes': codes}
         return render(request, 'events/event_register.html', args)
 

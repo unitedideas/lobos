@@ -209,7 +209,7 @@ class RiderClass(ModelForm):
 RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            exclude=(
                                                'rider_cat', 'user', 'confirmation_number', 'start_time', 'event', 'id',
-                                               'registration_date_time', 'promotion_name'),
+                                               'registration_date_time'),
                                            formset=BaseRiderProfileFormSet,
                                            widgets={
                                                'birth_date': DateInput(
@@ -238,10 +238,12 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                    }),
                                                'rider_class': forms.Select(
                                                    attrs={
-                                                       'oninput': "select_change(this)"
+                                                       'oninput': "select_change(this); ",
+                                                       'v-on:input': "promotion_class_selected(this)"
                                                    }),
                                                'merchandise_ordered': forms.HiddenInput(),
                                                'discount_code': forms.HiddenInput(),
                                                'items_ordered': forms.HiddenInput(attrs={'id': "order_data"}),
-                                               'promotional_item': forms.HiddenInput()
+                                               'promotional_item': forms.HiddenInput(),
+                                               'promotion_name': forms.HiddenInput(),
                                            })
