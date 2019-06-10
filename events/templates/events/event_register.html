@@ -35,7 +35,7 @@
                                      v-html="form">
                                 </div>
 
-                                <div v-if="promotion_limit > 0 && promotion_class_selected([[count]])"
+                                <div v-if="promotion_limit > 0 && promotion_class_selected(this)"
                                      style=" padding: 0 25px 0; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px">
                                     <label>Would you like to participate in the promotion:</label>
                                     <p>{{ promotion.promotion_item_name }}</p>
@@ -734,22 +734,22 @@
                     },
 
                     promotion_class_selected(id) {
-                        console.log(id[0][0])
-                        let form_id = id[0][0]
+                        console.log(id)
+                        {#let form_id = id#}
                         console.log(this.promotion_classes)
 
-                        try {
-                            let selector = document.getElementById('id_form-' + form_id + '-rider_class').value
-                            console.log(selector)
-                            console.log(this.promotion_classes.includes(selector))
-                            return this.promotion_classes.includes(selector)
-
-                        } catch (error) {
-                            console.error(error);
-                            // expected output: ReferenceError: nonExistentFunction is not defined
-                            // Note - error messages will vary depending on browser
-                            return false
-                        }
+                        {#try {#}
+                        {#    let selector = document.getElementById('id_form-' + form_id + '-rider_class').value#}
+                        {#    console.log(selector)#}
+                        {#    console.log(this.promotion_classes.includes(selector))#}
+                        {#    return this.promotion_classes.includes(selector)#}
+                        {##}
+                        {# } catch (error) {#}
+                        {#    console.error(error);#}
+                        {#    // expected output: ReferenceError: nonExistentFunction is not defined#}
+                        {#    // Note - error messages will vary depending on browser#}
+                        {#    return false#}
+                        {# }#}
 
                     },
 
@@ -791,8 +791,7 @@
                                 {
                                     'X-CSRFToken': '{{ csrf_token }}',
                                 }
-                        }
-                    )
+                        })
 
                         .then(function (response) {
                             app.vue_form = response.data.formset
@@ -824,6 +823,7 @@
             document.getElementById(id).onchange = function (e) {
                 app.totalCost()
             }
+
         }
     </script>
 

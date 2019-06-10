@@ -890,13 +890,14 @@ def event_formset(request):
     formset = str(formset)
     event = json.loads(request.body)['event']
     event_date = json.loads(request.body)['event'][-4:]
-    escort_rider_cost = Event.objects.get(
-        event_name=event, event_date__contains=event_date).escort_rider_cost
-    reg_rider_cost = Event.objects.get(
-        event_name=event, event_date__contains=event_date).pre_entry_cost
+    # escort_rider_cost = Event.objects.get(
+    #     event_name=event, event_date__contains=event_date).escort_rider_cost
+    # reg_rider_cost = Event.objects.get(
+        # event_name=event, event_date__contains=event_date).pre_entry_cost
     # reg_rider_cost = Event.objects.get(event_name=request.GET.get('event')).pre_entry_cost
-    formset_to_vue = {'reg_rider_cost': reg_rider_cost,
-                      'escort_rider_cost': escort_rider_cost, 'formset': formset}
+    # formset_to_vue = {'reg_rider_cost': reg_rider_cost,
+    #                   'escort_rider_cost': escort_rider_cost, 'formset': formset}
+    formset_to_vue = {'formset': formset}
     return JsonResponse(formset_to_vue)
 
 
