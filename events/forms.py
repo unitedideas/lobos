@@ -238,11 +238,12 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                    }),
                                                'rider_class': forms.Select(
                                                    attrs={
-                                                       'oninput': "select_change(this); ",
+                                                       'oninput': "select_class_change(this); ",
                                                    }),
                                                'merchandise_ordered': forms.HiddenInput(),
                                                'discount_code': forms.HiddenInput(),
                                                'items_ordered': forms.HiddenInput(attrs={'id': "order_data"}),
                                                'promotional_item': forms.Select(attrs={'class': 'hide'}),
                                                'promotion_name': forms.HiddenInput(),
+                                               'promotion_time': forms.HiddenInput(),
                                            })

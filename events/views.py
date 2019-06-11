@@ -28,6 +28,7 @@ from django.template.loader import render_to_string
 import random
 import string
 import json
+import re
 from datetime import datetime as ddt
 import datetime as dt
 
@@ -889,15 +890,21 @@ def event_formset(request):
     formset = prefill_form(request)
     formset = str(formset)
     event = json.loads(request.body)['event']
+    promotion = json.loads(request.body)['promotion']
+    print(promotion)
     event_date = json.loads(request.body)['event'][-4:]
     # escort_rider_cost = Event.objects.get(
     #     event_name=event, event_date__contains=event_date).escort_rider_cost
     # reg_rider_cost = Event.objects.get(
-        # event_name=event, event_date__contains=event_date).pre_entry_cost
+    # event_name=event, event_date__contains=event_date).pre_entry_cost
     # reg_rider_cost = Event.objects.get(event_name=request.GET.get('event')).pre_entry_cost
     # formset_to_vue = {'reg_rider_cost': reg_rider_cost,
     #                   'escort_rider_cost': escort_rider_cost, 'formset': formset}
+    formset = re.sub('for="id_form-0-promotional_item"',
+                     'for="id_form-0-promotional_item" id="id_form-0-promotional_item_label" class="hide"', formset)
+    formset = re.sub('Promotion:', 'Would you like to join the ' + promotion + '.', formset)
     formset_to_vue = {'formset': formset}
+
     return JsonResponse(formset_to_vue)
 
 

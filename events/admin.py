@@ -13,8 +13,8 @@ admin.site.register(Event)
 @admin.register(SignupPromotion)
 # this is the example of how to setup the import/ export and the admin search
 class ClubEventExportAdmin(ImportExportModelAdmin):
-    list_display = ('promotion_item_name', 'promotion_limit', 'promotion_classes')
-    search_fields = ('promotion_item_name', 'promotion_limit', 'promotion_classes')
+    list_display = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_time_choices')
+    search_fields = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_time_choices')
     form = RiderClass
 
     def user_info(self, obj):

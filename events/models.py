@@ -94,14 +94,14 @@ class Merchandise(models.Model):
         max_length=1000, null=True, blank=True, default='Merchandise Description')
     sale_price = models.FloatField(default=60.00)
     item_image = models.CharField(max_length=300, null=True, blank=True)
-    one_size_fits_all_quantity_available = models.IntegerField(default=0)
-    x_small_quantity_available = models.IntegerField(default=0)
-    small_quantity_available = models.IntegerField(default=0)
-    medium_quantity_available = models.IntegerField(default=0)
-    large_quantity_available = models.IntegerField(default=0)
-    x_large_quantity_available = models.IntegerField(default=0)
-    xx_large_quantity_available = models.IntegerField(default=0)
-    xxx_large_quantity_available = models.IntegerField(default=0)
+    one_size_fits_all_quantity_available = models.PositiveIntegerField(default=0)
+    x_small_quantity_available = models.PositiveIntegerField(default=0)
+    small_quantity_available = models.PositiveIntegerField(default=0)
+    medium_quantity_available = models.PositiveIntegerField(default=0)
+    large_quantity_available = models.PositiveIntegerField(default=0)
+    x_large_quantity_available = models.PositiveIntegerField(default=0)
+    xx_large_quantity_available = models.PositiveIntegerField(default=0)
+    xxx_large_quantity_available = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return str(self.merchandise_name) + " $" + str(self.sale_price)
@@ -112,6 +112,7 @@ class SignupPromotion(models.Model):
     promotion_description = models.CharField(default='Promo details', max_length=800, null=True, blank=True)
     promotion_limit = models.PositiveIntegerField()
     promotion_classes = models.CharField(max_length=1000, null=True, blank=True)
+    promotion_time_choices = models.CharField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
         return str(self.promotion_item_name)
@@ -120,8 +121,8 @@ class SignupPromotion(models.Model):
 class Event(models.Model):
     event_name = models.CharField(max_length=300, null=True, blank=True)
     description = models.TextField(max_length=1000, null=True, blank=True)
-    pre_entry_cost = models.IntegerField()
-    post_entry_cost = models.IntegerField()
+    pre_entry_cost = models.PositiveIntegerField()
+    post_entry_cost = models.PositiveIntegerField()
     entry_closes = models.CharField(max_length=800, null=True, blank=True)
     event_date = models.DateField(max_length=30, null=True, blank=True)
     event_location = models.CharField(max_length=300, null=True, blank=True)
@@ -129,13 +130,13 @@ class Event(models.Model):
     map_location = models.TextField(max_length=800, null=True, blank=True)
     expert_time_est = models.TimeField(max_length=30, null=True, blank=True)
     amateur_time_est = models.TimeField(max_length=30, null=True, blank=True)
-    rider_limit = models.IntegerField(null=True, blank=True)
-    expert_over_16_cost = models.IntegerField()
-    expert_under_16_cost = models.IntegerField()
-    amateur_over_16_cost = models.IntegerField()
-    amateur_under_16_cost = models.IntegerField()
-    class_60_and_class_70_cost = models.IntegerField()
-    escort_rider_cost = models.IntegerField()
+    rider_limit = models.PositiveIntegerField(null=True, blank=True)
+    expert_over_16_cost = models.PositiveIntegerField()
+    expert_under_16_cost = models.PositiveIntegerField()
+    amateur_over_16_cost = models.PositiveIntegerField()
+    amateur_under_16_cost = models.PositiveIntegerField()
+    class_60_and_class_70_cost = models.PositiveIntegerField()
+    escort_rider_cost = models.PositiveIntegerField()
     open_registration = models.BooleanField(default=False)
 
     promotion = models.ForeignKey(SignupPromotion, help_text='Leave blank if there is no promotion', null=True,
@@ -147,7 +148,7 @@ class Event(models.Model):
         max_length=300, null=True, blank=True)
     hoodie_main_description = models.CharField(
         max_length=300, null=True, blank=True)
-    hoodie_cost = models.IntegerField(null=True, blank=True, default=60)
+    hoodie_cost = models.PositiveIntegerField(null=True, blank=True, default=60)
     hoodie_Xsmall = models.BooleanField(default=False)
     hoodie_small = models.BooleanField(default=False)
     hoodie_medium = models.BooleanField(default=False)
@@ -161,7 +162,7 @@ class Event(models.Model):
         max_length=300, null=True, blank=True)
     hat_main_description = models.CharField(
         max_length=300, null=True, blank=True)
-    hat_cost = models.IntegerField(null=True, blank=True, default=60)
+    hat_cost = models.PositiveIntegerField(null=True, blank=True, default=60)
     hat_osfa = models.BooleanField(default=False)
     shirt = models.BooleanField(
         'Check if up-selling shirts after registration', default=False)
@@ -169,7 +170,7 @@ class Event(models.Model):
         max_length=300, null=True, blank=True)
     shirt_main_description = models.CharField(
         max_length=300, null=True, blank=True)
-    shirt_cost = models.IntegerField(null=True, blank=True, default=60)
+    shirt_cost = models.PositiveIntegerField(null=True, blank=True, default=60)
     shirt_Xsmall = models.BooleanField(default=False)
     shirt_small = models.BooleanField(default=False)
     shirt_medium = models.BooleanField(default=False)
@@ -332,6 +333,7 @@ class RiderProfile(models.Model):
                                                   auto_now_add=True)
     promotional_item = models.CharField('Promotion', max_length=3, default=YESNO[1][1], choices=YESNO)
     promotion_name = models.CharField('Promotion Chosen', max_length=300, null=True, blank=True)
+    promotion_time = models.CharField('Time Chosen', max_length=300, null=True, blank=True)
 
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     discount_code = models.CharField(max_length=100, null=True, blank=True)

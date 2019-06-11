@@ -753,17 +753,6 @@
                         {# }#}
                     },
 
-                    {#select_change(e) {#}
-                    {#    var id = e.id#}
-                    {#    try{#}
-                    {#    document.getElementById(e).onchange = function () {#}
-                    {#        return true}#}
-                    {#    }#}
-                    {#    catch (e) {#}
-                    {#        console.log(e)#}
-                    {#    }#}
-                    {# },#}
-
                 },
 
             filters: {
@@ -790,7 +779,7 @@
                     let app = this
 
                     axios.post("{% url 'event_formset' %}",
-                        {processData: false, contentType: false, event: '{{event}}'},
+                        {processData: false, contentType: false, event: '{{event}}', promotion: '{{ promotion.promotion_item_name }}'},
                         {
                             headers:
                                 {
@@ -803,7 +792,8 @@
                             app.formList.push(app.vue_form)
                         })
                 },
-            function(){},
+            function() {
+            },
 
 
             created:
@@ -824,28 +814,22 @@
 
     </script>
     <script>
-        function select_change(e) {
+        function select_class_change(e) {
             let id = e.id
 
             let form_num = id.match(/\d+/)[0]
             let selector = document.getElementById(id).value
             document.getElementById(id).onchange = function () {
                 app.totalCost()
+                if (app.promotion_classes.includes(selector)) {
+                    app.promotion_list.push([form_num])
+                    document.getElementById('id_form-' + form_num.toString() + '-promotional_item').classList.remove("hide")
+                    document.getElementById('id_form-' + form_num.toString() + '-promotional_item_label').classList.remove("hide")
+                } else {
+                    document.getElementById('id_form-' + form_num.toString() + '-promotional_item').classList.add("hide")
+                    document.getElementById('id_form-' + form_num.toString() + '-promotional_item_label').classList.add("hide")
+                }
             }
-            if (app.promotion_classes.includes(selector)) {
-                app.promotion_list.push([form_num])
-                let selector_elem = document.getElementById('id_form-'+form_num.toString()+'-promotional_item')
-                selector_elem.classList.remove("hide")
-            }
-            {#console.log('app.promotion_list')#}
-            {#console.log(app.promotion_list)#}
-            {#console.log('selector')#}
-            {#console.log(selector)#}
-            {#console.log('app.promotion_classes')#}
-            {#console.log(app.promotion_classes)#}
-            {#app.promotion_list(form_num)#}
-
-
         }
     </script>
 
