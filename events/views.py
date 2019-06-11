@@ -848,8 +848,13 @@ def event_register(request):
             errors = formset_post.errors
             event = Event.objects.get(event_name=request.GET.get('event'))
             formset = prefill_form(request)
+            codes = dict(Codes.objects.values_list(
+                'discount_code', 'discount_amount'))
+            codes = json.dumps(codes)
 
-            args = {'formset': formset, 'event': event, 'errors': errors}
+            promotion = event.promotion
+
+            args = {'formset': formset, 'event': event, 'errors': errors, 'codes': codes, 'promotion': promotion}
             return render(request, 'events/event_register.html', args)
 
     else:
