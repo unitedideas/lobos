@@ -446,6 +446,7 @@
                 promotion_classes: '{{ promotion.promotion_classes }}',
                 promotion_limit: '{{ promotion.promotion_limit }}',
                 promotion_name: '{{ promotion.promotion_item_name }}',
+                promotion_options: [],
                 hoodie: {
                     price: {{ event.hoodie_cost }},
                     size:
@@ -779,7 +780,12 @@
                     let app = this
 
                     axios.post("{% url 'event_formset' %}",
-                        {processData: false, contentType: false, event: '{{event}}', promotion: '{{ promotion.promotion_item_name }}'},
+                        {
+                            processData: false,
+                            contentType: false,
+                            event: '{{event}}',
+                            promotion: '{{ promotion.promotion_item_name }}'
+                        },
                         {
                             headers:
                                 {
@@ -791,10 +797,15 @@
                             app.vue_form = response.data.formset
                             app.formList.push(app.vue_form)
                         })
-                },
-            function() {
-            },
 
+
+                    let promo_options_list = '{{ promotion.promotion_options }}'.split(',')
+                    for(const option in promo_options_list){
+                        this.promotion_options.push(promo_options_list[option])
+                    }
+
+
+                },
 
             created:
                 function () {
@@ -827,9 +838,20 @@
                     document.getElementById('id_form-' + form_num.toString() + '-promotional_item_label').classList.remove("hide")
                 } else {
                     document.getElementById('id_form-' + form_num.toString() + '-promotional_item').classList.add("hide")
+                    document.getElementById('id_form-' + form_num.toString() + '-promotional_item').value = 'No'
                     document.getElementById('id_form-' + form_num.toString() + '-promotional_item_label').classList.add("hide")
                 }
             }
+        }
+
+        function select_promo_change(e) {
+            let id = e.id
+
+            let form_num = id.match(/\d+/)[0]
+            let selector = document.getElementById(id).value
+            console.log(form_num)
+            console.log(selector)
+
         }
     </script>
 

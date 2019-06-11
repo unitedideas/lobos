@@ -200,7 +200,8 @@ class RiderClass(ModelForm):
             (ES, ES)]
          )]
 
-    promotion_classes = forms.MultipleChoiceField(choices=RIDER_CLASS, widget=forms.SelectMultiple)
+    promotion_classes = forms.MultipleChoiceField(help_text='You must choose classes every time.', choices=RIDER_CLASS,
+                                                  widget=forms.SelectMultiple)
 
     class Meta:
         fields = '__all__'
@@ -243,7 +244,8 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                'merchandise_ordered': forms.HiddenInput(),
                                                'discount_code': forms.HiddenInput(),
                                                'items_ordered': forms.HiddenInput(attrs={'id': "order_data"}),
-                                               'promotional_item': forms.Select(attrs={'class': 'hide'}),
+                                               'promotional_item': forms.Select(
+                                                   attrs={'class': 'hide', 'oninput': "select_promo_change(this); "}),
                                                'promotion_name': forms.HiddenInput(),
-                                               'promotion_time': forms.HiddenInput(),
+                                               'promotion_options': forms.Select(attrs={'class': 'hide'}),
                                            })

@@ -4,7 +4,6 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from .models import RiderProfile, Event, Profile, Codes, Merchandise, MerchandiseOrder, ClubEvent, SignupPromotion
 from .forms import RiderClass
-
 admin.site.site_header = 'Lobos Events/ User Database'
 admin.site.register(Codes)
 admin.site.register(Event)
@@ -13,10 +12,9 @@ admin.site.register(Event)
 @admin.register(SignupPromotion)
 # this is the example of how to setup the import/ export and the admin search
 class ClubEventExportAdmin(ImportExportModelAdmin):
-    list_display = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_time_choices')
-    search_fields = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_time_choices')
+    list_display = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_options')
+    search_fields = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_options')
     form = RiderClass
-
     def user_info(self, obj):
         return obj.description
 

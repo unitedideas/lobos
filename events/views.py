@@ -896,7 +896,6 @@ def event_formset(request):
     formset = str(formset)
     event = json.loads(request.body)['event']
     promotion = json.loads(request.body)['promotion']
-    print(promotion)
     event_date = json.loads(request.body)['event'][-4:]
     # escort_rider_cost = Event.objects.get(
     #     event_name=event, event_date__contains=event_date).escort_rider_cost
@@ -907,7 +906,10 @@ def event_formset(request):
     #                   'escort_rider_cost': escort_rider_cost, 'formset': formset}
     formset = re.sub('for="id_form-0-promotional_item"',
                      'for="id_form-0-promotional_item" id="id_form-0-promotional_item_label" class="hide"', formset)
-    formset = re.sub('Promotion:', 'Would you like to join the ' + promotion + '.', formset)
+
+    formset = re.sub('for="id_form-0-promotion_options"',
+                     'for="id_form-0-promotion_options" id="id_form-0-promotion_options_label" class="hide"', formset)
+
     formset_to_vue = {'formset': formset}
 
     return JsonResponse(formset_to_vue)
