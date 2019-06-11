@@ -222,6 +222,10 @@ input, select {
     font-weight: bold;
 }
 
+.hide {
+    display: none;
+}
+
 .top-container {
     background-color: #FFFFFF;
     padding: 30px;

@@ -31,18 +31,9 @@
                         <div v-for="form in formList" class="container">
                             <div style="padding: 5px; border-radius:5px; margin: 20px 15px 0px 15px">
                                 <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
-                                <div style="padding: 0px 25px 0px; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
+                                <div style="padding: 0px 25px 0px; border-bottom-left-radius:5px;
+                                border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
                                      v-html="form">
-                                </div>
-
-                                <div v-if="promotion_class_selected && promotion_limit > 0"
-                                     style=" padding: 0 25px 0; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px">
-                                    <label>Would you like to participate in the promotion:</label>
-                                    <p>{{ promotion.promotion_item_name }}</p>
-                                    <select>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">no</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -567,9 +558,10 @@
                     }
                 },
 
-                promotion_list(){
-                    for(let item in this.promotion_list){
-                        document.getElementById()
+                promotion_list() {
+                    for (let item in this.promotion_list) {
+                        {#document.getElementById()#}
+                        console.log(this.promotion_list[item])
                     }
                 }
             },
@@ -811,6 +803,7 @@
                             app.formList.push(app.vue_form)
                         })
                 },
+            function(){},
 
 
             created:
@@ -841,15 +834,17 @@
             }
             if (app.promotion_classes.includes(selector)) {
                 app.promotion_list.push([form_num])
-                            console.log('ADDED one')
-
+                let selector_elem = document.getElementById('id_form-'+form_num.toString()+'-promotional_item')
+                selector_elem.classList.remove("hide")
             }
-            console.log('app.promotion_list')
-            console.log(app.promotion_list)
-            console.log('selector')
-            console.log(selector)
-            console.log('app.promotion_classes')
-            console.log(app.promotion_classes)
+            {#console.log('app.promotion_list')#}
+            {#console.log(app.promotion_list)#}
+            {#console.log('selector')#}
+            {#console.log(selector)#}
+            {#console.log('app.promotion_classes')#}
+            {#console.log(app.promotion_classes)#}
+            {#app.promotion_list(form_num)#}
+
 
         }
     </script>

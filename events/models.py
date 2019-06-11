@@ -138,8 +138,8 @@ class Event(models.Model):
     escort_rider_cost = models.IntegerField()
     open_registration = models.BooleanField(default=False)
 
-    promotion = models.ForeignKey(SignupPromotion, help_text='Leave blank if there is no promotion', null=True, blank=True, on_delete=models.CASCADE)
-    # promotion_limit = models.IntegerField(default=0, null=True, blank=True, )
+    promotion = models.ForeignKey(SignupPromotion, help_text='Leave blank if there is no promotion', null=True,
+                                  blank=True, on_delete=models.CASCADE)
 
     hoodie = models.BooleanField(
         'Check if up-selling hoodies after registration', default=False)
