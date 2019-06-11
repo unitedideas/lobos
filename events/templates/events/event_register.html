@@ -35,7 +35,7 @@
                                      v-html="form">
                                 </div>
 
-                                <div v-if="promotion_limit > 0 && promotion_class_selected(this)"
+                                <div v-if="promotion_class_selected && promotion_limit > 0"
                                      style=" padding: 0 25px 0; border-bottom-left-radius:5px; border-bottom-right-radius:5px; margin: 0px 15px 0px 15px">
                                     <label>Would you like to participate in the promotion:</label>
                                     <p>{{ promotion.promotion_item_name }}</p>
@@ -505,6 +505,7 @@
                 hoodieCost: {{ event.hoodie_cost }},
                 shirtCost: {{ event.shirt_cost }},
                 hatCost: {{ event.hat_cost }},
+                promotion_list: [],
 
             },
             watch: {
@@ -565,6 +566,12 @@
                     } else {
                     }
                 },
+
+                promotion_list(){
+                    for(let item in this.promotion_list){
+                        document.getElementById()
+                    }
+                }
             },
 
             computed: {
@@ -733,10 +740,12 @@
                         this.showPayPal = true
                     },
 
-                    promotion_class_selected(id) {
-                        console.log(id)
+                    promotion_class_selected() {
+
+
+                        {#console.log($event.target)#}
                         {#let form_id = id#}
-                        console.log(this.promotion_classes)
+                        {#console.log(this.promotion_classes)#}
 
                         {#try {#}
                         {#    let selector = document.getElementById('id_form-' + form_id + '-rider_class').value#}
@@ -750,15 +759,19 @@
                         {#    // Note - error messages will vary depending on browser#}
                         {#    return false#}
                         {# }#}
-
                     },
 
-                    select_change(e) {
-                        var id = e.id
-                        document.getElementById(id).onchange = function (e) {
-                            totalCost()
-                        }
-                    },
+                    {#select_change(e) {#}
+                    {#    var id = e.id#}
+                    {#    try{#}
+                    {#    document.getElementById(e).onchange = function () {#}
+                    {#        return true}#}
+                    {#    }#}
+                    {#    catch (e) {#}
+                    {#        console.log(e)#}
+                    {#    }#}
+                    {# },#}
+
                 },
 
             filters: {
@@ -819,10 +832,24 @@
     </script>
     <script>
         function select_change(e) {
-            var id = e.id
-            document.getElementById(id).onchange = function (e) {
+            let id = e.id
+
+            let form_num = id.match(/\d+/)[0]
+            let selector = document.getElementById(id).value
+            document.getElementById(id).onchange = function () {
                 app.totalCost()
             }
+            if (app.promotion_classes.includes(selector)) {
+                app.promotion_list.push([form_num])
+                            console.log('ADDED one')
+
+            }
+            console.log('app.promotion_list')
+            console.log(app.promotion_list)
+            console.log('selector')
+            console.log(selector)
+            console.log('app.promotion_classes')
+            console.log(app.promotion_classes)
 
         }
     </script>
