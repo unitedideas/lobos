@@ -120,11 +120,6 @@ class EditProfileForm(UserChangeForm):
         )
 
 
-class BaseRiderProfileFormSet(BaseModelFormSet):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
 class LobosRace(ModelForm):
     class Meta:
         model = ClubEvent
@@ -205,6 +200,11 @@ class RiderClass(ModelForm):
 
     class Meta:
         fields = '__all__'
+
+
+class BaseRiderProfileFormSet(BaseModelFormSet):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 
 RiderProfileFormSet = modelformset_factory(RiderProfile,

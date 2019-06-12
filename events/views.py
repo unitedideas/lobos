@@ -644,13 +644,6 @@ def error_checking(request):
                     under_16 - escorts_signed_up > 1) else 'escort'
             content['escorts_signed_up'] = escorts_signed_up
             content['under_16'] = under_16
-            # return JsonResponse(content)
-
-        # age vs rider_class check
-        # if ((y < 16) or (y == 16 and m < 0) or (y == age and m == 0 and d < 0)) and ( rider_class not in class_list_under_16):
-        #     print('RIDER CLASS NOT GOOD... less than age ' + str(age) + " rider in " + rider_class)
-        #     content['under_class_age'] = {"age": age, "rider_class": rider_class, 'form': form_count}
-        #     content["age_error"] = True
 
         for age in age_set:
             if (y < age and y >= 16) or (y == age and m < 0) or (y == age and m == 0 and d < 0):
@@ -906,6 +899,9 @@ def event_formset(request):
     #                   'escort_rider_cost': escort_rider_cost, 'formset': formset}
     formset = re.sub('for="id_form-0-promotional_item"',
                      'for="id_form-0-promotional_item" id="id_form-0-promotional_item_label" class="hide"', formset)
+
+    formset = re.sub('for="id_form-0-promotion_options"',
+                     'for="id_form-0-promotion_options" id="id_form-0-promotion_options_label" class="hide"', formset)
 
     formset = re.sub('for="id_form-0-promotion_options"',
                      'for="id_form-0-promotion_options" id="id_form-0-promotion_options_label" class="hide"', formset)

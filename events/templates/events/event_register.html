@@ -800,7 +800,7 @@
 
 
                     let promo_options_list = '{{ promotion.promotion_options }}'.split(',')
-                    for(const option in promo_options_list){
+                    for (const option in promo_options_list) {
                         this.promotion_options.push(promo_options_list[option])
                     }
 
@@ -846,12 +846,28 @@
 
         function select_promo_change(e) {
             let id = e.id
-
             let form_num = id.match(/\d+/)[0]
             let selector = document.getElementById(id).value
+            if (selector === 'Yes') {
+                document.getElementById('id_form-' + form_num.toString() + '-promotion_options').classList.remove("hide")
+
+                let select = document.getElementById('id_form-' + form_num.toString() + '-promotion_options')
+                for(let item in app.promotion_options) {
+                    let option_text = document.createElement("option")
+                    console.log(app.promotion_options[item])
+                    option_text.text = app.promotion_options[item]
+                    select.add(option_text)
+                }
+                document.getElementById('id_form-' + form_num.toString() + '-promotion_options_label').classList.remove("hide")
+
+
+            } else {
+                document.getElementById('id_form-' + form_num.toString() + '-promotion_options').classList.add("hide")
+                document.getElementById('id_form-' + form_num.toString() + '-promotion_options').value = ''
+                document.getElementById('id_form-' + form_num.toString() + '-promotion_options_label').classList.add("hide")
+            }
             console.log(form_num)
             console.log(selector)
-
         }
     </script>
 

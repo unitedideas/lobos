@@ -334,10 +334,10 @@ class RiderProfile(models.Model):
     merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)
     registration_date_time = models.DateTimeField('Created Time', editable=True, null=True, blank=True,
                                                   auto_now_add=True)
-    promotional_item = models.CharField('Take advantage of the promotion?', max_length=3, default=YESNO[1][1],
+    promotional_item = models.CharField('Would you like to use the promotion?', max_length=3, default=YESNO[1][1],
                                         choices=YESNO)
-    promotion_name = models.CharField('Promotion Chosen', max_length=300, null=True, blank=True)
-    promotion_options = models.CharField('What time?', max_length=300, null=True, blank=True)
+    promotion_name = models.CharField('Promotion', max_length=300, null=True, blank=True)
+    promotion_options = models.CharField('Choose your option:', max_length=300, null=True, blank=True)
 
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     discount_code = models.CharField(max_length=100, null=True, blank=True)
