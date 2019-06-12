@@ -81,7 +81,7 @@
                         <h3>{{ detail.14 }}</h3>
                         <h3>{{detail.16}}</h3>
                         <h3>There {{ detail.15 | pluralize:"is,are" }} only {{ detail.15 }}
-                            spot{{ detail.15 | pluralize:"s" }} remaining!</h3>
+                            {{ detail.14 }}{{ detail.15 | pluralize:"s" }} remaining!</h3>
                     </div>
                 {% endif %}
                 {% if detail.13 == False %}
