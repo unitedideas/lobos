@@ -1,7 +1,5 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
 from .models import RiderProfile, Event, Profile, Codes, Merchandise, MerchandiseOrder, ClubEvent, SignupPromotion
 from .forms import RiderClass
 admin.site.site_header = 'Lobos Events/ User Database'
@@ -10,7 +8,6 @@ admin.site.register(Event)
 
 
 @admin.register(SignupPromotion)
-# this is the example of how to setup the import/ export and the admin search
 class ClubEventExportAdmin(ImportExportModelAdmin):
     list_display = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_options')
     search_fields = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_options')
@@ -70,27 +67,6 @@ class ProfileExportAdmin(ImportExportModelAdmin):
         return obj.description
 
 
-#
-# class ProfileInline(admin.StackedInline):
-#     model = Profile
-#     can_delete = False
-#     verbose_name_plural = 'Profile'
-#     fk_name = 'user'
-#
-#
-# class CustomUserAdmin(UserAdmin):
-#     inlines = (ProfileInline,)
-#     list_display = ('username', 'email', 'first_name', 'last_name')
-#     list_select_related = ('profile',)
-#
-#     def get_inline_instances(self, request, obj=None):
-#         if not obj:
-#             return list()
-#         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
-
-
 class RatingAdmin(admin.ModelAdmin):
     readonly_fields = ('date',)
 
-# admin.site.unregister(User)
-# admin.site.register(User, CustomUserAdmin)
