@@ -836,9 +836,11 @@
                     app.promotion_list.push([form_num])
                     document.getElementById('id_form-' + form_num.toString() + '-promotional_item').classList.remove("hide")
                     document.getElementById('id_form-' + form_num.toString() + '-promotional_item_label').classList.remove("hide")
+                    document.getElementById('id_form-' + form_num.toString() + '-promotion_name').value = '{{ promotion.promotion_item_name }}'
                 } else {
                     document.getElementById('id_form-' + form_num.toString() + '-promotional_item').classList.add("hide")
                     document.getElementById('id_form-' + form_num.toString() + '-promotional_item').value = 'No'
+                    document.getElementById('id_form-' + form_num.toString() + '-promotion_name').value = ''
                     document.getElementById('id_form-' + form_num.toString() + '-promotional_item_label').classList.add("hide")
                 }
             }
@@ -852,15 +854,14 @@
                 document.getElementById('id_form-' + form_num.toString() + '-promotion_options').classList.remove("hide")
 
                 let select = document.getElementById('id_form-' + form_num.toString() + '-promotion_options')
-                for(let item in app.promotion_options) {
+                select.innerHTML = ''
+                for (let item in app.promotion_options) {
                     let option_text = document.createElement("option")
                     console.log(app.promotion_options[item])
                     option_text.text = app.promotion_options[item]
                     select.add(option_text)
                 }
                 document.getElementById('id_form-' + form_num.toString() + '-promotion_options_label').classList.remove("hide")
-
-
             } else {
                 document.getElementById('id_form-' + form_num.toString() + '-promotion_options').classList.add("hide")
                 document.getElementById('id_form-' + form_num.toString() + '-promotion_options').value = ''
