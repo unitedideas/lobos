@@ -559,12 +559,6 @@
                     }
                 },
 
-                promotion_list() {
-                    for (let item in this.promotion_list) {
-                        {#document.getElementById()#}
-                        console.log(this.promotion_list[item])
-                    }
-                }
             },
 
             computed: {
@@ -733,27 +727,6 @@
                         this.showPayPal = true
                     },
 
-                    promotion_class_selected() {
-
-
-                        {#console.log($event.target)#}
-                        {#let form_id = id#}
-                        {#console.log(this.promotion_classes)#}
-
-                        {#try {#}
-                        {#    let selector = document.getElementById('id_form-' + form_id + '-rider_class').value#}
-                        {#    console.log(selector)#}
-                        {#    console.log(this.promotion_classes.includes(selector))#}
-                        {#    return this.promotion_classes.includes(selector)#}
-                        {##}
-                        {# } catch (error) {#}
-                        {#    console.error(error);#}
-                        {#    // expected output: ReferenceError: nonExistentFunction is not defined#}
-                        {#    // Note - error messages will vary depending on browser#}
-                        {#    return false#}
-                        {# }#}
-                    },
-
                 },
 
             filters: {
@@ -857,7 +830,6 @@
                 select.innerHTML = ''
                 for (let item in app.promotion_options) {
                     let option_text = document.createElement("option")
-                    console.log(app.promotion_options[item])
                     option_text.text = app.promotion_options[item]
                     select.add(option_text)
                 }
@@ -867,8 +839,6 @@
                 document.getElementById('id_form-' + form_num.toString() + '-promotion_options').value = ''
                 document.getElementById('id_form-' + form_num.toString() + '-promotion_options_label').classList.add("hide")
             }
-            console.log(form_num)
-            console.log(selector)
         }
     </script>
 

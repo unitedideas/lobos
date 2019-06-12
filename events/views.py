@@ -29,6 +29,7 @@ import random
 import string
 import json
 import re
+import math
 from datetime import datetime as ddt
 import datetime as dt
 
@@ -373,6 +374,7 @@ def home(request):
         year_list.append(year)
 
     for event in events:
+
         event_date.append(event.event_date)
         event_details.append(event.event_details)
         event_location.append(event.event_location)
@@ -386,6 +388,13 @@ def home(request):
         open_registration.append(event.open_registration)
         promotion.append(event.promotion)
         if event.promotion is not None:
+            # total not to exceed
+            promo_limit = \
+                SignupPromotion.objects.filter(promotion_item_name=event.promotion.promotion_item_name).values_list(
+                    'promotion_limit', flat=True)[0]
+            promo_count = len(RiderProfile.objects.filter(promotion_name=event.promotion.promotion_item_name))
+            event.promotion.promotion_limit = promo_limit - promo_count
+
             promotion_count.append(event.promotion.promotion_limit)
             promotion_description.append(event.promotion.promotion_description)
         else:
@@ -723,7 +732,6 @@ def event_register(request):
             count = 0
             confirm = {}
             for form in formset:
-                # print(form.items_ordered)
                 count += 1
                 created_username = form.first_name + form.last_name + form.email
                 created_username = created_username.replace(" ", "").lower()
@@ -845,6 +853,8 @@ def event_register(request):
                 'discount_code', 'discount_amount'))
             codes = json.dumps(codes)
 
+            if event.promotion:
+                event.promotion.promotion_options = promotion_func(event)
             promotion = event.promotion
 
             args = {'formset': formset, 'event': event, 'errors': errors, 'codes': codes, 'promotion': promotion}
@@ -869,6 +879,11 @@ def event_register(request):
         codes = json.dumps(codes)
 
         promotion = event.promotion
+
+        if event.promotion:
+            event.promotion.promotion_options = promotion_func(event)
+            if event.promotion.promotion_options is None:
+                promotion = None
 
         args = {'event': event, 'codes': codes, 'promotion': promotion}
         # args = {'formset': formset, 'event': event, 'codes': codes}
@@ -928,7 +943,48 @@ def prefill_form(request):
     #     field = str(field.name)
     #     if field in user_field_names:
     #         form_fill_dict[field] = getattr(user_prof, field)
-    # print(form_fill_dict)
-    # print(RiderProfileFormSet(queryset=RiderProfile.objects.none()))
     # return RiderProfileFormSet(queryset=RiderProfile.objects.none(), initial=[form_fill_dict])
     return RiderProfileFormSet(queryset=RiderProfile.objects.none())
+
+
+def promotion_func(event):
+    # total not to exceed
+    promo_limit = SignupPromotion.objects.filter(promotion_item_name=event.promotion.promotion_item_name).values_list(
+        'promotion_limit', flat=True)[0]
+    promo_count = len(RiderProfile.objects.filter(promotion_name=event.promotion.promotion_item_name))
+
+    # if the limit is reached
+    if promo_count >= promo_limit:
+        return None
+
+    # string options to add to list
+    options_string = \
+        SignupPromotion.objects.filter(promotion_item_name=event.promotion.promotion_item_name).values_list(
+            'promotion_options', flat=True)[0]
+
+    # how many options in the promotion
+    options_count = len(options_string.split(','))
+
+    # listing the options
+    options_list = options_string.split(',')
+
+    # total per option
+    limit_per_option = math.floor(promo_limit / options_count)
+
+    # options taken count
+    rider_promo_option_count = []
+    for option in options_list:
+        count = len(RiderProfile.objects.filter(promotion_name=event.promotion.promotion_item_name).filter(
+            promotion_options=option))
+        rider_promo_option_count.append({option: count})
+
+    promo_otions_available = []
+    # options to add to list
+    for promo_time in rider_promo_option_count:
+        for key, value in promo_time.items():
+            if value < limit_per_option:
+                promo_otions_available.append(key)
+
+    str_promo_options = ','.join(promo_otions_available)
+
+    return str_promo_options
