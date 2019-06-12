@@ -2,6 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .models import RiderProfile, Event, Profile, Codes, Merchandise, MerchandiseOrder, ClubEvent, SignupPromotion
 from .forms import RiderClass
+
 admin.site.site_header = 'Lobos Events/ User Database'
 admin.site.register(Codes)
 admin.site.register(Event)
@@ -12,6 +13,7 @@ class ClubEventExportAdmin(ImportExportModelAdmin):
     list_display = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_options')
     search_fields = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_options')
     form = RiderClass
+
     def user_info(self, obj):
         return obj.description
 
@@ -69,4 +71,3 @@ class ProfileExportAdmin(ImportExportModelAdmin):
 
 class RatingAdmin(admin.ModelAdmin):
     readonly_fields = ('date',)
-
