@@ -79,7 +79,7 @@
                 {% if detail.15 > 0 %}
                     <div style="background-image: url('{% static "events/bgimages/promo_bg.png" %}'); padding:5px;box-shadow:inset 0 0 10px #000000; text-shadow: 4px 3px rgba(0,0,0,.5)">
                         <h3>{{ detail.14 }}</h3>
-                        <h4>{{detail.16}}</h4>
+                        <h4>{{ detail.16 }}</h4>
                         <h3>There {{ detail.15 | pluralize:"is,are" }} only {{ detail.15 }}
                             {{ detail.14 }}{{ detail.15 | pluralize:"s" }} remaining!</h3>
                     </div>
