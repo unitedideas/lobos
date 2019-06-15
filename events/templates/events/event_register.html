@@ -803,6 +803,7 @@
 
             let form_num = id.match(/\d+/)[0]
             let selector = document.getElementById(id).value
+            console.log(id)
             document.getElementById(id).onchange = function () {
                 app.totalCost()
                 if (app.promotion_classes.includes(selector)) {
@@ -839,6 +840,14 @@
                 document.getElementById('id_form-' + form_num.toString() + '-promotion_options').value = ''
                 document.getElementById('id_form-' + form_num.toString() + '-promotion_options_label').classList.add("hide")
             }
+        }
+
+        function discount(e) {
+            let id = e.id
+            let discount_code = document.getElementById(id).value
+            console.log(discount_code in {{ codes|safe }})
+            console.log(discount_code)
+
         }
     </script>
 
