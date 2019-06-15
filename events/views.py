@@ -877,6 +877,7 @@ def event_register(request):
         codes = dict(Codes.objects.values_list(
             'discount_code', 'discount_amount'))
         codes = json.dumps(codes)
+        print(codes)
 
         promotion = event.promotion
 
