@@ -54,7 +54,10 @@
                         </div>
                         <br>
                     </div>
-                    <button v-on ref="submitButton" style='display: none'></button>
+                    <div id="sub_button" style="text-align:center" class="hide">
+                        <button v-on ref="submitButton" class="btn btn-lg btn-primary">Submit</button>
+                    </div>
+
                 </form>
             </div>
             <br>
@@ -141,25 +144,27 @@
                         </p>
                         <p>Single day passes will be available at the event for $25.</p>
                     </h4>
-                    <div>
-                        <h3>Registration Total: $[[regTotal]]</h3>
-                        {#                        <div style="text-align: center ">#}
-                        {#                            <h3>Discount Code:#}
-                        {#                                <input style="width: 10%" type="text" name="discount_code"#}
-                        {#                                       placeholder="" v-model="discountCode">#}
-                        {#                            </h3>#}
-                        {#                            <transition name="fade">#}
-                        {#                                <h4 v-if="discountCodeSuccess" style="color: green">Your discount was#}
-                        {#                                    applied</h4>#}
-                        {#                                <h4 v-else-if="discountCodeSuccess == false && discountCode != ''"#}
-                        {#                                    style="color: red">#}
-                        {#                                    This is not a valid code</h4>#}
-                        {#                                <h4 v-else></h4>#}
-                        {#                            </transition>#}
-                        {#                        </div>#}
-                    </div>
-                    <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
-                        Checkout
+                    <div id="reg_checkout_button_div" class="">
+                        <div>
+                            <h3>Registration Total: $[[regTotal]]</h3>
+                            {#                        <div style="text-align: center ">#}
+                            {#                            <h3>Discount Code:#}
+                            {#                                <input style="width: 10%" type="text" name="discount_code"#}
+                            {#                                       placeholder="" v-model="discountCode">#}
+                            {#                            </h3>#}
+                            {#                            <transition name="fade">#}
+                            {#                                <h4 v-if="discountCodeSuccess" style="color: green">Your discount was#}
+                            {#                                    applied</h4>#}
+                            {#                                <h4 v-else-if="discountCodeSuccess == false && discountCode != ''"#}
+                            {#                                    style="color: red">#}
+                            {#                                    This is not a valid code</h4>#}
+                            {#                                <h4 v-else></h4>#}
+                            {#                            </transition>#}
+                            {#                        </div>#}
+                        </div>
+                        <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
+                            Checkout
+                        </div>
                     </div>
                 </div>
             </div>
@@ -421,6 +426,8 @@
                 showModal: false,
                 closeModal: "Cancel",
                 showPayPal: true,
+                discount_codes_used: [],
+                discount_codes: {{ codes | safe}},
                 discountCode: "",
                 {#discountCode: [],#}
                 discountCodeSuccess: "",
@@ -670,6 +677,9 @@
 
                     addForm() {
                         this.count++
+                        if (this.count > 0) {
+                            document.getElementById('reg_checkout_button_div').classList.remove('hide')
+                        }
                         let form_count = this.count
                         form_count++
 
@@ -843,12 +853,42 @@
         }
 
         function discount(e) {
+            let codes = app.discount_codes
             let id = e.id
             let discount_code = document.getElementById(id).value
-            console.log(discount_code in {{ codes|safe }})
-            console.log(discount_code)
+            console.log(codes[discount_code])
+            {#let discount_used = (discount_code in app.discount_codes_used)#}
+            let discount_used = app.discount_codes_used.includes(discount_code)
+            console.log('discount_used', discount_used)
+            if (app.count === 0 && codes[discount_code] === .5 && !(discount_used)) {
+                console.log('In the if')
+                hide_checkout_btn()
+            } else {
+                console.log('skipped the if')
+                show_checkout_btn()
+            }
+        }
+
+
+        function discount_approved() {
+            console.log('fff')
+        }
+
+
+        function show_checkout_btn() {
+            let reg_checkout_button_div = document.getElementById('reg_checkout_button_div')
+            reg_checkout_button_div.classList.remove('hide')
+            document.getElementById('sub_button').classList.add('hide')
 
         }
+
+        function hide_checkout_btn() {
+            let reg_checkout_button_div = document.getElementById('reg_checkout_button_div')
+            reg_checkout_button_div.classList.add('hide')
+            document.getElementById('sub_button').classList.remove('hide')
+        }
+
+
     </script>
 
 {% endblock %}
