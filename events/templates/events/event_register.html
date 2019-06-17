@@ -678,7 +678,7 @@
                     addForm() {
                         this.count++
                         if (this.count > 0) {
-                            document.getElementById('reg_checkout_button_div').classList.remove('hide')
+                            show_checkout_btn()
                         }
                         let form_count = this.count
                         form_count++
@@ -699,7 +699,6 @@
                             this.count--
                             let form_count = this.count
                             form_count++
-
                             let formID = 'id_form-' + this.count
                             this.formList.pop()
                             this.$nextTick(() => {
@@ -708,6 +707,19 @@
                                     ele.value = form_count
                                 })
                             })
+                            if (this.count === 0) {
+                                let codes = app.discount_codes
+                                let discount_code = document.getElementById('id_form-0-discount_code').value
+                                console.log(codes[discount_code])
+                                {#let discount_used = (discount_code in app.discount_codes_used)#}
+                                let discount_used = app.discount_codes_used.includes(discount_code)
+                                console.log('discount_used', discount_used)
+                                if (app.count === 0 && codes[discount_code] === .5 && !(discount_used)) {
+                                    console.log('In the if')
+                                    hide_checkout_btn()
+                                }
+
+                            }
                         } else return
                     },
 
@@ -853,8 +865,8 @@
         }
 
         function discount(e) {
-            let codes = app.discount_codes
             let id = e.id
+            let codes = app.discount_codes
             let discount_code = document.getElementById(id).value
             console.log(codes[discount_code])
             {#let discount_used = (discount_code in app.discount_codes_used)#}
@@ -869,11 +881,9 @@
             }
         }
 
-
-        function discount_approved() {
-            console.log('fff')
-        }
-
+        {#function discount_approved() {#}
+        {#    console.log('fff')#}
+        {# }#}
 
         function show_checkout_btn() {
             let reg_checkout_button_div = document.getElementById('reg_checkout_button_div')
