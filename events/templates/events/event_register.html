@@ -507,20 +507,21 @@
 
             },
             watch: {
-                discountCode() {
-                    this.totalCost()
-                    this.discountCodeSuccess = false
-                    document.getElementById("id_form-0-discount_code").value = ""
-                    if (this.discountCode in {{ codes|safe }}) {
-                        {#let discount = 1 - {{ codes|safe }}[this.discountCode]#}
-                        let discount = 50
-                        {#    insert discount total price here    #}
-                        {#this.regTotal = (Number(this.regTotal) * discount).toFixed(2)#}
-                        this.regTotal = (Number(this.regTotal) - discount).toFixed(2)
-                        this.discountCodeSuccess = true
-                        document.getElementById("id_form-0-discount_code").value = this.discountCode
-                    }
-                },
+                {#discountCode() {#}
+                {#this.totalCost()#}
+                {#this.discountCodeSuccess = false#}
+                {#document.getElementById("id_form-0-discount_code").value = ""#}
+                {#if (this.discountCode in {{ codes|safe }}) {#}
+                {#let discount = 1 - {{ codes|safe }}[this.discountCode]#}
+                {#    let discount = 50#}
+                {#    insert discount total price here    #}
+                {#this.regTotal = (Number(this.regTotal) * discount).toFixed(2)#}
+                {#    this.regTotal = (Number(this.regTotal) - discount).toFixed(2)#}
+                {#    this.discountCodeSuccess = true#}
+                {#    document.getElementById("id_form-0-discount_code").value = this.discountCode#}
+                {#    }#}
+                {# },#}
+
 
                 cartlist() {
                     let count = 0
@@ -564,6 +565,9 @@
                     } else {
                     }
                 },
+                discount_list() {
+                    this.totalCost()
+                }
 
             },
 
@@ -633,41 +637,57 @@
                         let total = 0
                         let allRiderTypes = []
                         this.allRiderTypes = allRiderTypes
-
                         for (let i = 0; i < total_rider_classes.length; i++) {
                             allRiderTypes.push(total_rider_classes[i].value)
                         }
-
+                        let totals_list = []
                         for (let i = 0; i < allRiderTypes.length; i++) {
                             if (allRiderTypes[i].includes('Escort Rider')) {
-                                total +=
-                                {{ event.escort_rider_cost }}
+                                {#total +=#}
+                                totals_list.push({{ event.escort_rider_cost }})
 
                             } else if (allRiderTypes[i].includes('60')) {
-                                total +=
-                                {{ event.class_60_and_class_70_cost }}
+                                {#total +=#}
+                                totals_list.push({{ event.class_60_and_class_70_cost }})
 
                             } else if (allRiderTypes[i].includes('70')) {
-                                total +=
-                                {{ event.class_60_and_class_70_cost }}
+                                {#total +=#}
+                                totals_list.push({{ event.class_60_and_class_70_cost }})
 
                             } else if (allRiderTypes[i].includes('Amateur under 16')) {
-                                total +=
-                                {{ event.amateur_under_16_cost }}
+                                {#total +=#}
+                                totals_list.push({{ event.amateur_under_16_cost }})
 
                             } else if (allRiderTypes[i].includes('Amateur 16 and over')) {
-                                total +=
-                                {{ event.amateur_over_16_cost }}
+                                {#total +=#}
+                                totals_list.push({{ event.amateur_over_16_cost }})
 
                             } else if (allRiderTypes[i].includes('Expert under 16')) {
-                                total +=
-                                {{ event.expert_under_16_cost }}
+                                {#total +=#}
+                                totals_list.push({{ event.expert_under_16_cost }})
 
                             } else if (allRiderTypes[i].includes('Expert 16 and over')) {
-                                total +=
-                                {{ event.expert_over_16_cost }}
+                                {#total +=#}
+                                totals_list.push({{ event.expert_over_16_cost }})
                             }
                         }
+                        console.log('totals_list: ', totals_list)
+
+                        for (let reg_item in totals_list) {
+
+                                let discount_amount = this.discount_list[reg_item]
+                                console.log('discount_amount: ', discount_amount)
+
+                                if (discount_amount !== 0 && discount_amount) {
+                                    console.log('discount_amount not === 0')
+                                    total += (totals_list[reg_item] - (totals_list[reg_item] * discount_amount))
+                                } else {
+                                    console.log('discount_amount DOES === 0')
+                                    total += totals_list[reg_item]
+                                }
+
+                        }
+
 
                         this.regTotal = total.toFixed(2)
                         this.showcheckout = true
@@ -938,6 +958,7 @@
         }
 
         function discount_list() {
+            app.totalCost()
             let codes = app.discount_codes
             for (let code in app.discount_codes_used) {
                 if (codes[app.discount_codes_used[code]]) {
