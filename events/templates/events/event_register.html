@@ -28,9 +28,9 @@
                     {% csrf_token %}
                     {{ formset.management_form }}
                     <div style="margin-right: 15px;" class="row">
-                        <div v-for="form in formList" class="container">
+                        <div v-for="(form, index) in formList" class="container">
                             <div style="padding: 5px; border-radius:5px; margin: 20px 15px 0px 15px">
-                                <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
+                                <h2 style="text-align: center" class="">Rider Registration Form [[index+1]]</h2>
                                 <div style="padding: 0px 25px 0px; border-bottom-left-radius:5px;
                                 border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
                                      v-html="form">
