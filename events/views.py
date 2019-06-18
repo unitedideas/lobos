@@ -851,7 +851,9 @@ def event_register(request):
             formset = prefill_form(request)
             codes = dict(Codes.objects.values_list(
                 'discount_code', 'discount_amount'))
+            codes = dict((key.lower(), value) for key, value in codes.items())
             codes = json.dumps(codes)
+            print(codes)
 
             if event.promotion:
                 event.promotion.promotion_options = promotion_func(event)
@@ -876,6 +878,7 @@ def event_register(request):
 
         codes = dict(Codes.objects.values_list(
             'discount_code', 'discount_amount'))
+        codes = dict((key.lower(), value) for key, value in codes.items())
         codes = json.dumps(codes)
         print(codes)
 

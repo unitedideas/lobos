@@ -30,7 +30,7 @@
                     <div style="margin-right: 15px;" class="row">
                         <div v-for="(form, index) in formList" class="container">
                             <div style="padding: 5px; border-radius:5px; margin: 20px 15px 0px 15px">
-                                <h2 style="text-align: center" class="">Rider Registration Form [[index+1]]</h2>
+                                <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
                                 <div style="padding: 0px 25px 0px; border-bottom-left-radius:5px;
                                 border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
                                      v-html="form">
@@ -496,7 +496,6 @@
                             {'{{event.shirt_Xlarge}}': 'XXX-Large'},
                         ]
                 },
-
                 hoodieqty: 1,
                 hatqty: 1,
                 shirtqty: 1,
@@ -572,7 +571,6 @@
                 checkoutList() {
                 }
             },
-
 
             methods:
                 {
@@ -711,10 +709,9 @@
                                 let codes = app.discount_codes
                                 let discount_code = document.getElementById('id_form-0-discount_code').value
                                 console.log(codes[discount_code])
-                                {#let discount_used = (discount_code in app.discount_codes_used)#}
-                                let discount_used = app.discount_codes_used.includes(discount_code)
+                                {#let discount_used = app.discount_codes_used.includes(discount_code)#}
                                 console.log('discount_used', discount_used)
-                                if (app.count === 0 && codes[discount_code] === .5 && !(discount_used)) {
+                                if (app.count === 0 && codes[discount_code] === 1 && !(discount_used)) {
                                     console.log('In the if')
                                     hide_checkout_btn()
                                 }
@@ -865,19 +862,28 @@
         }
 
         function discount(e) {
+            app.discount_codes_used = []
+            let discount_code_element_list = document.querySelectorAll('[name*="discount_code"]')
+            {#console.log(discount_code_element_list)#}
+            discount_code_element_list.forEach(function (element) {
+                console.log(element.value)
+                app.discount_codes_used.push(element.value)
+                {#console.log(discount_code_element_list)#}
+                console.log(app.discount_codes_used)
+            })
+            {#console.log(app.discount_codes_used)#}
             let id = e.id
             let codes = app.discount_codes
-            let discount_code = document.getElementById(id).value
-            console.log(codes[discount_code])
-            {#let discount_used = (discount_code in app.discount_codes_used)#}
+            let discount_code = document.getElementById(id).value.toLowerCase()
             let discount_used = app.discount_codes_used.includes(discount_code)
             console.log('discount_used', discount_used)
-            if (app.count === 0 && codes[discount_code] === .5 && !(discount_used)) {
-                console.log('In the if')
+            if (app.count === 0 && codes[discount_code] === 1 && !(discount_used)) {
+                console.log('Hide Checkout')
                 hide_checkout_btn()
             } else {
-                console.log('skipped the if')
+                console.log('Show Checkout')
                 show_checkout_btn()
+
             }
         }
 
