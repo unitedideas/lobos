@@ -429,7 +429,6 @@
                 discount_codes_used: [],
                 discount_codes: {{ codes | safe}},
                 discountCode: "",
-                {#discountCode: [],#}
                 discountCodeSuccess: "",
                 allRiderTypes: "None",
                 regTotal: 0.00,
@@ -504,6 +503,7 @@
                 shirtCost: {{ event.shirt_cost }},
                 hatCost: {{ event.hat_cost }},
                 promotion_list: [],
+                discount_list: [],
 
             },
             watch: {
@@ -668,6 +668,7 @@
                                 {{ event.expert_over_16_cost }}
                             }
                         }
+
                         this.regTotal = total.toFixed(2)
                         this.showcheckout = true
 
@@ -709,14 +710,14 @@
                                 let codes = app.discount_codes
                                 let discount_code = document.getElementById('id_form-0-discount_code').value
                                 console.log(codes[discount_code])
-                                {#let discount_used = app.discount_codes_used.includes(discount_code)#}
-                                console.log('discount_used', discount_used)
-                                if (app.count === 0 && codes[discount_code] === 1 && !(discount_used)) {
+                                if (app.count === 0 && codes[discount_code] === 1) {
                                     console.log('In the if')
                                     hide_checkout_btn()
                                 }
-
                             }
+                            console.log(discount_list())
+
+
                         } else return
                     },
 
@@ -862,34 +863,30 @@
         }
 
         function discount(e) {
-            app.discount_codes_used = []
-            let discount_code_element_list = document.querySelectorAll('[name*="discount_code"]')
-            {#console.log(discount_code_element_list)#}
-            discount_code_element_list.forEach(function (element) {
-                console.log(element.value)
-                app.discount_codes_used.push(element.value)
-                {#console.log(discount_code_element_list)#}
-                console.log(app.discount_codes_used)
-            })
-            {#console.log(app.discount_codes_used)#}
+
+
             let id = e.id
             let codes = app.discount_codes
             let discount_code = document.getElementById(id).value.toLowerCase()
-            let discount_used = app.discount_codes_used.includes(discount_code)
-            console.log('discount_used', discount_used)
-            if (app.count === 0 && codes[discount_code] === 1 && !(discount_used)) {
-                console.log('Hide Checkout')
-                hide_checkout_btn()
+
+            if (codes[discount_code]) {
+                console.log('green symbol')
+                {#    green symbol by discount input#}
+                if (app.count === 0) {
+                    single_rider_no_pay(codes, discount_code)
+                }
+                if (app.count > 0) {
+                    multi_rider_discount(codes, discount_code)
+                }
+
             } else {
-                console.log('Show Checkout')
+                console.log('red symbol')
+                {#red symbol by discount input#}
                 show_checkout_btn()
-
             }
-        }
 
-        {#function discount_approved() {#}
-        {#    console.log('fff')#}
-        {# }#}
+
+        }
 
         function show_checkout_btn() {
             let reg_checkout_button_div = document.getElementById('reg_checkout_button_div')
@@ -904,6 +901,54 @@
             document.getElementById('sub_button').classList.remove('hide')
         }
 
+        function single_rider_no_pay(codes, discount_code) {
+            if (codes[discount_code] === 1) {
+                hide_checkout_btn()
+            } else {
+                show_checkout_btn()
+            }
+        }
+
+        function multi_rider_discount(codes, discount_code) {
+            app.discount_codes_used = []
+            app.discount_list = []
+
+            console.log(app.discount_codes_used)
+            let discount_code_element_list = document.querySelectorAll('[name*="discount_code"]')
+            discount_code_element_list.forEach(function (element) {
+                console.log(element.value)
+                app.discount_codes_used.push(element.value)
+                console.log(app.discount_codes_used)
+            })
+
+
+            {#let discount_code_use = 0#}
+            {#for (let code in app.discount_codes_used) {#}
+            {#    if (app.discount_codes_used[code] === discount_code) {#}
+            {#        discount_code_use++#}
+            {#    }#}
+            {# }#}
+            {##}
+            {#if (discount_code_use > 1) {#}
+            {#    console.log('discount used already')#}
+            {#    return false#}
+            {# }#}
+            discount_list()
+
+        }
+
+        function discount_list() {
+            let codes = app.discount_codes
+            for (let code in app.discount_codes_used) {
+                if (codes[app.discount_codes_used[code]]) {
+                    app.discount_list.push(codes[app.discount_codes_used[code]])
+                } else {
+                    app.discount_list.push(0)
+                }
+            }
+            console.log(app.discount_list)
+
+        }
 
     </script>
 
