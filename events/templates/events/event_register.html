@@ -633,14 +633,18 @@
                     },
 
                     totalCost() {
+
                         let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
+                        console.log(total_rider_classes)
                         let total = 0
                         let allRiderTypes = []
                         this.allRiderTypes = allRiderTypes
+                        let totals_list = []
+
                         for (let i = 0; i < total_rider_classes.length; i++) {
                             allRiderTypes.push(total_rider_classes[i].value)
                         }
-                        let totals_list = []
+
                         for (let i = 0; i < allRiderTypes.length; i++) {
                             if (allRiderTypes[i].includes('Escort Rider')) {
                                 {#total +=#}
@@ -671,20 +675,17 @@
                                 totals_list.push({{ event.expert_over_16_cost }})
                             }
                         }
-                        console.log('totals_list: ', totals_list)
+
+                        console.log(totals_list)
 
                         for (let reg_item in totals_list) {
-
-                                let discount_amount = this.discount_list[reg_item]
-                                console.log('discount_amount: ', discount_amount)
-
-                                if (discount_amount !== 0 && discount_amount) {
-                                    console.log('discount_amount not === 0')
-                                    total += (totals_list[reg_item] - (totals_list[reg_item] * discount_amount))
-                                } else {
-                                    console.log('discount_amount DOES === 0')
-                                    total += totals_list[reg_item]
-                                }
+                            console.log(reg_item)
+                            let discount_amount = this.discount_list[reg_item]
+                            if (discount_amount !== 0 && discount_amount) {
+                                total += (totals_list[reg_item] - (totals_list[reg_item] * discount_amount))
+                            } else {
+                                total += totals_list[reg_item]
+                            }
 
                         }
 
@@ -714,7 +715,8 @@
                     },
 
                     delForm() {
-                        if (this.count != 0) {
+                        if (this.count !== 0) {
+                            document.getElementById('id_form-'+ this.count+'-rider_class').value = ''
                             this.count--
                             let form_count = this.count
                             form_count++
@@ -729,13 +731,12 @@
                             if (this.count === 0) {
                                 let codes = app.discount_codes
                                 let discount_code = document.getElementById('id_form-0-discount_code').value
-                                console.log(codes[discount_code])
                                 if (app.count === 0 && codes[discount_code] === 1) {
-                                    console.log('In the if')
                                     hide_checkout_btn()
                                 }
                             }
-                            console.log(discount_list())
+                            discount_list()
+                            multi_rider_discount()
 
 
                         } else return
@@ -843,7 +844,6 @@
 
             let form_num = id.match(/\d+/)[0]
             let selector = document.getElementById(id).value
-            console.log(id)
             document.getElementById(id).onchange = function () {
                 app.totalCost()
                 if (app.promotion_classes.includes(selector)) {
@@ -890,22 +890,16 @@
             let discount_code = document.getElementById(id).value.toLowerCase()
 
             if (codes[discount_code]) {
-                console.log('green symbol')
                 {#    green symbol by discount input#}
-                if (app.count === 0) {
-                    single_rider_no_pay(codes, discount_code)
-                }
-                if (app.count > 0) {
-                    multi_rider_discount(codes, discount_code)
-                }
+                single_rider_no_pay(codes, discount_code)
+                multi_rider_discount(codes, discount_code)
+
 
             } else {
-                console.log('red symbol')
                 {#red symbol by discount input#}
                 show_checkout_btn()
+                multi_rider_discount()
             }
-
-
         }
 
         function show_checkout_btn() {
@@ -929,16 +923,13 @@
             }
         }
 
-        function multi_rider_discount(codes, discount_code) {
+        function multi_rider_discount() {
             app.discount_codes_used = []
             app.discount_list = []
 
-            console.log(app.discount_codes_used)
             let discount_code_element_list = document.querySelectorAll('[name*="discount_code"]')
             discount_code_element_list.forEach(function (element) {
-                console.log(element.value)
                 app.discount_codes_used.push(element.value)
-                console.log(app.discount_codes_used)
             })
 
 
@@ -950,7 +941,6 @@
             {# }#}
             {##}
             {#if (discount_code_use > 1) {#}
-            {#    console.log('discount used already')#}
             {#    return false#}
             {# }#}
             discount_list()
@@ -958,7 +948,6 @@
         }
 
         function discount_list() {
-            app.totalCost()
             let codes = app.discount_codes
             for (let code in app.discount_codes_used) {
                 if (codes[app.discount_codes_used[code]]) {
@@ -967,9 +956,10 @@
                     app.discount_list.push(0)
                 }
             }
-            console.log(app.discount_list)
+            app.totalCost()
 
         }
+
 
     </script>
 
