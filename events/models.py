@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from events.util import load_choices
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 STATES_PATH = os.path.join(HERE, 'states.txt')
@@ -219,7 +220,7 @@ class Profile(models.Model):
 
 class Codes(models.Model):
     discount_code = models.CharField(max_length=100, null=True, blank=True)
-    discount_amount = models.FloatField(null=True, blank=True)
+    discount_amount = models.FloatField(null=True, blank=True, validators=[MinValueValidator(0.05), MaxValueValidator(1)])
 
     def __str__(self):
         return str(self.discount_code) + " " + str(self.discount_amount)
@@ -307,7 +308,6 @@ class RiderProfile(models.Model):
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     rider_number = models.CharField('OMRA Member Number', max_length=20, null=True, blank=True)
-    rider_cat = models.CharField('Rider Category', max_length=1000, null=True, blank=True)
     rider_class = models.CharField('Rider Class (required)', max_length=1000, choices=RIDER_CLASS)
     first_name = models.CharField('First Name (required)', max_length=300)
     last_name = models.CharField('Last Name (required)', max_length=300)
@@ -341,7 +341,6 @@ class RiderProfile(models.Model):
 
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     discount_code = models.CharField(max_length=100, null=True, blank=True)
-    start_time = models.TimeField(max_length=30, null=True, blank=True)
     items_ordered = models.TextField(null=True, blank=True)
 
     def __str__(self):

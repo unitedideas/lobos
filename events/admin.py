@@ -4,12 +4,19 @@ from .models import RiderProfile, Event, Profile, Codes, Merchandise, Merchandis
 from .forms import RiderClass
 
 admin.site.site_header = 'Lobos Events/ User Database'
-admin.site.register(Codes)
 admin.site.register(Event)
 
 
+@admin.register(Codes)
+class CodesExportAdmin(ImportExportModelAdmin):
+    list_display = ('discount_code', 'discount_amount')
+    search_fields = ('discount_code', 'discount_amount')
+
+    def user_info(self, obj):
+        return obj.description
+
 @admin.register(SignupPromotion)
-class ClubEventExportAdmin(ImportExportModelAdmin):
+class SignupPromotionAdmin(ImportExportModelAdmin):
     list_display = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_options')
     search_fields = ('promotion_item_name', 'promotion_limit', 'promotion_classes', 'promotion_options')
     form = RiderClass
