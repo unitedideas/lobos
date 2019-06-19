@@ -2,8 +2,6 @@
 {% load static %}
 
 <head>
-    {# javascript #}
-    <script type="text/javascript" src="{% static "events/JS.js" %}"></script>
     {# Vue.js CDN #}
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <!-- Axios -->
@@ -13,6 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
     {% block head %}
         <title>Event Registration</title>
+        {# css #}
+        <link rel="stylesheet" href='{% static "events/msgPop.css" %}' type="text/css">
+        {# javascript #}
+{#        <script type="text/javascript" src="{% static "events/JS.js" %}"></script>#}
+        <script type="text/javascript" src="{% static "events/msgPop.js" %}"></script>
+
     {% endblock %}
 
 
@@ -30,7 +34,7 @@
                     <div style="margin-right: 15px;" class="row">
                         <div v-for="(form, index) in formList" class="container">
                             <div style="padding: 5px; border-radius:5px; margin: 20px 15px 0px 15px">
-                                <h2 style="text-align: center" class="">Rider Registration Form [[count+1]]</h2>
+                                <h2 style="text-align: center" class="">Rider Registration Form [[index+1]]</h2>
                                 <div style="padding: 0px 25px 0px; border-bottom-left-radius:5px;
                                 border-bottom-right-radius:5px; margin: 0px 15px 0px 15px"
                                      v-html="form">
@@ -57,7 +61,6 @@
                     <div id="sub_button" style="text-align:center" class="hide">
                         <button v-on ref="submitButton" class="btn btn-lg btn-primary">Submit</button>
                     </div>
-
                 </form>
             </div>
             <br>
@@ -147,20 +150,6 @@
                     <div id="reg_checkout_button_div" class="">
                         <div>
                             <h3>Registration Total: $[[regTotal]]</h3>
-                            {#                        <div style="text-align: center ">#}
-                            {#                            <h3>Discount Code:#}
-                            {#                                <input style="width: 10%" type="text" name="discount_code"#}
-                            {#                                       placeholder="" v-model="discountCode">#}
-                            {#                            </h3>#}
-                            {#                            <transition name="fade">#}
-                            {#                                <h4 v-if="discountCodeSuccess" style="color: green">Your discount was#}
-                            {#                                    applied</h4>#}
-                            {#                                <h4 v-else-if="discountCodeSuccess == false && discountCode != ''"#}
-                            {#                                    style="color: red">#}
-                            {#                                    This is not a valid code</h4>#}
-                            {#                                <h4 v-else></h4>#}
-                            {#                            </transition>#}
-                            {#                        </div>#}
                         </div>
                         <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">
                             Checkout
@@ -507,21 +496,6 @@
 
             },
             watch: {
-                {#discountCode() {#}
-                {#this.totalCost()#}
-                {#this.discountCodeSuccess = false#}
-                {#document.getElementById("id_form-0-discount_code").value = ""#}
-                {#if (this.discountCode in {{ codes|safe }}) {#}
-                {#let discount = 1 - {{ codes|safe }}[this.discountCode]#}
-                {#    let discount = 50#}
-                {#    insert discount total price here    #}
-                {#this.regTotal = (Number(this.regTotal) * discount).toFixed(2)#}
-                {#    this.regTotal = (Number(this.regTotal) - discount).toFixed(2)#}
-                {#    this.discountCodeSuccess = true#}
-                {#    document.getElementById("id_form-0-discount_code").value = this.discountCode#}
-                {#    }#}
-                {# },#}
-
 
                 cartlist() {
                     let count = 0
@@ -888,12 +862,38 @@
 
             if (codes[discount_code]) {
                 {#    green symbol by discount input#}
+                document.getElementById(id).style.color = 'green'
+                document.getElementById(id).style.fontWeight = 'bold'
+
+                MsgPop.closeAll();
+                MsgPop.open({
+                    Type: "success",
+                    Content: "Your discount was added",
+                    AutoClose: 	true,
+                    CloseTimer: 	3000,
+                    displaySmall: 	true,
+                    AnchorTo: id
+
+                });
                 single_rider_no_pay(codes, discount_code)
                 multi_rider_discount()
 
 
             } else {
                 {#red symbol by discount input#}
+                document.getElementById(id).style.color = 'red'
+                document.getElementById(id).style.fontWeight = 'bold'
+                MsgPop.closeAll();
+                MsgPop.open({
+                    Type: "warning",
+                    Content: "Invalid Discount Code",
+                    AutoClose: 	true,
+                    CloseTimer: 	500,
+                    displaySmall: 	true,
+                    AnchorTo: id
+
+                });
+
                 show_checkout_btn()
                 multi_rider_discount()
             }
@@ -953,7 +953,6 @@
 
 
     </script>
-
 {% endblock %}
 
 
