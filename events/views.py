@@ -719,8 +719,14 @@ def event_register(request):
         if formset_post.is_valid():
             formset = formset_post.save(commit=False)
             postData = request.POST.dict()
-            itemsOrderedDict = json.loads(postData['form-0-items_ordered'])
-            confirmation_number = itemsOrderedDict['transactions'][0]['related_resources'][0]['sale']['id']
+            try:
+                itemsOrderedDict = json.loads(postData['form-0-items_ordered'])
+            except:
+                itemsOrderedDict = 'Free Race Entry Using Discount Code'
+            try:
+                confirmation_number = itemsOrderedDict['transactions'][0]['related_resources'][0]['sale']['id']
+            except:
+                confirmation_number = 'DISC' + id_generator()
             confirmation_number = confirmation_number.upper()
 
             if RiderProfile.objects.filter(confirmation_number=confirmation_number).exists():
@@ -899,7 +905,7 @@ def event_confirmation(request):
     return render(request, 'events/event_confirmation.html', args)
 
 
-def id_generator(size=8, chars=string.ascii_uppercase + string.digits):
+def id_generator(size=9, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 
