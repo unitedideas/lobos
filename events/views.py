@@ -795,8 +795,11 @@ def event_register(request):
                     form.save()
 
                     # Email
-                    event_mail(email, first_name, last_name, username, rider_class, event,
-                               confirmation_number)
+                    try:
+                        event_mail(email, first_name, last_name, username, rider_class, event,
+                                   confirmation_number)
+                    except:
+                        print("An exception occurred with email. Email not sent to " + email)
 
                 elif RiderProfile.objects.filter(event=form.event).filter(user=user_id).exists():
                     form.user = User.objects.get(username=created_username)
@@ -824,8 +827,11 @@ def event_register(request):
                     form.save()
 
                     # Email
-                    event_mail(email, first_name, last_name, username, rider_class, event,
-                               confirmation_number)
+                    try:
+                        event_mail(email, first_name, last_name, username, rider_class, event,
+                                   confirmation_number)
+                    except:
+                        print("An exception occurred with email. Email not sent to " + email)
 
                 else:
                     form.user = User.objects.get(username=created_username)
@@ -845,8 +851,11 @@ def event_register(request):
                     form.save()
 
                     # Email
-                    event_mail(email, first_name, last_name, username, rider_class, event,
-                               confirmation_number)
+                    try:
+                        event_mail(email, first_name, last_name, username, rider_class, event,
+                                   confirmation_number)
+                    except:
+                        print("An exception occurred with email. Email not sent to " + email)
 
             args = {'event': form.event, 'confirm': confirm}
             # email confirmation function here

@@ -14,7 +14,7 @@
         {# css #}
         <link rel="stylesheet" href='{% static "events/msgPop.css" %}' type="text/css">
         {# javascript #}
-{#        <script type="text/javascript" src="{% static "events/JS.js" %}"></script>#}
+        {#        <script type="text/javascript" src="{% static "events/JS.js" %}"></script>#}
         <script type="text/javascript" src="{% static "events/msgPop.js" %}"></script>
 
     {% endblock %}
@@ -356,7 +356,7 @@
                             currency="USD"
                             :button-style="aStyle"
                             :client="paypal"
-                            env="production"
+                            env="sandbox"
                             {#for adding more details#}
                             {# :details="details" #}
                             v-on:payment-authorized="paymentAuthorized"
@@ -550,198 +550,201 @@
                 }
             },
 
-            methods:
-                {
-                    add_to_cart(item_type, size, qty, price) {
-                        let count = 0
-                        let merch_order = ""
-                        if (size !== "") {
-                            if (qty > 0) {
-                                this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
-                                for (let i in this.cartlist) {
-                                    merch_order += String(Object.values(this.cartlist[count])) + "\n"
-                                    count += 1
-                                }
-                                document.getElementById("id_form-0-merchandise_ordered").value = merch_order
+            methods: {
+
+                add_to_cart(item_type, size, qty, price) {
+                    let count = 0
+                    let merch_order = ""
+                    if (size !== "") {
+                        if (qty > 0) {
+                            this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
+                            for (let i in this.cartlist) {
+                                merch_order += String(Object.values(this.cartlist[count])) + "\n"
+                                count += 1
                             }
+                            document.getElementById("id_form-0-merchandise_ordered").value = merch_order
                         }
-                    },
+                    }
+                },
 
-                    remove_from_cart(index) {
-                        let count = 0
-                        let merch_order = "", end
-                        this.cartlist.splice(index, 1)
-                        for (i in this.cartlist) {
-                            merch_order += String(Object.values(this.cartlist[count])) + "\n"
-                            count += 1
+                remove_from_cart(index) {
+                    let count = 0
+                    let merch_order = "", end
+                    this.cartlist.splice(index, 1)
+                    for (i in this.cartlist) {
+                        merch_order += String(Object.values(this.cartlist[count])) + "\n"
+                        count += 1
+                    }
+                    document.getElementById("id_form-0-merchandise_ordered").value = merch_order
+                },
+
+                the3DayMethod() {
+                    let app = this
+                    app.formSuccess = ''
+                    var object = {}
+                    forms = document.getElementById('feedbackform')
+                    var formData = new FormData(forms),
+                        result = {event_date: this.event_date}
+                    for (var entry of formData.entries()) {
+                        result[entry[0]] = entry[1];
+                    }
+                    data = JSON.stringify(result)
+                    axios.post("{% url 'error_checking' %}", data, {headers: {'X-CSRFToken': '{{ csrf_token }}',}})
+                        .then(function (response) {
+                            app.formerrors = response.data.errors
+                            app.formSuccess = response.data.success
+                            app.escort_required = response.data.under_16 - response.data.escorts_signed_up
+                            app.under_class_age = response.data.under_class_age
+                            app.age_error = response.data.age_error
+                            app.email_not_the_same = response.data.email_not_the_same
+                            app.email_not_the_same_form = response.data.email_not_the_same_form
+                            app.gender_class = response.data.gender_class
+                            app.gender_form = response.data.gender_form
+                            app.birthdate_wrong = response.data.birthdate_wrong
+                            app.birthdate_form = response.data.birthdate_form
+
+                        })
+                },
+
+                totalCost() {
+
+                    let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
+                    let total = 0
+                    let allRiderTypes = []
+                    this.allRiderTypes = allRiderTypes
+                    let totals_list = []
+
+                    for (let i = 0; i < total_rider_classes.length; i++) {
+                        allRiderTypes.push(total_rider_classes[i].value)
+                    }
+
+                    for (let i = 0; i < allRiderTypes.length; i++) {
+                        if (allRiderTypes[i].includes('Escort Rider')) {
+                            {#total +=#}
+                            totals_list.push({{ event.escort_rider_cost }})
+
+                        } else if (allRiderTypes[i].includes('60')) {
+                            {#total +=#}
+                            totals_list.push({{ event.class_60_and_class_70_cost }})
+
+                        } else if (allRiderTypes[i].includes('70')) {
+                            {#total +=#}
+                            totals_list.push({{ event.class_60_and_class_70_cost }})
+
+                        } else if (allRiderTypes[i].includes('Amateur under 16')) {
+                            {#total +=#}
+                            totals_list.push({{ event.amateur_under_16_cost }})
+
+                        } else if (allRiderTypes[i].includes('Amateur 16 and over')) {
+                            {#total +=#}
+                            totals_list.push({{ event.amateur_over_16_cost }})
+
+                        } else if (allRiderTypes[i].includes('Expert under 16')) {
+                            {#total +=#}
+                            totals_list.push({{ event.expert_under_16_cost }})
+
+                        } else if (allRiderTypes[i].includes('Expert 16 and over')) {
+                            {#total +=#}
+                            totals_list.push({{ event.expert_over_16_cost }})
                         }
-                        document.getElementById("id_form-0-merchandise_ordered").value = merch_order
-                    },
+                    }
 
-                    the3DayMethod() {
-                        let app = this
-                        app.formSuccess = ''
-                        var object = {}
-                        forms = document.getElementById('feedbackform')
-                        var formData = new FormData(forms),
-                            result = {event_date: this.event_date}
-                        for (var entry of formData.entries()) {
-                            result[entry[0]] = entry[1];
-                        }
-                        data = JSON.stringify(result)
-                        axios.post("{% url 'error_checking' %}", data, {headers: {'X-CSRFToken': '{{ csrf_token }}',}})
-                            .then(function (response) {
-                                app.formerrors = response.data.errors
-                                app.formSuccess = response.data.success
-                                app.escort_required = response.data.under_16 - response.data.escorts_signed_up
-                                app.under_class_age = response.data.under_class_age
-                                app.age_error = response.data.age_error
-                                app.email_not_the_same = response.data.email_not_the_same
-                                app.email_not_the_same_form = response.data.email_not_the_same_form
-                                app.gender_class = response.data.gender_class
-                                app.gender_form = response.data.gender_form
-                                app.birthdate_wrong = response.data.birthdate_wrong
-                                app.birthdate_form = response.data.birthdate_form
 
-                            })
-                    },
-
-                    totalCost() {
-
-                        let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
-                        let total = 0
-                        let allRiderTypes = []
-                        this.allRiderTypes = allRiderTypes
-                        let totals_list = []
-
-                        for (let i = 0; i < total_rider_classes.length; i++) {
-                            allRiderTypes.push(total_rider_classes[i].value)
+                    for (let reg_item in totals_list) {
+                        let discount_amount = this.discount_list[reg_item]
+                        if (discount_amount !== 0 && discount_amount) {
+                            total += (totals_list[reg_item] - (totals_list[reg_item] * discount_amount))
+                        } else {
+                            total += totals_list[reg_item]
                         }
 
-                        for (let i = 0; i < allRiderTypes.length; i++) {
-                            if (allRiderTypes[i].includes('Escort Rider')) {
-                                {#total +=#}
-                                totals_list.push({{ event.escort_rider_cost }})
-
-                            } else if (allRiderTypes[i].includes('60')) {
-                                {#total +=#}
-                                totals_list.push({{ event.class_60_and_class_70_cost }})
-
-                            } else if (allRiderTypes[i].includes('70')) {
-                                {#total +=#}
-                                totals_list.push({{ event.class_60_and_class_70_cost }})
-
-                            } else if (allRiderTypes[i].includes('Amateur under 16')) {
-                                {#total +=#}
-                                totals_list.push({{ event.amateur_under_16_cost }})
-
-                            } else if (allRiderTypes[i].includes('Amateur 16 and over')) {
-                                {#total +=#}
-                                totals_list.push({{ event.amateur_over_16_cost }})
-
-                            } else if (allRiderTypes[i].includes('Expert under 16')) {
-                                {#total +=#}
-                                totals_list.push({{ event.expert_under_16_cost }})
-
-                            } else if (allRiderTypes[i].includes('Expert 16 and over')) {
-                                {#total +=#}
-                                totals_list.push({{ event.expert_over_16_cost }})
-                            }
-                        }
+                    }
 
 
-                        for (let reg_item in totals_list) {
-                            let discount_amount = this.discount_list[reg_item]
-                            if (discount_amount !== 0 && discount_amount) {
-                                total += (totals_list[reg_item] - (totals_list[reg_item] * discount_amount))
-                            } else {
-                                total += totals_list[reg_item]
-                            }
+                    this.regTotal = total.toFixed(2)
+                    this.showcheckout = true
 
-                        }
+                },
 
+                addForm() {
+                    this.count++
+                    if (this.count > 0) {
+                        show_checkout_btn()
+                    }
+                    let form_count = this.count
+                    form_count++
 
-                        this.regTotal = total.toFixed(2)
-                        this.showcheckout = true
+                    let formID = 'id_form-' + this.count
+                    incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
+                    this.formList.push(incremented_form)
+                    this.$nextTick(() => {
+                        let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
+                        (function (ele, idx) {
+                            ele.value = form_count
+                        })
+                    })
+                    multi_rider_discount()
+                },
 
-                    },
-
-                    addForm() {
-                        this.count++
-                        if (this.count > 0) {
-                            show_checkout_btn()
-                        }
+                delForm() {
+                    if (this.count !== 0) {
+                        document.getElementById('id_form-' + this.count + '-rider_class').value = ''
+                        document.getElementById('id_form-' + this.count + '-rider_class').value = ''
+                        this.count--
                         let form_count = this.count
                         form_count++
-
                         let formID = 'id_form-' + this.count
-                        incremented_form = this.vue_form.replace(/form-\d/g, 'form-' + this.count)
-                        this.formList.push(incremented_form)
+                        this.formList.pop()
                         this.$nextTick(() => {
                             let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
                             (function (ele, idx) {
                                 ele.value = form_count
                             })
                         })
-                        multi_rider_discount()
-                    },
-
-                    delForm() {
-                        if (this.count !== 0) {
-                            document.getElementById('id_form-' + this.count + '-rider_class').value = ''
-                            document.getElementById('id_form-' + this.count + '-rider_class').value = ''
-                            this.count--
-                            let form_count = this.count
-                            form_count++
-                            let formID = 'id_form-' + this.count
-                            this.formList.pop()
-                            this.$nextTick(() => {
-                                let total_forms = document.getElementsByName('form-TOTAL_FORMS').forEach
-                                (function (ele, idx) {
-                                    ele.value = form_count
-                                })
-                            })
-                            if (this.count === 0) {
-                                let codes = app.discount_codes
-                                let discount_code = document.getElementById('id_form-0-discount_code').value
-                                if (app.count === 0 && codes[discount_code] === 1) {
-                                    hide_checkout_btn()
-                                }
+                        if (this.count === 0) {
+                            let codes = app.discount_codes
+                            let discount_code = document.getElementById('id_form-0-discount_code').value
+                            if (app.count === 0 && codes[discount_code] === 1) {
+                                hide_checkout_btn()
                             }
-                            discount_list()
-                            multi_rider_discount()
+                        }
+                        discount_list()
+                        multi_rider_discount()
 
 
-                        } else return
-                    },
-
-                    formID() {
-                        let formID = 'id_form-' + this.count
-                        this.delForm()
-                    },
-
-                    add_rider_type() {
-                        this.paypalItems.push({"name": ""})
-                    },
-
-                    paymentAuthorized(data) {
-                        this.showPayPal = false
-                    },
-
-                    paymentCompleted(data) {
-                        document.getElementById('modal_close_btn').style.display = "none"
-                        const order_data = JSON.stringify(data)
-                        document.getElementById('order_data').value = order_data
-                        this.paymentComplete = true
-                    },
-
-                    paymentCancelled(data) {
-                        this.payment_cancelled = false
-                        this.payment_cancelled = true
-                        this.showPayPal = true
-                    },
-
+                    } else return
                 },
+
+                formID() {
+                    let formID = 'id_form-' + this.count
+                    this.delForm()
+                },
+
+                add_rider_type() {
+                    this.paypalItems.push({"name": ""})
+                },
+
+                paymentAuthorized(data) {
+                    console.log(data)
+                    this.showPayPal = true
+                },
+
+                paymentCompleted(data) {
+                    console.log(data)
+                    document.getElementById('modal_close_btn').style.display = "none"
+                    const order_data = JSON.stringify(data)
+                    document.getElementById('order_data').value = order_data
+                    this.paymentComplete = true
+                },
+
+                paymentCancelled(data) {
+                    console.log(data)
+                    this.payment_cancelled = false
+                    this.payment_cancelled = true
+                    this.showPayPal = true
+                },
+
+            },
 
             filters: {
                 capitalize(value) {
@@ -869,9 +872,9 @@
                 MsgPop.open({
                     Type: "success",
                     Content: "Your discount was added",
-                    AutoClose: 	true,
-                    CloseTimer: 	3000,
-                    displaySmall: 	true,
+                    AutoClose: true,
+                    CloseTimer: 3000,
+                    displaySmall: true,
                     AnchorTo: id
 
                 });
@@ -887,9 +890,9 @@
                 MsgPop.open({
                     Type: "warning",
                     Content: "Invalid Discount Code",
-                    AutoClose: 	true,
-                    CloseTimer: 	500,
-                    displaySmall: 	true,
+                    AutoClose: true,
+                    CloseTimer: 500,
+                    displaySmall: true,
                     AnchorTo: id
 
                 });
