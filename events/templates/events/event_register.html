@@ -349,6 +349,9 @@
                     <div class="alert alert-warning" role="alert" v-show="payment_cancelled">The payment was canceled or
                         declined
                     </div>
+                    <div class="alert alert-warning" role="alert" v-show="payment_failed">The payment was not collected.
+                        Please try checking out again.
+                    </div>
                 </div>
                 <div v-show="showPayPal">
                     <paypal-checkout
@@ -493,6 +496,8 @@
                 hatCost: {{ event.hat_cost }},
                 promotion_list: [],
                 discount_list: [],
+                payment_failed: false
+
 
             },
             watch: {
@@ -724,9 +729,20 @@
                     this.paypalItems.push({"name": ""})
                 },
 
+                resolveAfter2Seconds(x) {
+                    return new Promise(resolve => {
+
+                        setTimeout(() => {
+                            resolve(x);
+                            console.log('in the resolve')
+                        }, 2000);
+                    });
+                    this.showPayPal = true
+                },
+
                 paymentAuthorized(data) {
                     console.log(data)
-                    this.showPayPal = true
+                    this.resolveAfter2Seconds()
                 },
 
                 paymentCompleted(data) {
@@ -815,6 +831,21 @@
 
     </script>
     <script>
+
+        function resolveAfter2Seconds(x) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(x);
+                }, 2000);
+            });
+        }
+
+        async function f1() {
+            var x = await resolveAfter2Seconds(10);
+            console.log(x); // 10
+        }
+
+
         function select_class_change(e) {
             let id = e.id
 
