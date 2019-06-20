@@ -734,14 +734,16 @@
 
                         setTimeout(() => {
                             resolve(x);
+                            this.payment_failed = true
                             console.log('in the resolve')
-                        }, 2000);
+                            this.showPayPal = true
+                        }, 7000);
                     });
-                    this.showPayPal = true
                 },
 
                 paymentAuthorized(data) {
                     console.log(data)
+                    this.showPayPal = false
                     this.resolveAfter2Seconds()
                 },
 
