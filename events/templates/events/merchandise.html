@@ -138,22 +138,22 @@
                         Please fill out the shipping information form above
                     </h3>
                     <div v-if="cartlist.length > 0">
-                    <div v-show="shipping_complete">
-                        <div v-show="showPayPal">
-                            <paypal-checkout
-                                    :amount="totalStr"
-                                    currency="USD"
-                                    :button-style="aStyle"
-                                    :client="paypal"
-                                    :items="cartlist"
-                                    env="production"
-                                    :details="details"
-                                    v-on:payment-authorized="paymentAuthorized"
-                                    v-on:payment-completed="paymentCompleted"
-                                    v-on:payment-cancelled="paymentCancelled">
-                            </paypal-checkout>
+                        <div v-show="shipping_complete">
+                            <div v-show="showPayPal">
+                                <paypal-checkout
+                                        :amount="totalStr"
+                                        currency="USD"
+                                        :button-style="aStyle"
+                                        :client="paypal"
+                                        :items="cartlist"
+                                        env="production"
+                                        :details="details"
+                                        v-on:payment-authorized="paymentAuthorized"
+                                        v-on:payment-completed="paymentCompleted"
+                                        v-on:payment-cancelled="paymentCancelled">
+                                </paypal-checkout>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div class="whirlpool" v-show="!showPayPal" style="text-align: center">
                         <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
@@ -251,7 +251,6 @@
                     addToCartObj.sku = String(itemId + ' ' + item_size_sku)
                     addToCartObj.shipping = item_shipping.toFixed(2)
                     this.cartlist.push(addToCartObj)
-                    console.log(addToCartObj)
                 },
 
                 maxInput(itemId) {
@@ -311,12 +310,14 @@
                         item_total += Number(price) * Number(qty)
                     }
 
-                    final_total = shipping + item_total
+                    let final_total = shipping + item_total
                     this.total_shipping = shipping.toFixed(2)
                     this.details.shipping = shipping.toFixed(2)
                     this.totalStr = (final_total).toFixed(2)
                     this.details.subtotal = item_total.toFixed(2)
                     this.itemPreShipping = (Number(this.totalStr) - Number(this.total_shipping)).toFixed(2)
+                    console.log(this.cartlist)
+
                 },
             },
         });

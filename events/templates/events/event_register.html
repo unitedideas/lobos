@@ -321,9 +321,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <h4 style="text-align: center; float: left">[[item.qty]]
-                                            [[item.size]]
-                                            [[item.item]]</h4>
+                                        <h4 style="text-align: center; float: left">[[item.quantity]]
+                                            [[item.description]] [[item.name]] $[[item.price]]</h4>
                                     </div>
                                 </div>
                             </div>
@@ -359,9 +358,10 @@
                             currency="USD"
                             :button-style="aStyle"
                             :client="paypal"
+                            :items="cartlist"
                             env="sandbox"
                             {#for adding more details#}
-                            {# :details="details" #}
+                            :details="details"
                             v-on:payment-authorized="paymentAuthorized"
                             v-on:payment-completed="paymentCompleted"
                             v-on:payment-cancelled="paymentCancelled">
@@ -396,16 +396,15 @@
                     tagline: 'false'
                 },
                 totalStr: "0.00",
-                {#for adding more details#}
-                {#details:#}
-                {#    {#}
-                {#        subtotal: "",#}
-                {#        tax: "0.00",#}
-                {#        shipping: "",#}
-                {#        handling_fee: "0.00",#}
-                {#        shipping_discount: "0.00",#}
-                {#        insurance: "0.00"#}
-                {#    },#}
+                details:
+                    {
+                        subtotal: "",
+                        tax: "0.00",
+                        shipping: "0.00",
+                        handling_fee: "0.00",
+                        shipping_discount: "0.00",
+                        insurance: "0.00"
+                    },
                 formList: [],
                 count: 0,
                 vue_form: "",
@@ -503,16 +502,33 @@
             watch: {
 
                 cartlist() {
-                    let count = 0
-                    let cost = 0
+                    {#let count = 0#}
+                    {#let cost = 0#}
+                    {#for (let item in this.cartlist) {#}
+                    {#    let itemcost = 0#}
+                    {#    let merchtot = 0#}
+                    {#    itemcost = this.cartlist[item].qty * this.cartlist[item].price#}
+                    {#    cost += itemcost#}
+                    {# }#}
+                    {#this.merchTotal = cost.toFixed(2)#}
+                    {#this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))#}
+                    let item_total = 0
+                    let shipping = 0
+
                     for (let item in this.cartlist) {
-                        let itemcost = 0
-                        let merchtot = 0
-                        itemcost = this.cartlist[item].qty * this.cartlist[item].price
-                        cost += itemcost
+                        let price = this.cartlist[item].price
+                        let qty = this.cartlist[item].quantity
+                        let shipping_cost = this.cartlist[item].shipping
+                        shipping += Number(shipping_cost)
+                        item_total += Number(price) * Number(qty)
                     }
-                    this.merchTotal = cost.toFixed(2)
-                    this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))
+
+                    let final_total = shipping + item_total + Number(this.regTotal)
+                    this.total_shipping = shipping.toFixed(2)
+                    this.details.shipping = shipping.toFixed(2)
+                    this.totalStr = (final_total).toFixed(2)
+                    this.details.subtotal = item_total.toFixed(2)
+                    this.itemPreShipping = (Number(this.totalStr) - Number(this.total_shipping)).toFixed(2)
 
                 },
 
@@ -558,11 +574,22 @@
             methods: {
 
                 add_to_cart(item_type, size, qty, price) {
+                    let addToCartObj = {}
+                    let item_name = item_type
+                    let item_size = size
+                    let item_qty = qty
+                    let item_shipping = 0.00
                     let count = 0
                     let merch_order = ""
-                    if (size !== "") {
-                        if (qty > 0) {
-                            this.cartlist.push({item: item_type, size: size, qty: qty, price: price})
+                    if (item_size !== "") {
+                        if (item_qty > 0) {
+                            addToCartObj.name = item_name
+                            addToCartObj.description = item_size //size
+                            addToCartObj.quantity = String(item_qty)
+                            addToCartObj.price = price[0][0].toFixed(2)
+                            addToCartObj.currency = 'USD'
+                            addToCartObj.shipping = item_shipping.toFixed(2)
+                            this.cartlist.push(addToCartObj)
                             for (let i in this.cartlist) {
                                 merch_order += String(Object.values(this.cartlist[count])) + "\n"
                                 count += 1
@@ -570,6 +597,7 @@
                             document.getElementById("id_form-0-merchandise_ordered").value = merch_order
                         }
                     }
+                    console.log(this.cartlist)
                 },
 
                 remove_from_cart(index) {
@@ -612,14 +640,21 @@
                 },
 
                 totalCost() {
+                    let addToCartObj = {}
+                    let item_name = 'item_type'
+                    let item_size = 'size'
+                    let item_qty = 'qty'
+                    let item_shipping = 0.00
 
                     let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
+                    console.log('total_rider_classes ', total_rider_classes)
                     let total = 0
                     let allRiderTypes = []
                     this.allRiderTypes = allRiderTypes
                     let totals_list = []
 
                     for (let i = 0; i < total_rider_classes.length; i++) {
+                        console.log(total_rider_classes[i].value)
                         allRiderTypes.push(total_rider_classes[i].value)
                     }
 
@@ -653,9 +688,12 @@
                             totals_list.push({{ event.expert_over_16_cost }})
                         }
                     }
+                    console.log(totals_list)
+                    console.log('allRiderTypes ', allRiderTypes)
 
 
                     for (let reg_item in totals_list) {
+                        console.log(reg_item)
                         let discount_amount = this.discount_list[reg_item]
                         if (discount_amount !== 0 && discount_amount) {
                             total += (totals_list[reg_item] - (totals_list[reg_item] * discount_amount))
@@ -735,7 +773,6 @@
                         setTimeout(() => {
                             resolve(x);
                             this.payment_failed = true
-                            console.log('in the resolve')
                             this.showPayPal = true
                         }, 5000);
                     });
@@ -844,7 +881,6 @@
 
         async function f1() {
             var x = await resolveAfter2Seconds(10);
-            console.log(x); // 10
         }
 
 
