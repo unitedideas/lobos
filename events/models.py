@@ -142,10 +142,8 @@ class Event(models.Model):
     class_60_and_class_70_cost = models.PositiveIntegerField()
     escort_rider_cost = models.PositiveIntegerField()
     open_registration = models.BooleanField(default=False)
-
     promotion = models.ForeignKey(SignupPromotion, help_text='Leave blank if there is no promotion', null=True,
                                   blank=True, on_delete=models.CASCADE)
-
     hoodie = models.BooleanField(
         'Check if up-selling hoodies after registration', default=False)
     hoodie_image_file_name = models.CharField(
@@ -220,7 +218,8 @@ class Profile(models.Model):
 
 class Codes(models.Model):
     discount_code = models.CharField(max_length=100, null=True, blank=True)
-    discount_amount = models.FloatField(null=True, blank=True, validators=[MinValueValidator(0.05), MaxValueValidator(1)])
+    discount_amount = models.FloatField(null=True, blank=True,
+                                        validators=[MinValueValidator(0.05), MaxValueValidator(1)])
 
     def __str__(self):
         return str(self.discount_code) + " " + str(self.discount_amount)
