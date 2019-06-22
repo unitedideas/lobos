@@ -359,7 +359,7 @@
                             :button-style="aStyle"
                             :client="paypal"
                             :items="cartlist"
-                            env="production"
+                            env="sandbox"
                             {#for adding more details#}
                             :details="details"
                             v-on:payment-authorized="paymentAuthorized"
@@ -504,16 +504,6 @@
             watch: {
 
                 cartlist() {
-                    {#let count = 0#}
-                    {#let cost = 0#}
-                    {#for (let item in this.cartlist) {#}
-                    {#    let itemcost = 0#}
-                    {#    let merchtot = 0#}
-                    {#    itemcost = this.cartlist[item].qty * this.cartlist[item].price#}
-                    {#    cost += itemcost#}
-                    {# }#}
-                    {#this.merchTotal = cost.toFixed(2)#}
-                    {#this.totalStr = String((Number(this.merchTotal) + Number(this.regTotal)).toFixed(2))#}
                     let item_total = 0
                     let shipping = 0
 
@@ -646,8 +636,6 @@
                     let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
                     let first_names = document.querySelectorAll('input[id*="first_name"]')
                     let last_names = document.querySelectorAll('input[id*="last_name"]')
-                    console.log(last_names)
-                    console.log('total_rider_classes ', total_rider_classes)
                     let total = 0
                     let allRiderTypes = []
                     this.allRiderTypes = allRiderTypes
@@ -668,64 +656,25 @@
                         let item_description = 'Event: {{ event.event_name }}'
                         let price = 0
                         allRiderTypes.push(total_rider_classes[i].value)
-                        {# }#}
-
-                        {#for (let i = 0; i < allRiderTypes.length; i++) {#}
-                        {#if (allRiderTypes[i].includes('Escort Rider')) {#}
-                        {#total +=#}
-                        {#    totals_list.push({{ event.escort_rider_cost }})#}
-                        {##}
-                        {# } else if (allRiderTypes[i].includes('60')) {#}
-                        {#total +=#}
-                        {#    totals_list.push({{ event.class_60_and_class_70_cost }})#}
-                        {##}
-                        {# } else if (allRiderTypes[i].includes('70')) {#}
-                        {#total +=#}
-                        {#    totals_list.push({{ event.class_60_and_class_70_cost }})#}
-                        {##}
-                        {# } else if (allRiderTypes[i].includes('Amateur under 16')) {#}
-                        {#total +=#}
-                        {#    totals_list.push({{ event.amateur_under_16_cost }})#}
-                        {##}
-                        {# } else if (allRiderTypes[i].includes('Amateur 16 and over')) {#}
-                        {#total +=#}
-                        {#    totals_list.push({{ event.amateur_over_16_cost }})#}
-                        {##}
-                        {# } else if (allRiderTypes[i].includes('Expert under 16')) {#}
-                        {#total +=#}
-                        {#    totals_list.push({{ event.expert_under_16_cost }})#}
-                        {##}
-                        {# } else if (allRiderTypes[i].includes('Expert 16 and over')) {#}
-                        {#total +=#}
-                        {#    totals_list.push({{ event.expert_over_16_cost }})#}
-                        {# }#}
-
                         if (total_rider_classes[i].value.includes('Escort Rider')) {
-                            {#total +=#}
                             price = ({{ event.escort_rider_cost }})
 
                         } else if (total_rider_classes[i].value.includes('60')) {
-                            {#total +=#}
                             price = ({{ event.class_60_and_class_70_cost }})
 
                         } else if (total_rider_classes[i].value.includes('70')) {
-                            {#total +=#}
                             price = ({{ event.class_60_and_class_70_cost }})
 
                         } else if (total_rider_classes[i].value.includes('Amateur under 16')) {
-                            {#total +=#}
                             price = ({{ event.amateur_under_16_cost }})
 
                         } else if (total_rider_classes[i].value.includes('Amateur 16 and over')) {
-                            {#total +=#}
                             price = ({{ event.amateur_over_16_cost }})
 
                         } else if (total_rider_classes[i].value.includes('Expert under 16')) {
-                            {#total +=#}
                             price = ({{ event.expert_under_16_cost }})
 
                         } else if (total_rider_classes[i].value.includes('Expert 16 and over')) {
-                            {#total +=#}
                             price = ({{ event.expert_over_16_cost }})
                         }
 
