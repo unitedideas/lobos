@@ -359,7 +359,7 @@
                             :button-style="aStyle"
                             :client="paypal"
                             :items="cartlist"
-                            env="sandbox"
+                            env="production"
                             {#for adding more details#}
                             :details="details"
                             v-on:payment-authorized="paymentAuthorized"
