@@ -243,7 +243,7 @@
                     let price = Number(this.merch_json.merch[item][0]['sale_price'])
                     let item_shipping = 0.00
 
-                    addToCartObj.name = item_name
+                    addToCartObj.name = item_size + " " + item_name
                     addToCartObj.description = item_size //size
                     addToCartObj.quantity = String(item_qty)
                     addToCartObj.price = price.toFixed(2)
