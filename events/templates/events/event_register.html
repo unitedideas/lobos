@@ -496,37 +496,37 @@
                 promotion_list: [],
                 discount_list: [],
                 payment_failed: false,
-                merchlist:[],
-                registration_list:[],
+                merchlist: [],
+                registration_list: [],
                 reg_total_string: ''
 
             },
             watch: {
-
-                cartlist() {
-                    let item_total = 0
-                    let shipping = 0
-
-                    for (let item in this.cartlist) {
-                        let price = this.cartlist[item].price
-                        let qty = this.cartlist[item].quantity
-                        let shipping_cost = this.cartlist[item].shipping
-                        shipping += Number(shipping_cost)
-                        item_total += Number(price) * Number(qty)
-                    }
-
-                    let final_total = shipping + item_total
-                    this.total_shipping = shipping.toFixed(2)
-                    this.details.shipping = shipping.toFixed(2)
-                    this.totalStr = (final_total).toFixed(2)
-                    this.details.subtotal = item_total.toFixed(2)
-                    this.itemPreShipping = (Number(this.totalStr) - Number(this.total_shipping)).toFixed(2)
-
-                },
+                {##}
+                {#cartlist() {#}
+                {#    let item_total = 0#}
+                {#    let shipping = 0#}
+                {##}
+                {#    for (let item in this.cartlist) {#}
+                {#        let price = this.cartlist[item].price#}
+                {#        let qty = this.cartlist[item].quantity#}
+                {#        let shipping_cost = this.cartlist[item].shipping#}
+                {#        shipping += Number(shipping_cost)#}
+                {#        item_total += Number(price) * Number(qty)#}
+                {#    }#}
+                {##}
+                {#    let final_total = shipping + item_total#}
+                {#    this.total_shipping = shipping.toFixed(2)#}
+                {#    this.details.shipping = shipping.toFixed(2)#}
+                {#    this.totalStr = (final_total).toFixed(2)#}
+                {#    this.details.subtotal = item_total.toFixed(2)#}
+                {#    this.itemPreShipping = (Number(this.totalStr) - Number(this.total_shipping)).toFixed(2)#}
+                {##}
+                {# },#}
 
                 regTotal() {
-                    this.reg_total_string =  this.regTotal.toFixed(2)
-                 },
+                    this.reg_total_string = this.regTotal.toFixed(2)
+                },
 
                 paymentComplete() {
                     this.$refs.submitButton.click();
@@ -564,6 +564,17 @@
             },
 
             methods: {
+                cart() {
+                    this.cartlist = []
+                    console.log('this.cartlist ', this.cartlist)
+                    console.log('this.merchlist ', this.merchlist)
+                    console.log('this.registration_list ', this.registration_list)
+                    this.cartlist.push(...this.merchlist)
+                    this.cartlist.push(...this.registration_list)
+                    console.log('this.cartlist ', this.cartlist)
+
+                },
+
 
                 add_to_cart(item_type, size, qty, price) {
                     let addToCartObj = {}
@@ -581,26 +592,38 @@
                             addToCartObj.price = price[0][0].toFixed(2)
                             addToCartObj.currency = 'USD'
                             addToCartObj.shipping = item_shipping.toFixed(2)
-                            this.cartlist.push(addToCartObj)
                             this.merchlist.push(addToCartObj)
-                            for (let i in this.cartlist) {
-                                merch_order += String(Object.values(this.cartlist[count])) + "\n"
+                            for (let i in this.merchlist) {
+                                merch_order += String(Object.values(this.merchlist[count])) + "\n"
                                 count += 1
                             }
                             document.getElementById("id_form-0-merchandise_ordered").value = merch_order
                         }
                     }
+                    this.cart()
                 },
+
+                {#remove_from_cart(index) {#}
+                {#    let count = 0#}
+                {#    let merch_order = "", end#}
+                {#    this.cartlist.splice(index, 1)#}
+                {#    for (i in this.cartlist) {#}
+                {#        merch_order += String(Object.values(this.cartlist[count])) + "\n"#}
+                {#        count += 1#}
+                {#    }#}
+                {#    document.getElementById("id_form-0-merchandise_ordered").value = merch_order#}
+                {# },  #}
 
                 remove_from_cart(index) {
                     let count = 0
                     let merch_order = "", end
-                    this.cartlist.splice(index, 1)
-                    for (i in this.cartlist) {
-                        merch_order += String(Object.values(this.cartlist[count])) + "\n"
+                    this.merchlist.splice(index, 1)
+                    for (i in this.merchlist) {
+                        merch_order += String(Object.values(this.merchlist[count])) + "\n"
                         count += 1
                     }
                     document.getElementById("id_form-0-merchandise_ordered").value = merch_order
+                    this.cart()
                 },
 
                 the3DayMethod() {
@@ -632,7 +655,7 @@
                 },
 
                 totalCost() {
-                    this.cartlist = []
+                    this.registration_list = []
                     let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
                     let first_names = document.querySelectorAll('input[id*="first_name"]')
                     let last_names = document.querySelectorAll('input[id*="last_name"]')
@@ -640,16 +663,17 @@
                     let allRiderTypes = []
                     this.allRiderTypes = allRiderTypes
                     let totals_list = []
+                    this.regTotal = 0
 
                     for (let i = 0; i < total_rider_classes.length; i++) {
                         let addToCartObj = {}
                         let first_name = first_names[i].value
                         let last_name = last_names[i].value
 
-                        if (!first_name){
+                        if (!first_name) {
                             first_name = ''
                         }
-                        if (!last_name){
+                        if (!last_name) {
                             last_name = ''
                         }
                         let item_name = first_name + " " + last_name + " " + total_rider_classes[i].value
@@ -684,7 +708,7 @@
                         addToCartObj.price = price.toFixed(2)
                         addToCartObj.currency = 'USD'
                         addToCartObj.shipping = 0.00
-                        this.cartlist.push(addToCartObj)
+                        {#this.cartlist.push(addToCartObj)#}
                         this.registration_list.push(addToCartObj)
                     }
 
@@ -700,12 +724,12 @@
                     {##}
                     {# }#}
 
-                    for (let item in this.registration_list){
+                    for (let item in this.registration_list) {
                         this.regTotal += Number(this.registration_list[item].price)
                     }
 
                     this.showcheckout = true
-
+                    this.cart()
                 },
 
                 addForm() {
@@ -753,7 +777,7 @@
                         discount_list()
                         multi_rider_discount()
 
-
+                    this.cart()
                     } else return
                 },
 
