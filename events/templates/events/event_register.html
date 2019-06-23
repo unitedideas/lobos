@@ -502,27 +502,27 @@
 
             },
             watch: {
-                {##}
-                {#cartlist() {#}
-                {#    let item_total = 0#}
-                {#    let shipping = 0#}
-                {##}
-                {#    for (let item in this.cartlist) {#}
-                {#        let price = this.cartlist[item].price#}
-                {#        let qty = this.cartlist[item].quantity#}
-                {#        let shipping_cost = this.cartlist[item].shipping#}
-                {#        shipping += Number(shipping_cost)#}
-                {#        item_total += Number(price) * Number(qty)#}
-                {#    }#}
-                {##}
-                {#    let final_total = shipping + item_total#}
-                {#    this.total_shipping = shipping.toFixed(2)#}
-                {#    this.details.shipping = shipping.toFixed(2)#}
-                {#    this.totalStr = (final_total).toFixed(2)#}
-                {#    this.details.subtotal = item_total.toFixed(2)#}
-                {#    this.itemPreShipping = (Number(this.totalStr) - Number(this.total_shipping)).toFixed(2)#}
-                {##}
-                {# },#}
+
+                cartlist() {
+                    let item_total = 0
+                    let shipping = 0
+
+                    for (let item in this.cartlist) {
+                        let price = this.cartlist[item].price
+                        let qty = this.cartlist[item].quantity
+                        let shipping_cost = this.cartlist[item].shipping
+                        shipping += Number(shipping_cost)
+                        item_total += Number(price) * Number(qty)
+                    }
+
+                    let final_total = shipping + item_total
+                    this.total_shipping = shipping.toFixed(2)
+                    this.details.shipping = shipping.toFixed(2)
+                    this.totalStr = (final_total).toFixed(2)
+                    this.details.subtotal = item_total.toFixed(2)
+                    this.itemPreShipping = (Number(this.totalStr) - Number(this.total_shipping)).toFixed(2)
+
+                 },
 
                 regTotal() {
                     this.reg_total_string = this.regTotal.toFixed(2)
@@ -566,13 +566,8 @@
             methods: {
                 cart() {
                     this.cartlist = []
-                    console.log('this.cartlist ', this.cartlist)
-                    console.log('this.merchlist ', this.merchlist)
-                    console.log('this.registration_list ', this.registration_list)
-                    this.cartlist.push(...this.merchlist)
                     this.cartlist.push(...this.registration_list)
-                    console.log('this.cartlist ', this.cartlist)
-
+                    this.cartlist.push(...this.merchlist)
                 },
 
 
@@ -655,8 +650,10 @@
                 },
 
                 totalCost() {
+                    console.log('called totalCost')
                     this.registration_list = []
                     let total_rider_classes = document.querySelectorAll('select[id*="rider_class"]')
+                    console.log(total_rider_classes)
                     let first_names = document.querySelectorAll('input[id*="first_name"]')
                     let last_names = document.querySelectorAll('input[id*="last_name"]')
                     let total = 0
@@ -710,19 +707,24 @@
                         addToCartObj.shipping = 0.00
                         {#this.cartlist.push(addToCartObj)#}
                         this.registration_list.push(addToCartObj)
+                        console.log(this.registration_list)
                     }
 
 
-                    {#for (let reg_item in totals_list) {#}
-                    {#    console.log(reg_item)#}
-                    {#    let discount_amount = this.discount_list[reg_item]#}
-                    {#    if (discount_amount !== 0 && discount_amount) {#}
-                    {#        total += (totals_list[reg_item] - (totals_list[reg_item] * discount_amount))#}
-                    {#    } else {#}
-                    {#        total += totals_list[reg_item]#}
-                    {#    }#}
-                    {##}
-                    {# }#}
+                    for (let reg_item in this.registration_list) {
+
+                        console.log('index: ', reg_item)
+                        console.log('discount: ',this.discount_list[reg_item])
+                        console.log('registration: ',this.registration_list[reg_item])
+                        let discount_amount = this.discount_list[reg_item]
+                        if (discount_amount !== 0 && discount_amount) {
+                            total = (this.registration_list[reg_item].price - (this.registration_list[reg_item].price * discount_amount))
+                            console.log('total ', total)
+                            this.registration_list[reg_item].price = total
+                            console.log('registration: ',this.registration_list[reg_item])
+
+                        }
+                     }
 
                     for (let item in this.registration_list) {
                         this.regTotal += Number(this.registration_list[item].price)
@@ -756,6 +758,7 @@
                     if (this.count !== 0) {
                         document.getElementById('id_form-' + this.count + '-rider_class').value = ''
                         document.getElementById('id_form-' + this.count + '-rider_class').value = ''
+                        this.registration_list.pop()
                         this.count--
                         let form_count = this.count
                         form_count++
@@ -777,7 +780,7 @@
                         discount_list()
                         multi_rider_discount()
 
-                    this.cart()
+                        this.cart()
                     } else return
                 },
 
