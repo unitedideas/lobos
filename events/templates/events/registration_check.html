@@ -23,14 +23,16 @@
     <div class="container">
         <div class="jumbotron" style="padding: 15px; border-radius: 5px">
             <h2>Check if you are registered for an upcoming event.</h2>
-            {% if args.name %}
-                <div class="transition_fade">
+            {% if agrs.result == true %}
+                {% if args.name %}
+                    <div class="transition_fade">
                     {% for name in args.name %}
                         <h4>{{ name | title }}</h4>
                     {% endfor %}
                     <h4>{{ args.name | pluralize:'is,are' }}
                         registered for the {{ args.event }}</h4>
-                </div>
+                {% endif %}
+            </div>
             {% endif %}
 
             <form method="POST" action="/registration_check/">

@@ -121,13 +121,13 @@ def registration_check(request):
                 except:
                     args = {
                         'result': False,
-                        'name': ' ',
+                        'name': '',
                         'event': 'That confirmation number was not found.'
                     }
 
                     return render(request, 'events/registration_check.html', {"args": args, 'form': form})
 
-            elif first_name != '' or last_name != '':
+            elif first_name != '' and last_name != '':
                 event_id = RiderProfile.objects.filter(first_name=first_name).filter(
                     last_name=last_name).values_list(
                     'event', flat=True).last()
@@ -145,20 +145,22 @@ def registration_check(request):
                     return render(request, 'events/registration_check.html', {"args": args, 'form': form})
 
                 else:
+                    name = [first_name + ' ' + last_name]
                     args = {
                         'result': True,
-                        'name': first_name + ' ' + last_name,
+                        'name': name,
                         'event': 'was not found.'
                     }
 
                     return render(request, 'events/registration_check.html', {"args": args, 'form': form})
             else:
                 form = RegistrationCheck()
+                name = [first_name + ' ' + last_name]
 
                 args = {
                     'result': False,
-                    'name': first_name + " " + last_name,
-                    'event': 'was not found.'
+                    'name': '',
+                    'event': 'Please enter a first and last name.'
                 }
                 return render(request, 'events/registration_check.html', {"args": args, 'form': form})
 
