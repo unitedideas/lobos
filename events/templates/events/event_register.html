@@ -148,7 +148,7 @@
                         <p>Single day passes will be available at the event for $25.</p>
                     </h4>
                     <div id="reg_checkout_button_div" class="">
-                        <div>
+                        <div v-if="reg_total_string">
                             <h3>Registration Total: $[[reg_total_string]]</h3>
                         </div>
                         <div id="checkout" v-on:click="the3DayMethod" class="btn btn-lg btn-primary" value="Checkout">

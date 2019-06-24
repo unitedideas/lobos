@@ -23,18 +23,6 @@
     <div class="container">
         <div class="jumbotron" style="padding: 15px; border-radius: 5px">
             <h2>Check if you are registered for an upcoming event.</h2>
-            {% if agrs.result == true %}
-                {% if args.name %}
-                    <div class="transition_fade">
-                    {% for name in args.name %}
-                        <h4>{{ name | title }}</h4>
-                    {% endfor %}
-                    <h4>{{ args.name | pluralize:'is,are' }}
-                        registered for the {{ args.event }}</h4>
-                {% endif %}
-            </div>
-            {% endif %}
-
             <form method="POST" action="/registration_check/">
                 {% csrf_token %}
                 <div>
@@ -62,8 +50,20 @@
                 </div>
                 <button class="btn-primary btn-lg">submit</button>
             </form>
+            <br>
+            <div class="transition_fade">
+                {% if args.result %}
+                    {% for name in args.name %}
+                        <h3 style="display: inline" > {{ name }}
+                    {% endfor %}
+                {{ args.name | pluralize:'is,are' }} {{ args.event }}</h3>
+                {% else %}
+                    <h3>{{ args.event }}</h3>
+                {% endif %}
+            </div>
+            <br>
+        <h4>If you feel there is an error please contact us.</h4>
         </div>
     </div>
 {% endblock %}
-
 

@@ -92,7 +92,7 @@ def registration_check(request):
 
                 args = {
                     'result': False,
-                    'name': first_name + " " + last_name,
+                    'name': '',
                     'event': 'Please provide first and last name or a confirmation number'
                 }
                 return render(request, 'events/registration_check.html', {"args": args, 'form': form})
@@ -107,14 +107,20 @@ def registration_check(request):
 
                     if event_id is not None:
                         confirmation_names = list(confirmation_names)
-                        first_and_last_names = list((' '.join(name) for name in confirmation_names))
+                        first_and_last_names = list((' '.join(name).title() for name in confirmation_names))
+                        first_and_last_names_format = []
+                        for name in first_and_last_names:
+                            if name == first_and_last_names[-1]:
+                                first_and_last_names_format.append('and ' + name)
+                            else:
+                                first_and_last_names_format.append(name + ', ')
                         event_name = Event.objects.filter(id=event_id[0]).values_list('event_name', flat=True)
                         event_date = Event.objects.filter(id=event_id[0]).values_list('event_date', flat=True)
                         event_data = event_name[0] + ' scheduled for ' + event_date[0].strftime('%m/%d/%Y')
                         args = {
                             'result': True,
-                            'name': first_and_last_names,
-                            'event': event_data
+                            'name': first_and_last_names_format,
+                            'event': 'registered for ' + event_data + '.'
                         }
 
                         return render(request, 'events/registration_check.html', {"args": args, 'form': form})
@@ -132,7 +138,7 @@ def registration_check(request):
                     last_name=last_name).values_list(
                     'event', flat=True).last()
                 if event_id is not None:
-                    first_and_last_names = [first_name + " " + last_name]
+                    first_and_last_names = [first_name.capitalize() + " " + last_name.capitalize()]
                     event_name = Event.objects.filter(id=event_id).values_list('event_name', flat=True)
                     event_date = Event.objects.filter(id=event_id).values_list('event_date', flat=True)
                     event_data = event_name[0] + ' scheduled for ' + event_date[0].strftime('%m/%d/%Y')
@@ -140,22 +146,21 @@ def registration_check(request):
                     args = {
                         'result': True,
                         'name': first_and_last_names,
-                        'event': event_data
+                        'event': 'registered for ' + event_data + '.'
                     }
                     return render(request, 'events/registration_check.html', {"args": args, 'form': form})
 
                 else:
-                    name = [first_name + ' ' + last_name]
+                    name = [first_name.capitalize() + ' ' + last_name.capitalize()]
                     args = {
                         'result': True,
                         'name': name,
-                        'event': 'was not found.'
+                        'event': 'not registered for an event.'
                     }
 
                     return render(request, 'events/registration_check.html', {"args": args, 'form': form})
             else:
                 form = RegistrationCheck()
-                name = [first_name + ' ' + last_name]
 
                 args = {
                     'result': False,
