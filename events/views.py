@@ -48,12 +48,10 @@ def change_names_to_lower():
             name.email2 = name.email2.lower()
         except:
             print('no email')
-
         try:
             name.confirmation_number = name.confirmation_number.upper()
         except:
             print('no email')
-
         name.save()
 
 
