@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block head %}
     <title>Event Registration Confirmation</title>
@@ -19,6 +20,8 @@
             <h4>Email: {{ item.email }}</h4>
             <h4>Class: {{ item.rider_class }}</h4>
             <h4>Confirmation: {{ item.confirmation }}</h4>
+            <h5>If you would like to purchase event merchandise check it out on our <a href = "/merchandise/" target="_blank">merchandise</a> page</h5>
+            <h5>For assistance please email us at <a href = "mailto:eventinfo@lobosmc.com" target="_blank">eventinfo@lobosmc.com</a></h5>
             <br>
         {% endfor %}
     </div>

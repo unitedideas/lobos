@@ -22,6 +22,7 @@ urlpatterns = [
     path('password-reset/complete/', auth_views.PasswordResetCompleteView.as_view(template_name='events/password_reset_complete.html'), name='password_reset_complete'),
     path('profile/password/', auth_views.PasswordChangeView.as_view(template_name='events/password_change.html'), name='password_change'),
     path('event-confirmation/', views.event_confirmation, name='event_confirmation'),
+    path('contact/', views.contact, name='contact'),
     path('event-registration/', views.event_register, name='event_register'),
     path('event-registration/<event>', views.event_register, name='event_register'),
     path('event_formset', views.event_formset, name='event_formset'),

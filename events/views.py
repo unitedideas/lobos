@@ -180,6 +180,9 @@ def registration_check(request):
 def merchCheckout(request):
     return render(request, 'events/merchCheckout.html')
 
+def contact(request):
+    return render(request, 'events/contact.html')
+
 
 def merchandise(request):
     merchValues = Merchandise.objects.filter(available_on_merch_page=True).values()

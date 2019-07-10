@@ -74,6 +74,8 @@
                             {#                                    href="/profile/edit">Edit Profile</a></li>#}
                             <li class="nav-item {% if url_name == 'clubevents' %}myactive{% endif %}"><a
                                     href="/clubevents">Member Events</a></li>
+                            <li class="nav-item {% if url_name == 'contact' %}myactive{% endif %}"><a
+                                    href="/contact">Contact Us</a></li>
                             <li class="nav-item {% if url_name == 'logout' %}myactive{% endif %}"><a href="/logout">Logout</a>
                             </li>
                             <li><a class="navbar-brand"><strong>Welcome {{ request.user.first_name }}!</strong></a></li>
@@ -93,6 +95,8 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item {% if url_name == 'clubevents' %}myactive{% endif %}"><a
                                     href="/clubevents">Member Events</a></li>
+                            <li class="nav-item {% if url_name == 'contact' %}myactive{% endif %}"><a
+                                    href="/contact">Contact Us</a></li>
                             {#                            <li class="nav-item {% if url_name == 'password_reset' %}myactive{% endif %}"><a#}
                             {#                                    href="/password-reset">Reset Password</a></li>#}
                             {#                                    href="/password-reset">Reset Password</a></li>#}
