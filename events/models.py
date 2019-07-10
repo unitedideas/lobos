@@ -143,7 +143,7 @@ class Event(models.Model):
     escort_rider_cost = models.PositiveIntegerField()
     open_registration = models.BooleanField(default=False)
     promotion = models.ForeignKey(SignupPromotion, help_text='Leave blank if there is no promotion', null=True,
-                                  blank=True, on_delete=models.CASCADE)
+                                  blank=True, on_delete=models.SET_NULL)
     hoodie = models.BooleanField(
         'Check if up-selling hoodies after registration', default=False)
     hoodie_image_file_name = models.CharField(
