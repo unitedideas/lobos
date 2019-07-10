@@ -109,14 +109,14 @@ class Merchandise(models.Model):
 
 
 class SignupPromotion(models.Model):
-    promotion_item_name = models.CharField(default='Promo title', max_length=200, null=True, blank=True)
-    promotion_description = models.CharField(default='Promo details', max_length=800, null=True, blank=True)
-    promotion_limit = models.PositiveIntegerField()
+    promotion_item_name = models.CharField(default='Promo title', max_length=200)
+    promotion_description = models.CharField(default='Promo details', max_length=800)
+    promotion_limit = models.PositiveIntegerField(default=1)
     promotion_classes = models.CharField(help_text='You must choose classes every time.', max_length=1000, null=True,
                                          blank=True)
     promotion_options = models.CharField('Promotion Options:',
                                          help_text='Please separate by commas ex.(9:00am,1:00pm,5:00pm)',
-                                         max_length=1000, null=True, blank=True)
+                                         max_length=1000, default='Option 1,Option 2')
 
     def __str__(self):
         return str(self.promotion_item_name)
@@ -333,10 +333,10 @@ class RiderProfile(models.Model):
     merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)
     registration_date_time = models.DateTimeField('Created Time', editable=True, null=True, blank=True,
                                                   auto_now_add=True)
-    promotional_item = models.CharField('Would you like to use the promotion?', max_length=3, default=YESNO[1][1],
+    promotional_item = models.CharField('Would you like to register for the Radius Offroad Riding Clinic?', max_length=3, default=YESNO[1][1],
                                         choices=YESNO)
     promotion_name = models.CharField('Promotion', max_length=300, null=True, blank=True)
-    promotion_options = models.CharField('Choose your option:', max_length=300, null=True, blank=True)
+    promotion_options = models.CharField('Choose your riding clinic time:', max_length=300, null=True, blank=True)
 
     confirmation_number = models.CharField(max_length=30, null=True, blank=True)
     discount_code = models.CharField(max_length=100, null=True, blank=True)

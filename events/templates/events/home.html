@@ -69,10 +69,10 @@
                 {% endif %}
                 <p>{{ detail.6 | safe }}</p>
                 <p><b>Date: </b> {{ detail.2 | date:"F d Y" }}</p>
+                <p><b>Pre-entry: </b> ${{ detail.7 }}</p>
+                <p><b>Post-entry: </b> ${{ detail.8 }}</p>
                 <p><b>Escort Rider: </b> ${{ detail.10 }}</p>
-                <p><b>Classes under 16, Class 60 and Class 70: </b> ${{ detail.7 }}</p>
-                <p><b>All other classes: </b> ${{ detail.8 }}</p>
-                <p><b>Entry closes: </b> {{ detail.9 }}</p>
+                <p><b>Pre-entry closes: </b> {{ detail.9 }}</p>
                 <p><b>Details:</b> {{ detail.3 | safe }}</p>
             </div>
             <div style="float: right; margin-top: auto; text-align: center" class="col-md-5">
@@ -81,7 +81,7 @@
                         <h3>{{ detail.14 }}</h3>
                         <h4>{{ detail.16 }}</h4>
                         <h3>There {{ detail.15 | pluralize:"is,are" }} only {{ detail.15 }}
-                            {{ detail.14 }}{{ detail.15 | pluralize:"s" }} remaining!</h3>
+                            spot{{ detail.15 | pluralize:"s" }} remaining!</h3>
                     </div>
                 {% endif %}
                 {% if detail.13 == False %}

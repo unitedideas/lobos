@@ -210,7 +210,7 @@ class BaseRiderProfileFormSet(BaseModelFormSet):
 RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            exclude=(
                                                'rider_cat', 'user', 'confirmation_number', 'start_time', 'event', 'id',
-                                               'registration_date_time'),
+                                               'registration_date_time', 'rider_number'),
                                            formset=BaseRiderProfileFormSet,
                                            widgets={
                                                'birth_date': DateInput(
