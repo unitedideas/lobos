@@ -37,6 +37,7 @@ import datetime as dt
 def clubeventsCheckout(request):
     return render(request, 'events/clubeventsCheckout.html')
 
+
 def change_names_to_lower():
     all_names = RiderProfile.objects.all()
     for name in all_names:
@@ -179,6 +180,7 @@ def registration_check(request):
 
 def merchCheckout(request):
     return render(request, 'events/merchCheckout.html')
+
 
 def contact(request):
     return render(request, 'events/contact.html')
