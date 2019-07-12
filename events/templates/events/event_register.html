@@ -82,62 +82,61 @@
                         </div>
                     </div>
                 </transition>
-                <transition name="fade">
-                    <div v-if="age_error || escort_required > 0 || gender_class || birthdate_wrong || email_not_the_same"
-                         class="p-3 mb-2 bg-danger text-black">
-                        <h2 style="color: red">Please correct these errors to continue:</h2>
-                    </div>
+                <div v-if="age_error || escort_required > 0 || gender_class || birthdate_wrong || email_not_the_same"
+                     class="p-3 mb-2 bg-danger text-black">
+                    <h2 style="color: red">Please correct these errors to continue:</h2>
+                    <transition name="fade">
+                        <div v-if="email_not_the_same" class="p-3 mb-2 bg-danger text-black">
+                            <div>
+                                <h3 class="error_cases">The emails on form [[email_not_the_same_form]] are not the
+                                    same</h3>
+                            </div>
+                        </div>
+                    </transition>
+                    <transition name="fade">
+                        <div v-if="age_error" class="p-3 mb-2 bg-danger text-black">
+                            <div>
+                                <h3 class="error_cases">Rider on form [[under_class_age.form]] is not the correct age to
+                                    ride in
+                                    [[under_class_age.rider_class]]</h3>
+                            </div>
+                        </div>
+                    </transition>
+                    <transition name="fade">
+                        <div v-if="gender_class" class="p-3 mb-2 bg-danger text-black">
+                            <div>
+                                <h3 class="error_cases">You've signed up for Women's Class as a male on form
+                                    [[gender_form]]</h3>
+                            </div>
+                        </div>
+                    </transition>
+                    </transition>
+                    <transition name="fade">
+                        <div v-if="birthdate_wrong" class="p-3 mb-2 bg-danger text-black">
+                            <div>
+                                <h3 class="error_cases">The birth date entered on form [[birthdate_form]] is not
+                                    correct</h3>
+                            </div>
+                        </div>
+                    </transition>
+                    <transition name="fade">
+                        <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-black">
+                            <div id="v-for-formerrors">
+                                <div v-if='[[escort_required]] == 1'>
+                                    <h3 class="error_cases">At least [[escort_required]] Escort Rider is required to
+                                        register based on the
+                                        birth dates provided.</h3>
+                                </div>
+                                <div v-if='[[escort_required]] > 1'>
+                                    <h3 class="error_cases">At least [[escort_required]] Escort Riders are required to
+                                        register based on the
+                                        birth dates provided.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
 
-                </transition>
-                <transition name="fade">
-                    <div v-if="email_not_the_same" class="p-3 mb-2 bg-danger text-black">
-                        <div>
-                            <h3 class="error_cases">The emails on form [[email_not_the_same_form]] are not the same</h3>
-                        </div>
-                    </div>
-                </transition>
-                <transition name="fade">
-                    <div v-if="age_error" class="p-3 mb-2 bg-danger text-black">
-                        <div>
-                            <h3 class="error_cases">Rider on form [[under_class_age.form]] is not the correct age to
-                                ride in
-                                [[under_class_age.rider_class]]</h3>
-                        </div>
-                    </div>
-                </transition>
-                <transition name="fade">
-                    <div v-if="gender_class" class="p-3 mb-2 bg-danger text-black">
-                        <div>
-                            <h3 class="error_cases">You've signed up for Women's Class as a male on form
-                                [[gender_form]]</h3>
-                        </div>
-                    </div>
-                </transition>
-                </transition>
-                <transition name="fade">
-                    <div v-if="birthdate_wrong" class="p-3 mb-2 bg-danger text-black">
-                        <div>
-                            <h3 class="error_cases">The birth date entered on form [[birthdate_form]] is not
-                                correct</h3>
-                        </div>
-                    </div>
-                </transition>
-                <transition name="fade">
-                    <div v-if="escort_required > 0" class="p-3 mb-2 bg-danger text-black">
-                        <div id="v-for-formerrors">
-                            <div v-if='[[escort_required]] == 1'>
-                                <h3 class="error_cases">At least [[escort_required]] Escort Rider is required to
-                                    register based on the
-                                    birth dates provided.</h3>
-                            </div>
-                            <div v-if='[[escort_required]] > 1'>
-                                <h3 class="error_cases">At least [[escort_required]] Escort Riders are required to
-                                    register based on the
-                                    birth dates provided.</h3>
-                            </div>
-                        </div>
-                    </div>
-                </transition>
                 <div v-show="showcheckout">
                     <h4 style="margin-top: 0px; padding-top: 5px">
                         <p>**AMA Membership is <strong style="color: red">required</strong>
@@ -359,7 +358,7 @@
                             :button-style="aStyle"
                             :client="paypal"
                             :items="cartlist"
-                            env="production"
+                            env="sandbox"
                             {#for adding more details#}
                             :details="details"
                             v-on:payment-authorized="paymentAuthorized"
@@ -522,7 +521,7 @@
                     this.details.subtotal = item_total.toFixed(2)
                     this.itemPreShipping = (Number(this.totalStr) - Number(this.total_shipping)).toFixed(2)
 
-                 },
+                },
 
                 regTotal() {
                     this.reg_total_string = this.regTotal.toFixed(2)
@@ -635,6 +634,12 @@
                     axios.post("{% url 'error_checking' %}", data, {headers: {'X-CSRFToken': '{{ csrf_token }}',}})
                         .then(function (response) {
                             app.formerrors = response.data.errors
+                            for (let i in app.formerrors[0]) {
+                                if (i === 'mach') {
+                                    delete app.formerrors[0].mach
+                                    app.formerrors[0].Bike_Manufacturer = ["field is required"]
+                                }
+                            }
                             app.formSuccess = response.data.success
                             app.escort_required = response.data.under_16 - response.data.escorts_signed_up
                             app.under_class_age = response.data.under_class_age
@@ -714,17 +719,17 @@
                     for (let reg_item in this.registration_list) {
 
                         console.log('index: ', reg_item)
-                        console.log('discount: ',this.discount_list[reg_item])
-                        console.log('registration: ',this.registration_list[reg_item])
+                        console.log('discount: ', this.discount_list[reg_item])
+                        console.log('registration: ', this.registration_list[reg_item])
                         let discount_amount = this.discount_list[reg_item]
                         if (discount_amount !== 0 && discount_amount) {
                             total = (this.registration_list[reg_item].price - (this.registration_list[reg_item].price * discount_amount))
                             console.log('total ', total)
                             this.registration_list[reg_item].price = total
-                            console.log('registration: ',this.registration_list[reg_item])
+                            console.log('registration: ', this.registration_list[reg_item])
 
                         }
-                     }
+                    }
 
                     for (let item in this.registration_list) {
                         this.regTotal += Number(this.registration_list[item].price)
