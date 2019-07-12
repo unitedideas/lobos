@@ -11,6 +11,7 @@ Kawasaki,Kaw
 KTM,KTM
 Maico,Mai
 Montesa,Mon
+Sherco, Shr
 Scorpa,Sco
 Suzuki,Suz
 TM,TM

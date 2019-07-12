@@ -306,7 +306,6 @@ class RiderProfile(models.Model):
     # user name displayed at login
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    rider_number = models.CharField('OMRA Member Number', max_length=20, null=True, blank=True)
     first_name = models.CharField('First Name (required)', max_length=300)
     last_name = models.CharField('Last Name (required)', max_length=300)
     rider_class = models.CharField('Rider Class (required)', max_length=1000, choices=RIDER_CLASS)
@@ -314,6 +313,7 @@ class RiderProfile(models.Model):
     email2 = models.EmailField('Verify Email', max_length=300, null=True, blank=True)
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
     birth_date = models.DateField('Birth Date - Example: 12/14/1980 (required)')
+    # age = models.IntegerField
     phone_number = models.CharField('Phone Number', max_length=10, null=True, blank=True)
     country = models.CharField(max_length=300, null=True, blank=True)
     address = models.CharField(max_length=300, null=True, blank=True)
@@ -323,12 +323,12 @@ class RiderProfile(models.Model):
     zip_code = models.CharField('Zip Code', max_length=5, null=True, blank=True)
     emergency_contact_name = models.CharField('Emergency Contact Name', max_length=300, null=True, blank=True)
     emergency_contact_phone = models.CharField('Emergency Contact Phone', max_length=10, null=True, blank=True)
-    bike_make = models.CharField('Bike Manufacturer (required)', max_length=20, choices=MAKES)
+    mach = models.CharField('Bike Manufacturer (required)', max_length=20, choices=MAKES)
     bike_displacement = models.CharField('Bike Displacement', max_length=10, null=True, blank=True)
     escort_name = models.CharField(
         'Escort’s Name: (Must register as Escort Rider) Required for riders under 16 on the day of the event',
         max_length=300, null=True, blank=True)
-    group_name = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
+    riding_together = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
                                   null=True, blank=True)
     merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)
     registration_date_time = models.DateTimeField('Created Time', editable=True, null=True, blank=True,

@@ -210,7 +210,7 @@ class BaseRiderProfileFormSet(BaseModelFormSet):
 RiderProfileFormSet = modelformset_factory(RiderProfile,
                                            exclude=(
                                                'rider_cat', 'user', 'confirmation_number', 'start_time', 'event', 'id',
-                                               'registration_date_time', 'rider_number'),
+                                               'registration_date_time'),
                                            formset=BaseRiderProfileFormSet,
                                            widgets={
                                                'birth_date': DateInput(
@@ -222,7 +222,7 @@ RiderProfileFormSet = modelformset_factory(RiderProfile,
                                                    attrs={
                                                        'placeholder': 'Escort Rider Required if under 16 on the day of the event.'
                                                    }),
-                                               'group_name': forms.TextInput(
+                                               'riding_together': forms.TextInput(
                                                    attrs={
                                                        'placeholder': 'John Smith, Jane Doe'}),
                                                'email': forms.EmailInput(
