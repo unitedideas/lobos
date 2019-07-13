@@ -1,3 +1,4 @@
+from import_export import resources
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .models import RiderProfile, Event, Profile, Codes, Merchandise, MerchandiseOrder, ClubEvent, SignupPromotion
@@ -7,6 +8,9 @@ admin.site.site_header = 'Lobos Events/ User Database'
 admin.site.register(Event)
 
 
+# admin.site.register(RiderProfile)
+
+
 @admin.register(Codes)
 class CodesExportAdmin(ImportExportModelAdmin):
     list_display = ('discount_code', 'discount_amount')
@@ -14,6 +18,7 @@ class CodesExportAdmin(ImportExportModelAdmin):
 
     def user_info(self, obj):
         return obj.description
+
 
 @admin.register(SignupPromotion)
 class SignupPromotionAdmin(ImportExportModelAdmin):
@@ -56,7 +61,6 @@ class MerchandiseExportAdmin(ImportExportModelAdmin):
 
 
 @admin.register(RiderProfile)
-# this is the example of how to setup the import/ export and the admin search
 class RiderProfileExportAdmin(ImportExportModelAdmin):
     exclude = ['email2']
     list_display = ('first_name', 'last_name', 'email', 'event', 'confirmation_number', 'registration_date_time')
@@ -64,6 +68,15 @@ class RiderProfileExportAdmin(ImportExportModelAdmin):
 
     def user_info(self, obj):
         return obj.description
+
+#
+# class RiderProfileResource(resources.ModelResource):
+#     model = RiderProfile
+#     fields = ('id', 'last_name', 'first_name',)
+#
+#     class Meta:
+#         model = RiderProfile
+#         fields = ('id', 'last_name', 'first_name',)
 
 
 @admin.register(Profile)
