@@ -7,22 +7,20 @@
 
 {% block body %}
     <div class="container" style="padding: 15px; border-radius: 5px">
-        <h1>Congrats!</h1>
+        <h1>Congrats {{ item.first_name }} {{ item.last_name }}!</h1>
         <h3>You've been registered for {{ event.event_name }}</h3>
         <br>
         {% for key, item in confirm.items %}
             {% if item.message %}
                 <h4 style="color: orangered">Attention: {{ item.message }}</h4>
             {% endif %}
-            <h4>Username: {{ item.username }}</h4>
-            <h4>First Name: {{ item.first_name }}</h4>
-            <h4>Last Name: {{ item.last_name }}</h4>
-            <h4>Email: {{ item.email }}</h4>
-            <h4>Class: {{ item.rider_class }}</h4>
             <h4>Confirmation: {{ item.confirmation }}</h4>
-            <h5>If you would like to purchase event merchandise check it out on our <a href = "/merchandise/" target="_blank">merchandise</a> page</h5>
-            <h5>For assistance please email us at <a href = "mailto:lobomcsevents@gmail.com" target="_blank">lobomcsevents@gmail.com</a></h5>
-            <h5>To check your registration status <a href = "/registration_check/" target="_blank">here.</a></h5>
+            <h4>Class: {{ item.rider_class }}</h4>
+            <h4>Email: {{ item.email }}</h4>
+            <br>
+            <h4>If you would like to purchase event merchandise check it out on our <a href = "/merchandise/" target="_blank">merchandise</a> page</h4>
+            <h4>For assistance please email us at <a href = "mailto:lobomcsevents@gmail.com" target="_blank">lobomcsevents@gmail.com</a></h4>
+            <h4>To check your registration status <a href = "/registration_check/" target="_blank">here.</a></h4>
             <br>
         {% endfor %}
     </div>
