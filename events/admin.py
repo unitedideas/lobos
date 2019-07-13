@@ -1,14 +1,31 @@
 from import_export import resources
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 from .models import RiderProfile, Event, Profile, Codes, Merchandise, MerchandiseOrder, ClubEvent, SignupPromotion
 from .forms import RiderClass
+from import_export.fields import Field
 
 admin.site.site_header = 'Lobos Events/ User Database'
 admin.site.register(Event)
 
 
-# admin.site.register(RiderProfile)
+class RiderProfileResource(resources.ModelResource):
+    class Meta:
+        model = RiderProfile
+        fields = ('last_name', 'first_name', 'riding_together', 'rider_class', 'address', 'city', 'state', 'zip_code',
+                  'phone_number', 'email', 'mach', 'emergency_contact_name', 'emergency_contact_phone', 'birth_date')
+        export_order = fields
+
+
+# @admin.register(RiderProfile)
+class RiderProfileExportAdmin(ImportExportMixin, admin.ModelAdmin):
+    resource_class = RiderProfileResource
+    exclude = ['email2']
+    list_display = ('first_name', 'last_name', 'email', 'event', 'confirmation_number', 'registration_date_time')
+    search_fields = ('event__event_name', 'confirmation_number', 'first_name', 'last_name', 'email',)
+
+
+admin.site.register(RiderProfile, RiderProfileExportAdmin)
 
 
 @admin.register(Codes)
@@ -58,25 +75,6 @@ class MerchandiseExportAdmin(ImportExportModelAdmin):
 
     def user_info(self, obj):
         return obj.description
-
-
-@admin.register(RiderProfile)
-class RiderProfileExportAdmin(ImportExportModelAdmin):
-    exclude = ['email2']
-    list_display = ('first_name', 'last_name', 'email', 'event', 'confirmation_number', 'registration_date_time')
-    search_fields = ('event__event_name', 'confirmation_number', 'first_name', 'last_name', 'email',)
-
-    def user_info(self, obj):
-        return obj.description
-
-#
-# class RiderProfileResource(resources.ModelResource):
-#     model = RiderProfile
-#     fields = ('id', 'last_name', 'first_name',)
-#
-#     class Meta:
-#         model = RiderProfile
-#         fields = ('id', 'last_name', 'first_name',)
 
 
 @admin.register(Profile)
