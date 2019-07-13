@@ -634,11 +634,15 @@
                     axios.post("{% url 'error_checking' %}", data, {headers: {'X-CSRFToken': '{{ csrf_token }}',}})
                         .then(function (response) {
                             app.formerrors = response.data.errors
-                            for (let i in app.formerrors[0]) {
-                                if (i === 'mach') {
-                                    delete app.formerrors[0].mach
-                                    app.formerrors[0].Bike_Manufacturer = ["field is required"]
+                            try {
+                                for (let i in app.formerrors[0]) {
+                                    if (i === 'mach') {
+                                        delete app.formerrors[0].mach
+                                        app.formerrors[0].Bike_Manufacturer = ["field is required"]
+                                    }
                                 }
+                            } catch (e) {
+                                console.log(e)
                             }
                             app.formSuccess = response.data.success
                             app.escort_required = response.data.under_16 - response.data.escorts_signed_up
