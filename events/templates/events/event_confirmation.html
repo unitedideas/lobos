@@ -7,13 +7,14 @@
 
 {% block body %}
     <div class="container" style="padding: 15px; border-radius: 5px">
-        <h1>Congrats {{ item.first_name }} {{ item.last_name }}!</h1>
+        <h1>Congrats!</h1>
         <h3>You've been registered for {{ event.event_name }}</h3>
         <br>
         {% for key, item in confirm.items %}
             {% if item.message %}
                 <h4 style="color: orangered">Attention: {{ item.message }}</h4>
             {% endif %}
+            <h4>Rider: {{ item.first_name }} {{ item.last_name }}</h4>
             <h4>Confirmation: {{ item.confirmation }}</h4>
             <h4>Class: {{ item.rider_class }}</h4>
             <h4>Email: {{ item.email }}</h4>

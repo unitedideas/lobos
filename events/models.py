@@ -314,13 +314,13 @@ class RiderProfile(models.Model):
     gender = models.CharField(null=True, blank=True, max_length=10, choices=GENDER)
     birth_date = models.DateField('Birth Date - Example: 12/14/1980 (required)')
     # age = models.IntegerField
-    phone_number = models.CharField('Phone Number', max_length=10, null=True, blank=True)
+    phone_number = models.CharField('Phone Number (required)', max_length=10)
     country = models.CharField(max_length=300, null=True, blank=True)
-    address = models.CharField(max_length=300, null=True, blank=True)
+    address = models.CharField('Address (required)', max_length=300)
     address_line_two = models.CharField(max_length=300, null=True, blank=True)
-    city = models.CharField(max_length=300, null=True, blank=True)
-    state = models.CharField(max_length=2, null=True, blank=True, choices=STATES)
-    zip_code = models.CharField('Zip Code', max_length=5, null=True, blank=True)
+    city = models.CharField('City (required)', max_length=300)
+    state = models.CharField('State (required)', max_length=2,  choices=STATES)
+    zip_code = models.CharField('Zip Code (required)', max_length=5)
     emergency_contact_name = models.CharField('Emergency Contact Name', max_length=300, null=True, blank=True)
     emergency_contact_phone = models.CharField('Emergency Contact Phone', max_length=10, null=True, blank=True)
     mach = models.CharField('Bike Manufacturer (required)', max_length=20, choices=MAKES)
@@ -329,11 +329,12 @@ class RiderProfile(models.Model):
         'Escort’s Name: (Must register as Escort Rider) Required for riders under 16 on the day of the event',
         max_length=300, null=True, blank=True)
     riding_together = models.CharField('Riding in a group? Enter their First and Last names here:', max_length=1000,
-                                  null=True, blank=True)
+                                       null=True, blank=True)
     merchandise_ordered = models.TextField(max_length=1000, null=True, blank=True, default=None)
     registration_date_time = models.DateTimeField('Created Time', editable=True, null=True, blank=True,
                                                   auto_now_add=True)
-    promotional_item = models.CharField('Would you like to register for the Radius Offroad Riding Clinic?', max_length=3, default=YESNO[1][1],
+    promotional_item = models.CharField('Would you like to register for the Radius Offroad Riding Clinic?',
+                                        max_length=3, default=YESNO[1][1],
                                         choices=YESNO)
     promotion_name = models.CharField('Promotion', max_length=300, null=True, blank=True)
     promotion_options = models.CharField('Choose your riding clinic time:', max_length=300, null=True, blank=True)
