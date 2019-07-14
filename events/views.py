@@ -132,8 +132,8 @@ def registration_check(request):
                     return render(request, 'events/registration_check.html', {"args": args, 'form': form})
 
             elif first_name != '' and last_name != '':
-                event_id = RiderProfile.objects.filter(first_name=first_name).filter(
-                    last_name=last_name).values_list(
+                event_id = RiderProfile.objects.filter(first_name__iexact=first_name).filter(
+                    last_name__iexact=last_name).values_list(
                     'event', flat=True).last()
                 if event_id is not None:
                     first_and_last_names = [first_name.capitalize() + " " + last_name.capitalize()]
