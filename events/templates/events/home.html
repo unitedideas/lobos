@@ -14,9 +14,19 @@
                 return is_ie;
             }
 
+            function isEdge() {
+                if (/Edge/.test(navigator.userAgent)) {
+                    return true
+                }
+            }
+
             /* Create an alert to show if the browser is IE or not */
             if (isIE()) {
-                alert('InternetExplorer is not supported for registration on this site.\nPlease use Chrome, Edge, Firefox or Safari.');
+                alert('InternetExplorer is not supported for registration on this site.\nPlease use Chrome, Firefox or Safari.');
+            }
+            /* Create an alert to show if the browser is IE or not */
+            if (isEdge()) {
+                alert('Microsoft Edge is not supported for registration on this site.\nPlease use Chrome, Firefox or Safari.');
             }
 
             window.onload = isIE();
