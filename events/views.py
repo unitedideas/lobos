@@ -297,7 +297,8 @@ def adminemail(request):
                 Event.objects.filter(event_name=event_name).filter(event_date__contains=event_year).values_list(
                     'riderprofile__email', flat=True))
         else:
-            recipients = list(recipients)
+            recipients = [recipients]
+            print(recipients)
         args = {'allEmails': allEmails, 'events': events,
                 "success": "<h3 class='bg-success'>Your email was successfully sent!</h3>"}
 
