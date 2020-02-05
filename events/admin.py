@@ -12,9 +12,9 @@ admin.site.register(Event)
 class RiderProfileResource(resources.ModelResource):
     class Meta:
         model = RiderProfile
-        fields = ('last_name', 'first_name', 'riding_together', 'rider_class', 'address', 'city', 'state', 'zip_code',
-                  'phone_number', 'email', 'mach', 'emergency_contact_name', 'emergency_contact_phone', 'birth_date')
-        export_order = fields
+        # fields = ('last_name', 'first_name', 'riding_together', 'rider_class', 'address', 'city', 'state', 'zip_code',
+        #           'phone_number', 'email', 'mach', 'emergency_contact_name', 'emergency_contact_phone', 'birth_date')
+        # export_order = fields
 
 
 # @admin.register(RiderProfile)
