@@ -131,69 +131,71 @@ class LobosRace(ModelForm):
 
 class RiderClass(ModelForm):
     EXO16 = 'Expert 16 and over '
-    EXU16 = 'Expert under 16 '
-    AMO16 = 'Amateur 16 and over '
-    AMU16 = 'Amateur under 16 '
-    C60_70 = 'Class 60 and 70 '
-    ES = 'Escort Rider'
-
-    C60 = '60 Class'
-    C70 = '70 Class'
+    # EXU16 = 'Expert under 16 '
+    # AMO16 = 'Amateur 16 and over '
+    # AMU16 = 'Amateur under 16 '
+    # C60_70 = 'Class 60 and 70 '
+    # ES = 'Escort Rider'
+    #
+    # C60 = '60 Class'
+    # C70 = '70 Class'
     AA = 'AA'
-    OAM = 'Open Amateur'
-    AM250 = '250 AM'
-    EX250 = '250 EX'
-    AM30 = '30 AM'
-    EX30 = '30 EX'
-    AM40 = '40 AM'
-    EXEX40 = '40 EX'
-    EX50 = '50 EX'
-    AM50 = '50 AM'
-    SSMN = 'Sportsman'
-    BEG = 'Beginner'
-    WO = 'Women'
-    JR = 'Jr.'
-    OEX = 'Open Expert'
+    # OAM = 'Open Amateur'
+    # AM250 = '250 AM'
+    # EX250 = '250 EX'
+    # AM30 = '30 AM'
+    # EX30 = '30 EX'
+    # AM40 = '40 AM'
+    # EXEX40 = '40 EX'
+    # EX50 = '50 EX'
+    # AM50 = '50 AM'
+    # SSMN = 'Sportsman'
+    # BEG = 'Beginner'
+    # WO = 'Women'
+    # JR = 'Jr.'
+    # OEX = 'Open Expert'
 
     RIDER_CLASS = [
         (EXO16, [
             (EXO16 + AA, AA),
-            (EXO16 + OEX, OEX),
-            (EXO16 + EX250, EX250),
-            (EXO16 + EX30, EX30),
-            (EXO16 + EXEX40, EXEX40)
-        ]),
-        (EXU16, [
-            (EXU16 + AA, AA),
-            (EXU16 + OEX, OEX),
-            (EXU16 + EX250, EX250)
-        ]),
-        (AMO16, [
-            (AMO16 + OAM, OAM),
-            (AMO16 + AM250, AM250),
-            (AMO16 + AM30, AM30),
-            (AMO16 + AM40, AM40),
-            (AMO16 + AM50, AM50),
-            (AMO16 + EX50, EX50),
-            (AMO16 + SSMN, SSMN),
-            (AMO16 + BEG, BEG),
-            (AMO16 + WO, WO)
-        ]),
-        (AMU16, [
-            (AMU16 + OAM, OAM),
-            (AMU16 + AM250, AM250),
-            (AMU16 + SSMN, SSMN),
-            (AMU16 + BEG, BEG),
-            (AMU16 + WO, WO),
-            (AMU16 + JR, JR),
-        ]),
-        (C60_70, [
-            (C60, C60),
-            (C70, C70)
-        ]),
-        (ES, [
-            (ES, ES)]
-         )]
+            # (EXO16 + OEX, OEX),
+            # (EXO16 + EX250, EX250),
+            # (EXO16 + EX30, EX30),
+            # (EXO16 + EXEX40, EXEX40)
+        ])
+        # ,
+        # (EXU16, [
+        #     (EXU16 + AA, AA),
+        #     (EXU16 + OEX, OEX),
+        #     (EXU16 + EX250, EX250)
+        # ]),
+        # (AMO16, [
+        #     (AMO16 + OAM, OAM),
+        #     (AMO16 + AM250, AM250),
+        #     (AMO16 + AM30, AM30),
+        #     (AMO16 + AM40, AM40),
+        #     (AMO16 + AM50, AM50),
+        #     (AMO16 + EX50, EX50),
+        #     (AMO16 + SSMN, SSMN),
+        #     (AMO16 + BEG, BEG),
+        #     (AMO16 + WO, WO)
+        # ]),
+        # (AMU16, [
+        #     (AMU16 + OAM, OAM),
+        #     (AMU16 + AM250, AM250),
+        #     (AMU16 + SSMN, SSMN),
+        #     (AMU16 + BEG, BEG),
+        #     (AMU16 + WO, WO),
+        #     (AMU16 + JR, JR),
+        # ]),
+        # (C60_70, [
+        #     (C60, C60),
+        #     (C70, C70)
+        # ]),
+        # (ES, [
+        #     (ES, ES)]
+        #  )
+    ]
 
     promotion_classes = forms.MultipleChoiceField(help_text='You must choose classes every time.', choices=RIDER_CLASS,
                                                   widget=forms.SelectMultiple)
