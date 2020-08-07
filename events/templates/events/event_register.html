@@ -970,7 +970,8 @@
             let codes = app.discount_codes
             let discount_code = document.getElementById(id).value.toLowerCase()
 
-            if (codes[discount_code] && !app.discount_codes_used.includes(discount_code)) {
+            {#if (codes[discount_code] && !app.discount_codes_used.includes(discount_code)) {#}
+            if (codes[discount_code]) {
                 {#    green symbol by discount input#}
                 document.getElementById(id).style.color = 'green'
                 document.getElementById(id).style.fontWeight = 'bold'
@@ -1043,6 +1044,7 @@
                     app.discount_codes_used.push((element.value).toLowerCase())
                 }
             })
+            app.discount_codes_used = []
 
             discount_list()
 
@@ -1057,6 +1059,8 @@
                     app.discount_list.push(0)
                 }
             }
+            app.discount_codes_used = []
+
             app.totalCost()
 
         }
