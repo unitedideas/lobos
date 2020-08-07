@@ -758,7 +758,7 @@ def event_register(request):
 
                 if form.discount_code != None:
                     usedCode = form.discount_code
-                    Codes.objects.filter(discount_code=usedCode).delete()
+                    # Codes.objects.filter(discount_code=usedCode).delete()
 
                 if User.objects.filter(username=created_username).exists():
                     user_id = User.objects.get(username=created_username).id
