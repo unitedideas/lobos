@@ -236,11 +236,13 @@
                     let addToCartObj = {}
                     let item = 'item_' + itemId
                     let datas = document.getElementsByClassName(itemId)
-                    let item_name = this.merch_json.merch[item][0]['merchandise_name']
+                    // Hard Coded
+                    let item_name = "Jersey"
                     let item_size_sku = datas[0].value
                     let item_size = this.sizeTextChange(datas[0].value)
                     let item_qty = datas[1].value
-                    let price = Number(this.merch_json.merch[item][0]['sale_price'])
+                    // Hard Coded
+                    let price = 80.00
                     let item_shipping = 0.00
 
                     addToCartObj.name = item_size + " " + item_name
@@ -257,7 +259,8 @@
                     const selectedSize = document.getElementById('select_' + itemId).value
                     let item = 'item_' + itemId
                     const inputField = document.getElementById('input_' + itemId)
-                    inputField.max = app.merch_json.merch[item][1][selectedSize]
+                    // Hard Coded
+                    inputField.max = 9
                     inputField.value = 1
                     document.getElementById('addButton_' + itemId).disabled = false
                 },
