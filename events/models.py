@@ -257,44 +257,42 @@ class RiderProfile(models.Model):
     RIDER_CLASS = [
         (EXO16, [
             (EXO16 + AA, AA),
-            # (EXO16 + OEX, OEX),
-            # (EXO16 + EX250, EX250),
-            # (EXO16 + EX30, EX30),
-            # (EXO16 + EXEX40, EXEX40)
-        ])
-        # ,
-        # (EXU16, [
-        #     (EXU16 + AA, AA),
-        #     (EXU16 + OEX, OEX),
-        #     (EXU16 + EX250, EX250)
-        # ]),
-        # (AMO16, [
-        #     (AMO16 + OAM, OAM),
-        #     (AMO16 + AM250, AM250),
-        #     (AMO16 + AM30, AM30),
-        #     (AMO16 + AM40, AM40),
-        #     (AMO16 + AM50, AM50),
-        #     (AMO16 + EX50, EX50),
-        #     (AMO16 + SSMN, SSMN),
-        #     (AMO16 + BEG, BEG),
-        #     (AMO16 + WO, WO)
-        # ]),
-        # (AMU16, [
-        #     (AMU16 + OAM, OAM),
-        #     (AMU16 + AM250, AM250),
-        #     (AMU16 + SSMN, SSMN),
-        #     (AMU16 + BEG, BEG),
-        #     (AMU16 + WO, WO),
-        #     (AMU16 + JR, JR),
-        # ]),
-        # (C60_70, [
-        #     (C60, C60),
-        #     (C70, C70)
-        # ]),
-        # (ES, [
-        #     (ES, ES)]
-        #  )
-    ]
+            (EXO16 + OEX, OEX),
+            (EXO16 + EX250, EX250),
+            (EXO16 + EX30, EX30),
+            (EXO16 + EXEX40, EXEX40)
+        ]),
+        (EXU16, [
+            (EXU16 + AA, AA),
+            (EXU16 + OEX, OEX),
+            (EXU16 + EX250, EX250)
+        ]),
+        (AMO16, [
+            (AMO16 + OAM, OAM),
+            (AMO16 + AM250, AM250),
+            (AMO16 + AM30, AM30),
+            (AMO16 + AM40, AM40),
+            (AMO16 + AM50, AM50),
+            (AMO16 + EX50, EX50),
+            (AMO16 + SSMN, SSMN),
+            (AMO16 + BEG, BEG),
+            (AMO16 + WO, WO)
+        ]),
+        (AMU16, [
+            (AMU16 + OAM, OAM),
+            (AMU16 + AM250, AM250),
+            (AMU16 + SSMN, SSMN),
+            (AMU16 + BEG, BEG),
+            (AMU16 + WO, WO),
+            (AMU16 + JR, JR),
+        ]),
+        (C60_70, [
+            (C60, C60),
+            (C70, C70)
+        ]),
+        (ES, [
+            (ES, ES)]
+         )]
 
     GENDER = (
         (FEMALE, 'Female'),
